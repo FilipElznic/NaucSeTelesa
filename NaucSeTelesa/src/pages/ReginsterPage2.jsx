@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -6,22 +6,31 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2aXVocmlvbGN1dmF5emJnenVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk1MDgyOTksImV4cCI6MjA0NTA4NDI5OX0.A5c9eHjNu37OaCt9DTCr-aKFHvyG8z1X_dHLpxl7aRc"
 );
 
-function LoginPage2() {
+const RegisterPage2 = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
+
+    if (error) {
+      setMessage(`Error: ${error.message}`);
+    } else {
+      setMessage(
+        "Registration successful! Please check your email to confirm your account."
+      );
+    }
   };
+
   return (
     <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
+      <h1>Register</h1>
+      <form onSubmit={handleSignUp}>
         <div style={{ marginBottom: "10px" }}>
           <label htmlFor="email">Email:</label>
           <input
@@ -57,12 +66,12 @@ function LoginPage2() {
             cursor: "pointer",
           }}
         >
-          Login
+          Register
         </button>
       </form>
       {message && <p style={{ marginTop: "10px", color: "red" }}>{message}</p>}
     </div>
   );
-}
+};
 
-export default LoginPage2;
+export default RegisterPage2;
