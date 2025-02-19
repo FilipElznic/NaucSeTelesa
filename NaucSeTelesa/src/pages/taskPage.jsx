@@ -7,7 +7,7 @@ import { useGlobalData } from "../Global";
 function TaskPage() {
   const [tasks, setTasks] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({}); // Track selected answers by task ID
-  const { authUser, userData, refreshUserData } = useGlobalData();
+  const { userData, refreshUserData } = useGlobalData();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -59,8 +59,8 @@ function TaskPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br text-white flex flex-col items-center p-6">
-        <h1 className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500">
+      <div className="min-h-screen  text-white flex flex-col items-center p-6">
+        <h1 className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 py-5">
           Task Page
         </h1>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
@@ -109,6 +109,7 @@ function TaskPage() {
           })}
         </ul>
       </div>
+
       <Footer />
     </>
   );
