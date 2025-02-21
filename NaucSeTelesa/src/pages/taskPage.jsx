@@ -63,7 +63,7 @@ function TaskPage() {
         <h1 className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 py-5">
           Task Page
         </h1>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl">
           {tasks.map((task) => {
             const selectedAnswer = selectedAnswers[task.id];
             const correctAnswer = task.correctanswer;
@@ -71,13 +71,13 @@ function TaskPage() {
             return (
               <li
                 key={task.id}
-                className="bg-gray-800 rounded-lg p-6 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+                className="bg-zinc-800 rounded-lg p-6 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl"
               >
                 <h2 className="text-xl font-bold mb-4 text-purple-400">
                   {task.name}
                 </h2>
                 <p className="text-gray-300 mb-2">{task.description}</p>
-                <div className="text-sm text-gray-400 space-y-2">
+                <div className="text-sm text-white space-y-2">
                   {["answera", "answerb", "answerc"].map((option) => {
                     const answerText = task[option];
                     const isCorrect = answerText === correctAnswer;
@@ -93,7 +93,7 @@ function TaskPage() {
                               : isSelected
                               ? "bg-red-500"
                               : "bg-gray-700 opacity-50"
-                            : "bg-gray-700 hover:bg-gray-600"
+                            : "bg-zinc-700 hover:bg-zinc-600"
                         }`}
                         onClick={() => handleAnswerClick(task.id, answerText)}
                         disabled={!!selectedAnswer}

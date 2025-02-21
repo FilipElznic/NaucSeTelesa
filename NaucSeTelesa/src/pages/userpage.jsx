@@ -4,6 +4,7 @@ import Overused from "../Components/Overused";
 import Work from "../Components/Work";
 import Robot from "../Components/Robot";
 import Project from "../Components/Project";
+import FadeInWrapper from "../Components/FadeInWrapper";
 
 function UserPage() {
   return (
@@ -11,12 +12,18 @@ function UserPage() {
       <Robot />
 
       <div className="border-t border-gray-700 min-h-screen bg-gradient-to-br from-black via-zinc-900  to-black text-white ">
-        <Overused />
+        <FadeInWrapper>
+          <Overused />
+        </FadeInWrapper>
 
-        <Project />
+        <FadeInWrapper>
+          <Project />
+        </FadeInWrapper>
 
         <div className="md:mt-20 md:pb-20">
-          <Work />
+          <FadeInWrapper>
+            <Work />
+          </FadeInWrapper>
         </div>
       </div>
 

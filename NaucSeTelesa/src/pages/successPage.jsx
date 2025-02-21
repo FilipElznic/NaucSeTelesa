@@ -4,15 +4,25 @@ import Features from "../Components/Features";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import LeaderboardW from "../Components/LeaderboardW";
+import FadeInWrapper from "../Components/FadeInWrapper";
 
 function SuccessPage() {
   return (
     <>
       <Navbar />
-      <InfoForm />
-      <Tailwind />
-      <Features />
-      <LeaderboardW />
+      <FadeInWrapper>
+        <InfoForm />
+      </FadeInWrapper>
+      <FadeInWrapper>
+        <Tailwind />
+      </FadeInWrapper>
+      <FadeInWrapper>
+        <Features />
+      </FadeInWrapper>
+      <FadeInWrapper>
+        <LeaderboardW />
+      </FadeInWrapper>
+
       <Footer />
     </>
   );

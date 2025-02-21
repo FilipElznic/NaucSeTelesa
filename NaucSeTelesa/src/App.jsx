@@ -12,93 +12,96 @@ import AboutPage from "./pages/aboutPage";
 import { GlobalProvider } from "./Global"; // Používáme pojmenovaný export
 import Profile from "./Components/Profile";
 import PomocPage from "./pages/pomocPage";
+import FadeInWrapper from "./Components/FadeInWrapper";
 
 function App() {
   return (
     <AuthProvider>
       <GlobalProvider>
-        <Router>
-          <Routes>
-            {/* Public route for login */}
-            <Route path="/prihlaseni" element={<LoginPage />} />
+        <FadeInWrapper>
+          <Router>
+            <Routes>
+              {/* Public route for login */}
+              <Route path="/prihlaseni" element={<LoginPage />} />
 
-            {/* Protected routes */}
-            <Route
-              path="/uzivatel"
-              element={
-                <ProtectedRoute redirectTo="/prihlaseni">
-                  <SuccessPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/pomoc"
-              element={
-                <ProtectedRoute redirectTo="/prihlaseni">
-                  <PomocPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/tailwind"
-              element={
-                <ProtectedRoute redirectTo="/prihlaseni">
-                  <TailwindTest />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/ukoly"
-              element={
-                <ProtectedRoute redirectTo="/prihlaseni">
-                  <TaskPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/telesa"
-              element={
-                <ProtectedRoute redirectTo="/prihlaseni">
-                  <TelesaPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/projekt"
-              element={
-                <ProtectedRoute redirectTo="/">
-                  <AboutPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/profil"
-              element={
-                <ProtectedRoute redirectTo="/prihlaseni">
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/success"
-              element={
-                <ProtectedRoute redirectTo="/">
-                  <SuccessPage />
-                </ProtectedRoute>
-              }
-            />
+              {/* Protected routes */}
+              <Route
+                path="/uzivatel"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <SuccessPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/pomoc"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <PomocPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/tailwind"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <TailwindTest />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/ukoly"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <TaskPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/telesa"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <TelesaPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/projekt"
+                element={
+                  <ProtectedRoute redirectTo="/">
+                    <AboutPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profil"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/success"
+                element={
+                  <ProtectedRoute redirectTo="/">
+                    <SuccessPage />
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* Redirect logged-in users from the root ("/") */}
-            <Route
-              path="/"
-              element={
-                <RedirectIfLoggedIn redirectTo="/success">
-                  <UserPage />
-                </RedirectIfLoggedIn>
-              }
-            />
-          </Routes>
-        </Router>
+              {/* Redirect logged-in users from the root ("/") */}
+              <Route
+                path="/"
+                element={
+                  <RedirectIfLoggedIn redirectTo="/success">
+                    <UserPage />
+                  </RedirectIfLoggedIn>
+                }
+              />
+            </Routes>
+          </Router>
+        </FadeInWrapper>
       </GlobalProvider>
     </AuthProvider>
   );

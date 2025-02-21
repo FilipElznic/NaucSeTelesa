@@ -82,7 +82,7 @@ function Help() {
         <div className="flex items-center justify-center sm:w-1/2 h-80 sm:h-auto">
           <div className="w-full h-full">
             <Spline
-              scene="https://prod.spline.design/B8qPp8HbRTDUa3zn/scene.splinecode"
+              scene="https://prod.spline.design/0lrgZxstxvvirq3I/scene.splinecode"
               className="w-full h-full"
             />
           </div>
