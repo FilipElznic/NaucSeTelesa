@@ -9,7 +9,6 @@ function AboutPage() {
       <div className="min-h-screen bg-black text-white p-8">
         {/* Animated Heading */}
         <div className="flex w-full justify-center">
-          {" "}
           <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-center mb-12 pb-6 typing-animation">
             <span className="userlvl">O Projektu</span>
           </h1>

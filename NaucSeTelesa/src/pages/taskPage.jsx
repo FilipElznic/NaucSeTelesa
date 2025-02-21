@@ -6,7 +6,8 @@ import { useGlobalData } from "../Global";
 
 function TaskPage() {
   const [tasks, setTasks] = useState([]);
-  const [selectedAnswers, setSelectedAnswers] = useState({}); // Track selected answers by task ID
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [popup, setPopup] = useState(null);
   const { userData, refreshUserData } = useGlobalData();
 
   useEffect(() => {
@@ -23,14 +24,17 @@ function TaskPage() {
   }, []);
 
   const handleAnswerClick = async (taskId, answer) => {
-    // Prevent multiple submissions
     if (selectedAnswers[taskId]) return;
 
     const task = tasks.find((t) => t.id === taskId);
     const isCorrect = task.correctanswer === answer;
-
-    // Update selected answer
     setSelectedAnswers((prev) => ({ ...prev, [taskId]: answer }));
+
+    setPopup({
+      message: isCorrect ? "Správná odpověď!" : "Špatná odpověď!",
+      isCorrect,
+    });
+    setTimeout(() => setPopup(null), 2000);
 
     if (isCorrect) {
       try {
@@ -50,8 +54,6 @@ function TaskPage() {
 
       if (error) {
         console.error("Error inserting into finishedtasks:", error);
-      } else {
-        console.log("Task successfully added to finishedtasks.");
       }
     }
   };
@@ -59,11 +61,11 @@ function TaskPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen  text-white flex flex-col items-center p-6">
+      <div className="min-h-screen text-white flex flex-col items-center p-6">
         <h1 className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 py-5">
           Task Page
         </h1>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl">
+        <ul className="grid grid-cols-1 md-grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl">
           {tasks.map((task) => {
             const selectedAnswer = selectedAnswers[task.id];
             const correctAnswer = task.correctanswer;
@@ -108,8 +110,18 @@ function TaskPage() {
             );
           })}
         </ul>
+        {popup && (
+          <div
+            className={`fixed bottom-5 right-5 px-6 py-3 rounded-lg shadow-lg text-white text-lg transition-opacity duration-500 bg-gradient-to-r ${
+              popup.isCorrect
+                ? "from-green-800 to-green-500 border-green-400"
+                : "from-red-800 to-red-500 border-red-400"
+            } border-2`}
+          >
+            {popup.message}
+          </div>
+        )}
       </div>
-
       <Footer />
     </>
   );
