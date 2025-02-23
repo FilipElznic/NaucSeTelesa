@@ -161,3 +161,7 @@ html {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.usergradient-glow {
+  box-shadow: 0 0 2px 0px rgba(102, 102, 102, 0.8);
+}
