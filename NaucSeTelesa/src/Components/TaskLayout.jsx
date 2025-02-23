@@ -9,8 +9,8 @@ function TaskLayout() {
         {/* Top Bar */}
         <div className="w-full h-24 usergradient rounded-3xl usergradient-glow"></div>
 
-        <div className="flex flex-col md:flex-row gap-4 w-full h-[70vh]">
-          <div className="w-full h-full md:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
+        <div className="flex flex-col md:flex-row gap-4 w-full min-h[70vh]">
+          <div className="w-full h-[70vh] md:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
             <div className="w-full flex justify-between mt-16 p-5 px-10">
               <h1 className="text-5xl w-3/4 text-zinc-100/90">
                 Určete, které těleso má jednu podstavu a vrchol.
@@ -28,7 +28,13 @@ function TaskLayout() {
               <CiHeart />
             </div>
           </div>
-          <div className="w-full h-full md:w-1/5 usergradient rounded-3xl usergradient-glow"></div>
+          <div className="w-full h-[30vh] md:h-[70vh] md:w-1/5 usergradient rounded-3xl usergradient-glow">
+            <div className="h-full w-full flex justify-evenly flex-row md:flex-col items-center ">
+              <div className="w-28 h-28 bg-white"></div>
+              <div className="w-28 h-28 bg-white"></div>
+              <div className="w-28 h-28 bg-white"></div>
+            </div>
+          </div>
         </div>
 
         {/* Main Content */}
