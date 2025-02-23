@@ -23,6 +23,33 @@ function SuccessPage() {
         <LeaderboardW />
       </FadeInWrapper>
 
+      <div className="bg-black min-h-screen flex flex-col items-center p-4">
+        <div className="w-5/6 flex flex-col gap-4 p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl">
+          {/* Top Bar */}
+          <div className="w-full h-24 bg-white/10 rounded-3xl"></div>
+
+          {/* Main Content */}
+          <div className="flex flex-col md:flex-row gap-4 w-full h-[70vh]">
+            <div className="flex-1 h-full bg-white/10 rounded-3xl"></div>
+            <div className="w-1/5 h-full bg-white/10 rounded-3xl"></div>
+            <div className="w-1/5 h-full hidden md:block"></div>
+          </div>
+
+          {/* Middle Section */}
+          <div className="flex flex-col md:flex-row gap-4 w-full h-[70vh]">
+            <div className="flex-1 h-full bg-white/10 rounded-3xl"></div>
+            <div className="w-1/5 h-full bg-white/10 rounded-3xl"></div>
+            <div className="w-1/5 h-full hidden md:block"></div>
+          </div>
+
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row gap-4 w-full h-[70vh]">
+            <div className="flex-1 h-full bg-white/10 rounded-3xl"></div>
+            <div className="w-1/5 h-full bg-white/10 rounded-3xl"></div>
+            <div className="w-1/5 h-full hidden md:block"></div>
+          </div>
+        </div>
+      </div>
       <Footer />
     </>
   );
