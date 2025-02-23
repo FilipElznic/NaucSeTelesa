@@ -30,9 +30,24 @@ function TaskLayout() {
           </div>
           <div className="w-full h-[30vh] md:h-[70vh] md:w-1/5 usergradient rounded-3xl usergradient-glow">
             <div className="h-full w-full flex justify-evenly flex-row md:flex-col items-center ">
-              <div className="w-28 h-28 bg-white"></div>
-              <div className="w-28 h-28 bg-white"></div>
-              <div className="w-28 h-28 bg-white"></div>
+              <div className="w-48 h-28  rounded-3xl items-center flex flex-row">
+                <p className="text-3xl p-4">{"A)"}</p>
+                <div className="h-28 w-28 usergradient rounded-3xl flex justify-center items-center usergradient-glow">
+                  <p className="text-3xl">Koule</p>
+                </div>
+              </div>
+              <div className="w-48 h-28  rounded-3xl items-center flex flex-row">
+                <p className="text-3xl p-4">{"B)"}</p>
+                <div className="h-28 w-28 usergradient rounded-3xl flex justify-center items-center usergradient-glow">
+                  <p className="text-3xl">Kužel</p>
+                </div>
+              </div>
+              <div className="w-48 h-28  rounded-3xl items-center flex flex-row">
+                <p className="text-3xl p-4">{"C)"}</p>
+                <div className="h-28 w-28 usergradient rounded-3xl flex justify-center items-center usergradient-glow">
+                  <p className="text-3xl">Hranol</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
