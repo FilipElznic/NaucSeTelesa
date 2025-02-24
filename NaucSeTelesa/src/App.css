@@ -95,6 +95,13 @@ html {
   color: transparent;
 }
 
+.userlvl3 {
+  background: linear-gradient(to right, #941194, #36d6f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .userlvl1 {
   background: linear-gradient(to left, #dba1db, #36d6f7);
 }
