@@ -59,7 +59,7 @@ function TaskLayout() {
   return (
     <div className="bg-black min-h-screen flex flex-col items-center p-2 md:p-4 text-white">
       <div className="w-full h-full bg-white/5 md:p-5 rounded-3xl">
-        <div className="w-full flex flex-col gap-4 p-3 md:p-6 usergradient backdrop-blur-lg rounded-3xl">
+        <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
           <div className="w-full h-24 usergradient rounded-full usergradient-glow"></div>
 
           {tasks.map((task) => {
@@ -74,7 +74,7 @@ function TaskLayout() {
                 {/* Task Info */}
                 <div className="w-full min-h-[40vh] md:min-h-[70vh] lg:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
                   <div className="w-full flex justify-between mt-4 lg:mt-16 p-5 px-5 lg:px-10">
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 userlvl3">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 userlvl3 pb-2">
                       {task.name}
                     </h1>
                     <p className="text-md md:text-lg lg:text-2xl text-zinc-300 hidden sm:block">
@@ -83,6 +83,8 @@ function TaskLayout() {
                   </div>
                   <div className="w-full xl:w-3/4 p-3 lg:p-10 text-md sm:text-xl md:text-2xl text-gray-500 flex-grow">
                     {task.description}
+                    <br />
+                    {task.description2}
                   </div>
                   <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto">
                     <CiCircleInfo />
