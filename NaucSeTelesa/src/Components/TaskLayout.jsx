@@ -1,94 +1,141 @@
-import { CiCircleInfo } from "react-icons/ci";
-import { CiHeart } from "react-icons/ci";
-import "../App.css";
+import { useEffect, useState } from "react";
+import { supabase } from "../supabaseClient";
+import { CiCircleInfo, CiHeart } from "react-icons/ci";
+import { useGlobalData } from "../Global";
 
 function TaskLayout() {
+  const [tasks, setTasks] = useState([]);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [popup, setPopup] = useState(null);
+  const { userData, refreshUserData } = useGlobalData();
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const { data, error } = await supabase.from("tasks").select("*");
+      if (error) {
+        console.error("Error fetching tasks:", error);
+      } else {
+        setTasks(data);
+      }
+    };
+    fetchTasks();
+  }, []);
+
+  const handleAnswerClick = async (taskId, answer) => {
+    if (selectedAnswers[taskId]) return;
+
+    const task = tasks.find((t) => t.id === taskId);
+    const isCorrect = task.correctanswer === answer;
+    setSelectedAnswers((prev) => ({ ...prev, [taskId]: answer }));
+
+    setPopup({
+      message: isCorrect ? "Správná odpověď!" : "Špatná odpověď!",
+      isCorrect,
+    });
+    setTimeout(() => setPopup(null), 2000);
+
+    if (isCorrect) {
+      try {
+        await supabase.rpc("increment_user_xp", {
+          user_id: userData.id,
+          xp_amount: task.xp,
+        });
+        await refreshUserData();
+      } catch (error) {
+        console.error("XP update error:", error);
+      }
+
+      const { error } = await supabase.from("finishedtasks").insert({
+        iduser: userData.id,
+        idtask: taskId,
+      });
+
+      if (error) {
+        console.error("Error inserting into finishedtasks:", error);
+      }
+    }
+  };
+
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center p-2 md:p-4 text-white ">
+    <div className="bg-black min-h-screen flex flex-col items-center p-2 md:p-4 text-white">
       <div className="w-full h-full bg-white/5 md:p-5 rounded-3xl">
         <div className="w-full flex flex-col gap-4 p-3 md:p-6 usergradient backdrop-blur-lg rounded-3xl">
-          {/* Top Bar */}
           <div className="w-full h-24 usergradient rounded-full usergradient-glow"></div>
 
-          <div className="flex flex-col lg:flex-row gap-4 w-full min-h[70vh]">
-            <div className="w-full min-h-[40vh] md:min-h-[70vh] lg:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
-              <div className="w-full flex justify-between mt-4 lg:mt-16  p-5 px-5 lg:px-10">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 userlvl3">
-                  {/* name */}
-                </h1>
-                <p className="text-md md:text-lg lg:text-2xl text-zinc-300 hidden sm:block">
-                  {/* xp */}
-                </p>
-              </div>
-              <div className="w-full xl:w-3/4 p-3 lg:p-10 text-md sm:text-xl md:text-2xl text-gray-500 flex-grow">
-                {/* description */}
-              </div>
-              <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto">
-                <CiCircleInfo />
-                <CiHeart />
-              </div>
-            </div>
-            <div className="w-full h-[30vh] lg:h-[70vh] lg:w-1/5  usergradient rounded-3xl usergradient-glow">
-              <div className="h-full w-full flex justify-evenly flex-row lg:flex-col items-center ">
-                <div className="w-1/3 h-1/3 md:w-40 md:h-28  rounded-3xl items-center flex flex-col md:flex-row m-1 sm:m-4">
-                  <div className="h-full w-full usergradient rounded-3xl flex justify-center items-center usergradient-glow">
-                    <p className="text-xl md:text-3xl"> {/* answera */}</p>
-                  </div>
-                </div>
-                <div className="w-1/3 h-1/3 md:w-40 md:h-28  rounded-3xl items-center flex flex-col md:flex-row m-1 sm:m-4">
-                  <div className="h-full w-full usergradient rounded-3xl flex justify-center items-center usergradient-glow ">
-                    <p className="text-xl md:text-3xl">{/* answerb */}</p>
-                  </div>
-                </div>
-                <div className="w-1/3 h-1/3 md:w-40 md:h-28  rounded-3xl items-center flex flex-col md:flex-row m-1 sm:m-4">
-                  <div className="h-full w-full usergradient rounded-3xl flex justify-center items-center usergradient-glow ">
-                    <p className="text-xl md:text-3xl">{/* answerc */}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {tasks.map((task) => {
+            const selectedAnswer = selectedAnswers[task.id];
+            const correctAnswer = task.correctanswer;
 
-          <div className="flex flex-col lg:flex-row gap-4 w-full min-h[70vh]">
-            <div className="w-full min-h-[40vh] md:min-h-[70vh] lg:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
-              <div className="w-full flex justify-between mt-4 lg:mt-16  p-5 px-5 lg:px-10">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 userlvl3">
-                  {/* name */}
-                </h1>
-                <p className="text-md md:text-lg lg:text-2xl text-zinc-300 hidden sm:block">
-                  {/* xp */}
-                </p>
-              </div>
-              <div className="w-full xl:w-3/4 p-3 lg:p-10 text-md sm:text-xl md:text-2xl text-gray-500 flex-grow">
-                {/* description */}
-              </div>
-              <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto">
-                <CiCircleInfo />
-                <CiHeart />
-              </div>
-            </div>
-            <div className="w-full h-[30vh] lg:h-[70vh] lg:w-1/5  usergradient rounded-3xl usergradient-glow">
-              <div className="h-full w-full flex justify-evenly flex-row lg:flex-col items-center ">
-                <div className="w-1/3 h-1/3 md:w-40 md:h-28  rounded-3xl items-center flex flex-col md:flex-row m-1 sm:m-4">
-                  <div className="h-full w-full usergradient rounded-3xl flex justify-center items-center usergradient-glow">
-                    <p className="text-xl md:text-3xl"> {/* answera */}</p>
+            return (
+              <div
+                key={task.id}
+                className="flex flex-col lg:flex-row gap-4 w-full min-h-[70vh]"
+              >
+                {/* Task Info */}
+                <div className="w-full min-h-[40vh] md:min-h-[70vh] lg:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
+                  <div className="w-full flex justify-between mt-4 lg:mt-16 p-5 px-5 lg:px-10">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 userlvl3">
+                      {task.name}
+                    </h1>
+                    <p className="text-md md:text-lg lg:text-2xl text-zinc-300 hidden sm:block">
+                      {task.xp} XP
+                    </p>
+                  </div>
+                  <div className="w-full xl:w-3/4 p-3 lg:p-10 text-md sm:text-xl md:text-2xl text-gray-500 flex-grow">
+                    {task.description}
+                  </div>
+                  <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto">
+                    <CiCircleInfo />
+                    <CiHeart />
                   </div>
                 </div>
-                <div className="w-1/3 h-1/3 md:w-40 md:h-28  rounded-3xl items-center flex flex-col md:flex-row m-1 sm:m-4">
-                  <div className="h-full w-full usergradient rounded-3xl flex justify-center items-center usergradient-glow ">
-                    <p className="text-xl md:text-3xl">{/* answerb */}</p>
-                  </div>
-                </div>
-                <div className="w-1/3 h-1/3 md:w-40 md:h-28  rounded-3xl items-center flex flex-col md:flex-row m-1 sm:m-4">
-                  <div className="h-full w-full usergradient rounded-3xl flex justify-center items-center usergradient-glow ">
-                    <p className="text-xl md:text-3xl">{/* answerc */}</p>
+
+                {/* Answer Choices */}
+                <div className="w-full h-[30vh] lg:h-[70vh] lg:w-1/5 usergradient rounded-3xl usergradient-glow">
+                  <div className="h-full w-full flex justify-evenly flex-row lg:flex-col items-center">
+                    {["answera", "answerb", "answerc"].map((option) => {
+                      const answerText = task[option];
+                      const isCorrect = answerText === correctAnswer;
+                      const isSelected = answerText === selectedAnswer;
+
+                      return (
+                        <button
+                          key={option}
+                          className={`w-1/3 h-1/3 md:w-40 md:h-28 rounded-3xl flex justify-center items-center m-1 sm:m-4 usergradient-glow transition-colors ${
+                            selectedAnswer
+                              ? isCorrect
+                                ? "bg-green-500"
+                                : isSelected
+                                ? "bg-red-500"
+                                : "bg-gray-700 opacity-50"
+                              : "bg-zinc-700 hover:bg-zinc-600"
+                          }`}
+                          onClick={() => handleAnswerClick(task.id, answerText)}
+                          disabled={!!selectedAnswer}
+                        >
+                          <p className="text-xl md:text-3xl">{answerText}</p>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
+
+      {popup && (
+        <div
+          className={`fixed bottom-5 right-5 px-6 py-3 rounded-lg shadow-lg text-white text-lg transition-opacity duration-500 bg-gradient-to-r ${
+            popup.isCorrect
+              ? "from-green-800 to-green-500 border-green-400"
+              : "from-red-800 to-red-500 border-red-400"
+          } border-2`}
+        >
+          {popup.message}
+        </div>
+      )}
     </div>
   );
 }
