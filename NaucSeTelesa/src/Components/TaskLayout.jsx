@@ -129,10 +129,10 @@ function TaskLayout() {
 
       {popup && (
         <div
-          className={`fixed bottom-5 right-5 px-6 py-3 rounded-lg shadow-lg text-white text-lg transition-opacity duration-500 bg-gradient-to-r ${
+          className={`fixed top-5 right-5 px-10 py-6 rounded-lg shadow-lg text-white text-lg transition-opacity duration-1000 bg-gradient-to-r ${
             popup.isCorrect
-              ? "from-green-800 to-green-500 border-green-400"
-              : "from-red-800 to-red-500 border-red-400"
+              ? "from-black to-green-900 border-none"
+              : "from-black to-red-900 border-none"
           } border-2`}
         >
           {popup.message}
