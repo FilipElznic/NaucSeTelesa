@@ -172,3 +172,30 @@ html {
 .usergradient-glow {
   box-shadow: 0 0 2px 0px rgba(102, 102, 102, 0.8);
 }
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.animate-progress {
+  animation: progress 4.5s linear forwards;
+}

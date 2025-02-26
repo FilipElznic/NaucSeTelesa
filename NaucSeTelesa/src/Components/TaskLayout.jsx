@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import { CiCircleInfo, CiHeart } from "react-icons/ci";
 import { useGlobalData } from "../Global";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [popup, setPopup] = useState(null);
   const { userData, refreshUserData } = useGlobalData();
 
   useEffect(() => {
@@ -28,11 +29,29 @@ function TaskLayout() {
     const isCorrect = task.correctanswer === answer;
     setSelectedAnswers((prev) => ({ ...prev, [taskId]: answer }));
 
-    setPopup({
-      message: isCorrect ? "Správná odpověď!" : "Špatná odpověď!",
-      isCorrect,
-    });
-    setTimeout(() => setPopup(null), 2000);
+    // Show toast notification
+    toast(
+      <div>
+        <span
+          className={`bg-gradient-to-r ${
+            isCorrect
+              ? "from-green-400 to-green-600"
+              : "from-red-400 to-red-600"
+          } bg-clip-text text-transparent font-bold`}
+        >
+          {isCorrect ? "Správná odpověď!" : "Špatná odpověď!"}
+        </span>
+      </div>,
+      {
+        className: isCorrect ? "toast-success" : "toast-error",
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      }
+    );
 
     if (isCorrect) {
       try {
@@ -58,6 +77,14 @@ function TaskLayout() {
 
   return (
     <div className="bg-black min-h-screen flex flex-col items-center p-2 md:p-4 text-white">
+      {/* Toast Container */}
+      <ToastContainer
+        toastClassName="bg-black border-2 border-white/10 rounded-lg shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"
+        progressClassName={({ defaultClassName }) =>
+          `${defaultClassName} bg-gradient-to-r from-transparent to-white/10`
+        }
+      />
+
       <div className="w-full h-full bg-white/5 md:p-5 rounded-3xl">
         <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
           <div className="w-full h-24 usergradient rounded-full usergradient-glow"></div>
@@ -126,18 +153,6 @@ function TaskLayout() {
           })}
         </div>
       </div>
-
-      {popup && (
-        <div
-          className={`fixed top-5 right-5 px-10 py-6 rounded-lg shadow-lg text-white text-lg transition-opacity duration-1000 bg-gradient-to-r ${
-            popup.isCorrect
-              ? "from-black to-green-900 border-none"
-              : "from-black to-red-900 border-none"
-          } border-2`}
-        >
-          {popup.message}
-        </div>
-      )}
     </div>
   );
 }
