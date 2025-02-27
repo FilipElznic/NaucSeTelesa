@@ -43,7 +43,7 @@ function TaskLayout() {
         </span>
       </div>,
       {
-        className: isCorrect ? "toast-success" : "toast-error",
+        className: "!bg-black !text-white !border border-white/20 !shadow-lg",
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -77,14 +77,15 @@ function TaskLayout() {
 
   return (
     <div className="bg-black min-h-screen flex flex-col items-center p-2 md:p-4 text-white">
-      {/* Toast Container */}
       <ToastContainer
-        toastClassName="bg-black border-2 border-white/10 rounded-lg shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"
+        toastClassName={() =>
+          "bg-black !text-white !border-2 !border-white/10 !rounded-lg !shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"
+        }
+        bodyClassName="!bg-black !text-white"
         progressClassName={({ defaultClassName }) =>
-          `${defaultClassName} bg-gradient-to-r from-transparent to-white/10`
+          `${defaultClassName} !bg-gradient-to-r from-transparent to-white/10`
         }
       />
-
       <div className="w-full h-full bg-white/5 md:p-5 rounded-3xl">
         <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
           <div className="w-full h-24 usergradient rounded-full usergradient-glow"></div>
