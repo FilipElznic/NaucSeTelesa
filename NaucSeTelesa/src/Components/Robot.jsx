@@ -19,9 +19,9 @@ function Robot() {
   return (
     <>
       {isDesktop ? (
-        <div className="hidden lg:block">
+        <div className="hidden lg:block bg-gradient-to-tr from-black   to-zinc-950">
           <Navbar />
-          <div className="flex flex-col justify-center items-center bg-black min-h-screen text-white relative">
+          <div className="flex flex-col justify-center items-center  min-h-screen text-white relative">
             <div className="absolute bottom-14 left-1/2 transform -translate-x-1/2 z-50">
               <iframe
                 src="https://lottie.host/embed/8a69b819-9ee1-41e8-8360-9ecd4b0eee27/QYOR6xDR47.lottie"
@@ -34,12 +34,12 @@ function Robot() {
             <div className="relative md:flex md:flex-row md:justify-between md:items-start md:mt-14 w-full">
               <div className="absolute inset-0 z-0">
                 {isSplineLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-transparent rounded-3xl z-10">
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-900 rounded-3xl z-10">
                     <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                   </div>
                 )}
                 <Spline
-                  scene="https://prod.spline.design/jRwjRE4UBf9SZJJd/scene.splinecode"
+                  scene="https://prod.spline.design/VeV8EAaugsxDil4C/scene.splinecode"
                   onLoad={handleSplineLoad}
                 />
               </div>
@@ -56,9 +56,9 @@ function Robot() {
           </div>
         </div>
       ) : (
-        <div className="lg:hidden">
+        <div className="lg:hidden bg-gradient-to-tr from-black   to-zinc-950">
           <Navbar />
-          <div className="flex flex-col justify-center items-center bg-black min-h-screen text-white">
+          <div className="flex flex-col justify-center items-center bg-gray-900 min-h-screen text-white">
             <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50">
               <iframe
                 src="https://lottie.host/embed/201e4d38-1bcf-4ede-9774-d02af3ec27f4/Yp7gkvwJiX.lottie"
@@ -79,7 +79,7 @@ function Robot() {
               </p>
             </div>
             <div className="w-full h-[90v]">
-              <Spline scene="https://prod.spline.design/jRwjRE4UBf9SZJJd/scene.splinecode" />
+              <Spline scene="https://prod.spline.design/VeV8EAaugsxDil4C/scene.splinecode" />
             </div>
           </div>
         </div>

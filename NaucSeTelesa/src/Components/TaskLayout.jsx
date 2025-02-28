@@ -99,7 +99,7 @@ function TaskLayout() {
   };
 
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center p-2 sm:p-5 md:p-10 text-white">
+    <div className="bg-black min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
       <ToastContainer
         toastClassName={() =>
           "bg-black !text-white !border-2 !border-white/10 !rounded-lg !shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"
@@ -109,7 +109,7 @@ function TaskLayout() {
           `${defaultClassName} !bg-gradient-to-r from-transparent to-white/10`
         }
       />
-      <div className="w-full h-full bg-white/5 md:p-5 rounded-3xl">
+      <div className="w-full h-full bg-black md:p-5 rounded-3xl">
         <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
           <div className="w-full h-24 usergradient rounded-full usergradient-glow">
             <div className="h-full flex flex-row justify-between items-center">
@@ -139,7 +139,7 @@ function TaskLayout() {
 
               <span
                 className="flex flex-row cursor-pointer items-center gap-2   text-3xl mr-5"
-                onClick={() => (window.location.href = "/ukoly")}
+                onClick={() => (window.location.href = "/")}
               >
                 <p className="hidden sm:block text-2xl lg:text-3xl">Zavřít</p>
                 <IoClose className="  lg:mr-10" />

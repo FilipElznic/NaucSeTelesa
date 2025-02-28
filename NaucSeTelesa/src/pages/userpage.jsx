@@ -11,7 +11,7 @@ function UserPage() {
     <>
       <Robot />
 
-      <div className="border-t border-gray-700 min-h-screen bg-gradient-to-br from-black via-zinc-900  to-black text-white ">
+      <div className="border-t border-gray-700 min-h-screen bg-gradient-to-br from-black via-zinc-950  to-black text-white ">
         <FadeInWrapper>
           <Overused />
         </FadeInWrapper>

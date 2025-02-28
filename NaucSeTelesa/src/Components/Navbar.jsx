@@ -41,7 +41,7 @@ function Navbar() {
   }, [userData]);
 
   return (
-    <nav className="bg-quick text-white px-4 py-2 flex justify-between items-center shadow-lg relative lg:mt-3">
+    <nav className="bg-transparent text-white px-4 py-2 flex justify-between items-center shadow-lg relative ">
       {/* Left Side: Collapsible Menu */}
       <div className="flex items-center">
         {/* Hamburger Icon */}
@@ -66,7 +66,7 @@ function Navbar() {
         </button>
 
         <div
-          className={`absolute top-16 left-0 w-80 bg-black rounded-3xl transition-all duration-500 ease-in-out ${
+          className={`absolute top-16 left-0 w-80 bg-transparent rounded-3xl transition-all duration-500 ease-in-out ${
             isMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
           } lg:static lg:block lg:w-auto lg:opacity-100 lg:scale-100`}
         >
