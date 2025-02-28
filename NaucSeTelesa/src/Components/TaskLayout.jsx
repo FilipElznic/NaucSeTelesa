@@ -11,6 +11,8 @@ function TaskLayout() {
   const { userData, refreshUserData } = useGlobalData();
 
   useEffect(() => {
+    if (!userData || !userData.id) return; // Prevents fetching if userData is not available
+
     const fetchTasks = async () => {
       const { data, error } = await supabase.rpc("get_unfinished_tasks", {
         user_id: userData.id,
@@ -19,16 +21,15 @@ function TaskLayout() {
       if (error) {
         console.error("Error fetching unfinished tasks:", error);
       } else {
-        setTasks(data); // Since the function returns JSON, the array structure remains intact
+        setTasks(data);
       }
     };
 
     fetchTasks();
-  }, [userData.id]);
-
-  console.log(tasks);
+  }, [userData]); // Runs when userData changes
 
   const handleAnswerClick = async (taskId, answer) => {
+    if (!userData || !userData.id) return; // Prevents action if userData is missing
     if (selectedAnswers[taskId]) return;
 
     const task = tasks.find((t) => t.id === taskId);
@@ -80,6 +81,11 @@ function TaskLayout() {
       }
     }
   };
+
+  // Prevents rendering before userData is available
+  if (!userData) {
+    return <div className="text-white text-center mt-10">Načítání...</div>;
+  }
 
   return (
     <div className="bg-black min-h-screen flex flex-col items-center p-2 md:p-4 text-white">
