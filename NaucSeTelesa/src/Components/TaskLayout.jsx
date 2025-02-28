@@ -4,6 +4,11 @@ import { CiCircleInfo, CiHeart } from "react-icons/ci";
 import { useGlobalData } from "../Global";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaHome } from "react-icons/fa";
+import { IoMdRefresh } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
+import { FaShuffle } from "react-icons/fa6";
+
 
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
@@ -100,7 +105,14 @@ function TaskLayout() {
       />
       <div className="w-full h-full bg-white/5 md:p-5 rounded-3xl">
         <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
-          <div className="w-full h-24 usergradient rounded-full usergradient-glow"></div>
+          <div className="w-full h-24 usergradient rounded-full usergradient-glow">
+            <div className="h-full flex flex-row justify-between items-center">
+              <div className="flex-row w-full h-full text-3xl md:p-10 flex items-center gap-10 "><FaHome className="cursor-pointer"onClick={() => (window.location.href = "/")}/>  <IoMdRefresh className="cursor-pointer"/><FaShuffle className="cursor-pointer"/></div>
+              <IoClose className="text-4xl m-5 lg:mr-10 cursor-pointer"    
+              onClick={() => (window.location.href = "/")}/>
+     
+            </div>
+          </div>
 
           {tasks.map((task) => {
             const selectedAnswer = selectedAnswers[task.id];
