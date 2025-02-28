@@ -12,15 +12,21 @@ function TaskLayout() {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const { data, error } = await supabase.from("tasks").select("*");
+      const { data, error } = await supabase.rpc("get_unfinished_tasks", {
+        user_id: userData.id,
+      });
+
       if (error) {
-        console.error("Error fetching tasks:", error);
+        console.error("Error fetching unfinished tasks:", error);
       } else {
-        setTasks(data);
+        setTasks(data); // Since the function returns JSON, the array structure remains intact
       }
     };
+
     fetchTasks();
-  }, []);
+  }, [userData.id]);
+
+  console.log(tasks);
 
   const handleAnswerClick = async (taskId, answer) => {
     if (selectedAnswers[taskId]) return;
