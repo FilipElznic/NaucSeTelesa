@@ -9,7 +9,6 @@ import { IoMdRefresh } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { FaShuffle } from "react-icons/fa6";
 
-
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -92,6 +91,13 @@ function TaskLayout() {
     return <div className="text-white text-center mt-10">Načítání...</div>;
   }
 
+  const shuffleArray = (array) => {
+    return array
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  };
+
   return (
     <div className="bg-black min-h-screen flex flex-col items-center p-2 md:p-4 text-white">
       <ToastContainer
@@ -107,10 +113,37 @@ function TaskLayout() {
         <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
           <div className="w-full h-24 usergradient rounded-full usergradient-glow">
             <div className="h-full flex flex-row justify-between items-center">
-              <div className="flex-row w-full h-full text-3xl md:p-10 flex items-center gap-10 "><FaHome className="cursor-pointer" onClick={() => (window.location.href = "/")}/>  <IoMdRefresh className="cursor-pointer" onClick={() => (window.location.href = "/ukoly")}/><FaShuffle className="cursor-pointer"/></div>
-              <IoClose className="text-4xl m-5 lg:mr-10 cursor-pointer"    
-              onClick={() => (window.location.href = "/")}/>
-     
+              <div className="flex-row w-full h-full text-3xl md:p-10 flex items-center gap-10 ">
+                <span
+                  className="flex flex-row cursor-pointer items-center gap-2"
+                  onClick={() => (window.location.href = "/")}
+                >
+                  <FaHome className="" />
+                  <p>Domů</p>
+                </span>
+                <span
+                  className="flex flex-row cursor-pointer items-center gap-2"
+                  onClick={() => (window.location.href = "/ukoly")}
+                >
+                  <IoMdRefresh className="cursor-pointer" />
+                  <p>Obnovit</p>
+                </span>
+                <span
+                  className="flex flex-row cursor-pointer items-center gap-2"
+                  onClick={() => (window.location.href = "/ukoly")}
+                >
+                  <FaShuffle
+                    className="cursor-pointer"
+                    onClick={() => setTasks(shuffleArray(tasks))}
+                  />
+                  <p>Zamíchat</p>
+                </span>
+              </div>
+
+              <IoClose
+                className="text-4xl m-5 lg:mr-10 cursor-pointer"
+                onClick={() => (window.location.href = "/")}
+              />
             </div>
           </div>
 
