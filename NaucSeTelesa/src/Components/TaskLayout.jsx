@@ -99,7 +99,7 @@ function TaskLayout() {
   };
 
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center p-2 md:p-4 text-white">
+    <div className="bg-black min-h-screen flex flex-col items-center p-2 sm:p-5 md:p-10 text-white">
       <ToastContainer
         toastClassName={() =>
           "bg-black !text-white !border-2 !border-white/10 !rounded-lg !shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"
@@ -113,37 +113,37 @@ function TaskLayout() {
         <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
           <div className="w-full h-24 usergradient rounded-full usergradient-glow">
             <div className="h-full flex flex-row justify-between items-center">
-              <div className="flex-row w-full h-full text-3xl md:p-10 flex items-center gap-10 ">
+              <div className="flex-row w-full h-full  md:p-10 flex items-center gap-10 ">
                 <span
-                  className="flex flex-row cursor-pointer items-center gap-2"
+                  className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl ml-4"
                   onClick={() => (window.location.href = "/")}
                 >
-                  <FaHome className="" />
-                  <p>Domů</p>
+                  <FaHome />
+                  <p className="hidden sm:block">Domů</p>
                 </span>
                 <span
-                  className="flex flex-row cursor-pointer items-center gap-2"
+                  className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
                   onClick={() => (window.location.href = "/ukoly")}
                 >
-                  <IoMdRefresh className="cursor-pointer" />
-                  <p>Obnovit</p>
+                  <IoMdRefresh />
+                  <p className="hidden sm:block">Obnovit</p>
                 </span>
                 <span
-                  className="flex flex-row cursor-pointer items-center gap-2"
-                  onClick={() => (window.location.href = "/ukoly")}
+                  className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
+                  onClick={() => setTasks(shuffleArray(tasks))}
                 >
-                  <FaShuffle
-                    className="cursor-pointer"
-                    onClick={() => setTasks(shuffleArray(tasks))}
-                  />
-                  <p>Zamíchat</p>
+                  <FaShuffle />
+                  <p className="hidden sm:block">Zamíchat</p>
                 </span>
               </div>
 
-              <IoClose
-                className="text-4xl m-5 lg:mr-10 cursor-pointer"
-                onClick={() => (window.location.href = "/")}
-              />
+              <span
+                className="flex flex-row cursor-pointer items-center gap-2   text-3xl mr-5"
+                onClick={() => (window.location.href = "/ukoly")}
+              >
+                <p className="hidden sm:block text-2xl lg:text-3xl">Zavřít</p>
+                <IoClose className="  lg:mr-10" />
+              </span>
             </div>
           </div>
 
