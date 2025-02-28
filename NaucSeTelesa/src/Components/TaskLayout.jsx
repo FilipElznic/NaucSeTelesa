@@ -107,7 +107,7 @@ function TaskLayout() {
         <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
           <div className="w-full h-24 usergradient rounded-full usergradient-glow">
             <div className="h-full flex flex-row justify-between items-center">
-              <div className="flex-row w-full h-full text-3xl md:p-10 flex items-center gap-10 "><FaHome className="cursor-pointer"onClick={() => (window.location.href = "/")}/>  <IoMdRefresh className="cursor-pointer"/><FaShuffle className="cursor-pointer"/></div>
+              <div className="flex-row w-full h-full text-3xl md:p-10 flex items-center gap-10 "><FaHome className="cursor-pointer" onClick={() => (window.location.href = "/")}/>  <IoMdRefresh className="cursor-pointer" onClick={() => (window.location.href = "/ukoly")}/><FaShuffle className="cursor-pointer"/></div>
               <IoClose className="text-4xl m-5 lg:mr-10 cursor-pointer"    
               onClick={() => (window.location.href = "/")}/>
      
