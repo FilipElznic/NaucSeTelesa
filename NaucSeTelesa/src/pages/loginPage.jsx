@@ -64,15 +64,18 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-gradient-to-b from-gray-800 to-gray-900 p-8 rounded-lg shadow-lg text-center">
+    <div className="min-h-screen usergradient text-white flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white/5 p-8 rounded-lg shadow-lg text-center">
         <div className="space-y-4">
-          <button
-            onClick={() => handleProviderLogin("google")}
-            className="w-full py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition duration-200"
-          >
-            Přihlásit se přes Google
-          </button>
+          <div className="w-full usergradient rounded-3xl">
+            <button
+              onClick={() => handleProviderLogin("google")}
+              className="w-full py-2 px-4 rounded-lg  text-white font-semibold userlvl"
+            >
+              Přihlásit se přes Google
+            </button>
+          </div>
+
           <button
             onClick={() => handleProviderLogin("discord")}
             className="w-full py-2 px-4 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold transition duration-200"
