@@ -1,3 +1,6 @@
+import { CiLogin } from "react-icons/ci";
+import NeonBall from "./Neonball";
+import { Link } from "react-router-dom";
 function Overused() {
   return (
     <div className="flex  flex-col justify-center min-h-screen text-white">
@@ -41,9 +44,23 @@ function Overused() {
               </p>
             </div>
           </div>
-          <div className="md:w-72 md:h-60 lg:w-96 flex flex-col justify-evenly items-center mx-4 my-5">
-            <div className="w-56 mb-5 md:w-full md:h-full h-24 bg-zinc-900 rounded-3xl"></div>
-            <div className="w-56 md:w-full md:h-full h-24 bg-zinc-900 rounded-3xl"></div>
+          <div className="w-2/3  md:w-72 md:h-60 lg:w-96 flex flex-col justify-evenly items-center md:mx-4 my-5 ">
+            <div className="w-full mb-5 md:w-full md:h-full h-24 bg-zinc-900 rounded-3xl">
+              <Link to="/prihlaseni">
+                <div className="w-full h-full flex justify-center items-center flex-col">
+                  <h1 className="text-xl lg:text-2xl userlvl">
+                    Začnětě svou cestu učení s námi
+                  </h1>
+                  <div className="flex flex-row items-center gap-2">
+                    <p>přihlásit se</p>
+                    <CiLogin className="text-xl font-bold" />
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className="w-full md:w-full md:h-full h-24 bg-zinc-900 rounded-3xl">
+              <NeonBall />
+            </div>
           </div>
           <div className="w-2/3 h-60 md:w-72 md:h-60 lg:w-96 bg-zinc-900 rounded-3xl lg:mr-4">
             <div className="w-full h-full flex flex-col justify-center items-center text-center mr-4">
