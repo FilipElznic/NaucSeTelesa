@@ -34,7 +34,7 @@ function Robot() {
             <div className="relative md:flex md:flex-row md:justify-between md:items-start md:mt-14 w-full">
               <div className="absolute inset-0 z-0">
                 {isSplineLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gray-900 rounded-3xl z-10">
+                  <div className="absolute inset-0 flex items-center justify-center  rounded-3xl z-10">
                     <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                   </div>
                 )}

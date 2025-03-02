@@ -151,7 +151,7 @@ html {
   animation: typing 3s steps(30, end), blink 1s step-end infinite;
 }
 .bgplanet {
-  background-image: url("best.jpg");
+  background-image: url("best.webp");
   background-repeat: no-repeat;
   background-color: rgb(20, 20, 20); /* Ensure transparency */
   background-size: cover;

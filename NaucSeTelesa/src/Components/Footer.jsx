@@ -9,7 +9,7 @@ function Footer() {
       <div className="flex flex-col sm:flex-row justify-between items-center pb-3">
         {/* Logo */}
         <div className="flex flex-row  mb-4 sm:mb-0">
-          <img src="/cube.png" alt="Logo" className="w-16 h-16" />
+          <img src="/cube.webp" alt="Logo" className="w-16 h-16" />
         </div>
 
         {/* Navigation Buttons */}

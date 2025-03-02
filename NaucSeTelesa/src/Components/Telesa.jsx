@@ -179,11 +179,13 @@ function Telesa() {
                 />
               </div>
             ) : (
-              <img
-                src={selectedBody.image_url}
-                alt={selectedBody.geometric_body_name}
-                className="w-96 h-96 object-fit rounded-md mb-4"
-              />
+              <div className="relative w-full flex justify-center">
+                <img
+                  src={selectedBody.image_url}
+                  alt={selectedBody.geometric_body_name}
+                  className="w-96 h-96 object-fit rounded-md mb-4"
+                />
+              </div>
             )}
             <p className="text-gray-300 mb-4 text-center">
               {selectedBody.description}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
-import { CiCircleInfo, CiHeart } from "react-icons/ci";
+import { CiCircleInfo } from "react-icons/ci";
 import { useGlobalData } from "../Global";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -174,9 +174,13 @@ function TaskLayout() {
                       <br />
                       {task.description2}
                     </div>
-                    <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto">
-                      <CiCircleInfo />
-                      <CiHeart />
+                    <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto relative">
+                      <div className="relative group">
+                        <CiCircleInfo className="cursor-pointer" />
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 p-2 text-sm text-white bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                          This is a task info tooltip.
+                        </div>
+                      </div>
                     </div>
                   </div>
 

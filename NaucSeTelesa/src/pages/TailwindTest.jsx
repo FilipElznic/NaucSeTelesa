@@ -103,7 +103,7 @@ function TailwindTest() {
           <div className="w-full lg:w-2/5 h-80 usergradient m-2 rounded-3xl relative hover:scale-105 transition-transform duration-300 cursor-pointer">
             <Link to={"/ukoly"}>
               <img
-                src="/userimg.png"
+                src="/userimg.webp"
                 alt="telesa"
                 className="w-full h-full object-cover rounded-3xl"
               />
