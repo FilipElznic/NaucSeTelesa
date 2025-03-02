@@ -67,21 +67,22 @@ function LoginPage() {
     <div className="min-h-screen usergradient text-white flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white/5 p-8 rounded-lg shadow-lg text-center">
         <div className="space-y-4">
-          <div className="w-full usergradient rounded-3xl">
+          <div className="w-full usergradient rounded-2xl">
             <button
               onClick={() => handleProviderLogin("google")}
-              className="w-full py-2 px-4 rounded-lg  text-white font-semibold userlvl"
+              className="w-full py-2 px-4 text-white font-semibold userlvl"
             >
               Přihlásit se přes Google
             </button>
           </div>
-
-          <button
-            onClick={() => handleProviderLogin("discord")}
-            className="w-full py-2 px-4 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold transition duration-200"
-          >
-            Přihlásit se přes Discord
-          </button>
+          <div className="w-full usergradient rounded-2xl">
+            <button
+              onClick={() => handleProviderLogin("discord")}
+              className="w-full py-2 px-4 text-white font-semibold userlvl"
+            >
+              Přihlásit se přes Discord
+            </button>
+          </div>
         </div>
         <Auth
           providers={[]}
@@ -91,13 +92,13 @@ function LoginPage() {
             variables: {
               default: {
                 colors: {
-                  brand: "#0f172a",
-                  brandAccent: "#1e3a8a",
+                  brand: "#0a0a0a", // zinc-950
+                  brandAccent: "#18181b", // zinc-900
                   defaultButtonText: "#e2e8f0",
-                  defaultButtonBackground: "#1e293b",
-                  defaultButtonHoverBackground: "#111827",
-                  inputBackground: "#1e293b",
-                  inputBorder: "#334155",
+                  defaultButtonBackground: "#18181b", // zinc-900
+                  defaultButtonHoverBackground: "#0a0a0a", // zinc-950
+                  inputBackground: "#18181b", // zinc-900
+                  inputBorder: "#27272a", // Slightly lighter zinc-800 for contrast
                   inputText: "#e2e8f0",
                 },
               },
