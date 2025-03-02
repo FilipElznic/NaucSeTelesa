@@ -8,6 +8,7 @@ import { FaHome } from "react-icons/fa";
 import { IoMdRefresh } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { FaShuffle } from "react-icons/fa6";
+import Footer from "./Footer";
 
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
@@ -99,119 +100,125 @@ function TaskLayout() {
   };
 
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
-      <ToastContainer
-        toastClassName={() =>
-          "bg-black !text-white !border-2 !border-white/10 !rounded-lg !shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"
-        }
-        bodyClassName="!bg-black !text-white"
-        progressClassName={({ defaultClassName }) =>
-          `${defaultClassName} !bg-gradient-to-r from-transparent to-white/10`
-        }
-      />
-      <div className="w-full h-full bg-black md:p-5 rounded-3xl">
-        <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
-          <div className="w-full h-24 usergradient rounded-full usergradient-glow">
-            <div className="h-full flex flex-row justify-between items-center">
-              <div className="flex-row w-full h-full  md:p-10 flex items-center gap-10 ">
+    <>
+      {" "}
+      <div className="bg-black min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
+        <ToastContainer
+          toastClassName={() =>
+            "bg-black !text-white !border-2 !border-white/10 !rounded-lg !shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"
+          }
+          bodyClassName="!bg-black !text-white"
+          progressClassName={({ defaultClassName }) =>
+            `${defaultClassName} !bg-gradient-to-r from-transparent to-white/10`
+          }
+        />
+        <div className="w-full h-full bg-black md:p-5 rounded-3xl">
+          <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
+            <div className="w-full h-24 usergradient rounded-full usergradient-glow">
+              <div className="h-full flex flex-row justify-between items-center">
+                <div className="flex-row w-full h-full  md:p-10 flex items-center gap-10 ">
+                  <span
+                    className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl ml-4"
+                    onClick={() => (window.location.href = "/")}
+                  >
+                    <FaHome />
+                    <p className="hidden sm:block">Domů</p>
+                  </span>
+                  <span
+                    className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
+                    onClick={() => (window.location.href = "/ukoly")}
+                  >
+                    <IoMdRefresh />
+                    <p className="hidden sm:block">Obnovit</p>
+                  </span>
+                  <span
+                    className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
+                    onClick={() => setTasks(shuffleArray(tasks))}
+                  >
+                    <FaShuffle />
+                    <p className="hidden sm:block">Zamíchat</p>
+                  </span>
+                </div>
+
                 <span
-                  className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl ml-4"
+                  className="flex flex-row cursor-pointer items-center gap-2   text-3xl mr-5"
                   onClick={() => (window.location.href = "/")}
                 >
-                  <FaHome />
-                  <p className="hidden sm:block">Domů</p>
-                </span>
-                <span
-                  className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
-                  onClick={() => (window.location.href = "/ukoly")}
-                >
-                  <IoMdRefresh />
-                  <p className="hidden sm:block">Obnovit</p>
-                </span>
-                <span
-                  className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
-                  onClick={() => setTasks(shuffleArray(tasks))}
-                >
-                  <FaShuffle />
-                  <p className="hidden sm:block">Zamíchat</p>
+                  <p className="hidden sm:block text-2xl lg:text-3xl">Zavřít</p>
+                  <IoClose className="  lg:mr-10" />
                 </span>
               </div>
-
-              <span
-                className="flex flex-row cursor-pointer items-center gap-2   text-3xl mr-5"
-                onClick={() => (window.location.href = "/")}
-              >
-                <p className="hidden sm:block text-2xl lg:text-3xl">Zavřít</p>
-                <IoClose className="  lg:mr-10" />
-              </span>
             </div>
+
+            {tasks.map((task) => {
+              const selectedAnswer = selectedAnswers[task.id];
+              const correctAnswer = task.correctanswer;
+
+              return (
+                <div
+                  key={task.id}
+                  className="flex flex-col lg:flex-row gap-4 w-full min-h-[70vh]"
+                >
+                  {/* Task Info */}
+                  <div className="w-full min-h-[40vh] md:min-h-[70vh] lg:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
+                    <div className="w-full flex justify-between mt-4 lg:mt-16 p-5 px-5 lg:px-10">
+                      <h1 className="text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 userlvl3 pb-2">
+                        {task.name}
+                      </h1>
+                      <p className="text-md md:text-lg lg:text-2xl text-zinc-300 hidden sm:block">
+                        {task.xp} XP
+                      </p>
+                    </div>
+                    <div className="w-full xl:w-3/4 p-3 lg:p-10 text-md sm:text-xl md:text-2xl text-gray-500 flex-grow">
+                      {task.description}
+                      <br />
+                      {task.description2}
+                    </div>
+                    <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto">
+                      <CiCircleInfo />
+                      <CiHeart />
+                    </div>
+                  </div>
+
+                  {/* Answer Choices */}
+                  <div className="w-full h-[30vh] lg:h-[70vh] lg:w-1/5 usergradient rounded-3xl usergradient-glow">
+                    <div className="h-full w-full flex justify-evenly flex-row lg:flex-col items-center">
+                      {["answera", "answerb", "answerc"].map((option) => {
+                        const answerText = task[option];
+                        const isCorrect = answerText === correctAnswer;
+                        const isSelected = answerText === selectedAnswer;
+
+                        return (
+                          <button
+                            key={option}
+                            className={`w-1/3 h-1/3 md:w-40 md:h-28 rounded-3xl flex justify-center items-center m-1 sm:m-4 usergradient-glow transition-colors ${
+                              selectedAnswer
+                                ? isCorrect
+                                  ? "bg-green-500"
+                                  : isSelected
+                                  ? "bg-red-500"
+                                  : "bg-gray-700 opacity-50"
+                                : "bg-zinc-700 hover:bg-zinc-600"
+                            }`}
+                            onClick={() =>
+                              handleAnswerClick(task.id, answerText)
+                            }
+                            disabled={!!selectedAnswer}
+                          >
+                            <p className="text-xl md:text-2xl">{answerText}</p>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-
-          {tasks.map((task) => {
-            const selectedAnswer = selectedAnswers[task.id];
-            const correctAnswer = task.correctanswer;
-
-            return (
-              <div
-                key={task.id}
-                className="flex flex-col lg:flex-row gap-4 w-full min-h-[70vh]"
-              >
-                {/* Task Info */}
-                <div className="w-full min-h-[40vh] md:min-h-[70vh] lg:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
-                  <div className="w-full flex justify-between mt-4 lg:mt-16 p-5 px-5 lg:px-10">
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 userlvl3 pb-2">
-                      {task.name}
-                    </h1>
-                    <p className="text-md md:text-lg lg:text-2xl text-zinc-300 hidden sm:block">
-                      {task.xp} XP
-                    </p>
-                  </div>
-                  <div className="w-full xl:w-3/4 p-3 lg:p-10 text-md sm:text-xl md:text-2xl text-gray-500 flex-grow">
-                    {task.description}
-                    <br />
-                    {task.description2}
-                  </div>
-                  <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto">
-                    <CiCircleInfo />
-                    <CiHeart />
-                  </div>
-                </div>
-
-                {/* Answer Choices */}
-                <div className="w-full h-[30vh] lg:h-[70vh] lg:w-1/5 usergradient rounded-3xl usergradient-glow">
-                  <div className="h-full w-full flex justify-evenly flex-row lg:flex-col items-center">
-                    {["answera", "answerb", "answerc"].map((option) => {
-                      const answerText = task[option];
-                      const isCorrect = answerText === correctAnswer;
-                      const isSelected = answerText === selectedAnswer;
-
-                      return (
-                        <button
-                          key={option}
-                          className={`w-1/3 h-1/3 md:w-40 md:h-28 rounded-3xl flex justify-center items-center m-1 sm:m-4 usergradient-glow transition-colors ${
-                            selectedAnswer
-                              ? isCorrect
-                                ? "bg-green-500"
-                                : isSelected
-                                ? "bg-red-500"
-                                : "bg-gray-700 opacity-50"
-                              : "bg-zinc-700 hover:bg-zinc-600"
-                          }`}
-                          onClick={() => handleAnswerClick(task.id, answerText)}
-                          disabled={!!selectedAnswer}
-                        >
-                          <p className="text-xl md:text-3xl">{answerText}</p>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

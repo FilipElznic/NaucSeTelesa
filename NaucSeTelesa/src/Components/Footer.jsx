@@ -41,7 +41,7 @@ function Footer() {
       {/* Footer */}
       <div className="text-center mt-3">
         <p className="text-white">
-          &copy; {getCurrentYear()} Filip Elznic. All rights reserved.
+          &copy; {getCurrentYear()} Filip Elznic. Všechna práva vyhrazena.
         </p>
       </div>
     </div>
