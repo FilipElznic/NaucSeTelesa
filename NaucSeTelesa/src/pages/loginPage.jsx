@@ -3,6 +3,8 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Robot1 from "/rukyhore.png";
+import Robot2 from "/robotlast1.png";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -64,7 +66,19 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen usergradient text-white flex items-center justify-center p-4">
+    <div className="relative min-h-screen usergradient text-white flex items-center justify-center p-4 overflow-hidden">
+      <img
+        src={Robot2}
+        alt="Robot Left"
+        className="absolute top-[0%] sm:top-[-5%] left-[-22%] w-[50%] rotate-[30deg] object-cover"
+      />
+
+      {/* Right Robot */}
+      <img
+        src={Robot1}
+        alt="Robot Right"
+        className="absolute bottom-[-5%] right-[-20%] w-[50%] rotate-[-25deg] object-cover"
+      />
       <div className="max-w-md w-full bg-white/5 p-8 rounded-lg shadow-lg text-center">
         <div className="space-y-4">
           <div className="w-full usergradient rounded-2xl">
