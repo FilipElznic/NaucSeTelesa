@@ -66,21 +66,21 @@ function Navbar() {
         </button>
 
         <div
-          className={`absolute top-16 left-0 w-80 bg-transparent rounded-3xl transition-all duration-500 ease-in-out ${
+          className={`absolute top-16 left-5 w-60 usergradient rounded-3xl transition-all duration-200 ease-in-out z-20 ${
             isMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
           } lg:static lg:block lg:w-auto lg:opacity-100 lg:scale-100`}
         >
-          <ul className="lg:flex lg:space-x-6 space-y-3 lg:space-y-0 p-6 lg:p-0">
-            <li className="flex items-center justify-center">
+          <ul className="lg:flex lg:space-x-6 space-y-6 lg:space-y-0 p-2 lg:p-0">
+            <li className="flex items-center ">
               <Link
                 to="/success"
-                className=" flex items-center justify-center text-white text-xl rounded-3xl  lg:text-2xl mx-4"
+                className="flex md:items-center md:justify-center text-white text-xl rounded-3xl lg:text-2xl mx-4 "
               >
                 <FaHome />
               </Link>
             </li>
 
-            <li>
+            <li className="mb-10">
               <Link
                 to="/telesa"
                 className="navbutton w-full text-white text-xl px-4 py-2 rounded-full lg:text-2xl lg:px-10"
@@ -88,7 +88,7 @@ function Navbar() {
                 Tělesa
               </Link>
             </li>
-            <li>
+            <li className="mb-2">
               <Link
                 to="/ukoly"
                 className="navbutton w-full text-white text-xl px-4 py-2 rounded-full lg:text-2xl lg:px-10"

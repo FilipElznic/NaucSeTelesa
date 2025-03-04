@@ -101,7 +101,6 @@ function TaskLayout() {
 
   return (
     <>
-      {" "}
       <div className="bg-black min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
         <ToastContainer
           toastClassName={() =>
@@ -157,7 +156,7 @@ function TaskLayout() {
               return (
                 <div
                   key={task.id}
-                  className="flex flex-col lg:flex-row gap-4 w-full min-h-[70vh]"
+                  className="flex flex-col lg:flex-row gap-4 w-full min-h-[70vh] h-full "
                 >
                   {/* Task Info */}
                   <div className="w-full min-h-[40vh] md:min-h-[70vh] lg:w-3/5 usergradient rounded-3xl flex flex-col usergradient-glow">
@@ -185,7 +184,8 @@ function TaskLayout() {
                   </div>
 
                   {/* Answer Choices */}
-                  <div className="w-full h-[30vh] lg:h-[70vh] lg:w-1/5 usergradient rounded-3xl usergradient-glow">
+
+                  <div className="w-full min-h-[30vh] usergradient lg:min-h-[70vh]  lg:w-1/5  rounded-3xl usergradient-glow flex items-center ">
                     <div className="h-full w-full flex justify-evenly flex-row lg:flex-col items-center">
                       {["answera", "answerb", "answerc"].map((option) => {
                         const answerText = task[option];
@@ -195,7 +195,7 @@ function TaskLayout() {
                         return (
                           <button
                             key={option}
-                            className={`w-1/3 h-1/3 md:w-40 md:h-28 rounded-3xl flex justify-center items-center m-1 sm:m-4 usergradient-glow transition-colors ${
+                            className={`w-20 h-20 sm:w-40 sm:h-32 md:w-40 md:h-28 rounded-3xl flex justify-center items-center m-1 sm:m-4 usergradient-glow transition-colors ${
                               selectedAnswer
                                 ? isCorrect
                                   ? "bg-green-500"
