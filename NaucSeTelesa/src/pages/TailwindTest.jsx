@@ -36,7 +36,9 @@ function TailwindTest() {
 
               <div className="text-7xl text-black absolute mb-7">
                 {userData ? (
-                  <p className="userlvl">{Math.floor(userData.xp / 100)}</p>
+                  <p className="userlvl text-5xl md:text-7xl">
+                    {Math.floor(userData.xp / 100)}
+                  </p>
                 ) : (
                   <p className="text-sm">Načítám data ...</p>
                 )}
