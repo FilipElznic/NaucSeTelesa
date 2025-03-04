@@ -50,7 +50,7 @@ function TailwindTest() {
             <div className="flex flex-col h-full justify-center text-white p-11">
               {userData ? (
                 <>
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-7xl p-5">
+                  <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-7xl p-5">
                     <p className="userlvl typing-animation">
                       {userData.name} {userData.surname}
                     </p>
@@ -119,7 +119,7 @@ function TailwindTest() {
               <div className="w-full h-full flex flex-col justify-center items-center">
                 <img
                   src={avatarUrl}
-                  className="object-fit rounded-full"
+                  className="object-fit rounded-full max-h-80 md:max-w-48 lg:max-w-56"
                   alt="Avatar"
                 />
               </div>
