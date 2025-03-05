@@ -189,8 +189,6 @@ function TaskLayout() {
                     </div>
                   </div>
 
-                  {/* Answer Choices */}
-
                   <div className="w-full min-h-[30vh] usergradient lg:min-h-[70vh]  lg:w-1/5  rounded-3xl usergradient-glow flex items-center ">
                     <div className="h-full w-full flex justify-evenly flex-row lg:flex-col items-center">
                       {["answera", "answerb", "answerc"].map((option) => {
@@ -201,7 +199,7 @@ function TaskLayout() {
                         return (
                           <button
                             key={option}
-                            className={`w-20 h-20 sm:w-40 sm:h-32 md:w-40 md:h-28 rounded-3xl flex justify-center items-center m-1 sm:m-4 usergradient-glow transition-colors ${
+                            className={`w-full h-28 gap-2 sm:w-40 sm:h-32 md:w-40 md:h-28 rounded-3xl flex justify-center items-center m-1 sm:m-4 usergradient-glow transition-colors ${
                               selectedAnswer
                                 ? isCorrect
                                   ? "bg-green-500"
@@ -215,7 +213,13 @@ function TaskLayout() {
                             }
                             disabled={!!selectedAnswer}
                           >
-                            <p className="text-xl md:text-2xl">{answerText}</p>
+                            {answerText.length > 10 ? (
+                              <p className="text-md md:text-xl">{answerText}</p>
+                            ) : (
+                              <p className="text-xl md:text-2xl">
+                                {answerText}
+                              </p>
+                            )}
                           </button>
                         );
                       })}
