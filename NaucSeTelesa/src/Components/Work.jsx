@@ -12,7 +12,7 @@ function Work() {
       </h1>
       <div className="w-[90vw]">
         {/* Larger div */}
-        <div className="w-full md:h-[80vh] lg:h-[90vh] xl:h-screen bg-black rounded-2xl mb-6 flex justify-center items-center usergradient-glow">
+        <div className="w-full md:h-[80vh] lg:h-[90vh] xl:h-screen bg-black rounded-2xl mb-6 flex justify-center items-center">
           <div className="flex flex-col items-center">
             <p className="userlvl text-xl text-white pt-4">
               Sledujte svůj pokrok
@@ -27,7 +27,7 @@ function Work() {
 
       {/* Smaller divs */}
       <div className="w-[90vw] flex flex-col md:flex-row gap-6">
-        <div className="w-full md:w-1/2 md:h-[60vh] bg-black rounded-2xl flex justify-center items-center usergradient-glow">
+        <div className="w-full md:w-1/2 md:h-[60vh] bg-black rounded-2xl flex justify-center items-center">
           <div className="flex flex-col items-center">
             <p className="userlvl text-xl text-white ">Sledujte svůj pokrok</p>
             <img
@@ -36,7 +36,7 @@ function Work() {
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 md:h-[60vh] bg-black rounded-2xl flex justify-center items-center usergradient-glow">
+        <div className="w-full md:w-1/2 md:h-[60vh] bg-black rounded-2xl flex justify-center items-center">
           <div className="flex flex-col items-center">
             <p className="userlvl text-xl text-white ">Soutěžte s ostatními</p>
             <img
