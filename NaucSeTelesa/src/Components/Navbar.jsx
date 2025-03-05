@@ -66,7 +66,7 @@ function Navbar() {
         </button>
 
         <div
-          className={`absolute top-16 left-5 w-60  rounded-3xl transition-all duration-200 ease-in-out z-20 ${
+          className={`absolute top-16 left-5 w-60 usergradient rounded-3xl transition-all duration-200 ease-in-out z-20 ${
             isMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
           } lg:static lg:block lg:w-auto lg:opacity-100 lg:scale-100`}
         >
