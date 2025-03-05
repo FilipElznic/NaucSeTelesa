@@ -34,7 +34,7 @@ function TailwindTest() {
             <div className="w-full h-5/6 justify-center items-center flex flex-col">
               <IoShieldSharp className="w-2/3 h-5/6 relative text-zinc-900 drop-shadow-white-glow" />
 
-              <div className="text-7xl text-black absolute mb-7">
+              <div className="md:text-5xl text-7xl xl:text-7xl text-black absolute mb-7">
                 {userData ? (
                   <p className="userlvl">{Math.floor(userData.xp / 100)}</p>
                 ) : (

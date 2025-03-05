@@ -176,8 +176,14 @@ function TaskLayout() {
                     <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto relative">
                       <div className="relative group">
                         <CiCircleInfo className="cursor-pointer" />
-                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 p-2 text-sm text-white bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                          This is a task info tooltip.
+                        <div className="absolute bottom-full left-5 md:left-40  -translate-x-1/2 mb-2 w-40 md:w-80 p-2 text-sm text-white bg-black rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                          <p>
+                            Každý úkol obsahuje otázku doplněnou krátkým
+                            vysvětlením. Uživatel má na výběr ze tří možných
+                            odpovědí, z nichž pouze jedna je správná. Cílem je
+                            zvolit správnou odpověď na základě poskytnutých
+                            informací.
+                          </p>
                         </div>
                       </div>
                     </div>
