@@ -70,7 +70,7 @@ function Navbar() {
             isMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
           } lg:static lg:block lg:w-auto lg:opacity-100 lg:scale-100`}
         >
-          <ul className="lg:flex lg:space-x-6 space-y-6 lg:space-y-0 p-2 lg:p-0">
+          <ul className="lg:flex lg:space-x-6 space-y-6 lg:space-y-0 p-2  lg:p-0 bg-black rounded-2xl">
             <li className="flex items-center ">
               <Link
                 to="/success"
@@ -83,7 +83,7 @@ function Navbar() {
             <li className="mb-10">
               <Link
                 to="/telesa"
-                className="navbutton w-full text-white text-xl px-4 py-2 rounded-full lg:text-2xl lg:px-10"
+                className="navbutton w-full text-white text-xl px-4 py-2 rounded-full lg:text-2xl lg:px-10 "
               >
                 Tělesa
               </Link>

@@ -68,8 +68,8 @@ function Robot() {
                 title="Lottie Animation"
               ></iframe>
             </div>
-            <div className="sm:flex sm:flex-col sm:justify-center sm:items-center sm:h-[90vh] text-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold  sm:pr-20">
+            <div className="sm:flex sm:flex-col sm:justify-center sm:items-center sm:h-[90vh] text-center ">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold  text-center">
                 Nechte se vnést <br />
                 do světa geometrie
               </h1>
