@@ -13,7 +13,7 @@ function LeaderboardW() {
           </h2>
         </div>
         <div className="flex w-full justify-center">
-          <div className="flex justify-center w-3/4">
+          <div className="flex justify-center w-full md:w-3/4">
             <Leaderboard />
           </div>
         </div>

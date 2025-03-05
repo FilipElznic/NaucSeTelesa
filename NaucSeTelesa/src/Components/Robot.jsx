@@ -59,7 +59,7 @@ function Robot() {
         <div className="lg:hidden bg-gradient-to-tr from-black   to-zinc-950">
           <Navbar />
           <div className="flex flex-col justify-center items-center  min-h-screen text-white">
-            <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50">
+            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50">
               <iframe
                 src="https://lottie.host/embed/201e4d38-1bcf-4ede-9774-d02af3ec27f4/Yp7gkvwJiX.lottie"
                 width="100px"
