@@ -14,7 +14,7 @@ function Telesa() {
   useEffect(() => {
     const fetchBodies = async () => {
       setLoading(true);
-      const { data, error } = await supabase.rpc("fetch_geometric_bodies2");
+      const { data, error } = await supabase.rpc("fetch_geometric_bodies4");
 
       if (error) {
         console.error("Error fetching geometric bodies:", error);
@@ -48,20 +48,22 @@ function Telesa() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul className="flex flex-col gap-6 w-full max-w-6xl">
+        <ul className="flex flex-col gap-6 w-full max-w-7xl ">
           {bodies.map((body, index) => (
             <li
               key={index}
-              className="usergradient rounded-lg p-8 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
+              className="usergradient rounded-lg p-8  shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
               onClick={() => handleBodyClick(body)}
             >
-              <div className="flex flex-col md:flex-row w-full justify-between items-center h-full">
+              <div className="flex flex-col md:flex-row w-full justify-between items-center h-full min-h-[50vh]">
                 <div className="md:w-2/3">
-                  <h2 className="text-2xl font-bold mb-6 text-purple-400">
+                  <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-6 text-purple-400">
                     {body.geometric_body_name}
                   </h2>
-                  <p className="text-gray-300 mb-6 text-lg md:w-2/3">
+                  <p className="text-gray-300 mb-6 text-xl md:text-2xl md:w-2/3 gap-3">
                     {body.description}
+                    <br />
+                    {body.description1}
                   </p>
                   <div className="text-sm text-gray-400 space-y-4">
                     <div className="flex flex-col md:flex-row md:justify-evenly md:w-2/3">
@@ -138,7 +140,7 @@ function Telesa() {
                     </div>
                   </div>
                 </div>
-                <div className="md:w-1/3 flex justify-center items-center">
+                <div className="md:w-1/3 h-full flex justify-center items-center">
                   {body.image_url && (
                     <img
                       src={body.image_url}

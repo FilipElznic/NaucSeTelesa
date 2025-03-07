@@ -70,7 +70,7 @@ function Navbar() {
             isMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
           } lg:static lg:block lg:w-auto lg:opacity-100 lg:scale-100`}
         >
-          <ul className="lg:flex lg:space-x-6 space-y-6 lg:space-y-0 p-2  lg:p-0 bg-black rounded-2xl">
+          <ul className="lg:flex lg:space-x-6 space-y-6 lg:space-y-0 p-2  lg:p-0 bg-transparent rounded-2xl">
             <li className="flex items-center ">
               <Link
                 to="/success"
