@@ -1,18 +1,32 @@
 import React from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import Robot1 from "/rukyhore.png";
+import Robot2 from "/robotlast1.png";
 
 function AboutPage() {
   return (
-    <>
+    <div className="usergradient">
       <Navbar />
-      <div className="min-h-screen bg-black text-white p-8">
+      <div className="min-h-screen w-full bg-transparent relative overflow-hidden text-white p-8">
         {/* Animated Heading */}
         <div className="flex w-full justify-center">
           <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-center mb-12 pb-6 typing-animation">
             <span className="userlvl">O Projektu</span>
           </h1>
         </div>
+        <img
+          src={Robot2}
+          alt="Robot Left"
+          className="absolute top-[0%]  left-[-22%] w-[50%] rotate-[30deg] object-cover"
+        />
+
+        {/* Right Robot */}
+        <img
+          src={Robot1}
+          alt="Robot Right"
+          className="absolute bottom-[-5%] right-[-20%] w-[50%] rotate-[-25deg] object-cover"
+        />
 
         {/* Project Description */}
         <div className="max-w-4xl mx-auto text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed">
@@ -38,7 +52,7 @@ function AboutPage() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
