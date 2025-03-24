@@ -35,34 +35,10 @@ function Help() {
   return (
     <div className="w-full min-h-screen bg-black text-white flex flex-col">
       {/* Header */}
-      <header className="border-b border-gray-800 p-4 flex items-center">
-        <a
-          href="/"
-          className="flex items-center text-gray-400 hover:text-blue-400 transition-colors"
-        >
-          <ArrowLeft size={20} className="mr-2" />
-          <span>Zpět</span>
-        </a>
-        <h1 className="text-2xl font-bold mx-auto pr-8">Nápověda</h1>
-      </header>
 
       {/* Main content with robot imagery */}
       <div className="flex-1 flex flex-col relative overflow-hidden">
         {/* Background robot images - stylized positioning similar to login screen */}
-        <div className="absolute left-0 bottom-0 opacity-70 w-1/3 pointer-events-none">
-          <img
-            src="/api/placeholder/400/600"
-            alt="Robot figure"
-            className="opacity-30"
-          />
-        </div>
-        <div className="absolute right-0 bottom-0 opacity-70 w-1/3 pointer-events-none">
-          <img
-            src="/api/placeholder/400/600"
-            alt="Robot figure"
-            className="opacity-30"
-          />
-        </div>
 
         {/* Content container */}
         <div className="relative z-10 flex-1 flex flex-col md:flex-row w-full max-w-6xl mx-auto p-6 gap-6">
@@ -363,9 +339,6 @@ function Help() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 p-4 text-center text-gray-500 text-sm">
-        &copy; 2025 Geometrický projekt | Všechna práva vyhrazena
-      </footer>
     </div>
   );
 }
