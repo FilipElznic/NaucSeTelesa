@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import emailjs from "@emailjs/browser";
+import emailjs from "emailjs-com";
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,54 +23,51 @@ const FAQItem = ({ question, answer }) => {
 const HelpPage = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
 
-    try {
-      // Send email using EmailJS
-      const result = await emailjs.send(
+    // Prepare form data
+    const formData = {
+      from_email: email,
+      message: message,
+    };
+
+    emailjs
+      .send(
         "service_2kw7nvx",
-        "template_your_template_id", // You'll need to create a template in EmailJS
-        {
-          from_email: email,
-          message: message,
+        "template_voakx5c",
+        formData,
+        "38mGiICJtaMmF4ga3"
+      )
+      .then(
+        (result) => {
+          toast.success("Vaše zpráva byla úspěšně odeslána!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+
+          // Reset form fields
+          setEmail("");
+          setMessage("");
         },
-        {
-          publicKey: "38mGiICJtaMmF4ga3",
-          privateKey: "KBvc8u1UH-SCVM88Z5gA0",
+        (error) => {
+          toast.error("Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }
       );
-
-      // Show success toast
-      toast.success("Vaše zpráva byla úspěšně odeslána!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-
-      // Reset form fields
-      setEmail("");
-      setMessage("");
-      setSubmitted(true);
-    } catch (error) {
-      // Show error toast
-      toast.error("Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      console.error("Error sending email:", error);
-    }
   };
 
   return (
@@ -84,7 +81,7 @@ const HelpPage = () => {
       </div>
 
       {/* Kontaktní formulář */}
-      <div className="flex flex-col w-5/6">
+      <div className="flex flex-col h-full w-5/6">
         <section
           className="bg-zinc-900 p-8 rounded-3xl 
             shadow-[0_0_30px_rgba(255,255,255,0.2)] 
@@ -95,13 +92,14 @@ const HelpPage = () => {
           <h2 className="text-4xl text-center font-semibold mb-6">
             Kontaktujte nás
           </h2>
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+          <form onSubmit={sendEmail} className="flex flex-col gap-4">
             <div className="col-span-2 md:col-span-1">
               <label htmlFor="email" className="block mb-2">
                 Váš email
               </label>
               <input
                 type="email"
+                name="from_email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -117,6 +115,7 @@ const HelpPage = () => {
               </label>
               <textarea
                 id="message"
+                name="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 required
