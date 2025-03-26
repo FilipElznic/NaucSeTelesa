@@ -41,7 +41,7 @@ function Telesa() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950  to-black  text-white flex flex-col items-center p-6">
       <h1 className="text-2xl md:text-5xl lg:text-9xl font-bold my-28 text-transparent bg-clip-text userlvl ">
         Geometrická tělesa
       </h1>

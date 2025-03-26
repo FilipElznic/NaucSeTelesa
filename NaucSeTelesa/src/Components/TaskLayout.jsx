@@ -101,7 +101,7 @@ function TaskLayout() {
 
   return (
     <>
-      <div className="bg-black min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
+      <div className="bg-gradient-to-br from-black via-zinc-950  to-black  min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
         <ToastContainer
           toastClassName={() =>
             "bg-black !text-white !border-2 !border-white/10 !rounded-lg !shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"

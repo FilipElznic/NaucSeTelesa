@@ -6,7 +6,7 @@ import Robot2 from "/robotlast1.png";
 
 function AboutPage() {
   return (
-    <div className="usergradient">
+    <div className="bg-gradient-to-br from-black via-zinc-950  to-black ">
       <Navbar />
       <div className="min-h-screen w-full bg-transparent relative overflow-hidden text-white p-8">
         {/* Animated Heading */}
