@@ -65,14 +65,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
-                path="/projekt"
-                element={
-                  <ProtectedRoute redirectTo="/">
-                    <AboutPage />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/projekt" element={<AboutPage />} />
               <Route
                 path="/profil"
                 element={
