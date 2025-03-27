@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useGlobalData } from "../Global"; // Import global context
 import "../App.css";
@@ -11,13 +11,15 @@ function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(userData?.img || ""); // Initialize avatar URL
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // Optimize menu toggle with useCallback
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // Optimize dropdown toggle with useCallback
+  const toggleDropdown = useCallback(() => {
+    setIsDropdownOpen((prev) => !prev);
+  }, []);
 
   // Handle sign out
   const signOutUser = async () => {
@@ -40,8 +42,13 @@ function Navbar() {
     }
   }, [userData]);
 
+  // Close menu when a link is clicked
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
   return (
-    <nav className="bg-transparent text-white px-4 py-2 flex justify-between items-center shadow-lg relative ">
+    <nav className="bg-transparent text-white px-4 py-2 flex justify-between items-center shadow-lg relative">
       {/* Left Side: Collapsible Menu */}
       <div className="flex items-center">
         {/* Hamburger Icon */}
@@ -66,32 +73,37 @@ function Navbar() {
         </button>
 
         <div
-          className={`absolute top-16 left-5 w-60  rounded-3xl transition-all duration-200 ease-in-out z-20 ${
-            isMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          } lg:static lg:block lg:w-auto lg:opacity-100 lg:scale-100`}
+          className={`fixed top-16 left-5 w-60 rounded-3xl transition-all duration-200 ease-in-out z-20 ${
+            isMenuOpen
+              ? "opacity-100 scale-100 usergradient shadow-lg"
+              : "opacity-0 scale-95 pointer-events-none"
+          } lg:static lg:block lg:w-auto lg:opacity-100 lg:scale-100 lg:usergradient-none`}
         >
-          <ul className="lg:flex lg:space-x-6 space-y-6 lg:space-y-0 p-2  lg:p-0 bg-transparent rounded-2xl">
+          <ul className="lg:flex lg:space-x-6 space-y-6 lg:space-y-0 p-4 rounded-2xl font-bold">
             <li className="flex items-center ">
               <Link
                 to="/success"
-                className="flex md:items-center md:justify-center text-white text-xl rounded-3xl lg:text-2xl mx-4 "
+                className="flex text-white text-2xl w-full px-4"
+                onClick={closeMenu}
               >
-                <FaHome />
+                <FaHome className="mr-2" />
               </Link>
             </li>
 
-            <li className="mb-10">
+            <li className="">
               <Link
                 to="/telesa"
-                className="navbutton w-full text-white text-xl px-4 py-2 rounded-full lg:text-2xl lg:px-10 "
+                className="block w-full text-white text-xl px-4"
+                onClick={closeMenu}
               >
                 Tělesa
               </Link>
             </li>
-            <li className="mb-2">
+            <li className="">
               <Link
                 to="/ukoly"
-                className="navbutton w-full text-white text-xl px-4 py-2 rounded-full lg:text-2xl lg:px-10"
+                className="block w-full text-white text-xl px-4"
+                onClick={closeMenu}
               >
                 Úkoly
               </Link>
@@ -99,7 +111,8 @@ function Navbar() {
             <li>
               <Link
                 to="/projekt"
-                className="navbutton w-full text-white text-xl px-4 py-2 rounded-full lg:text-2xl lg:px-10"
+                className="block w-full text-white text-xl px-4"
+                onClick={closeMenu}
               >
                 O projektu
               </Link>
