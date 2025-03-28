@@ -48,7 +48,7 @@ function Overused() {
             <div className="w-full mb-5 md:w-full md:h-full h-24 bg-zinc-900 rounded-3xl">
               <Link to="/prihlaseni">
                 <div className="w-full h-full flex justify-center items-center flex-col">
-                  <h1 className="text-xl lg:text-2xl userlvl">
+                  <h1 className="text-xl lg:text-2xl userlvl text-center">
                     Začnětě svou cestu učení s námi
                   </h1>
                   <div className="flex flex-row items-center gap-2">

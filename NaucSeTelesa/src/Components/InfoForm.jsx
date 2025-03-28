@@ -1,10 +1,9 @@
-import "../App.css";
 import { useEffect, useState } from "react";
-import { useGlobalData } from "../Global"; // Import the global context hook
+import { useGlobalData } from "../Global";
 import { supabase } from "../supabaseClient";
 
 function InfoForm() {
-  const { authUser, userData, loading } = useGlobalData(); // Access data from context
+  const { authUser, userData, loading } = useGlobalData();
   const [jmeno, setJmeno] = useState("");
   const [prijmeni, setPrijmeni] = useState("");
   const [prezdivka, setPrezdivka] = useState("");
@@ -34,12 +33,12 @@ function InfoForm() {
             .from("user")
             .select("nameSet")
             .eq("authid", authUser.id)
-            .single(); // Fetch a single row
+            .single();
 
           if (error) {
             console.error("Error fetching data:", error);
           } else if (data) {
-            setIsVisible(!data.nameSet); // Show popup if nameSet is false
+            setIsVisible(!data.nameSet);
           }
         }
       } catch (error) {
@@ -50,7 +49,7 @@ function InfoForm() {
   }, [authUser]);
 
   async function handleSubmit(e) {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
 
     if (!authUser) {
       console.error("No authenticated user found.");
@@ -92,92 +91,131 @@ function InfoForm() {
       }
 
       console.log("Update successful:", data);
-      setIsVisible(false); // Hide popup after updating
+      setIsVisible(false);
     } catch (err) {
       console.error("Unexpected error:", err);
     }
   };
 
   const handleHide = () => {
-    Zavri(); // Call Zavri to update the database and hide the popup
+    Zavri();
   };
 
   if (loading) {
-    return <p>Loading...</p>; // You can display a loading state while data is fetching
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <p className="text-xl text-gray-300">Načítání...</p>
+      </div>
+    );
   }
 
   return (
     <>
       {isVisible && (
-        <div className="min-h-screen flex items-center justify-center text-white">
-          <div className="w-[80vw] flex flex-col md:flex-row gap-6 border-form rounded-3xl bg-zinc-900 relative">
-            <div className="w-full md:w-1/2 md:h-[80vh] bg-zinc-900 border-form rounded-3xl flex justify-center items-center md:items-start md:pl-20 flex-col text-white">
-              <div className="w-3/4">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-6xl font-bold pb-6 pt-5 md:pb-12">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 ">
+          <div className="w-full max-w-4xl bg-zinc-900 rounded-2xl shadow-2xl overflow-hidden relative">
+            <div className="flex flex-col md:flex-row">
+              {/* Left Side - Welcome Message */}
+              <div className="w-full md:w-1/2 bg-zinc-900 p-6 md:p-10 flex flex-col justify-center">
+                <h1 className="text-2xl md:text-4xl font-bold text-white mb-4">
                   Skvělé, že jste se zaregistrovali!
                 </h1>
-                <p className="text-2xl mt-5 text-gray-300">
+                <p className="text-base md:text-xl text-gray-300">
                   Abychom vám mohli nabídnout co nejlepší, potřebujeme od vás
                   ještě pár drobných informací.
                 </p>
               </div>
-            </div>
-            <div className="w-full md:w-1/2 md:h-[80vh] bg-zinc-900 flex border-form rounded-3xl justify-center items-start flex-col p-6 lg:pr-16 xl:pr-32 relative">
-              <div
-                className="absolute top-0 right-0 m-2 md:m-10 w-8 h-8 flex justify-center items-center cursor-pointer"
-                onClick={handleHide}
-              >
-                <div className="cross"></div>
-              </div>
 
-              <div className="flex w-full flex-col sm:flex-row gap-5">
-                <div className="flex flex-col w-full items-center">
-                  <h3>Jméno</h3>
-                  <input
-                    className="w-full h-16 bg-zinc-800 p-2 rounded-full"
-                    type="text"
-                    name="jmeno"
-                    value={jmeno}
-                    onChange={(e) => setJmeno(e.target.value)}
-                    placeholder="Karel"
-                    required
-                  />
-                </div>
-                <div className="flex flex-col w-full items-center">
-                  <h3>Přijmení</h3>
-                  <input
-                    className="w-full h-16 bg-zinc-800 rounded-full p-2"
-                    type="text"
-                    name="prijmeni"
-                    value={prijmeni}
-                    onChange={(e) => setPrijmeni(e.target.value)}
-                    placeholder="Novák"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="w-full flex justify-center items-center">
-                <div className="flex flex-col w-full items-center mt-5">
-                  <h3>Přezdívka</h3>
-                  <input
-                    className="w-full h-16 bg-zinc-800 rounded-full p-2"
-                    type="text"
-                    name="prezdivka"
-                    value={prezdivka}
-                    onChange={(e) => setPrezdivka(e.target.value)}
-                    placeholder="KarelNovak123"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="w-full flex justify-center items-center mt-5 md:mt-10">
+              {/* Right Side - Form */}
+              <div className="w-full md:w-1/2 bg-zinc-900 p-6 md:p-10 md:relative">
+                {/* Close Button */}
                 <button
-                  className="w-1/2 h-14 bg-purple-950 rounded-2xl"
-                  onClick={handleSubmit}
+                  onClick={handleHide}
+                  className="absolute  top-4 right-4 text-white hover:text-gray-300 transition-colors"
+                  aria-label="Zavřít"
                 >
-                  Začít objevovat
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
                 </button>
+
+                {/* Form Inputs */}
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="jmeno"
+                        className="block text-sm font-medium text-white mb-2"
+                      >
+                        Jméno
+                      </label>
+                      <input
+                        id="jmeno"
+                        type="text"
+                        value={jmeno}
+                        onChange={(e) => setJmeno(e.target.value)}
+                        placeholder="Karel"
+                        required
+                        className="w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="prijmeni"
+                        className="block text-sm font-medium text-white mb-2"
+                      >
+                        Přijmení
+                      </label>
+                      <input
+                        id="prijmeni"
+                        type="text"
+                        value={prijmeni}
+                        onChange={(e) => setPrijmeni(e.target.value)}
+                        placeholder="Novák"
+                        required
+                        className="w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="prezdivka"
+                      className="block text-sm font-medium text-white mb-2"
+                    >
+                      Přezdívka
+                    </label>
+                    <input
+                      id="prezdivka"
+                      type="text"
+                      value={prezdivka}
+                      onChange={(e) => setPrezdivka(e.target.value)}
+                      placeholder="KarelNovak123"
+                      required
+                      className="w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    />
+                  </div>
+
+                  <div className="flex justify-center mt-6">
+                    <button
+                      type="submit"
+                      className="w-full md:w-1/2 h-12 bg-purple-950 text-white rounded-full hover:bg-purple-900 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    >
+                      Začít objevovat
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
