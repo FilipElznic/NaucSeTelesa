@@ -30,7 +30,7 @@ function Footer() {
             </Link>
           </li>
           <li>
-            <Link to="/oprojektu" className="text-white px-2 hover:underline">
+            <Link to="/projekt" className="text-white px-2 hover:underline">
               O projektu
             </Link>
           </li>

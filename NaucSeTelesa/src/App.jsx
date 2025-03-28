@@ -9,10 +9,11 @@ import UserPage from "./pages/userpage";
 import TaskPage from "./pages/taskPage";
 import TelesaPage from "./pages/telesaPage";
 import AboutPage from "./pages/aboutPage";
-import { GlobalProvider } from "./Global"; // Používáme pojmenovaný export
+import { GlobalProvider } from "./Global";
 import Profile from "./Components/Profile";
 import PomocPage from "./pages/pomocPage";
 import FadeInWrapper from "./Components/FadeInWrapper";
+import NotFoundPage from "./pages/NotFoundPage"; // Import the new 404 page
 
 function App() {
   return (
@@ -92,6 +93,9 @@ function App() {
                   </RedirectIfLoggedIn>
                 }
               />
+
+              {/* Catch-all 404 route - place this LAST */}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Router>
         </FadeInWrapper>

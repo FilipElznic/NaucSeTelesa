@@ -211,6 +211,7 @@ function InfoForm() {
                     <button
                       type="submit"
                       className="w-full md:w-1/2 h-12 bg-purple-950 text-white rounded-full hover:bg-purple-900 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      onClick={Zavri()}
                     >
                       Začít objevovat
                     </button>
