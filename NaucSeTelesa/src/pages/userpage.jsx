@@ -5,6 +5,7 @@ import Work from "../Components/Work";
 import Robot from "../Components/Robot";
 import Project from "../Components/Project";
 import FadeInWrapper from "../Components/FadeInWrapper";
+import Help from "../Components/Help";
 
 function UserPage() {
   return (
@@ -25,6 +26,8 @@ function UserPage() {
             <Work />
           </FadeInWrapper>
         </div>
+
+        <Help />
       </div>
 
       <Footer />
