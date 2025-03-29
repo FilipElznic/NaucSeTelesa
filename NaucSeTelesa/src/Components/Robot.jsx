@@ -44,7 +44,7 @@ function Robot() {
                   </div>
                 )}
                 <div className="relative sm:flex sm:flex-col sm:justify-center sm:h-[90vh] w-1/3">
-                  <h1 className="text-4xl md:text-2xl lg:text-5xl font-bold p-5 sm:pr-20">
+                  <h1 className="text-4xl md:text-2xl lg:text-5xl font-bold p-5 sm:pr-20 userlvl">
                     Nechte se vnést do světa geometrie
                   </h1>
                   <p className="text-xl lg:text-2xl p-5">
