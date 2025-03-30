@@ -95,12 +95,12 @@ const HelpPage = () => {
           <h2 className="text-2xl font-semibold mb-6">Často kladené otázky</h2>
           <div className="space-y-4">
             <FAQItem
-              question="Jak začít používat naši službu?"
-              answer="Registrace je jednoduchá. Stačí vyplnit základní údaje na úvodní stránce a můžete začít ihned využívat všechny funkce."
+              question="Jak začít používat Nauč se Tělesa?"
+              answer="První se zaregistrujte a přihlaste se do svého účtu. Poté můžete využívat všechny funkce."
             />
             <FAQItem
               question="Jak obnovit zapomenuté heslo?"
-              answer="Na přihlašovací stránce klikněte na odkaz 'Zapomenuté heslo' a postupujte podle pokynů pro reset hesla."
+              answer="Na přihlašovací stránce klikněte na 'Zapomenuté heslo' a postupujte podle pokynů pro reset hesla."
             />
             <FAQItem
               question="Jak kontaktovat podporu?"
@@ -116,19 +116,21 @@ const HelpPage = () => {
           hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]
           mt-5 mb-12"
         >
-          <h2 className="text-2xl font-semibold mb-6">Často kladené otázky</h2>
+          <h2 className="text-2xl font-semibold mb-6">
+            Nejčastější problémy a jejich řešení
+          </h2>
           <div className="space-y-4">
             <FAQItem
-              question="Jak začít používat naši službu?"
-              answer="Registrace je jednoduchá. Stačí vyplnit základní údaje na úvodní stránce a můžete začít ihned využívat všechny funkce."
+              question="Proč mi nepřišel potvrzovací e-mail?"
+              answer="Zkontrolujte složku se spamem nebo reklamy. Pokud e-mail stále nemáte, zkuste požádat o nový potvrzovací e-mail na stránce přihlášení."
             />
             <FAQItem
-              question="Jak obnovit zapomenuté heslo?"
-              answer="Na přihlašovací stránce klikněte na odkaz 'Zapomenuté heslo' a postupujte podle pokynů pro reset hesla."
+              question="Mohu používat službu na více zařízeních?"
+              answer="Ano, svůj účet můžete používat na více zařízeních současně. Stačí se přihlásit stejnými přihlašovacími údaji."
             />
             <FAQItem
-              question="Jak kontaktovat podporu?"
-              answer="Můžete nás kontaktovat pomocí formuláře nebo prostřednictvím emailu support@example.com."
+              question="Co dělat, když se nemohu přihlásit?"
+              answer="Zkuste obnovit heslo pomocí odkazu 'Zapomenuté heslo'. Pokud problém přetrvává, kontaktujte naši podporu."
             />
           </div>
         </div>

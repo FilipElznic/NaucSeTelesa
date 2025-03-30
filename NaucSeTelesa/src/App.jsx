@@ -11,7 +11,7 @@ import TelesaPage from "./pages/telesaPage";
 import AboutPage from "./pages/aboutPage";
 import { GlobalProvider } from "./Global";
 import Profile from "./Components/Profile";
-import PomocPage from "./pages/pomocPage";
+import PomocPage from "./pages/helpPage";
 import FadeInWrapper from "./Components/FadeInWrapper";
 import NotFoundPage from "./pages/NotFoundPage"; // Import the new 404 page
 

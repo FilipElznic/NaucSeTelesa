@@ -7,6 +7,8 @@ import { useGlobalData } from "../Global"; // Import global context
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../App.css";
 
 function Profile() {
@@ -38,6 +40,7 @@ function Profile() {
 
           if (error) {
             console.error("Error fetching user data:", error.message);
+            toast.error("Chyba při načítání dat uživatele.");
           } else {
             setFormData({
               name: data?.name || "",
@@ -47,6 +50,7 @@ function Profile() {
           }
         } catch (error) {
           console.error("Unexpected error:", error);
+          toast.error("Neočekávaná chyba při načítání dat.");
         }
       }
       setFetching(false);
@@ -76,12 +80,14 @@ function Profile() {
 
       if (error) {
         console.error("Error updating profile:", error.message);
+        toast.error("Chyba při ukládání změn profilu.");
       } else {
-        alert("Profile updated successfully!");
+        toast.success("Profil byl úspěšně aktualizován!");
         setEditing({ name: false, surname: false, nickname: false }); // Reset editing states
       }
     } catch (error) {
       console.error("Unexpected error:", error);
+      toast.error("Neočekávaná chyba při ukládání změn.");
     }
   };
 
@@ -143,6 +149,18 @@ function Profile() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Footer />
     </>
   );

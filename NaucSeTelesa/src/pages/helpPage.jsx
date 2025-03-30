@@ -1,6 +1,6 @@
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import Help from "./Components/Help";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
+import Help from "../Components/Help";
 
 const HelpPage = () => {
   return (

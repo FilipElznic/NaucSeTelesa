@@ -42,28 +42,12 @@ function TaskLayout() {
     setSelectedAnswers((prev) => ({ ...prev, [taskId]: answer }));
 
     // Show toast notification
-    toast(
-      <div>
-        <span
-          className={`bg-gradient-to-r ${
-            isCorrect
-              ? "from-green-400 to-green-600"
-              : "from-red-400 to-red-600"
-          } bg-clip-text text-transparent font-bold`}
-        >
-          {isCorrect ? "Správná odpověď!" : "Špatná odpověď!"}
-        </span>
-      </div>,
-      {
-        className: "!bg-black !text-white !border border-white/20 !shadow-lg",
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      }
-    );
+
+    {
+      isCorrect
+        ? toast.success("Správná odpověď!")
+        : toast.error("Špatná odpověď!");
+    }
 
     if (isCorrect) {
       try {
@@ -102,15 +86,6 @@ function TaskLayout() {
   return (
     <>
       <div className="bg-gradient-to-br from-black via-zinc-950  to-black  min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
-        <ToastContainer
-          toastClassName={() =>
-            "bg-black !text-white !border-2 !border-white/10 !rounded-lg !shadow-[0_0_15px_5px_rgba(255,255,255,0.5)]"
-          }
-          bodyClassName="!bg-black !text-white"
-          progressClassName={({ defaultClassName }) =>
-            `${defaultClassName} !bg-gradient-to-r from-transparent to-white/10`
-          }
-        />
         <div className="w-full h-full bg-black md:p-5 rounded-3xl">
           <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
             <div className="w-full h-24 usergradient rounded-full usergradient-glow">
@@ -231,6 +206,18 @@ function TaskLayout() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Footer />
     </>
   );

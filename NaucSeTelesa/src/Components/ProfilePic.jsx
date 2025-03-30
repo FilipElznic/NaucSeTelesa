@@ -3,6 +3,8 @@ import { supabase } from "../supabaseClient";
 import { useGlobalData } from "../Global";
 import { FaFileAlt } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProfilePic() {
   const { authUser, userData } = useGlobalData();
@@ -18,6 +20,7 @@ function ProfilePic() {
 
     if (error) {
       console.error("Error fetching public URL:", error);
+      toast.error("Nepodařilo se načíst profilový obrázek.");
     } else {
       setProfilePictureUrl(publicUrlData.publicUrl);
     }
@@ -26,28 +29,30 @@ function ProfilePic() {
   // Upload the profile picture
   async function uploadProfilePicture() {
     if (!selectedFile) {
-      console.error("No file selected.");
+      toast.error("Nebyl vybrán žádný soubor.");
       return;
     }
 
     if (!authUser) {
-      console.error("User is not authenticated.");
+      toast.error("Uživatel není přihlášen.");
       return;
     }
 
     const filePath = `user-${authUser.id}/${authUser.id}-${uuidv4()}.png`;
 
     // Step 1: If user already has a profile picture, delete the old one
-    console.log("Attempting to delete file:", userData.img);
-    console.log("From bucket: profile-pictures");
-    const { error: deleteError } = await supabase.storage
-      .from("profile-pictures")
-      .remove([userData.img]);
-    if (deleteError) {
-      console.error("Error deleting old file:", deleteError.message);
-    } else {
-      console.log("Old file deleted successfully.");
-    } // Verify deletion by attempting to fetch the file const { data: verifyData, error: verifyError } = await supabase.storage .from("profile-pictures") .list("", { prefix: `user-${authUser.id}/` }); if (verifyError) { console.error("Error verifying file deletion:", verifyError.message); } else { const fileExists = verifyData.some(file => file.name === userData.img); if (fileExists) { console.error("File still exists after supposed deletion."); } else { console.log("File deletion verified, file does not exist."); }
+    if (userData.img) {
+      const { error: deleteError } = await supabase.storage
+        .from("profile-pictures")
+        .remove([userData.img]);
+
+      if (deleteError) {
+        console.error("Error deleting old file:", deleteError.message);
+        toast.warning(
+          "Nepodařilo se odstranit starý obrázek, ale pokračuji v nahrávání nového."
+        );
+      }
+    }
 
     // Step 2: Upload the new profile picture
     const { data, error: uploadError } = await supabase.storage
@@ -59,10 +64,9 @@ function ProfilePic() {
 
     if (uploadError) {
       console.error("Error uploading file:", uploadError.message);
+      toast.error("Chyba při nahrávání obrázku.");
       return;
     }
-
-    console.log("New file successfully uploaded:", data.path);
 
     // Step 3: Update the database with the new image path
     const { error: dbError } = await supabase
@@ -72,10 +76,9 @@ function ProfilePic() {
 
     if (dbError) {
       console.error("Error updating user profile:", dbError.message);
+      toast.error("Chyba při aktualizaci profilu uživatele.");
       return;
     }
-
-    console.log("User profile successfully updated with image URL.");
 
     // Fetch the new image public URL
     const { data: publicUrlData, error: urlError } = supabase.storage
@@ -84,9 +87,11 @@ function ProfilePic() {
 
     if (urlError) {
       console.error("Error fetching public URL:", urlError);
+      toast.warning("Obrázek byl nahrán, ale nelze ho zobrazit.");
     } else {
       setProfilePictureUrl(publicUrlData.publicUrl);
       setIsFileSelected(false); // Reset the state after upload
+      toast.success("Profilový obrázek byl úspěšně aktualizován!");
     }
   }
 
