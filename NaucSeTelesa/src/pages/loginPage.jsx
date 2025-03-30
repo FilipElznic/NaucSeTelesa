@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Robot1 from "/rukyhore.png";
 import Robot2 from "/robotlast1.png";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import Footer from "../Components/Footer";
+import Navbar from "../Components/Navbar";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -66,6 +66,8 @@ function LoginPage() {
       console.error("Error with provider login:", error.message);
     }
   };
+
+  console.log(Auth); // Debugging line
 
   return (
     <>
