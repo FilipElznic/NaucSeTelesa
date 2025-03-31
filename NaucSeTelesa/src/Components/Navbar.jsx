@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { useGlobalData } from "../Global"; // Import global context
 import "../App.css";
 import { supabase } from "../supabaseClient";
-import { FaHome } from "react-icons/fa";
-
+import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineAppstore } from "react-icons/ai";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
+import { FiHelpCircle } from "react-icons/fi";
 function Navbar() {
   const { authUser, userData } = useGlobalData(); // Use context to get authUser and userData
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -108,7 +112,7 @@ function Navbar() {
                 className="flex text-white text-2xl w-full px-4 items-center "
                 onClick={closeMenu}
               >
-                {/*<FaHome className="mr-2" />*/}
+                <AiOutlineHome className="mr-2" />
                 Domů
               </Link>
             </li>
@@ -116,30 +120,48 @@ function Navbar() {
             <li>
               <Link
                 to="/telesa"
-                className="block w-full text-white text-xl px-4"
+                className="flex text-white text-2xl w-full px-4 items-center "
                 onClick={closeMenu}
               >
-                {/*<AiOutlineAppstore className="mr-2" />*/}
+                <AiOutlineAppstore className="mr-2" />
                 Tělesa
               </Link>
             </li>
             <li>
               <Link
                 to="/ukoly"
-                className="block w-full text-white text-xl px-4"
+                className="flex text-white text-2xl w-full px-4 items-center "
                 onClick={closeMenu}
               >
-                {/*<AiOutlineCheckCircle className="mr-2" />*/}
+                <AiOutlineCheckCircle className="mr-2" />
                 Úkoly
               </Link>
             </li>
             <li>
               <Link
                 to="/projekt"
-                className="block w-full text-white text-xl px-4"
+                className="flex text-white text-2xl w-full px-4 items-center "
                 onClick={closeMenu}
               >
-                O projektu
+                <AiOutlineInfoCircle className="mr-2" />O projektu
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/profil"
+                className="flex text-white text-2xl w-full px-4 items-center"
+              >
+                <AiOutlineUser className="mr-2" />
+                Profil
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/pomoc"
+                className="flex text-white text-2xl w-full px-4 items-center"
+              >
+                <FiHelpCircle className="mr-2" />
+                Pomoc
               </Link>
             </li>
           </ul>
@@ -196,25 +218,58 @@ function Navbar() {
 
           {/* Desktop horizontal menu */}
           <div className="hidden lg:block lg:w-auto">
-            <ul className="lg:flex lg:space-x-6 font-bold">
+            <ul className="lg:flex lg:space-x-0 font-bold">
               <li className="flex items-center">
-                <Link to="/success" className="flex text-white text-2xl">
-                  <FaHome className="mr-2" />
+                <Link
+                  to="/success"
+                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
+                >
+                  <AiOutlineHome className="mr-2" />
+                  Domů
                 </Link>
               </li>
               <li>
-                <Link to="/telesa" className="text-white text-xl">
+                <Link
+                  to="/telesa"
+                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
+                >
+                  <AiOutlineAppstore className="mr-2" />
                   Tělesa
                 </Link>
               </li>
               <li>
-                <Link to="/ukoly" className="text-white text-xl">
+                <Link
+                  to="/ukoly"
+                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
+                >
+                  <AiOutlineCheckCircle className="mr-2" />
                   Úkoly
                 </Link>
               </li>
               <li>
-                <Link to="/projekt" className="text-white text-xl">
-                  O projektu
+                <Link
+                  to="/projekt"
+                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
+                >
+                  <AiOutlineInfoCircle className="mr-2" />O projektu
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/profil"
+                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
+                >
+                  <AiOutlineUser className="mr-2" />
+                  Profil
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/pomoc"
+                  className="flex text-white text-2xl md:text-lg  w-full px-4 items-center"
+                >
+                  <FiHelpCircle className="mr-2" />
+                  Pomoc
                 </Link>
               </li>
             </ul>
@@ -230,7 +285,7 @@ function Navbar() {
                 className="dropdown-toggle text-white px-4 py-2 text-xl border-form lg:text-2xl flex justify-center items-center lg:px-10"
               >
                 <div className="flex flex-row">
-                  <p className="text-white pr-5">
+                  <p className="text-white pr-2">
                     Dobrý den,
                     {userData?.name ? ` ${userData.name} ` : authUser.email}
                   </p>

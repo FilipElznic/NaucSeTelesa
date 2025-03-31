@@ -12,7 +12,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@lottiefiles/dotlottie-react": "^0.13.2",
     "@splinetool/react-spline": "^4.0.0",
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.46.1",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.4.7",
