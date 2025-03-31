@@ -280,8 +280,8 @@ function Navbar() {
         <div className="relative dropdown-container">
           {authUser ? (
             <div className="relative">
-              <button
-                onClick={toggleDropdown}
+              <Link
+                to="/profil"
                 className="dropdown-toggle text-white px-4 py-2 text-xl border-form lg:text-2xl flex justify-center items-center lg:px-10"
               >
                 <div className="flex flex-row">
@@ -295,28 +295,7 @@ function Navbar() {
                     alt="Avatar"
                   />
                 </div>
-              </button>
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-52 usergradient text-white rounded-lg shadow-lg flex flex-col justify-start items-start font-bold z-50">
-                  <Link to="/profil" className="p-2 w-full">
-                    <div className="w-40 border-b-2">
-                      <p className="text-2xl ">Účet</p>
-                    </div>
-                    <p className="pt-2">Profil</p>
-                  </Link>
-                  <Link to="/pomoc" className="p-2 w-full">
-                    Pomoc
-                  </Link>
-                  <Link to="/" className="p-2 w-full">
-                    <button
-                      onClick={signOutUser}
-                      className="text-red-800 p-2 w-full text-left"
-                    >
-                      Odhlásit se
-                    </button>
-                  </Link>
-                </div>
-              )}
+              </Link>
             </div>
           ) : (
             <Link
