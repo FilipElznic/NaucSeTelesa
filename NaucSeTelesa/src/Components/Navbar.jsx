@@ -284,8 +284,8 @@ function Navbar() {
                 to="/profil"
                 className="dropdown-toggle text-white px-4 py-2 text-xl border-form lg:text-2xl flex justify-center items-center lg:px-10"
               >
-                <div className="flex flex-row">
-                  <p className="text-white pr-2">
+                <div className="flex flex-row justify-center items-center">
+                  <p className="text-white pr-2 text-2xl md:text-lg font-bold">
                     Dobrý den,
                     {userData?.name ? ` ${userData.name} ` : authUser.email}
                   </p>
