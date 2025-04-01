@@ -148,20 +148,20 @@ function Navbar() {
             </li>
             <li>
               <Link
-                to="/profil"
-                className="flex text-white text-2xl w-full px-4 items-center"
-              >
-                <AiOutlineUser className="mr-2" />
-                Profil
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="/pomoc"
                 className="flex text-white text-2xl w-full px-4 items-center"
               >
                 <FiHelpCircle className="mr-2" />
                 Pomoc
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/profil"
+                className="flex text-white text-2xl w-full px-4 items-center"
+              >
+                <AiOutlineUser className="mr-2" />
+                Profil
               </Link>
             </li>
           </ul>
