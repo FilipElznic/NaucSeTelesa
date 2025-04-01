@@ -117,9 +117,21 @@ const Test = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-screen usergradient flex items-center justify-center overflow-hidden flex-row">
       {/* Render the lines */}
       {connections.map((conn) => createLine(conn.from, conn.to))}
+
+      <div>
+        <h1 className="absolute text-3xl text-white font-bold top-5 left-5 z-10 ">
+          Vytvořeno pomocí Reactu a Tailwind CSS
+        </h1>
+        <p className="absolute text-white font-semibold text-lg top-20 left-5 z-10 max-w-md">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
+          obcaecati repudiandae quas animi temporibus non quasi sed cupiditate
+          ea vel. Dicta mollitia hic animi. Non ad ipsum distinctio consequuntur
+          modi?
+        </p>
+      </div>
 
       {/* Render the circles */}
       {nodes.map((node) => (
@@ -128,7 +140,7 @@ const Test = () => {
           className={`absolute ${
             isMobile ? "w-10 h-10 text-lg" : "w-16 h-16 text-2xl"
           } 
-            bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center 
+            bg-zinc-500 hover:bg-zinc-500 rounded-full flex items-center justify-center 
             text-white font-semibold cursor-pointer transition-all duration-200 transform hover:scale-110`}
           style={{
             top: `${node.y - (isMobile ? 20 : 32)}px`,
