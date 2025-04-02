@@ -5,6 +5,7 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import LeaderboardW from "../Components/LeaderboardW";
 import FadeInWrapper from "../Components/FadeInWrapper";
+import Test from "../Components/test";
 
 function SuccessPage() {
   return (
@@ -19,6 +20,10 @@ function SuccessPage() {
       <FadeInWrapper>
         <Features />
       </FadeInWrapper>
+      <FadeInWrapper>
+        <Test />
+      </FadeInWrapper>
+
       <FadeInWrapper>
         <LeaderboardW />
       </FadeInWrapper>

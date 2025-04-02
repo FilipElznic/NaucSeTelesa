@@ -264,26 +264,21 @@ const Test = () => {
           {/* Left side content for text */}
           <div className="w-1/2 p-10 flex items-start justify-center">
             <div className="max-w-lg">
-              <h1 className=" md:text-7xl lg:text-8xl text-purple-300 font-bold mb-6 absolute scale-110">
+              <h1 className=" md:text-7xl lg:text-8xl text-purple-300 font-bold mb-6 absolute scale-110 left-24">
                 Úrovně procvičování
               </h1>
-              <div className="mt-40">
-                <p className="text-white/90 text-2xl mb-6 ">
+              <div className="mt-40 w-full">
+                <p className="text-white/90 text-xl lg:text-2xl mb-2 lg:mb-6 ">
                   Úrovně na našem webu fungují jednoduše – čím aktivnější jsi,
                   tím vyšší úroveň získáš! Za různé akce, jako je přispívání,
                   komentování nebo sdílení, získáváš body, které tě posouvají
                   dál.
                 </p>
-
-                <p className="text-white/80 text-2xl mb-8">
-                  Každá úroveň přináší nové výhody a exkluzivní obsah. Stačí být
-                  aktivní a postupně odemykat lepší možnosti!
-                </p>
               </div>
 
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[50vh]">
+              <div className="absolute top-2/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[50vh] w-[40vw]">
                 <div className="w-full h-full flex flex-row gap-4">
-                  <div className="w-2/3 h-full bg-zinc-800 rounded-3xl">
+                  <div className="w-2/3 h-full bg-zinc-800 rounded-3xl flex justify-center items-center">
                     test
                   </div>
                   <div className="w-1/3 h-full bg-zinc-800 rounded-3xl"></div>
