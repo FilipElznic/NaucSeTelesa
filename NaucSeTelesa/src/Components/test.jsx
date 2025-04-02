@@ -179,7 +179,7 @@ const Test = () => {
   };
 
   return (
-    <div className="relative w-full h-[200vh] bg-gradient-to-br from-gray-900 to-purple-900 overflow-hidden">
+    <div className="relative w-full h-[120vh]  overflow-hidden">
       {/* Mobile layout with better spacing */}
       {isMobile ? (
         <div className="flex flex-col h-full">
@@ -206,7 +206,7 @@ const Test = () => {
                     ${
                       index === 0 || index <= 4
                         ? "bg-gradient-to-br from-purple-500 to-blue-500"
-                        : "bg-black"
+                        : "bg-white"
                     } 
                     rounded-full flex items-center justify-center 
                     text-white font-semibold cursor-pointer 
@@ -260,47 +260,35 @@ const Test = () => {
         </div>
       ) : (
         // Desktop layout with increased spacing and larger circles
-        <div className="flex h-full">
+        <div className="flex h-full bg-transparent scale-100">
           {/* Left side content for text */}
-          <div className="w-1/2 p-10 flex items-center justify-center">
+          <div className="w-1/2 p-10 flex items-start justify-center">
             <div className="max-w-lg">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl text-purple-300 font-bold mb-6">
+              <h1 className=" md:text-7xl lg:text-8xl text-purple-300 font-bold mb-6 absolute scale-110">
                 Úrovně procvičování
               </h1>
+              <div className="mt-40">
+                <p className="text-white/90 text-2xl mb-6 ">
+                  Úrovně na našem webu fungují jednoduše – čím aktivnější jsi,
+                  tím vyšší úroveň získáš! Za různé akce, jako je přispívání,
+                  komentování nebo sdílení, získáváš body, které tě posouvají
+                  dál.
+                </p>
 
-              <p className="text-white/90 text-lg mb-6">
-                Úrovně na našem webu fungují jednoduše – čím aktivnější jsi, tím
-                vyšší úroveň získáš! Za různé akce, jako je přispívání,
-                komentování nebo sdílení, získáváš body, které tě posouvají dál.
-              </p>
+                <p className="text-white/80 text-2xl mb-8">
+                  Každá úroveň přináší nové výhody a exkluzivní obsah. Stačí být
+                  aktivní a postupně odemykat lepší možnosti!
+                </p>
+              </div>
 
-              <p className="text-white/80 text-lg mb-8">
-                Každá úroveň přináší nové výhody a exkluzivní obsah. Stačí být
-                aktivní a postupně odemykat lepší možnosti!
-              </p>
-
-              <div className="space-y-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <p className="text-white/90">
-                    Získej přístup k exkluzivnímu obsahu
-                  </p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <p className="text-white/90">
-                    Odemkni speciální funkce pro pokročilé uživatele
-                  </p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <p className="text-white/90">
-                    Připoj se ke komunitě aktivních uživatelů
-                  </p>
-                </div>
+              <div className="gap-4 flex flex-col h-[50vh]">
+                <div className="bg-white w-full h-full"></div>
               </div>
             </div>
           </div>
 
           {/* Right side for the connected nodes */}
-          <div className="relative w-1/2 h-full flex items-center justify-center">
+          <div className="relative w-full scale-125 h-full flex items-center justify-center">
             {/* Render the connecting lines */}
             {connections.map((conn) => createLine(conn.from, conn.to))}
 
@@ -309,11 +297,11 @@ const Test = () => {
               <div
                 key={`node-${node.id}`}
                 className={`absolute pointer-events-auto 
-                  w-20 h-20 text-2xl
+                  w-20 h-20 text-2xl scale-125
                   ${
                     index === 0 || index <= 4
                       ? "bg-gradient-to-br from-purple-500 to-blue-500"
-                      : "bg-gray-700"
+                      : "bg-white !opacity-100"
                   } 
                   rounded-full flex items-center justify-center 
                   text-white font-semibold cursor-pointer 
