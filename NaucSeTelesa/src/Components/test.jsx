@@ -260,7 +260,7 @@ const Test = () => {
         </div>
       ) : (
         // Desktop layout with increased spacing and larger circles
-        <div className="flex h-full bg-transparent scale-100">
+        <div className="flex h-full bg-transparent scale-100 relative">
           {/* Left side content for text */}
           <div className="w-1/2 p-10 flex items-start justify-center">
             <div className="max-w-lg">
@@ -281,8 +281,21 @@ const Test = () => {
                 </p>
               </div>
 
-              <div className="gap-4 flex flex-col h-[50vh]">
-                <div className="bg-white w-full h-full"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[50vh]">
+                <div className="w-full h-full flex flex-row gap-4">
+                  <div className="w-2/3 h-full bg-zinc-800 rounded-3xl">
+                    test
+                  </div>
+                  <div className="w-1/3 h-full bg-zinc-800 rounded-3xl"></div>
+                </div>
+                <div className="w-full h-full flex flex-row gap-4">
+                  <div className="w-1/4 h-full bg-zinc-800 rounded-3xl"></div>
+                  <div className="w-3/4 h-full bg-zinc-800 rounded-3xl"></div>
+                </div>
+                <div className="w-full h-full flex flex-row gap-4">
+                  <div className="w-1/2 h-full bg-zinc-800 rounded-3xl"></div>
+                  <div className="w-1/2 h-full bg-zinc-800 rounded-3xl"></div>
+                </div>
               </div>
             </div>
           </div>
