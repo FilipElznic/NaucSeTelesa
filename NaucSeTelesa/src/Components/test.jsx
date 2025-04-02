@@ -7,61 +7,103 @@ const Test = () => {
     { id: 3, x: 0, y: 0, path: "/page3" },
     { id: 4, x: 0, y: 0, path: "/page4" },
     { id: 5, x: 0, y: 0, path: "/page5" },
+    { id: 6, x: 0, y: 0, path: "/page6" },
+    { id: 7, x: 0, y: 0, path: "/page7" },
+    { id: 8, x: 0, y: 0, path: "/page8" },
+    { id: 9, x: 0, y: 0, path: "/page9" },
   ]);
 
-  // State pro sledování velikosti obrazovky
+  // State for tracking screen size
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 920);
     };
 
     const updatePositions = () => {
       checkMobile();
 
-      // Calculate positions based on window dimensions
+      // Calculate available space for the nodes
       const width = window.innerWidth;
       const height = window.innerHeight;
-      const centerX = width / 2;
-      const centerY = height / 2;
 
-      // Responzivní vzdálenosti mezi uzly
-      const verticalSpacing = width < 768 ? 80 : 120;
-      const horizontalSpacing = width < 768 ? 60 : 100;
+      // Move nodes more to the left side on mobile to prevent overlap with text
+      const startX = isMobile ? width * 0.35 : width * 0.35;
 
-      // Set positions according to the tree-like structure
+      // Better vertical positioning with more space at the top
+      const startY = isMobile ? height * 0.2 : height / 2;
+
+      // INCREASED SPACING: Significantly increased spacing between nodes
+      const verticalSpacing = isMobile ? 90 : 100;
+      const horizontalSpacing = isMobile ? 80 : 90;
+
+      // Set positions in a tree-like structure with more space between nodes
       setNodes([
+        // Level 1
         {
           id: 1,
-          x: centerX,
-          y: centerY - verticalSpacing * 1.5,
+          x: startX,
+          y: startY - verticalSpacing * 1.5,
           path: "/page1",
-        }, // Top node
+          active: true,
+        },
+        // Level 2
         {
           id: 2,
-          x: centerX + horizontalSpacing,
-          y: centerY - verticalSpacing * 0.75,
+          x: startX + horizontalSpacing,
+          y: startY - verticalSpacing * 0.75,
           path: "/page2",
-        }, // Right of top
+        },
+        // Level 3
         {
           id: 3,
-          x: centerX - horizontalSpacing * 0.5,
-          y: centerY + verticalSpacing * 0.25,
+          x: startX - horizontalSpacing,
+          y: startY,
           path: "/page3",
-        }, // Middle left
+        },
+        // Level 4
         {
           id: 4,
-          x: centerX + horizontalSpacing * 0.5,
-          y: centerY + verticalSpacing * 0.75,
+          x: startX + horizontalSpacing,
+          y: startY + verticalSpacing * 0.75,
           path: "/page4",
-        }, // Middle right
+        },
+        // Level 5
         {
           id: 5,
-          x: centerX,
-          y: centerY + verticalSpacing * 1.5,
+          x: startX - horizontalSpacing * 0.5,
+          y: startY + verticalSpacing * 1.5,
           path: "/page5",
-        }, // Bottom node
+        },
+        // Level 6
+        {
+          id: 6,
+          x: startX + horizontalSpacing,
+          y: startY + verticalSpacing * 2.25,
+          path: "/page6",
+        },
+        // Level 7
+        {
+          id: 7,
+          x: startX - horizontalSpacing * 0.7,
+          y: startY + verticalSpacing * 3,
+          path: "/page7",
+        },
+        // Level 8
+        {
+          id: 8,
+          x: startX + horizontalSpacing * 0.8,
+          y: startY + verticalSpacing * 3.75,
+          path: "/page8",
+        },
+        // Level 9
+        {
+          id: 9,
+          x: startX,
+          y: startY + verticalSpacing * 4.5,
+          path: "/page9",
+        },
       ]);
     };
 
@@ -71,20 +113,29 @@ const Test = () => {
     return () => {
       window.removeEventListener("resize", updatePositions);
     };
-  }, []);
+  }, [isMobile]);
 
-  // Přesměrování na základě ID uzlu
+  // Redirect based on node ID
   const handleNodeClick = (path) => {
     window.location.href = path;
   };
 
-  // Create line components for connections
+  // Create connections between nodes
   const connections = [
     { from: 0, to: 1 }, // 1 to 2
     { from: 1, to: 2 }, // 2 to 3
     { from: 2, to: 3 }, // 3 to 4
     { from: 3, to: 4 }, // 4 to 5
+    { from: 4, to: 5 }, // 5 to 6
+    { from: 5, to: 6 }, // 6 to 7
+    { from: 6, to: 7 }, // 7 to 8
+    { from: 7, to: 8 }, // 8 to 9
   ];
+
+  // Calculate circle sizes based on device
+  const circleSizeMobile = 14; // Increased size
+  const circleSizeDesktop = 18; // Increased size
+  const circleSize = isMobile ? circleSizeMobile : circleSizeDesktop;
 
   const createLine = (startNode, endNode) => {
     const start = nodes[startNode];
@@ -99,13 +150,16 @@ const Test = () => {
     const angle =
       Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
 
+    // WIDER LINES: Base line width on circle size
+    const lineThickness = isMobile ? 2.5 : 3;
+
     return (
       <div
         key={`line-${startNode}-${endNode}`}
-        className="absolute bg-white"
+        className="absolute bg-white/40"
         style={{
           width: `${distance}px`,
-          height: isMobile ? "1px" : "2px",
+          height: `${lineThickness}px`, // Thicker lines that scale with circle size
           top: `${start.y}px`,
           left: `${start.x}px`,
           transform: `rotate(${angle}deg)`,
@@ -116,42 +170,169 @@ const Test = () => {
     );
   };
 
+  // Convert pixel size to Tailwind classes
+  const getCircleClasses = () => {
+    const sizeClass = isMobile ? "w-14 h-14" : "w-18 h-18";
+    const textSizeClass = isMobile ? "text-xl" : "text-2xl";
+
+    return `${sizeClass} ${textSizeClass}`;
+  };
+
   return (
-    <div className="relative w-full h-screen usergradient flex items-center justify-center overflow-hidden flex-row">
-      {/* Render the lines */}
-      {connections.map((conn) => createLine(conn.from, conn.to))}
+    <div className="relative w-full h-[200vh] bg-gradient-to-br from-gray-900 to-purple-900 overflow-hidden">
+      {/* Mobile layout with better spacing */}
+      {isMobile ? (
+        <div className="flex flex-col h-full">
+          {/* Title on top */}
+          <div className="px-5 pt-6 pb-2">
+            <h1 className="text-3xl text-purple-300 font-bold">
+              Úrovně procvičování
+            </h1>
+          </div>
 
-      <div>
-        <h1 className="absolute text-3xl text-white font-bold top-5 left-5 z-10 ">
-          Vytvořeno pomocí Reactu a Tailwind CSS
-        </h1>
-        <p className="absolute text-white font-semibold text-lg top-20 left-5 z-10 max-w-md">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-          obcaecati repudiandae quas animi temporibus non quasi sed cupiditate
-          ea vel. Dicta mollitia hic animi. Non ad ipsum distinctio consequuntur
-          modi?
-        </p>
-      </div>
+          <div className="flex flex-col h-full">
+            {/* IMPROVED: Increased height for nodes section to allow for bigger spacing */}
+            <div className="relative h-96 w-full">
+              {" "}
+              {/* Increased height for more vertical space */}
+              {/* Render the connecting lines */}
+              {connections.map((conn) => createLine(conn.from, conn.to))}
+              {/* Nodes with bigger sizes and better spacing */}
+              {nodes.map((node, index) => (
+                <div
+                  key={`node-${node.id}`}
+                  className={`absolute pointer-events-auto 
+                    w-14 h-14 text-xl
+                    ${
+                      index === 0 || index <= 4
+                        ? "bg-gradient-to-br from-purple-500 to-blue-500"
+                        : "bg-black"
+                    } 
+                    rounded-full flex items-center justify-center 
+                    text-white font-semibold cursor-pointer 
+                    transition-all duration-300 transform hover:scale-110 
+                    shadow-lg`}
+                  style={{
+                    top: `${node.y - circleSize}px`,
+                    left: `${node.x - circleSize}px`,
+                    zIndex: 2,
+                    opacity: index < 5 ? 1 : 0.7,
+                  }}
+                  onClick={() => handleNodeClick(node.path)}
+                >
+                  {node.id}
+                </div>
+              ))}
+            </div>
 
-      {/* Render the circles */}
-      {nodes.map((node) => (
-        <div
-          key={`node-${node.id}`}
-          className={`absolute ${
-            isMobile ? "w-10 h-10 text-lg" : "w-16 h-16 text-2xl"
-          } 
-            bg-zinc-500 hover:bg-zinc-500 rounded-full flex items-center justify-center 
-            text-white font-semibold cursor-pointer transition-all duration-200 transform hover:scale-110`}
-          style={{
-            top: `${node.y - (isMobile ? 20 : 32)}px`,
-            left: `${node.x - (isMobile ? 20 : 32)}px`,
-            zIndex: 2,
-          }}
-          onClick={() => handleNodeClick(node.path)}
-        >
-          {node.id}
+            {/* Text content - scrollable and starts below the node section */}
+            <div className="flex-1 px-5 pb-6 overflow-y-auto">
+              <p className="text-white/90 text-base mb-4">
+                Úrovně na našem webu fungují jednoduše – čím aktivnější jsi, tím
+                vyšší úroveň získáš! Za různé akce, jako je přispívání,
+                komentování nebo sdílení, získáváš body, které tě posouvají dál.
+              </p>
+
+              <p className="text-white/80 text-base mb-6">
+                Každá úroveň přináší nové výhody a exkluzivní obsah. Stačí být
+                aktivní a postupně odemykat lepší možnosti!
+              </p>
+
+              <div className="space-y-3">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                  <p className="text-white/90 text-sm">
+                    Získej přístup k exkluzivnímu obsahu
+                  </p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                  <p className="text-white/90 text-sm">
+                    Odemkni speciální funkce pro pokročilé uživatele
+                  </p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                  <p className="text-white/90 text-sm">
+                    Připoj se ke komunitě aktivních uživatelů
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      ))}
+      ) : (
+        // Desktop layout with increased spacing and larger circles
+        <div className="flex h-full">
+          {/* Left side content for text */}
+          <div className="w-1/2 p-10 flex items-center justify-center">
+            <div className="max-w-lg">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl text-purple-300 font-bold mb-6">
+                Úrovně procvičování
+              </h1>
+
+              <p className="text-white/90 text-lg mb-6">
+                Úrovně na našem webu fungují jednoduše – čím aktivnější jsi, tím
+                vyšší úroveň získáš! Za různé akce, jako je přispívání,
+                komentování nebo sdílení, získáváš body, které tě posouvají dál.
+              </p>
+
+              <p className="text-white/80 text-lg mb-8">
+                Každá úroveň přináší nové výhody a exkluzivní obsah. Stačí být
+                aktivní a postupně odemykat lepší možnosti!
+              </p>
+
+              <div className="space-y-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                  <p className="text-white/90">
+                    Získej přístup k exkluzivnímu obsahu
+                  </p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                  <p className="text-white/90">
+                    Odemkni speciální funkce pro pokročilé uživatele
+                  </p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                  <p className="text-white/90">
+                    Připoj se ke komunitě aktivních uživatelů
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right side for the connected nodes */}
+          <div className="relative w-1/2 h-full flex items-center justify-center">
+            {/* Render the connecting lines */}
+            {connections.map((conn) => createLine(conn.from, conn.to))}
+
+            {/* Larger circles for desktop with proper spacing */}
+            {nodes.map((node, index) => (
+              <div
+                key={`node-${node.id}`}
+                className={`absolute pointer-events-auto 
+                  w-20 h-20 text-2xl
+                  ${
+                    index === 0 || index <= 4
+                      ? "bg-gradient-to-br from-purple-500 to-blue-500"
+                      : "bg-gray-700"
+                  } 
+                  rounded-full flex items-center justify-center 
+                  text-white font-semibold cursor-pointer 
+                  transition-all duration-300 transform hover:scale-110 
+                  shadow-lg`}
+                style={{
+                  top: `${node.y - circleSize * 2}px`,
+                  left: `${node.x - circleSize * 2}px`,
+                  zIndex: 2,
+                  opacity: index < 5 ? 1 : 0.7,
+                }}
+                onClick={() => handleNodeClick(node.path)}
+              >
+                {node.id}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
