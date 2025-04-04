@@ -16,96 +16,23 @@ const Test = () => {
 
   // State for tracking screen size
   const [isMobile, setIsMobile] = useState(false);
+  // Add smaller screen breakpoint
+  const [isSmallMobile, setIsSmallMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
+    const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 920);
+      setIsSmallMobile(window.innerWidth < 480);
     };
 
     const updatePositions = () => {
-      checkMobile();
+      checkScreenSize();
 
-      // Calculate available space for the nodes
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      // Move nodes more to the left side on mobile to prevent overlap with text
-      const startX = isMobile ? width * 0.35 : width * 0.35;
-
-      // Better vertical positioning with more space at the top
-      const startY = isMobile ? height * 0.2 : height / 2;
-
-      // INCREASED SPACING: Significantly increased spacing between nodes
-      const verticalSpacing = isMobile ? 90 : 100;
-      const horizontalSpacing = isMobile ? 80 : 90;
-
-      // Set positions in a tree-like structure with more space between nodes
-      setNodes([
-        // Level 1
-        {
-          id: 1,
-          x: startX,
-          y: startY - verticalSpacing * 1.5,
-          path: "/page1",
-          active: true,
-        },
-        // Level 2
-        {
-          id: 2,
-          x: startX + horizontalSpacing,
-          y: startY - verticalSpacing * 0.75,
-          path: "/page2",
-        },
-        // Level 3
-        {
-          id: 3,
-          x: startX - horizontalSpacing,
-          y: startY,
-          path: "/page3",
-        },
-        // Level 4
-        {
-          id: 4,
-          x: startX + horizontalSpacing,
-          y: startY + verticalSpacing * 0.75,
-          path: "/page4",
-        },
-        // Level 5
-        {
-          id: 5,
-          x: startX - horizontalSpacing * 0.5,
-          y: startY + verticalSpacing * 1.5,
-          path: "/page5",
-        },
-        // Level 6
-        {
-          id: 6,
-          x: startX + horizontalSpacing,
-          y: startY + verticalSpacing * 2.25,
-          path: "/page6",
-        },
-        // Level 7
-        {
-          id: 7,
-          x: startX - horizontalSpacing * 0.7,
-          y: startY + verticalSpacing * 3,
-          path: "/page7",
-        },
-        // Level 8
-        {
-          id: 8,
-          x: startX + horizontalSpacing * 0.8,
-          y: startY + verticalSpacing * 3.75,
-          path: "/page8",
-        },
-        // Level 9
-        {
-          id: 9,
-          x: startX,
-          y: startY + verticalSpacing * 4.5,
-          path: "/page9",
-        },
-      ]);
+      if (isMobile) {
+        calculateMobilePositions();
+      } else {
+        calculateDesktopPositions();
+      }
     };
 
     updatePositions();
@@ -114,7 +41,172 @@ const Test = () => {
     return () => {
       window.removeEventListener("resize", updatePositions);
     };
-  }, [isMobile]);
+  }, [isMobile, isSmallMobile]);
+
+  // Separate function for desktop node positions
+  const calculateDesktopPositions = () => {
+    // Calculate available space for the nodes
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const startX = width * 0.35;
+    const startY = height / 2;
+    const verticalSpacing = 100;
+    const horizontalSpacing = 90;
+
+    // Set positions in a tree-like structure with more space between nodes
+    setNodes([
+      // Level 1
+      {
+        id: 1,
+        x: startX,
+        y: startY - verticalSpacing * 1.5,
+        path: "/page1",
+        active: true,
+      },
+      // Level 2
+      {
+        id: 2,
+        x: startX + horizontalSpacing,
+        y: startY - verticalSpacing * 0.75,
+        path: "/page2",
+      },
+      // Level 3
+      {
+        id: 3,
+        x: startX - horizontalSpacing,
+        y: startY,
+        path: "/page3",
+      },
+      // Level 4
+      {
+        id: 4,
+        x: startX + horizontalSpacing,
+        y: startY + verticalSpacing * 0.75,
+        path: "/page4",
+      },
+      // Level 5
+      {
+        id: 5,
+        x: startX - horizontalSpacing * 0.5,
+        y: startY + verticalSpacing * 1.5,
+        path: "/page5",
+      },
+      // Level 6
+      {
+        id: 6,
+        x: startX + horizontalSpacing,
+        y: startY + verticalSpacing * 2.25,
+        path: "/page6",
+      },
+      // Level 7
+      {
+        id: 7,
+        x: startX - horizontalSpacing * 0.7,
+        y: startY + verticalSpacing * 3,
+        path: "/page7",
+      },
+      // Level 8
+      {
+        id: 8,
+        x: startX + horizontalSpacing * 0.8,
+        y: startY + verticalSpacing * 3.75,
+        path: "/page8",
+      },
+      // Level 9
+      {
+        id: 9,
+        x: startX,
+        y: startY + verticalSpacing * 4.5,
+        path: "/page9",
+      },
+    ]);
+  };
+
+  // Separate function for mobile node positions
+  const calculateMobilePositions = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    // Center the nodes more on mobile
+    // Adjust positioning to be more centered horizontally on mobile
+    const startX = isSmallMobile ? width * 0.5 : width * 0.5;
+
+    // Keep good vertical spacing
+    const startY = isSmallMobile ? height * 0.15 : height * 0.2;
+
+    // Responsive spacing for mobile layout
+    const verticalSpacing = isSmallMobile ? 70 : 90;
+    const horizontalSpacing = isSmallMobile ? 60 : 80;
+
+    // Set mobile positions - more centered but still maintaining the tree structure
+    setNodes([
+      // Level 1
+      {
+        id: 1,
+        x: startX,
+        y: startY - verticalSpacing * 0.5,
+        path: "/page1",
+        active: true,
+      },
+      // Level 2 - positioned more centrally
+      {
+        id: 2,
+        x: startX + horizontalSpacing * 0.5,
+        y: startY + verticalSpacing * 0.5,
+        path: "/page2",
+      },
+      // Level 3 - positioned more centrally
+      {
+        id: 3,
+        x: startX - horizontalSpacing * 0.5,
+        y: startY + verticalSpacing,
+        path: "/page3",
+      },
+      // Level 4
+      {
+        id: 4,
+        x: startX + horizontalSpacing * 0.6,
+        y: startY + verticalSpacing * 1.5,
+        path: "/page4",
+      },
+      // Level 5
+      {
+        id: 5,
+        x: startX - horizontalSpacing * 0.4,
+        y: startY + verticalSpacing * 2,
+        path: "/page5",
+      },
+      // Level 6
+      {
+        id: 6,
+        x: startX + horizontalSpacing * 0.5,
+        y: startY + verticalSpacing * 2.5,
+        path: "/page6",
+      },
+      // Level 7
+      {
+        id: 7,
+        x: startX - horizontalSpacing * 0.5,
+        y: startY + verticalSpacing * 3,
+        path: "/page7",
+      },
+      // Level 8
+      {
+        id: 8,
+        x: startX + horizontalSpacing * 0.4,
+        y: startY + verticalSpacing * 3.5,
+        path: "/page8",
+      },
+      // Level 9 - centered at the bottom
+      {
+        id: 9,
+        x: startX,
+        y: startY + verticalSpacing * 4,
+        path: "/page9",
+      },
+    ]);
+  };
 
   // Redirect based on node ID
   const handleNodeClick = (path) => {
@@ -134,8 +226,8 @@ const Test = () => {
   ];
 
   // Calculate circle sizes based on device
-  const circleSizeMobile = 14; // Increased size
-  const circleSizeDesktop = 18; // Increased size
+  const circleSizeMobile = isSmallMobile ? 10 : 14; // Adjust for smaller screens
+  const circleSizeDesktop = 18;
   const circleSize = isMobile ? circleSizeMobile : circleSizeDesktop;
 
   const createLine = (startNode, endNode) => {
@@ -151,8 +243,8 @@ const Test = () => {
     const angle =
       Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
 
-    // WIDER LINES: Base line width on circle size
-    const lineThickness = isMobile ? 2.5 : 3;
+    // Responsive line thickness
+    const lineThickness = isMobile ? (isSmallMobile ? 1.5 : 2.5) : 3;
 
     return (
       <div
@@ -160,7 +252,7 @@ const Test = () => {
         className="absolute bg-white/40"
         style={{
           width: `${distance}px`,
-          height: `${lineThickness}px`, // Thicker lines that scale with circle size
+          height: `${lineThickness}px`,
           top: `${start.y}px`,
           left: `${start.x}px`,
           transform: `rotate(${angle}deg)`,
@@ -171,51 +263,53 @@ const Test = () => {
     );
   };
 
-  // Convert pixel size to Tailwind classes
-  const getCircleClasses = () => {
-    const sizeClass = isMobile ? "w-14 h-14" : "w-18 h-18";
-    const textSizeClass = isMobile ? "text-xl" : "text-2xl";
-
-    return `${sizeClass} ${textSizeClass}`;
+  // Get responsive position for mobile nodes
+  const getResponsivePosition = (node) => {
+    return {
+      top: `${node.y - (isSmallMobile ? 15 : 20)}px`,
+      left: `${node.x - (isSmallMobile ? 15 : 20)}px`,
+    };
   };
 
   return (
-    <div className="relative w-full h-[120vh]  overflow-hidden">
-      {/* Mobile layout with better spacing */}
+    <div className="relative w-full overflow-hidden">
+      {/* Mobile layout with improved responsiveness */}
       {isMobile ? (
-        <div className="flex flex-col h-full">
-          {/* Title on top */}
-          <div className="px-5 pt-6 pb-2">
-            <h1 className="text-3xl text-purple-300 font-bold">
+        <div className="flex flex-col h-full bg-gray-900 text-white">
+          {/* Title section - full width */}
+          <div className="px-4 pt-5 pb-2">
+            <h1 className="text-xl sm:text-2xl text-purple-300 font-bold">
               Úrovně procvičování
             </h1>
           </div>
 
-          <div className="flex flex-col h-full">
-            {/* IMPROVED: Increased height for nodes section to allow for bigger spacing */}
-            <div className="relative h-96 w-full">
-              {" "}
-              {/* Increased height for more vertical space */}
-              {/* Render the connecting lines */}
+          <div className="flex flex-col h-full bg-gray-900 text-white ">
+            {/* Nodes section - centered and adaptively sized */}
+            <div className="relative h-[90vh] w-full overflow-hidden px-2">
+              {/* Connecting lines */}
               {connections.map((conn) => createLine(conn.from, conn.to))}
-              {/* Nodes with bigger sizes and better spacing */}
+
+              {/* Nodes with improved responsive positioning */}
               {nodes.map((node, index) => (
                 <div
                   key={`node-${node.id}`}
                   className={`absolute pointer-events-auto 
-                    w-14 h-14 text-xl
-                    ${
-                      index === 0 || index <= 4
-                        ? "bg-gradient-to-br from-purple-500 to-blue-500"
-                        : "bg-white"
-                    } 
-                    rounded-full flex items-center justify-center 
-                    text-white font-semibold cursor-pointer 
-                    transition-all duration-300 transform hover:scale-110 
-                    shadow-lg`}
+                       ${
+                         isSmallMobile
+                           ? "w-8 h-8 text-xs"
+                           : "w-10 h-10 text-sm sm:w-12 sm:h-12 sm:text-lg"
+                       }
+                       ${
+                         index === 0 || index <= 4
+                           ? "bg-gradient-to-br from-purple-500 to-blue-500"
+                           : "bg-white"
+                       } 
+                       rounded-full flex items-center justify-center 
+                       text-white font-semibold cursor-pointer 
+                       transition-all duration-300 transform hover:scale-110 
+                       shadow-lg`}
                   style={{
-                    top: `${node.y - circleSize}px`,
-                    left: `${node.x - circleSize}px`,
+                    ...getResponsivePosition(node),
                     zIndex: 2,
                     opacity: index < 5 ? 1 : 0.7,
                   }}
@@ -225,47 +319,15 @@ const Test = () => {
                 </div>
               ))}
             </div>
-
-            {/* Text content - scrollable and starts below the node section */}
-            <div className="flex-1 px-5 pb-6 overflow-y-auto">
-              <p className="text-white/90 text-base mb-4">
-                Úrovně na našem webu fungují jednoduše – čím aktivnější jsi, tím
-                vyšší úroveň získáš! Za různé akce, jako je přispívání,
-                komentování nebo sdílení, získáváš body, které tě posouvají dál.
-              </p>
-
-              <p className="text-white/80 text-base mb-6">
-                Každá úroveň přináší nové výhody a exkluzivní obsah. Stačí být
-                aktivní a postupně odemykat lepší možnosti!
-              </p>
-
-              <div className="space-y-3">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                  <p className="text-white/90 text-sm">
-                    Získej přístup k exkluzivnímu obsahu
-                  </p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                  <p className="text-white/90 text-sm">
-                    Odemkni speciální funkce pro pokročilé uživatele
-                  </p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                  <p className="text-white/90 text-sm">
-                    Připoj se ke komunitě aktivních uživatelů
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       ) : (
-        // Desktop layout with increased spacing and larger circles
-        <div className="flex h-full bg-transparent scale-100 relative">
+        // Desktop layout - unchanged
+        <div className="flex  bg-transparent scale-100 relative h-[120vh]">
           {/* Left side content for text */}
           <div className="w-1/2 p-10 flex items-start justify-center">
             <div className="max-w-lg">
-              <h1 className=" md:text-7xl lg:text-8xl text-purple-300 font-bold mb-6 absolute scale-110 left-24">
+              <h1 className=" md:text-7xl lg:text-8xl userlvl font-bold mb-6 absolute scale-110 left-24">
                 Úrovně procvičování
               </h1>
               <div className="mt-40 w-full">
