@@ -51,7 +51,7 @@ const Test = () => {
 
     const startX = width * 0.35;
     const startY = height / 2;
-    const verticalSpacing = 100;
+    const verticalSpacing = 110;
     const horizontalSpacing = 90;
 
     // Set positions in a tree-like structure with more space between nodes
@@ -128,16 +128,15 @@ const Test = () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    // Center the nodes more on mobile
-    // Adjust positioning to be more centered horizontally on mobile
-    const startX = isSmallMobile ? width * 0.5 : width * 0.5;
+    // Center the nodes more on mobile - ensure they stay in viewport
+    const startX = width * 0.5;
 
     // Keep good vertical spacing
     const startY = isSmallMobile ? height * 0.15 : height * 0.2;
 
-    // Responsive spacing for mobile layout
-    const verticalSpacing = isSmallMobile ? 70 : 90;
-    const horizontalSpacing = isSmallMobile ? 60 : 80;
+    // Increased vertical spacing for mobile layout
+    const verticalSpacing = isSmallMobile ? 130 : 130; // Increased spacing
+    const horizontalSpacing = isSmallMobile ? 70 : 90; // Wider horizontal spacing
 
     // Set mobile positions - more centered but still maintaining the tree structure
     setNodes([
@@ -145,7 +144,7 @@ const Test = () => {
       {
         id: 1,
         x: startX,
-        y: startY - verticalSpacing * 0.5,
+        y: startY - verticalSpacing * 0.3, // Adjusted to keep in viewport
         path: "/page1",
         active: true,
       },
@@ -225,8 +224,8 @@ const Test = () => {
     { from: 7, to: 8 }, // 8 to 9
   ];
 
-  // Calculate circle sizes based on device
-  const circleSizeMobile = isSmallMobile ? 10 : 14; // Adjust for smaller screens
+  // Calculate circle sizes based on device - increased sizes
+  const circleSizeMobile = isSmallMobile ? 15 : 20; // Increased from 10/14
   const circleSizeDesktop = 18;
   const circleSize = isMobile ? circleSizeMobile : circleSizeDesktop;
 
@@ -244,7 +243,7 @@ const Test = () => {
       Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
 
     // Responsive line thickness
-    const lineThickness = isMobile ? (isSmallMobile ? 1.5 : 2.5) : 3;
+    const lineThickness = isMobile ? (isSmallMobile ? 2 : 3) : 3;
 
     return (
       <div
@@ -266,8 +265,8 @@ const Test = () => {
   // Get responsive position for mobile nodes
   const getResponsivePosition = (node) => {
     return {
-      top: `${node.y - (isSmallMobile ? 15 : 20)}px`,
-      left: `${node.x - (isSmallMobile ? 15 : 20)}px`,
+      top: `${node.y - (isSmallMobile ? 20 : 25)}px`, // Adjusted for larger circles
+      left: `${node.x - (isSmallMobile ? 20 : 25)}px`,
     };
   };
 
@@ -275,59 +274,89 @@ const Test = () => {
     <div className="relative w-full overflow-hidden">
       {/* Mobile layout with improved responsiveness */}
       {isMobile ? (
-        <div className="flex flex-col h-full bg-gray-900 text-white">
-          {/* Title section - full width */}
-          <div className="px-4 pt-5 pb-2">
-            <h1 className="text-xl sm:text-2xl text-purple-300 font-bold">
+        <div className="flex flex-col ">
+          <div className=" h-full mt-10 w-full flex justify-center items-center flex-col gap-16">
+            <h1 className="text-3xl md:text-6xl mb-6 userlvl font-bold">
               Úrovně procvičování
             </h1>
+            <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white">
+              <div className="w-full h-full flex flex-row gap-4">
+                <div className="w-2/3 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                </div>
+                <div className="w-1/3 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                </div>
+              </div>
+              <div className="w-full h-full flex flex-row gap-4">
+                <div className="w-1/4 h-full bg-zinc-800 rounded-3xl"></div>
+                <div className="w-3/4 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                </div>
+              </div>
+              <div className="w-full h-full flex flex-row gap-4">
+                <div className="w-1/2 h-full bg-zinc-800 rounded-3xl"></div>
+                <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                </div>
+              </div>
+            </div>
           </div>
+          <div className="relative">
+            <div className="flex flex-col h-full  text-white overflow-x-hidden">
+              {/* Title section - full width */}
 
-          <div className="flex flex-col h-full bg-gray-900 text-white ">
-            {/* Nodes section - centered and adaptively sized */}
-            <div className="relative h-[90vh] w-full overflow-hidden px-2">
-              {/* Connecting lines */}
-              {connections.map((conn) => createLine(conn.from, conn.to))}
+              <div className="flex flex-col h-full bg-transparent text-white overflow-x-hidden">
+                {/* Nodes section - centered and adaptively sized */}
+                <div className="relative h-[90vh] w-full px-2 overflow-x-hidden overflow-y-auto">
+                  {/* Connecting lines */}
+                  {connections.map((conn) => createLine(conn.from, conn.to))}
 
-              {/* Nodes with improved responsive positioning */}
-              {nodes.map((node, index) => (
-                <div
-                  key={`node-${node.id}`}
-                  className={`absolute pointer-events-auto 
+                  {/* Nodes with improved responsive positioning and larger sizes */}
+                  {nodes.map((node, index) => (
+                    <div
+                      key={`node-${node.id}`}
+                      className={`absolute pointer-events-auto 
                        ${
                          isSmallMobile
-                           ? "w-8 h-8 text-xs"
-                           : "w-10 h-10 text-sm sm:w-12 sm:h-12 sm:text-lg"
+                           ? "w-16 h-16 text-base" // Increased from w-8 h-8
+                           : "w-14 h-14 text-base sm:w-16 sm:h-16 sm:text-xl" // Increased from w-10 h-10
                        }
                        ${
                          index === 0 || index <= 4
-                           ? "bg-gradient-to-br from-purple-500 to-blue-500"
-                           : "bg-white"
+                           ? "bg-gradient-to-br from-purple-500 to-blue-500 !opacity-100"
+                           : "bg-zinc-800 !opacity-100"
                        } 
                        rounded-full flex items-center justify-center 
                        text-white font-semibold cursor-pointer 
                        transition-all duration-300 transform hover:scale-110 
-                       shadow-lg`}
-                  style={{
-                    ...getResponsivePosition(node),
-                    zIndex: 2,
-                    opacity: index < 5 ? 1 : 0.7,
-                  }}
-                  onClick={() => handleNodeClick(node.path)}
-                >
-                  {node.id}
+                      shadow-[0_0_25px_10px_rgba(255,255,255,0.25)]`}
+                      style={{
+                        ...getResponsivePosition(node),
+                        zIndex: 2,
+                        opacity: index < 5 ? 1 : 0.7,
+                      }}
+                      onClick={() => handleNodeClick(node.path)}
+                    >
+                      {node.id}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
       ) : (
         // Desktop layout - unchanged
-        <div className="flex  bg-transparent scale-100 relative h-[120vh]">
+        <div className="flex bg-transparent scale-100 relative h-[130vh] overflow-hidden">
           {/* Left side content for text */}
           <div className="w-1/2 p-10 flex items-start justify-center">
             <div className="max-w-lg">
-              <h1 className=" md:text-7xl lg:text-8xl userlvl font-bold mb-6 absolute scale-110 left-24">
+              <h1 className=" md:text-7xl userlvl font-bold mb-6 absolute scale-110 left-24">
                 Úrovně procvičování
               </h1>
               <div className="mt-40 w-full">
@@ -395,7 +424,7 @@ const Test = () => {
                   rounded-full flex items-center justify-center 
                   text-white font-semibold cursor-pointer 
                   transition-all duration-300 transform hover:scale-110 
-                  shadow-lg`}
+                  shadow-[0_0_25px_10px_rgba(255,255,255,0.25)]`}
                 style={{
                   top: `${node.y - circleSize * 2}px`,
                   left: `${node.x - circleSize * 2}px`,
