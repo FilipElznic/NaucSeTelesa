@@ -281,25 +281,23 @@ const Test = () => {
             </h1>
             <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white">
               <div className="w-full h-full flex flex-row gap-4">
-                <div className="w-2/3 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                </div>
-                <div className="w-1/3 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
                   <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
                   <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
                 </div>
               </div>
               <div className="w-full h-full flex flex-row gap-4">
-                <div className="w-1/4 h-full bg-zinc-800 rounded-3xl"></div>
-                <div className="w-3/4 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                </div>
-              </div>
-              <div className="w-full h-full flex flex-row gap-4">
-                <div className="w-1/2 h-full bg-zinc-800 rounded-3xl"></div>
                 <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                </div>
+                <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                </div>
+              </div>
+              <div className="w-full h-full flex flex-row gap-4">
+                <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
                   <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
                   <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
                 </div>
@@ -368,37 +366,29 @@ const Test = () => {
                 </p>
               </div>
 
-              <div className="absolute top-2/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[50vh] w-[40vw] text-white">
-                <div className="w-full h-full flex flex-row gap-4">
-                  <div className="w-2/3 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                    <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                    <h1 className="text-5xl font-semibold p-4 userlvl">
-                      Získat další úroveň
-                    </h1>
+              <div className="absolute top-2/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[60vh] w-[40vw] text-white">
+                <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white">
+                  <div className="w-full h-full flex flex-row gap-4">
+                    <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                      <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                      <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                    </div>
                   </div>
-                  <div className="w-1/3 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                    <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                    <h1 className="text-5xl font-semibold p-4 userlvl">
-                      Učit se
-                    </h1>
+                  <div className="w-full h-full flex flex-row gap-4">
+                    <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                      <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                      <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                    </div>
+                    <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                      <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                      <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                    </div>
                   </div>
-                </div>
-                <div className="w-full h-full flex flex-row gap-4">
-                  <div className="w-1/4 h-full bg-zinc-800 rounded-3xl"></div>
-                  <div className="w-3/4 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                    <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                    <h1 className="text-5xl font-semibold p-4 userlvl">
-                      Žebříček uživatelů
-                    </h1>
-                  </div>
-                </div>
-                <div className="w-full h-full flex flex-row gap-4">
-                  <div className="w-1/2 h-full bg-zinc-800 rounded-3xl"></div>
-                  <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                    <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                    <h1 className="text-5xl font-semibold p-4 userlvl">
-                      Statistiky
-                    </h1>
+                  <div className="w-full h-full flex flex-row gap-4">
+                    <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
+                      <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                      <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -418,8 +408,8 @@ const Test = () => {
                   w-20 h-20 text-2xl scale-125
                   ${
                     index === 0 || index <= 4
-                      ? "bg-gradient-to-br from-purple-500 to-blue-500"
-                      : "bg-white !opacity-100"
+                      ? " bg-gradient-to-br from-purple-500 to-blue-500 !opacity-100"
+                      : "bg-zinc-800   !opacity-100"
                   } 
                   rounded-full flex items-center justify-center 
                   text-white font-semibold cursor-pointer 
