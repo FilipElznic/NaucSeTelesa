@@ -408,7 +408,7 @@ const Test = () => {
                   w-20 h-20 text-2xl scale-125
                   ${
                     index === 0 || index <= 4
-                      ? " bg-gradient-to-br from-purple-500 to-blue-500 !opacity-100"
+                      ? "userlvl4"
                       : "bg-zinc-800   !opacity-100"
                   } 
                   rounded-full flex items-center justify-center 

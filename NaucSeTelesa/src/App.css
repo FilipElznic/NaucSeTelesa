@@ -105,6 +105,13 @@ html {
 .userlvl2 {
   background: linear-gradient(to left, #ad17ad, #87c5d2);
 }
+.userlvl4 {
+  background: linear-gradient(
+    130deg,
+    #d684d6,
+    #2c9ebd
+  ); /* Darker gradient colors */
+}
 
 .usertask {
   color: rgba(255, 255, 255);
