@@ -6,7 +6,6 @@ import Robot from "../Components/Robot";
 import Project from "../Components/Project";
 import FadeInWrapper from "../Components/FadeInWrapper";
 import Help from "../Components/Help";
-import Test from "../Components/test";
 
 function UserPage() {
   return (
@@ -29,8 +28,6 @@ function UserPage() {
         </div>
 
         <Help />
-
-        <Test />
       </div>
 
       <Footer />

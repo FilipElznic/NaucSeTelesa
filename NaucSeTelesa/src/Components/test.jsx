@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { useGlobalData } from "../Global"; //
 
 const Test = () => {
+  const { userData } = useGlobalData();
+
   const [nodes, setNodes] = useState([
     { id: 1, x: 0, y: 0, path: "/page1" },
     { id: 2, x: 0, y: 0, path: "/page2" },
@@ -325,7 +328,9 @@ const Test = () => {
                            : "w-14 h-14 text-base sm:w-16 sm:h-16 sm:text-xl" // Increased from w-10 h-10
                        }
                        ${
-                         index === 0 || index <= 4
+                         index === 0 ||
+                         index <=
+                           (userData ? Math.floor(userData.xp / 100 - 1) : -1)
                            ? "bg-gradient-to-br from-purple-500 to-blue-500 !opacity-100"
                            : "bg-zinc-800 !opacity-100"
                        } 
@@ -407,7 +412,8 @@ const Test = () => {
                 className={`absolute pointer-events-auto 
                   w-20 h-20 text-2xl scale-125
                   ${
-                    index === 0 || index <= 4
+                    index === 0 ||
+                    index <= (userData ? Math.floor(userData.xp / 100 - 1) : -1)
                       ? "userlvl4"
                       : "bg-zinc-800   !opacity-100"
                   } 

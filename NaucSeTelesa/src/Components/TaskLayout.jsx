@@ -15,6 +15,21 @@ function TaskLayout() {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const { userData, refreshUserData } = useGlobalData();
 
+  const resetTasks = async () => {
+    try {
+      const { error } = await supabase.rpc("reset_tasks", {
+        user_id: userData.id,
+      });
+      if (error) throw error;
+      setTasks([]); // Clear tasks from state
+    } catch (error) {
+      console.error("Error resetting tasks:", error);
+    }
+    window.location.href = "/ukoly"; // Redirect to the tasks page
+    console.log("Tasks reset successfully!");
+    toast.success("Úkoly byly úspěšně obnoveny!");
+  };
+
   useEffect(() => {
     if (!userData || !userData.id) return; // Prevents fetching if userData is not available
 
@@ -83,6 +98,8 @@ function TaskLayout() {
       .map(({ value }) => value);
   };
 
+  // reset tasks
+
   return (
     <>
       <div className="bg-gradient-to-br from-black via-zinc-950  to-black  min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
@@ -124,6 +141,23 @@ function TaskLayout() {
               </div>
             </div>
 
+            {tasks.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl text-center mb-4">
+                  Žádné úkoly k zobrazení
+                </h1>
+                <p className="text-lg md:text-xl text-center mb-4">
+                  Všechny úkoly byly dokončeny. Pokračujte na další úkoly nebo
+                  se vraťte zpět.
+                </p>
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+                  onClick={() => resetTasks()}
+                >
+                  Obnovit úkoly
+                </button>
+              </div>
+            )}
             {tasks.map((task) => {
               const selectedAnswer = selectedAnswers[task.id];
               const correctAnswer = task.correctanswer;
