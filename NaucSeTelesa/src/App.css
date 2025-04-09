@@ -211,3 +211,48 @@ html {
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.formula-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.5) rgba(0, 0, 0, 0.2);
+}
+
+.formula-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.formula-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.formula-container::-webkit-scrollbar-thumb {
+  background-color: rgba(139, 92, 246, 0.5);
+  border-radius: 3px;
+}
+
+/* Add styles for KaTeX to ensure formulas fit and look consistent */
+.formula {
+  white-space: nowrap;
+  overflow-x: auto;
+  min-width: 100%;
+  display: inline-block;
+}
+
+/* Optional: Add a subtle indication that formulas can be scrolled */
+.formula-container:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 20px;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.formula-container:hover:after {
+  opacity: 0.7;
+}
