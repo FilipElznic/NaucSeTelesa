@@ -372,7 +372,7 @@ const Test = () => {
               </div>
 
               <div className="absolute z-20 top-2/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[60vh] w-[40vw] text-white">
-                <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white bg-white">
+                <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white ">
                   <div className="w-full h-full flex flex-row gap-4 ">
                     <Link
                       to="/telesa"
