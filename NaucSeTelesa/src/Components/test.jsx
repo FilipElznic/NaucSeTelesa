@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { useGlobalData } from "../Global"; //
-
+import { Link } from "react-router-dom";
 const Test = () => {
   const { userData } = useGlobalData();
 
@@ -371,29 +371,44 @@ const Test = () => {
                 </p>
               </div>
 
-              <div className="absolute top-2/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[60vh] w-[40vw] text-white">
-                <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white">
-                  <div className="w-full h-full flex flex-row gap-4">
-                    <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                      <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                      <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                    </div>
+              <div className="absolute z-20 top-2/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[60vh] w-[40vw] text-white">
+                <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white bg-white">
+                  <div className="w-full h-full flex flex-row gap-4 ">
+                    <Link
+                      to="/telesa"
+                      className="w-full h-full  bg-zinc-800 rounded-3xl"
+                    >
+                      <div className="w-full h-full flex justify-center items-center p-4 relative">
+                        <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                        <h1 className="text-5xl font-semibold p-4 userlvl">
+                          Žebříček uživatelů
+                        </h1>
+                      </div>
+                    </Link>
                   </div>
-                  <div className="w-full h-full flex flex-row gap-4">
-                    <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                      <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                      <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                    </div>
-                    <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                      <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                      <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                    </div>
-                  </div>
-                  <div className="w-full h-full flex flex-row gap-4">
-                    <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                      <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
-                      <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                    </div>
+                  <div className="w-full h-full flex flex-row gap-4 ">
+                    <Link
+                      to="/telesa"
+                      className="w-full h-full  bg-zinc-800 rounded-3xl"
+                    >
+                      <div className=" h-full w-full  flex justify-center items-center p-4 relative">
+                        <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                        <h1 className="text-5xl font-semibold p-4 userlvl">
+                          Tělesa
+                        </h1>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/ukoly"
+                      className="w-full h-full z-50  bg-zinc-800 rounded-3xl"
+                    >
+                      <div className="w-full h-full flex justify-center items-center p-4 relative">
+                        <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                        <h1 className="text-5xl font-semibold p-4 userlvl">
+                          Úkoly
+                        </h1>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -414,7 +429,7 @@ const Test = () => {
                   ${
                     index === 0 ||
                     index <= (userData ? Math.floor(userData.xp / 100 - 1) : -1)
-                      ? "userlvl4"
+                      ? "userlvl4 !opacity-100"
                       : "bg-zinc-800   !opacity-100"
                   } 
                   rounded-full flex items-center justify-center 
