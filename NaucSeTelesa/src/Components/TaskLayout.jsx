@@ -13,6 +13,7 @@ import Footer from "./Footer";
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [shuffledOptions, setShuffledOptions] = useState({});
   const { userData, refreshUserData } = useGlobalData();
 
   const resetTasks = async () => {
@@ -29,6 +30,24 @@ function TaskLayout() {
     console.log("Tasks reset successfully!");
     toast.success("Úkoly byly úspěšně obnoveny!");
   };
+
+  // Function to shuffle an array
+  const shuffleArray = (array) => {
+    return array
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  };
+
+  // Create randomized answer options for each task
+  useEffect(() => {
+    const options = {};
+    tasks.forEach((task) => {
+      // Create a shuffled order of answer options for this task
+      options[task.id] = shuffleArray(["answera", "answerb", "answerc"]);
+    });
+    setShuffledOptions(options);
+  }, [tasks]);
 
   useEffect(() => {
     if (!userData || !userData.id) return; // Prevents fetching if userData is not available
@@ -57,7 +76,6 @@ function TaskLayout() {
     setSelectedAnswers((prev) => ({ ...prev, [taskId]: answer }));
 
     // Show toast notification
-
     {
       isCorrect
         ? toast.success("Správná odpověď!")
@@ -91,14 +109,10 @@ function TaskLayout() {
     return <div className="text-white text-center mt-10">Načítání...</div>;
   }
 
-  const shuffleArray = (array) => {
-    return array
-      .map((value) => ({ value, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
+  // Function to shuffle task order
+  const shuffleTasks = () => {
+    setTasks(shuffleArray([...tasks]));
   };
-
-  // reset tasks
 
   return (
     <>
@@ -124,7 +138,7 @@ function TaskLayout() {
                   </span>
                   <span
                     className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
-                    onClick={() => setTasks(shuffleArray(tasks))}
+                    onClick={shuffleTasks}
                   >
                     <FaShuffle />
                     <p className="hidden sm:block">Zamíchat</p>
@@ -142,16 +156,15 @@ function TaskLayout() {
             </div>
 
             {tasks.length === 0 && (
-              <div className="flex flex-col items-center justify-center h-full">
+              <div className="flex flex-col items-center justify-center h-full bg-transparent mt-11">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl text-center mb-4">
                   Žádné úkoly k zobrazení
                 </h1>
                 <p className="text-lg md:text-xl text-center mb-4">
-                  Všechny úkoly byly dokončeny. Pokračujte na další úkoly nebo
-                  se vraťte zpět.
+                  Všechny úkoly byly dokončeny.
                 </p>
                 <button
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+                  className="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
                   onClick={() => resetTasks()}
                 >
                   Obnovit úkoly
@@ -161,6 +174,12 @@ function TaskLayout() {
             {tasks.map((task) => {
               const selectedAnswer = selectedAnswers[task.id];
               const correctAnswer = task.correctanswer;
+              // Use the shuffled options for this task, or default if not yet set
+              const taskOptions = shuffledOptions[task.id] || [
+                "answera",
+                "answerb",
+                "answerc",
+              ];
 
               return (
                 <div
@@ -200,7 +219,7 @@ function TaskLayout() {
 
                   <div className="w-full min-h-[30vh] usergradient lg:min-h-[70vh]  lg:w-1/5  rounded-3xl usergradient-glow flex items-center ">
                     <div className="h-full w-full flex justify-evenly flex-row lg:flex-col items-center">
-                      {["answera", "answerb", "answerc"].map((option) => {
+                      {taskOptions.map((option) => {
                         const answerText = task[option];
                         const isCorrect = answerText === correctAnswer;
                         const isSelected = answerText === selectedAnswer;
