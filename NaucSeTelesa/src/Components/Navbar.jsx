@@ -1,28 +1,31 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { useGlobalData } from "../Global"; // Import global context
+import { useGlobalData } from "../Global";
 import "../App.css";
 import { supabase } from "../supabaseClient";
-import { AiOutlineHome } from "react-icons/ai";
-import { AiOutlineAppstore } from "react-icons/ai";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import { AiOutlineUser } from "react-icons/ai";
+import {
+  AiOutlineHome,
+  AiOutlineAppstore,
+  AiOutlineCheckCircle,
+  AiOutlineInfoCircle,
+  AiOutlineUser,
+} from "react-icons/ai";
 import { FiHelpCircle } from "react-icons/fi";
-function Navbar() {
-  const { authUser, userData } = useGlobalData(); // Use context to get authUser and userData
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState(userData?.img || ""); // Initialize avatar URL
 
-  // Optimize menu toggle with useCallback
+function Navbar() {
+  const { authUser, userData } = useGlobalData();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState("");
+
+  // Menu toggle
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
   }, []);
 
-  // Optimize dropdown toggle with useCallback
-  const toggleDropdown = useCallback(() => {
-    setIsDropdownOpen((prev) => !prev);
+  // Profile dropdown toggle
+  const toggleProfileDropdown = useCallback(() => {
+    setIsProfileDropdownOpen((prev) => !prev);
   }, []);
 
   // Handle sign out
@@ -30,19 +33,17 @@ function Navbar() {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.error("Error signing out:", error);
-    } else {
-      console.log("User signed out");
     }
     window.location.reload();
   };
 
   // Update the avatar URL when user data changes
   useEffect(() => {
-    if (userData) {
+    if (userData?.img) {
       setAvatarUrl(
         "https://bviuhriolcuvayzbgzum.supabase.co/storage/v1/object/public/profile-pictures/" +
           userData.img
-      ); // Ensure the avatar URL is updated
+      );
     }
   }, [userData]);
 
@@ -54,17 +55,17 @@ function Navbar() {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const dropdownElement = document.querySelector(".dropdown-container");
-      const toggleButton = document.querySelector(".dropdown-toggle");
+      const profileDropdown = document.getElementById("profile-dropdown");
+      const profileToggle = document.getElementById("profile-toggle");
 
       if (
-        isDropdownOpen &&
-        dropdownElement &&
-        toggleButton &&
-        !dropdownElement.contains(event.target) &&
-        !toggleButton.contains(event.target)
+        isProfileDropdownOpen &&
+        profileDropdown &&
+        profileToggle &&
+        !profileDropdown.contains(event.target) &&
+        !profileToggle.contains(event.target)
       ) {
-        setIsDropdownOpen(false);
+        setIsProfileDropdownOpen(false);
       }
     };
 
@@ -72,11 +73,32 @@ function Navbar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isDropdownOpen]);
+  }, [isProfileDropdownOpen]);
+
+  // Navigation links configuration
+  const navLinks = [
+    { to: "/success", icon: <AiOutlineHome className="mr-2" />, text: "Domů" },
+    {
+      to: "/telesa",
+      icon: <AiOutlineAppstore className="mr-2" />,
+      text: "Tělesa",
+    },
+    {
+      to: "/ukoly",
+      icon: <AiOutlineCheckCircle className="mr-2" />,
+      text: "Úkoly",
+    },
+    {
+      to: "/projekt",
+      icon: <AiOutlineInfoCircle className="mr-2" />,
+      text: "O projektu",
+    },
+    { to: "/pomoc", icon: <FiHelpCircle className="mr-2" />, text: "Pomoc" },
+  ];
 
   return (
-    <div className="flex h-20 w-full ">
-      {/* Full height sidebar for mobile (left side) */}
+    <div className="flex h-20 w-full">
+      {/* Mobile sidebar */}
       <div
         className={`fixed inset-y-0 left-0 w-64 bg-gray-900 usergradient shadow-lg transition-transform transform z-40 ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
@@ -86,7 +108,7 @@ function Navbar() {
           <div className="px-4 mb-8">
             <button
               onClick={toggleMenu}
-              className="text-white focus:outline-none transition-transform transform duration-300"
+              className="text-white focus:outline-none transition-transform duration-300"
             >
               <svg
                 className="w-7 h-7"
@@ -106,64 +128,18 @@ function Navbar() {
           </div>
 
           <ul className="space-y-6 px-4 flex-1 font-bold">
-            <li className="flex items-center">
-              <Link
-                to="/success"
-                className="flex text-white text-2xl w-full px-4 items-center "
-                onClick={closeMenu}
-              >
-                <AiOutlineHome className="mr-2" />
-                Domů
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                to="/telesa"
-                className="flex text-white text-2xl w-full px-4 items-center "
-                onClick={closeMenu}
-              >
-                <AiOutlineAppstore className="mr-2" />
-                Tělesa
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/ukoly"
-                className="flex text-white text-2xl w-full px-4 items-center "
-                onClick={closeMenu}
-              >
-                <AiOutlineCheckCircle className="mr-2" />
-                Úkoly
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/projekt"
-                className="flex text-white text-2xl w-full px-4 items-center "
-                onClick={closeMenu}
-              >
-                <AiOutlineInfoCircle className="mr-2" />O projektu
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/pomoc"
-                className="flex text-white text-2xl w-full px-4 items-center"
-              >
-                <FiHelpCircle className="mr-2" />
-                Pomoc
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/profil"
-                className="flex text-white text-2xl w-full px-4 items-center"
-              >
-                <AiOutlineUser className="mr-2" />
-                Profil
-              </Link>
-            </li>
+            {navLinks.map((link, index) => (
+              <li key={index} className="flex items-center">
+                <Link
+                  to={link.to}
+                  className="flex text-white text-2xl w-full px-4 items-center"
+                  onClick={closeMenu}
+                >
+                  {link.icon}
+                  {link.text}
+                </Link>
+              </li>
+            ))}
           </ul>
 
           <div className="mt-auto px-4">
@@ -178,7 +154,7 @@ function Navbar() {
             ) : (
               <Link
                 to="/"
-                className="text-red-500 w-full px-4 py-2 text-xl flex justify-center items-center"
+                className="text-red-500 w-full px-4 py-2 text-xl  flex justify-center items-center "
                 onClick={() => {
                   signOutUser();
                   closeMenu();
@@ -191,14 +167,14 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Original navbar for desktop */}
+      {/* Desktop navbar */}
       <nav className="fixed top-0 left-0 right-0 bg-transparent text-white px-4 py-2 flex justify-between items-center shadow-lg z-30 lg:relative lg:bg-transparent w-full">
         {/* Left Side: Hamburger menu for mobile, horizontal menu for desktop */}
         <div className="flex items-center">
           {/* Hamburger Icon for mobile */}
           <button
             onClick={toggleMenu}
-            className="lg:hidden text-white focus:outline-none transition-transform transform duration-300 z-40"
+            className="lg:hidden text-white focus:outline-none transition-transform duration-300 z-40"
           >
             <svg
               className="w-7 h-7"
@@ -219,70 +195,29 @@ function Navbar() {
           {/* Desktop horizontal menu */}
           <div className="hidden lg:block lg:w-auto">
             <ul className="lg:flex lg:space-x-0 font-bold">
-              <li className="flex items-center">
-                <Link
-                  to="/success"
-                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
-                >
-                  <AiOutlineHome className="mr-2" />
-                  Domů
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/telesa"
-                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
-                >
-                  <AiOutlineAppstore className="mr-2" />
-                  Tělesa
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/ukoly"
-                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
-                >
-                  <AiOutlineCheckCircle className="mr-2" />
-                  Úkoly
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/projekt"
-                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
-                >
-                  <AiOutlineInfoCircle className="mr-2" />O projektu
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/profil"
-                  className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
-                >
-                  <AiOutlineUser className="mr-2" />
-                  Profil
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/pomoc"
-                  className="flex text-white text-2xl md:text-lg  w-full px-4 items-center"
-                >
-                  <FiHelpCircle className="mr-2" />
-                  Pomoc
-                </Link>
-              </li>
+              {navLinks.map((link, index) => (
+                <li key={index} className="flex items-center">
+                  <Link
+                    to={link.to}
+                    className="flex text-white text-2xl md:text-lg w-full px-4 items-center"
+                  >
+                    {link.icon}
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Right Side: Login or User Profile */}
-        <div className="relative dropdown-container">
+        {/* Right Side: Login or User Profile with Dropdown */}
+        <div className="relative">
           {authUser ? (
             <div className="relative">
-              <Link
-                to="/profil"
+              <button
+                id="profile-toggle"
                 className="dropdown-toggle text-white px-4 py-2 text-xl border-form lg:text-2xl flex justify-center items-center lg:px-10"
+                onClick={toggleProfileDropdown}
               >
                 <div className="flex flex-row justify-center items-center">
                   <p className="text-white pr-2 text-2xl md:text-lg font-bold">
@@ -290,12 +225,37 @@ function Navbar() {
                     {userData?.name ? ` ${userData.name} ` : authUser.email}
                   </p>
                   <img
-                    src={avatarUrl || "/default-avatar.jpg"} // Use the public URL from context
+                    src={avatarUrl || "/default-avatar.jpg"}
                     className="w-10 h-10 object-fit-contain rounded-full"
                     alt="Avatar"
                   />
                 </div>
-              </Link>
+              </button>
+
+              {/* Profile Dropdown Menu for Desktop */}
+              {isProfileDropdownOpen && (
+                <div
+                  id="profile-dropdown"
+                  className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50"
+                >
+                  <Link
+                    to="/profil"
+                    className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                    onClick={() => setIsProfileDropdownOpen(false)}
+                  >
+                    Můj profil
+                  </Link>
+                  <button
+                    onClick={() => {
+                      signOutUser();
+                      setIsProfileDropdownOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-700"
+                  >
+                    Odhlásit se
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <Link
@@ -307,11 +267,6 @@ function Navbar() {
           )}
         </div>
       </nav>
-
-      {/* Main content area */}
-      <div className="flex-1 ml-0 lg:ml-0">
-        {/* This is where your page content would go */}
-      </div>
 
       {/* Overlay for mobile menu */}
       {isMenuOpen && (
