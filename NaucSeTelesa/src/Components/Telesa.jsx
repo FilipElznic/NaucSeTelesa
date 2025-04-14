@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 import Spline from "@splinetool/react-spline";
-import "../App.css";
 
-function Telesa() {
+const GeometricBodiesCarousel = () => {
   const [bodies, setBodies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedBody, setSelectedBody] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isSplineLoading, setIsSplineLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBody, setSelectedBody] = useState(null);
 
   useEffect(() => {
     const fetchBodies = async () => {
@@ -37,12 +38,43 @@ function Telesa() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleBodyClick = (body) => {
+  // Auto-play functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (bodies.length > 0) {
+        setCurrentSlide((prevSlide) => (prevSlide + 1) % bodies.length);
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [bodies.length]);
+
+  const goToNextSlide = () => {
+    if (bodies.length > 0) {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % bodies.length);
+    }
+  };
+
+  const goToPrevSlide = () => {
+    if (bodies.length > 0) {
+      setCurrentSlide(
+        (prevSlide) => (prevSlide - 1 + bodies.length) % bodies.length
+      );
+    }
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const openModal = (body) => {
     setSelectedBody(body);
+    setIsModalOpen(true);
     setIsSplineLoading(true);
   };
 
   const closeModal = () => {
+    setIsModalOpen(false);
     setSelectedBody(null);
   };
 
@@ -50,150 +82,207 @@ function Telesa() {
     setIsSplineLoading(false);
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-black via-zinc-950 to-black">
+        <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black text-white flex flex-col items-center p-4 md:p-6">
+    <div className="relative w-full h-screen bg-gradient-to-br from-black via-zinc-950 to-black text-white overflow-hidden">
       {/* Futuristic Heading with Glow Effect */}
-      <h1 className="text-3xl md:text-5xl lg:text-9xl font-bold my-8 md:my-20 text-transparent bg-clip-text userlvl text-center relative">
+      <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 text-transparent bg-clip-text userlvl text-center relative pt-6">
         Geometrická tělesa
-        <div className="absolute inset-0 blur-md opacity-50 bg-clip-text userlvl z-[-1]">
+        <div className="absolute inset-0 blur-md opacity-50 bg-clip-text userlvl z-[-1] pt-6">
           Geometrická tělesa
         </div>
       </h1>
 
-      {loading ? (
-        <div className="flex justify-center items-center h-40">
-          <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      ) : (
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-7xl">
+      {/* Main Carousel */}
+      <div className="relative w-full h-4/5 flex overflow-hidden">
+        <div
+          className="flex w-full h-full transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
           {bodies.map((body, index) => (
-            <li
+            <div
               key={index}
-              className="usergradient rounded-lg p-4 md:p-6 shadow-lg backdrop-blur-sm border border-purple-500/20 transform transition duration-300 hover:scale-105 hover:shadow-purple-500/20 hover:shadow-lg cursor-pointer"
-              onClick={() => handleBodyClick(body)}
+              className="flex-shrink-0 w-full h-full flex flex-col items-center p-6"
             >
-              <div className="flex flex-col h-full">
-                <div className="flex flex-col md:flex-row justify-between items-center">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-purple-300 drop-shadow-md">
-                    {body.geometric_body_name}
-                  </h2>
+              <div className="usergradient rounded-lg p-6 max-w-4xl w-full shadow-lg backdrop-blur-sm border border-purple-500/20 h-full overflow-y-auto">
+                <div className="flex flex-col h-full">
+                  <div className="flex flex-col md:flex-row justify-between items-center">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-4 text-purple-300 drop-shadow-md">
+                      {body.geometric_body_name}
+                    </h2>
 
-                  {body.image_url && (
-                    <div className="flex justify-center mb-4 w-full md:w-auto">
-                      <img
-                        src={body.image_url}
-                        alt={body.geometric_body_name}
-                        className="w-40 h-40 md:w-48 md:h-48 object-contain rounded-md backdrop-blur-sm bg-black/30 p-2"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <p className="text-gray-300 mb-4 text-base md:text-lg leading-relaxed">
-                  {body.description}
-                  {body.description1 && (
-                    <>
-                      <br />
-                      {body.description1}
-                    </>
-                  )}
-                </p>
-
-                <div className="mt-auto">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                    {body.volume_name && (
-                      <div className="bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-pink-500/30 hover:border-pink-500/50 transition-colors">
-                        <h3 className="text-base md:text-lg text-pink-400 mb-2">
-                          {body.volume_name}
-                        </h3>
-                        <div className="formula-container overflow-x-auto pb-2">
-                          <p
-                            className="formula text-xl"
-                            dangerouslySetInnerHTML={{
-                              __html: katex.renderToString(
-                                body.volume_formula,
-                                {
-                                  throwOnError: false,
-                                  displayMode: true,
-                                }
-                              ),
-                            }}
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {body.surface_name && (
-                      <div className="bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-indigo-500/30 hover:border-indigo-500/50 transition-colors">
-                        <h3 className="text-base md:text-lg text-indigo-400 mb-2">
-                          {body.surface_name}
-                        </h3>
-                        <div className="formula-container overflow-x-auto pb-2">
-                          <p
-                            className="formula text-xl"
-                            dangerouslySetInnerHTML={{
-                              __html: katex.renderToString(
-                                body.surface_formula,
-                                {
-                                  throwOnError: false,
-                                  displayMode: true,
-                                }
-                              ),
-                            }}
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {body.area_name && (
-                      <div className="bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-pink-500/30 hover:border-pink-500/50 transition-colors">
-                        <h3 className="text-base md:text-lg text-pink-400 mb-2">
-                          {body.area_name}
-                        </h3>
-                        <div className="formula-container overflow-x-auto pb-2">
-                          <p
-                            className="formula text-xl"
-                            dangerouslySetInnerHTML={{
-                              __html: katex.renderToString(body.area_formula, {
-                                throwOnError: false,
-                                displayMode: true,
-                              }),
-                            }}
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {body.perimeter_name && (
-                      <div className="bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-indigo-500/30 hover:border-indigo-500/50 transition-colors">
-                        <h3 className="text-base md:text-lg text-indigo-400 mb-2">
-                          {body.perimeter_name}
-                        </h3>
-                        <div className="formula-container overflow-x-auto pb-2">
-                          <p
-                            className="formula text-xl"
-                            dangerouslySetInnerHTML={{
-                              __html: katex.renderToString(
-                                body.perimeter_formula,
-                                {
-                                  throwOnError: false,
-                                  displayMode: true,
-                                }
-                              ),
-                            }}
-                          />
-                        </div>
+                    {body.image_url && (
+                      <div className="flex justify-center mb-4 w-full md:w-auto">
+                        <img
+                          src={body.image_url}
+                          alt={body.geometric_body_name}
+                          className="w-40 h-40 md:w-48 md:h-48 object-contain rounded-md p-2"
+                        />
                       </div>
                     )}
                   </div>
+
+                  <p className="text-gray-300 mb-4 text-base md:text-lg leading-relaxed">
+                    {body.description}
+                    {body.description1 && (
+                      <>
+                        <br />
+                        {body.description1}
+                      </>
+                    )}
+                  </p>
+
+                  <div className="mt-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                      {body.volume_name && (
+                        <div className="bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-pink-500/30 hover:border-pink-500/50 transition-colors">
+                          <h3 className="text-base md:text-lg text-pink-400 mb-2">
+                            {body.volume_name}
+                          </h3>
+                          <div className="formula-container overflow-x-auto pb-2">
+                            <p
+                              className="formula text-xl"
+                              dangerouslySetInnerHTML={{
+                                __html: katex.renderToString(
+                                  body.volume_formula,
+                                  {
+                                    throwOnError: false,
+                                    displayMode: true,
+                                  }
+                                ),
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {body.surface_name && (
+                        <div className="bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-indigo-500/30 hover:border-indigo-500/50 transition-colors">
+                          <h3 className="text-base md:text-lg text-indigo-400 mb-2">
+                            {body.surface_name}
+                          </h3>
+                          <div className="formula-container overflow-x-auto pb-2">
+                            <p
+                              className="formula text-xl"
+                              dangerouslySetInnerHTML={{
+                                __html: katex.renderToString(
+                                  body.surface_formula,
+                                  {
+                                    throwOnError: false,
+                                    displayMode: true,
+                                  }
+                                ),
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {body.area_name && (
+                        <div className="bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-pink-500/30 hover:border-pink-500/50 transition-colors">
+                          <h3 className="text-base md:text-lg text-pink-400 mb-2">
+                            {body.area_name}
+                          </h3>
+                          <div className="formula-container overflow-x-auto pb-2">
+                            <p
+                              className="formula text-xl"
+                              dangerouslySetInnerHTML={{
+                                __html: katex.renderToString(
+                                  body.area_formula,
+                                  {
+                                    throwOnError: false,
+                                    displayMode: true,
+                                  }
+                                ),
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {body.perimeter_name && (
+                        <div className="bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-indigo-500/30 hover:border-indigo-500/50 transition-colors">
+                          <h3 className="text-base md:text-lg text-indigo-400 mb-2">
+                            {body.perimeter_name}
+                          </h3>
+                          <div className="formula-container overflow-x-auto pb-2">
+                            <p
+                              className="formula text-xl"
+                              dangerouslySetInnerHTML={{
+                                __html: katex.renderToString(
+                                  body.perimeter_formula,
+                                  {
+                                    throwOnError: false,
+                                    displayMode: true,
+                                  }
+                                ),
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex justify-center">
+                    <button
+                      onClick={() => openModal(body)}
+                      className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors shadow-md"
+                    >
+                      {body.spline_url ? "View 3D Model" : "View Details"}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </li>
+            </div>
           ))}
-        </ul>
-      )}
+        </div>
 
-      {selectedBody && (
+        {/* Navigation Buttons */}
+        <button
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-purple-600 bg-opacity-70 hover:bg-opacity-100 p-2 rounded-full transition-colors"
+          onClick={goToPrevSlide}
+        >
+          <div className="border-2 border-white w-8 h-8 flex items-center justify-center rounded-full text-white">
+            ←
+          </div>
+        </button>
+
+        <button
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-purple-600 bg-opacity-70 hover:bg-opacity-100 p-2 rounded-full transition-colors"
+          onClick={goToNextSlide}
+        >
+          <div className="border-2 border-white w-8 h-8 flex items-center justify-center rounded-full text-white">
+            →
+          </div>
+        </button>
+
+        {/* Indicator Dots */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {bodies.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-colors ${
+                currentSlide === index
+                  ? "bg-purple-500 scale-125"
+                  : "bg-gray-400 hover:bg-purple-300"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Detail Modal */}
+      {isModalOpen && selectedBody && (
         <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-4 z-50">
           <div className="usergradient rounded-lg p-4 md:p-6 w-full max-w-5xl max-h-[90vh] overflow-y-auto relative border border-purple-500/30">
             <button
@@ -236,7 +325,7 @@ function Telesa() {
                 <img
                   src={selectedBody.image_url}
                   alt={selectedBody.geometric_body_name}
-                  className="w-full max-h-[70vh] object-contain rounded-lg mb-4 backdrop-blur-sm bg-black/30 p-4"
+                  className="w-full max-h-[70vh] object-contain rounded-lg mb-4 backdrop-blur-sm p-4"
                 />
               </div>
             )}
@@ -353,10 +442,8 @@ function Telesa() {
           </div>
         </div>
       )}
-
-      {/* Add CSS for formula containers */}
     </div>
   );
-}
+};
 
-export default Telesa;
+export default GeometricBodiesCarousel;
