@@ -241,7 +241,7 @@ html {
 
 /* Optional: Add a subtle indication that formulas can be scrolled */
 .formula-container:after {
-  content: '';
+  content: "";
   position: absolute;
   right: 0;
   top: 0;

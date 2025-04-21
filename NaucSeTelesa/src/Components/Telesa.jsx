@@ -3,6 +3,7 @@ import { supabase } from "../supabaseClient";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 import Spline from "@splinetool/react-spline";
+import { IoMdClose } from "react-icons/io";
 
 const GeometricBodiesCarousel = () => {
   // Stavové proměnné
@@ -268,8 +269,6 @@ const GeometricBodiesCarousel = () => {
                           )}
                         </div>
                       )}
-
-                      {/* Dodatečný popis */}
                     </div>
 
                     {/* Tlačítko pro 3D model - pouze pro hlavní kartu nebo mobil */}
@@ -320,15 +319,14 @@ const GeometricBodiesCarousel = () => {
         <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-4 z-50">
           <div className="usergradient rounded-lg p-4 md:p-6 w-full max-w-5xl max-h-[90vh] overflow-y-auto relative border border-purple-500/30">
             {/* Tlačítko pro zavření - upraveno na střed s ikonou X */}
-            <div className="w-full flex justify-center absolute top-0 left-0 -mt-4">
-              <button
-                onClick={closeModal}
-                className="bg-purple-800 hover:bg-purple-700 text-white rounded-full w-8 h-8 flex items-center justify-center text-xl z-10 transition-colors shadow-lg"
-                aria-label="Zavřít"
-              >
-                ×
-              </button>
-            </div>
+
+            <button
+              onClick={closeModal}
+              className="bg-purple-800 absolute right-3 hover:bg-purple-700 text-white rounded-full w-8 h-8 flex items-center justify-center text-xl z-10 transition-colors shadow-lg"
+              aria-label="Zavřít"
+            >
+              <IoMdClose />
+            </button>
 
             <h2 className="text-2xl md:text-3xl font-bold mb-4 userlvl text-center drop-shadow-md">
               {selectedBody.geometric_body_name}

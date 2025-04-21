@@ -8,6 +8,7 @@ import {
   AiOutlineAppstore,
   AiOutlineCheckCircle,
   AiOutlineInfoCircle,
+  AiOutlineLogout,
   AiOutlineUser,
 } from "react-icons/ai";
 import { FiHelpCircle } from "react-icons/fi";
@@ -236,13 +237,14 @@ function Navbar() {
               {isProfileDropdownOpen && (
                 <div
                   id="profile-dropdown"
-                  className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50"
+                  className="absolute right-0 mt-2 w-48 usergradient rounded-md shadow-lg py-1 z-50"
                 >
                   <Link
                     to="/profil"
-                    className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                    className="block px-4 py-2  text-white hover:bg-gray-700  text-xl font-bold "
                     onClick={() => setIsProfileDropdownOpen(false)}
                   >
+                    <AiOutlineUser className="inline-block mr-2 " />
                     Můj profil
                   </Link>
                   <button
@@ -250,8 +252,9 @@ function Navbar() {
                       signOutUser();
                       setIsProfileDropdownOpen(false);
                     }}
-                    className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-700"
+                    className="block w-full text-left px-4 py-2 text-xl   text-red-500 hover:bg-gray-700 font-bold"
                   >
+                    <AiOutlineLogout className="inline-block mr-2 " />
                     Odhlásit se
                   </button>
                 </div>
