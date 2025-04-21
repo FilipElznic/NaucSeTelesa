@@ -115,7 +115,7 @@ const GeometricBodiesCarousel = () => {
       {/* Full Width Carousel */}
       <div className="relative w-full h-4/5">
         <div className="flex justify-center items-center h-full px-2 md:px-4">
-          <div className="flex w-full justify-center items-center gap-2 md:gap-4">
+          <div className="flex w-full justify-center items-center gap-2 md:gap-4 h-full">
             {visibleSlides.map((item, idx) => (
               <div
                 key={item.index}
@@ -155,65 +155,121 @@ const GeometricBodiesCarousel = () => {
                     </div>
 
                     {/* Description - Always shown for all cards */}
-                    <div className="flex-grow">
+                    <div className="flex-grow overflow-y-auto">
                       <p className="text-gray-300 mb-4 text-sm md:text-base leading-relaxed">
                         {item.body.description}
                       </p>
 
-                      {/* Formulas - Only shown for center card */}
-                      {(idx === 1 || isMobile) &&
-                        (item.body.volume_name || item.body.surface_name) && (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                            {item.body.volume_name && (
-                              <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-pink-500/30">
-                                <h3 className="text-sm md:text-base text-pink-400 mb-1">
-                                  {item.body.volume_name}
-                                </h3>
-                                <div className="formula-container overflow-x-auto">
-                                  <p
-                                    className="formula text-sm md:text-lg"
-                                    dangerouslySetInnerHTML={{
-                                      __html: katex.renderToString(
-                                        item.body.volume_formula,
-                                        {
-                                          throwOnError: false,
-                                          displayMode: true,
-                                        }
-                                      ),
-                                    }}
-                                  />
-                                </div>
+                      {/* Show all formulas for main card or mobile view */}
+                      {(idx === 1 || isMobile) && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                          {/* Volume Formula */}
+                          {item.body.volume_name && (
+                            <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-pink-500/30">
+                              <h3 className="text-sm md:text-base text-pink-400 mb-1">
+                                {item.body.volume_name}
+                              </h3>
+                              <div className="formula-container overflow-x-auto">
+                                <p
+                                  className="formula text-sm md:text-lg"
+                                  dangerouslySetInnerHTML={{
+                                    __html: katex.renderToString(
+                                      item.body.volume_formula,
+                                      {
+                                        throwOnError: false,
+                                        displayMode: true,
+                                      }
+                                    ),
+                                  }}
+                                />
                               </div>
-                            )}
+                            </div>
+                          )}
 
-                            {item.body.surface_name && (
-                              <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-indigo-500/30">
-                                <h3 className="text-sm md:text-base text-indigo-400 mb-1">
-                                  {item.body.surface_name}
-                                </h3>
-                                <div className="formula-container overflow-x-auto">
-                                  <p
-                                    className="formula text-sm md:text-lg"
-                                    dangerouslySetInnerHTML={{
-                                      __html: katex.renderToString(
-                                        item.body.surface_formula,
-                                        {
-                                          throwOnError: false,
-                                          displayMode: true,
-                                        }
-                                      ),
-                                    }}
-                                  />
-                                </div>
+                          {/* Surface Formula */}
+                          {item.body.surface_name && (
+                            <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-indigo-500/30">
+                              <h3 className="text-sm md:text-base text-indigo-400 mb-1">
+                                {item.body.surface_name}
+                              </h3>
+                              <div className="formula-container overflow-x-auto">
+                                <p
+                                  className="formula text-sm md:text-lg"
+                                  dangerouslySetInnerHTML={{
+                                    __html: katex.renderToString(
+                                      item.body.surface_formula,
+                                      {
+                                        throwOnError: false,
+                                        displayMode: true,
+                                      }
+                                    ),
+                                  }}
+                                />
                               </div>
-                            )}
-                          </div>
-                        )}
+                            </div>
+                          )}
+
+                          {/* Area Formula */}
+                          {item.body.area_name && (
+                            <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-pink-500/30">
+                              <h3 className="text-sm md:text-base text-pink-400 mb-1">
+                                {item.body.area_name}
+                              </h3>
+                              <div className="formula-container overflow-x-auto">
+                                <p
+                                  className="formula text-sm md:text-lg"
+                                  dangerouslySetInnerHTML={{
+                                    __html: katex.renderToString(
+                                      item.body.area_formula,
+                                      {
+                                        throwOnError: false,
+                                        displayMode: true,
+                                      }
+                                    ),
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Perimeter Formula */}
+                          {item.body.perimeter_name && (
+                            <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-indigo-500/30">
+                              <h3 className="text-sm md:text-base text-indigo-400 mb-1">
+                                {item.body.perimeter_name}
+                              </h3>
+                              <div className="formula-container overflow-x-auto">
+                                <p
+                                  className="formula text-sm md:text-lg"
+                                  dangerouslySetInnerHTML={{
+                                    __html: katex.renderToString(
+                                      item.body.perimeter_formula,
+                                      {
+                                        throwOnError: false,
+                                        displayMode: true,
+                                      }
+                                    ),
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Additional description if available */}
+                      {(idx === 1 || isMobile) && item.body.description1 && (
+                        <div className="mt-4">
+                          <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                            {item.body.description1}
+                          </p>
+                        </div>
+                      )}
                     </div>
 
-                    {/* View Details Button - Only shown for center card */}
+                    {/* 3D Model Button - Only shown for center card or mobile */}
                     {(idx === 1 || isMobile) && (
-                      <div className="mt-auto text-center">
+                      <div className="mt-4 text-center">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -221,7 +277,9 @@ const GeometricBodiesCarousel = () => {
                           }}
                           className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 md:py-3 md:px-6 rounded-full transition-colors shadow-md text-sm md:text-base"
                         >
-                          View Details
+                          {item.body.spline_url
+                            ? "View 3D Model"
+                            : "View Full Details"}
                         </button>
                       </div>
                     )}
@@ -250,25 +308,9 @@ const GeometricBodiesCarousel = () => {
             →
           </div>
         </button>
-
-        {/* Indicator Dots */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {bodies.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                currentSlide === index
-                  ? "bg-purple-500 scale-125"
-                  : "bg-gray-400 hover:bg-purple-300"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </div>
 
-      {/* Detail Modal - Keeping the same as original */}
+      {/* Detail Modal */}
       {isModalOpen && selectedBody && (
         <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-4 z-50">
           <div className="usergradient rounded-lg p-4 md:p-6 w-full max-w-5xl max-h-[90vh] overflow-y-auto relative border border-purple-500/30">
@@ -284,6 +326,7 @@ const GeometricBodiesCarousel = () => {
               {selectedBody.geometric_body_name}
             </h2>
 
+            {/* 3D Model or Image */}
             {selectedBody.spline_url ? (
               <div className="relative rounded-xl overflow-hidden border border-purple-500/20">
                 {isSplineLoading && (
