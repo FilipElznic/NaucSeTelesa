@@ -64,64 +64,54 @@ const Test = () => {
         id: 1,
         x: startX,
         y: startY - verticalSpacing * 1.5,
-        path: "/page1",
-        active: true,
       },
       // Level 2
       {
         id: 2,
         x: startX + horizontalSpacing,
         y: startY - verticalSpacing * 0.75,
-        path: "/page2",
       },
       // Level 3
       {
         id: 3,
         x: startX - horizontalSpacing,
         y: startY,
-        path: "/page3",
       },
       // Level 4
       {
         id: 4,
         x: startX + horizontalSpacing,
         y: startY + verticalSpacing * 0.75,
-        path: "/page4",
       },
       // Level 5
       {
         id: 5,
         x: startX - horizontalSpacing * 0.5,
         y: startY + verticalSpacing * 1.5,
-        path: "/page5",
       },
       // Level 6
       {
         id: 6,
         x: startX + horizontalSpacing,
         y: startY + verticalSpacing * 2.25,
-        path: "/page6",
       },
       // Level 7
       {
         id: 7,
         x: startX - horizontalSpacing * 0.7,
         y: startY + verticalSpacing * 3,
-        path: "/page7",
       },
       // Level 8
       {
         id: 8,
         x: startX + horizontalSpacing * 0.8,
         y: startY + verticalSpacing * 3.75,
-        path: "/page8",
       },
       // Level 9
       {
         id: 9,
         x: startX,
         y: startY + verticalSpacing * 4.5,
-        path: "/page9",
       },
     ]);
   };
@@ -148,71 +138,56 @@ const Test = () => {
         id: 1,
         x: startX,
         y: startY - verticalSpacing * 0.3, // Adjusted to keep in viewport
-        path: "/page1",
-        active: true,
       },
       // Level 2 - positioned more centrally
       {
         id: 2,
         x: startX + horizontalSpacing * 0.5,
         y: startY + verticalSpacing * 0.5,
-        path: "/page2",
       },
       // Level 3 - positioned more centrally
       {
         id: 3,
         x: startX - horizontalSpacing * 0.5,
         y: startY + verticalSpacing,
-        path: "/page3",
       },
       // Level 4
       {
         id: 4,
         x: startX + horizontalSpacing * 0.6,
         y: startY + verticalSpacing * 1.5,
-        path: "/page4",
       },
       // Level 5
       {
         id: 5,
         x: startX - horizontalSpacing * 0.4,
         y: startY + verticalSpacing * 2,
-        path: "/page5",
       },
       // Level 6
       {
         id: 6,
         x: startX + horizontalSpacing * 0.5,
         y: startY + verticalSpacing * 2.5,
-        path: "/page6",
       },
       // Level 7
       {
         id: 7,
         x: startX - horizontalSpacing * 0.5,
         y: startY + verticalSpacing * 3,
-        path: "/page7",
       },
       // Level 8
       {
         id: 8,
         x: startX + horizontalSpacing * 0.4,
         y: startY + verticalSpacing * 3.5,
-        path: "/page8",
       },
       // Level 9 - centered at the bottom
       {
         id: 9,
         x: startX,
         y: startY + verticalSpacing * 4,
-        path: "/page9",
       },
     ]);
-  };
-
-  // Redirect based on node ID
-  const handleNodeClick = (path) => {
-    window.location.href = path;
   };
 
   // Create connections between nodes
@@ -335,15 +310,14 @@ const Test = () => {
                            : "bg-zinc-800 !opacity-100"
                        } 
                        rounded-full flex items-center justify-center 
-                       text-white font-semibold cursor-pointer 
-                       transition-all duration-300 transform hover:scale-110 
+                       text-white font-semibold border-2 border-transparent hover:border-purple-500 transition-all duration-200
+
                       shadow-[0_0_25px_10px_rgba(255,255,255,0.25)]`}
                       style={{
                         ...getResponsivePosition(node),
                         zIndex: 2,
                         opacity: index < 5 ? 1 : 0.7,
                       }}
-                      onClick={() => handleNodeClick(node.path)}
                     >
                       {node.id}
                     </div>
@@ -374,8 +348,8 @@ const Test = () => {
               <div className="absolute z-20 top-2/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 gap-4 flex flex-col h-[60vh] w-[40vw] text-white">
                 <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white ">
                   <div className="w-full h-full flex flex-row gap-4 ">
-                    <Link
-                      to="/telesa"
+                    <a
+                      href="#zebricek"
                       className="w-full h-full  bg-zinc-800 rounded-3xl"
                     >
                       <div className="w-full h-full flex justify-center items-center p-4 relative">
@@ -384,7 +358,7 @@ const Test = () => {
                           Žebříček uživatelů
                         </h1>
                       </div>
-                    </Link>
+                    </a>
                   </div>
                   <div className="w-full h-full flex flex-row gap-4 ">
                     <Link
@@ -433,16 +407,16 @@ const Test = () => {
                       : "bg-zinc-800   !opacity-100"
                   } 
                   rounded-full flex items-center justify-center 
-                  text-white font-semibold cursor-pointer 
-                  transition-all duration-300 transform hover:scale-110 
-                  shadow-[0_0_25px_10px_rgba(255,255,255,0.25)]`}
+                  text-white font-semibold
+                  border-2 border-transparent hover:border-purple-500 transition-all duration-100
+
+                  `}
                 style={{
                   top: `${node.y - circleSize * 2}px`,
                   left: `${node.x - circleSize * 2}px`,
                   zIndex: 2,
                   opacity: index < 5 ? 1 : 0.7,
                 }}
-                onClick={() => handleNodeClick(node.path)}
               >
                 {node.id}
               </div>
