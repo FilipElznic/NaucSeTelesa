@@ -10,7 +10,7 @@ const FAQItem = ({ question, answer }) => {
 
   return (
     <div
-      className="bg-zinc-800 p-4 rounded-3xl cursor-pointer transition-all duration-300 hover:bg-zinc-700"
+      className="bg-zinc-800 p-4 rounded-3xl cursor-pointer transition-all duration-100 hover:bg-zinc-700"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="flex justify-between items-center">
@@ -95,7 +95,7 @@ const HelpPage = () => {
           className="bg-zinc-900 p-8 rounded-3xl 
           shadow-[0_0_30px_rgba(255,255,255,0.2)] 
          w-full
-          transition-all duration-300 
+          transition-all duration-100 
           hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]
           mt-5 mr-4 mb-12"
         >
@@ -119,7 +119,7 @@ const HelpPage = () => {
           className="bg-zinc-900 p-8 rounded-3xl 
           shadow-[0_0_30px_rgba(255,255,255,0.2)] 
          w-full
-          transition-all duration-300 
+          transition-all duration-100 
           hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]
           mt-5 mb-12"
         >
@@ -148,7 +148,7 @@ const HelpPage = () => {
         <section
           className="bg-zinc-900 p-8 rounded-3xl 
           shadow-[0_0_30px_rgba(255,255,255,0.2)] 
-          transition-all duration-300 
+          transition-all duration-100 
           hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]
           mb-8"
         >
@@ -194,7 +194,7 @@ const HelpPage = () => {
                 disabled={isLoading}
                 className={`w-full ${
                   isLoading ? "bg-zinc-600" : "bg-zinc-700 hover:bg-zinc-600"
-                } text-white py-3 rounded-3xl transition-all duration-300 ${
+                } text-white py-3 rounded-3xl transition-all duration-100 ${
                   !isLoading && "hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                 } flex items-center justify-center`}
               >
