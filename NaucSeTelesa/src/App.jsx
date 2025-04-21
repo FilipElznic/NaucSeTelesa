@@ -34,14 +34,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
-                path="/pomoc"
-                element={
-                  <ProtectedRoute redirectTo="/prihlaseni">
-                    <PomocPage />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/pomoc" element={<PomocPage />} />
               <Route
                 path="/tailwind"
                 element={
