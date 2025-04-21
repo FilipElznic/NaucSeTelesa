@@ -164,6 +164,13 @@ const GeometricBodiesCarousel = () => {
                       <p className="text-gray-300 mb-4 text-sm md:text-base leading-relaxed">
                         {item.body.description}
                       </p>
+                      {(idx === 1 || isMobile) && item.body.description1 && (
+                        <div className="mt-4">
+                          <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                            {item.body.description1}
+                          </p>
+                        </div>
+                      )}
 
                       {/* Vzorce - zobrazujeme pouze pro hlavní kartu nebo na mobilu */}
                       {(idx === 1 || isMobile) && (
@@ -263,13 +270,6 @@ const GeometricBodiesCarousel = () => {
                       )}
 
                       {/* Dodatečný popis */}
-                      {(idx === 1 || isMobile) && item.body.description1 && (
-                        <div className="mt-4">
-                          <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                            {item.body.description1}
-                          </p>
-                        </div>
-                      )}
                     </div>
 
                     {/* Tlačítko pro 3D model - pouze pro hlavní kartu nebo mobil */}
