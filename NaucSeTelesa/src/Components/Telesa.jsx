@@ -5,31 +5,33 @@ import "katex/dist/katex.min.css";
 import Spline from "@splinetool/react-spline";
 
 const GeometricBodiesCarousel = () => {
-  const [bodies, setBodies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isSplineLoading, setIsSplineLoading] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedBody, setSelectedBody] = useState(null);
+  // Stavové proměnné
+  const [bodies, setBodies] = useState([]); // Ukládá seznam geometrických těles
+  const [loading, setLoading] = useState(true); // Indikátor načítání
+  const [currentSlide, setCurrentSlide] = useState(0); // Aktuální slide v karusele
+  const [isSplineLoading, setIsSplineLoading] = useState(true); // Načítání 3D modelu
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Detekce mobilního zařízení
+  const [isModalOpen, setIsModalOpen] = useState(false); // Otevření modálního okna
+  const [selectedBody, setSelectedBody] = useState(null); // Vybrané těleso pro detail
 
+  // Načtení dat při inicializaci komponenty
   useEffect(() => {
     const fetchBodies = async () => {
       setLoading(true);
       const { data, error } = await supabase.rpc("fetch_geometric_bodies4");
 
       if (error) {
-        console.error("Error fetching geometric bodies:", error);
+        console.error("Chyba při načítání geometrických těles:", error);
       } else {
         setBodies(data);
-        console.log("Geometric bodies fetched:", data);
+        console.log("Načtená geometrická tělesa:", data);
       }
       setLoading(false);
     };
 
     fetchBodies();
 
-    // Add resize listener to detect mobile/desktop
+    // Posluchač pro změnu velikosti okna (detekce mobil/desktop)
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -38,6 +40,7 @@ const GeometricBodiesCarousel = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Navigace v karuselu
   const goToNextSlide = () => {
     if (bodies.length > 0) {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % bodies.length);
@@ -56,6 +59,7 @@ const GeometricBodiesCarousel = () => {
     setCurrentSlide(index);
   };
 
+  // Otevření/zavření modálního okna
   const openModal = (body) => {
     setSelectedBody(body);
     setIsModalOpen(true);
@@ -71,16 +75,16 @@ const GeometricBodiesCarousel = () => {
     setIsSplineLoading(false);
   };
 
-  // Get the visible slides (previous, current, next)
+  // Získání viditelných slidů (předchozí, aktuální, následující)
   const getVisibleSlides = () => {
     if (bodies.length === 0) return [];
 
-    // If on mobile, just return the current slide
+    // Na mobilu zobrazíme pouze aktuální slide
     if (isMobile) {
       return [{ body: bodies[currentSlide], index: currentSlide }];
     }
 
-    // On desktop, return 3 slides
+    // Na desktopu zobrazíme 3 slidů
     const totalSlides = bodies.length;
     const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
     const nextIndex = (currentSlide + 1) % totalSlides;
@@ -92,6 +96,7 @@ const GeometricBodiesCarousel = () => {
     ];
   };
 
+  // Loading stav
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen bg-gradient-to-br from-black via-zinc-950 to-black">
@@ -104,7 +109,7 @@ const GeometricBodiesCarousel = () => {
 
   return (
     <div className="relative w-full h-screen bg-gradient-to-br from-black via-zinc-950 to-black text-white overflow-hidden">
-      {/* Futuristic Heading with Glow Effect */}
+      {/* Nadpis s efektem záře */}
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-transparent bg-clip-text userlvl text-center relative pt-6">
         Geometrická tělesa
         <div className="absolute inset-0 blur-md opacity-50 bg-clip-text userlvl z-[-1] pt-6">
@@ -112,19 +117,19 @@ const GeometricBodiesCarousel = () => {
         </div>
       </h1>
 
-      {/* Full Width Carousel */}
+      {/* Karusel */}
       <div className="relative w-full h-4/5">
         <div className="flex justify-center items-center h-full px-2 md:px-4">
           <div className="flex w-full justify-center items-center gap-2 md:gap-4 h-full">
             {visibleSlides.map((item, idx) => (
               <div
                 key={item.index}
-                className={`transition-all duration-300 h-full ${
+                className={`transition-all duration-300 ${
                   isMobile
-                    ? "w-full" // Full width on mobile (single card)
+                    ? "w-full h-5/6" // Na mobilu plná šířka a výška 5/6
                     : idx === 1
-                    ? "w-2/4" // Center/highlighted slide - half width
-                    : "w-1/4" // Side slides - quarter width each
+                    ? "w-2/4 h-5/6" // Hlavní karta - šířka 2/4, výška 5/6
+                    : "w-1/4 h-2/3" // Vedlejší karty - šířka 1/4, výška 2/3
                 }`}
                 onClick={() => !isMobile && idx !== 1 && goToSlide(item.index)}
               >
@@ -135,9 +140,9 @@ const GeometricBodiesCarousel = () => {
                       : "border border-purple-500/20"
                   }`}
                 >
-                  {/* Content for each slide */}
+                  {/* Obsah karty */}
                   <div className="p-4 md:p-6 flex flex-col h-full">
-                    {/* Title and Image - Always shown for all cards */}
+                    {/* Název a obrázek */}
                     <div className="flex flex-col md:flex-row justify-between items-center mb-4">
                       <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-0 text-purple-300 drop-shadow-md">
                         {item.body.geometric_body_name}
@@ -154,16 +159,16 @@ const GeometricBodiesCarousel = () => {
                       )}
                     </div>
 
-                    {/* Description - Always shown for all cards */}
+                    {/* Popis */}
                     <div className="flex-grow overflow-y-auto">
                       <p className="text-gray-300 mb-4 text-sm md:text-base leading-relaxed">
                         {item.body.description}
                       </p>
 
-                      {/* Show all formulas for main card or mobile view */}
+                      {/* Vzorce - zobrazujeme pouze pro hlavní kartu nebo na mobilu */}
                       {(idx === 1 || isMobile) && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
-                          {/* Volume Formula */}
+                          {/* Objem */}
                           {item.body.volume_name && (
                             <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-pink-500/30">
                               <h3 className="text-sm md:text-base text-pink-400 mb-1">
@@ -186,7 +191,7 @@ const GeometricBodiesCarousel = () => {
                             </div>
                           )}
 
-                          {/* Surface Formula */}
+                          {/* Povrch */}
                           {item.body.surface_name && (
                             <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-indigo-500/30">
                               <h3 className="text-sm md:text-base text-indigo-400 mb-1">
@@ -209,7 +214,7 @@ const GeometricBodiesCarousel = () => {
                             </div>
                           )}
 
-                          {/* Area Formula */}
+                          {/* Obsah */}
                           {item.body.area_name && (
                             <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-pink-500/30">
                               <h3 className="text-sm md:text-base text-pink-400 mb-1">
@@ -232,7 +237,7 @@ const GeometricBodiesCarousel = () => {
                             </div>
                           )}
 
-                          {/* Perimeter Formula */}
+                          {/* Obvod */}
                           {item.body.perimeter_name && (
                             <div className="bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-indigo-500/30">
                               <h3 className="text-sm md:text-base text-indigo-400 mb-1">
@@ -257,7 +262,7 @@ const GeometricBodiesCarousel = () => {
                         </div>
                       )}
 
-                      {/* Additional description if available */}
+                      {/* Dodatečný popis */}
                       {(idx === 1 || isMobile) && item.body.description1 && (
                         <div className="mt-4">
                           <p className="text-gray-300 text-sm md:text-base leading-relaxed">
@@ -267,7 +272,7 @@ const GeometricBodiesCarousel = () => {
                       )}
                     </div>
 
-                    {/* 3D Model Button - Only shown for center card or mobile */}
+                    {/* Tlačítko pro 3D model - pouze pro hlavní kartu nebo mobil */}
                     {(idx === 1 || isMobile) && (
                       <div className="mt-4 text-center">
                         <button
@@ -278,8 +283,8 @@ const GeometricBodiesCarousel = () => {
                           className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 md:py-3 md:px-6 rounded-full transition-colors shadow-md text-sm md:text-base"
                         >
                           {item.body.spline_url
-                            ? "View 3D Model"
-                            : "View Full Details"}
+                            ? "Zobrazit 3D model"
+                            : "Zobrazit detail"}
                         </button>
                       </div>
                     )}
@@ -290,7 +295,7 @@ const GeometricBodiesCarousel = () => {
           </div>
         </div>
 
-        {/* Navigation Buttons */}
+        {/* Navigační tlačítka */}
         <button
           className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-purple-600 bg-opacity-70 hover:bg-opacity-100 p-2 rounded-full transition-colors z-20"
           onClick={goToPrevSlide}
@@ -310,23 +315,26 @@ const GeometricBodiesCarousel = () => {
         </button>
       </div>
 
-      {/* Detail Modal */}
+      {/* Modální okno s detailem */}
       {isModalOpen && selectedBody && (
         <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-4 z-50">
           <div className="usergradient rounded-lg p-4 md:p-6 w-full max-w-5xl max-h-[90vh] overflow-y-auto relative border border-purple-500/30">
-            <button
-              onClick={closeModal}
-              className="absolute top-0 right-0 md:top-4 md:right-4 text-white bg-purple-800 hover:bg-purple-700 rounded-full w-8 h-8 flex items-center justify-center text-xl z-10 transition-colors"
-              aria-label="Close modal"
-            >
-              &times;
-            </button>
+            {/* Tlačítko pro zavření - upraveno na střed s ikonou X */}
+            <div className="w-full flex justify-center absolute top-0 left-0 -mt-4">
+              <button
+                onClick={closeModal}
+                className="bg-purple-800 hover:bg-purple-700 text-white rounded-full w-8 h-8 flex items-center justify-center text-xl z-10 transition-colors shadow-lg"
+                aria-label="Zavřít"
+              >
+                ×
+              </button>
+            </div>
 
             <h2 className="text-2xl md:text-3xl font-bold mb-4 userlvl text-center drop-shadow-md">
               {selectedBody.geometric_body_name}
             </h2>
 
-            {/* 3D Model or Image */}
+            {/* 3D model nebo obrázek */}
             {selectedBody.spline_url ? (
               <div className="relative rounded-xl overflow-hidden border border-purple-500/20">
                 {isSplineLoading && (
@@ -374,6 +382,7 @@ const GeometricBodiesCarousel = () => {
                 </p>
               </div>
 
+              {/* Vzorce */}
               {(selectedBody.volume_name ||
                 selectedBody.surface_name ||
                 selectedBody.area_name ||
