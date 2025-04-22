@@ -1,15 +1,32 @@
 import { supabase } from "../supabaseClient";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Robot1 from "/rukyhore.png";
 import Robot2 from "/robotlast1.png";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
+import { toast, ToastContainer } from "react-toastify";
 
 function LoginPage() {
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if user was redirected from a protected route
+    if (location.state?.protected) {
+      toast.error("Pro přístup na tuto stránku se musíte přihlásit", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  }, [location]);
 
   useEffect(() => {
     const {
@@ -71,6 +88,18 @@ function LoginPage() {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="usergradient">
         <Navbar />
         <div className="relative min-h-screen usergradient text-white flex items-center justify-center p-4 overflow-hidden">
