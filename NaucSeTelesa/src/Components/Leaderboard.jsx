@@ -49,7 +49,12 @@ function Leaderboard() {
             `}
             >
               <div className="text-lg font-medium">{`#${index + 1}`}</div>
-              <div className="text-lg font-medium">{`${user.name} ${user.surname}`}</div>
+              <div className="text-lg font-medium">
+                {" "}
+                {user.name && user.surname
+                  ? `${user.name} ${user.surname}`
+                  : "Neznámý uživatel"}
+              </div>
               <div className="text-lg font-medium text-right">
                 {Math.floor(user.xp / 100)}
               </div>

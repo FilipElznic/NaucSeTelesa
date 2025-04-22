@@ -142,29 +142,6 @@ function Navbar() {
               </li>
             ))}
           </ul>
-
-          <div className="mt-auto px-4">
-            {!authUser ? (
-              <Link
-                to="/prihlaseni"
-                className="navbutton text-white w-full px-4 py-2 text-xl rounded-full border hover:bg-gray-800 transition-all duration-300 flex justify-center items-center"
-                onClick={closeMenu}
-              >
-                Přihlášení
-              </Link>
-            ) : (
-              <Link
-                to="/"
-                className="text-red-500 w-full px-4 py-2 text-xl  flex justify-center items-center "
-                onClick={() => {
-                  signOutUser();
-                  closeMenu();
-                }}
-              >
-                Odhlásit se
-              </Link>
-            )}
-          </div>
         </div>
       </div>
 
