@@ -1,59 +1,128 @@
-import React from "react";
-import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
-import Robot1 from "/rukyhore.png";
-import Robot2 from "/robotlast1.png";
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
-function AboutPage() {
+const OverlappingHeadings = () => {
+  const [activeSection, setActiveSection] = useState(1); // Start with first section active
+
+  const sections = [
+    {
+      id: 1,
+      number: "01",
+      heading: "heading 1",
+      content:
+        "Lorem ipsum je označení pro standardní pseudolatinský text užívaný v grafickém designu a navrhování jako demonstrativní výplňový text při vytváření pracovních ukázek grafických návrhů. Lipsum tak pracovně znázorňuje text v ukázkových maketách předtím, než bude do",
+    },
+    {
+      id: 2,
+      number: "02",
+      heading: "heading 1",
+      content:
+        "Lorem ipsum je označení pro standardní pseudolatinský text užívaný v grafickém designu a navrhování jako demonstrativní",
+    },
+    {
+      id: 3,
+      number: "03",
+      heading: "heading 1",
+      content:
+        "Lorem ipsum je označení pro standardní pseudolatinský text užívaný v grafickém designu a navrhování jako demonstrativní",
+    },
+    {
+      id: 4,
+      number: "04",
+      heading: "heading 1",
+      content:
+        "Lorem ipsum je označení pro standardní pseudolatinský text užívaný v grafickém designu a navrhování jako demonstrativní",
+    },
+  ];
+
   return (
-    <div className="bg-gradient-to-br from-black via-zinc-950  to-black ">
+    <>
       <Navbar />
-      <div className="min-h-screen w-full bg-transparent relative overflow-hidden text-white p-8">
-        {/* Animated Heading */}
-        <div className="flex w-full justify-center">
-          <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-center mb-12 pb-6 typing-animation">
-            <span className="userlvl">O Projektu</span>
-          </h1>
-        </div>
-        <img
-          src={Robot2}
-          alt="Robot Left"
-          className="absolute top-[0%]  left-[-22%] w-[50%] rotate-[30deg] object-cover"
-        />
+      <div className="bg-black">
+        <div className="min-h-screen w-full relative text-white p-4 md:p-8">
+          {/* Projekt v kostce header */}
+          <div className="flex flex-col w-full justify-center mb-12">
+            <h1 className="text-4xl md:text-6xl font-bold text-purple-400 mb-2">
+              Projekt v kostce
+            </h1>
+            <h2 className="text-3xl md:text-5xl font-bold text-white">
+              Proč vznikl? Čím je výjimečý?
+            </h2>
+          </div>
 
-        {/* Right Robot */}
-        <img
-          src={Robot1}
-          alt="Robot Right"
-          className="absolute bottom-[-5%] right-[-20%] w-[50%] rotate-[-25deg] object-cover"
-        />
+          {/* Overlapping sections container */}
+          <div className="w-5/6 mx-auto">
+            {sections.map((section, index) => (
+              <div
+                key={section.id}
+                className={`relative cursor-pointer transition-all duration-500`}
+                style={{
+                  marginTop: index === 0 ? "0" : "-50px", // Increased negative margin for more overlap
+                  zIndex: activeSection === section.id ? 10 : 10 - index,
+                  opacity: activeSection === section.id ? 1 : 0.4,
+                  transform: `translateY(${
+                    activeSection === section.id ? "0" : "10px"
+                  })`,
+                  height: activeSection === section.id ? "auto" : "180px", // Increased height
+                  overflow: "hidden",
+                }}
+                onMouseEnter={() => setActiveSection(section.id)}
+              >
+                <div className="flex flex-row items-start">
+                  {/* Large number */}
+                  <div
+                    className={`text-8xl md:text-9xl lg:text-[12rem] font-bold transition-all duration-500 ease-out
+                    ${
+                      activeSection === section.id ? "text-white" : "text-white"
+                    }`}
+                    style={{ lineHeight: "1.2" }} // Increased line height for taller numbers
+                  >
+                    {section.number}
+                  </div>
 
-        {/* Project Description */}
-        <div className="max-w-4xl mx-auto text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed">
-          <p className="mb-6">
-            Jako téma své ročníkové práce jsem zvolil vytvoření webové aplikace
-            zaměřené na procvičování geometrických těles. Uživatelé se budou
-            moci přihlásit a sledovat svůj pokrok. Na stránce najdou různá
-            cvičení, která budou obsahovat buď obrázky, nebo interaktivní 3D
-            modely těles, aby si je lépe dokázali představit.
-          </p>
-          <p className="mb-6">
-            Dále zde budou vzorce pro výpočet objemu, povrchu a dalších
-            vlastností těles. Webová aplikace je postavena pomocí moderních
-            technologií jako React, Vite, JavaScript a Spline. Hlavním cílem
-            projektu je poskytnout lidem lepší povědomí o geometrických tělesech
-            a usnadnit jim jejich vizuální a praktické pochopení.
-          </p>
-          <p>
-            Projekt je nyní hotový a plně funkční. Doufám, že tato aplikace bude
-            užitečným nástrojem pro všechny, kteří se chtějí zlepšit v geometrii
-            a pochopit základy geometrických těles.
-          </p>
+                  {/* Heading and content */}
+                  <div className="mt-4 md:mt-8">
+                    <h3
+                      className={`text-2xl md:text-3xl font-bold mb-3 md:mb-4 transition-all duration-300
+                    ${
+                      activeSection === section.id
+                        ? "text-white"
+                        : "text-gray-500"
+                    }`}
+                    >
+                      {section.heading}
+                    </h3>
+
+                    {/* Content with expand/collapse effect */}
+                    <div
+                      className={`max-w-2xl transition-all duration-500 overflow-hidden
+                    ${
+                      activeSection === section.id
+                        ? "max-h-96 opacity-100"
+                        : "max-h-0 opacity-0"
+                    }`}
+                    >
+                      <p className="text-gray-300">{section.content}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Border line with animation */}
+                <div className="absolute bottom-0 left-0 w-full h-px bg-zinc-800">
+                  <div
+                    className={`h-full bg-purple-500 transition-all duration-500 ease-out
+                  ${activeSection === section.id ? "w-full" : "w-0"}`}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
-}
+};
 
-export default AboutPage;
+export default OverlappingHeadings;
