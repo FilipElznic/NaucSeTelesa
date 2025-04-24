@@ -9,30 +9,37 @@ const OverlappingHeadings = () => {
     {
       id: 1,
       number: "01",
-      heading: "heading 1",
+      heading: "Proč projekt vznikl?",
       content:
-        "Lorem ipsum je označení pro standardní pseudolatinský text užívaný v grafickém designu a navrhování jako demonstrativní výplňový text při vytváření pracovních ukázek grafických návrhů. Lipsum tak pracovně znázorňuje text v ukázkových maketách předtím, než bude do",
+        "Projekt vznikl jako ročníková práce pro Střední průmyslovou školu v Ústí nad Labem. Cílem bylo vytvořit moderní webovou aplikaci pro výuku geometrie, která by byla atraktivní, interaktivní a zábavná. Autor Filip Elznic se inspiroval svým kladným vztahem k matematice a touhou zlepšit své dovednosti ve webovém vývoji.",
     },
     {
       id: 2,
       number: "02",
-      heading: "heading 1",
+      heading: "K čemu projekt slouží?",
       content:
-        "Lorem ipsum je označení pro standardní pseudolatinský text užívaný v grafickém designu a navrhování jako demonstrativní",
+        "Projekt slouží jako online platforma pro výuku geometrických těles. Nabízí 3D modely těles, vzorce pro výpočet jejich vlastností (jako objem a povrch) a interaktivní úkoly pro ověření znalostí. Uživatelé mohou sledovat svůj pokrok pomocí bodového systému.",
     },
     {
       id: 3,
       number: "03",
-      heading: "heading 1",
+      heading: "Jaké technologie byly použity?",
       content:
-        "Lorem ipsum je označení pro standardní pseudolatinský text užívaný v grafickém designu a navrhování jako demonstrativní",
+        "Projekt využívá moderní technologie jako React, JavaScript a Vite.js pro frontend. Pro backend a databázi byl zvolen Supabase. Dále byly použity nástroje jako Spline pro 3D modely, Tailwind CSS pro styling, GitHub pro verzování kódu a další pomocné nástroje jako Figma pro design.",
     },
     {
       id: 4,
       number: "04",
-      heading: "heading 1",
+      heading: "Jaké jsou hlavní funkce?",
       content:
-        "Lorem ipsum je označení pro standardní pseudolatinský text užívaný v grafickém designu a navrhování jako demonstrativní",
+        "Hlavní funkce zahrnují: 1) Prohlížení 3D modelů geometrických těles, 2) Studium vzorců pro výpočet vlastností těles, 3) Řešení interaktivních úkolů s bodovým hodnocením, 4) Uživatelský účet s možností sledování pokroku, 5) Responzivní design pro různé velikosti obrazovek.",
+    },
+    {
+      id: 5,
+      number: "05",
+      heading: "Kdo je cílovou skupinou?",
+      content:
+        "Projekt je určen pro uživatele všech věkových skupin, kteří se chtějí naučit nebo procvičit geometrická tělesa. Primárně je zaměřen na studenty, ale může být užitečný i pro učitele nebo kohokoli s zájmem o matematiku.",
     },
   ];
 
@@ -42,13 +49,10 @@ const OverlappingHeadings = () => {
       <div className="bg-black">
         <div className="min-h-screen w-full relative text-white p-4 md:p-8">
           {/* Projekt v kostce header */}
-          <div className="flex flex-col w-full justify-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-purple-400 mb-2">
+          <div className="flex flex-col w-full justify-center items-center mb-12">
+            <h1 className="text-4xl md:text-6xl font-bold  text-purple-400 mb-2">
               Projekt v kostce
             </h1>
-            <h2 className="text-3xl md:text-5xl font-bold text-white">
-              Proč vznikl? Čím je výjimečý?
-            </h2>
           </div>
 
           {/* Overlapping sections container */}
