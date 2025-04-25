@@ -68,7 +68,6 @@ function Robot() {
         </div>
       ) : (
         <div className="lg:hidden bg-gradient-to-tr from-black to-zinc-950">
-          <Navbar />
           <div className="flex flex-col justify-center items-center min-h-screen text-white">
             {/* Lottie Animation */}
             <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-50">
