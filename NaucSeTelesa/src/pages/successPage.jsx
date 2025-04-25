@@ -1,8 +1,7 @@
 import InfoForm from "../Components/InfoForm";
 import Tailwind from "./TailwindTest";
 import Features from "../Components/Features";
-import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
+
 import LeaderboardW from "../Components/LeaderboardW";
 import FadeInWrapper from "../Components/FadeInWrapper";
 import Test from "../Components/test";
@@ -10,7 +9,6 @@ import Test from "../Components/test";
 function SuccessPage() {
   return (
     <>
-      <Navbar />
       <FadeInWrapper>
         <InfoForm />
       </FadeInWrapper>
@@ -27,8 +25,6 @@ function SuccessPage() {
       <FadeInWrapper>
         <LeaderboardW />
       </FadeInWrapper>
-
-      <Footer />
     </>
   );
 }

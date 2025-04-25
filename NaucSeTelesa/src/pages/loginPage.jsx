@@ -5,8 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Robot1 from "/rukyhore.png";
 import Robot2 from "/robotlast1.png";
-import Footer from "../Components/Footer";
-import Navbar from "../Components/Navbar";
+
 import { toast, ToastContainer } from "react-toastify";
 
 function LoginPage() {
@@ -101,7 +100,6 @@ function LoginPage() {
         theme="dark"
       />
       <div className="usergradient">
-        <Navbar />
         <div className="relative min-h-screen usergradient text-white flex items-center justify-center p-4 overflow-hidden">
           <img
             src={Robot2}
@@ -192,8 +190,6 @@ function LoginPage() {
             />
           </div>
         </div>
-
-        <Footer />
       </div>
     </>
   );

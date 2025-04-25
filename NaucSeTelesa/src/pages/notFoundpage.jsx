@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Cookie, Rocket } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import Footer from "../Components/Footer";
-import Navbar from "../Components/Navbar";
 
 const NotFoundPage = () => {
   const [showEcho, setShowEcho] = useState(false);
@@ -18,7 +16,6 @@ const NotFoundPage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="relative min-h-screen flex flex-col items-center justify-center bg-black text-white p-4 overflow-hidden">
         <div className="relative z-10 w-5/6 bg-zinc-900/80 backdrop-blur-sm rounded-xl shadow-2xl border border-zinc-700 p-8 text-center ">
           <div className="mb-8 space-y-4">
@@ -102,7 +99,6 @@ const NotFoundPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

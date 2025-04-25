@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
 
 const OverlappingHeadings = () => {
   const [activeSection, setActiveSection] = useState(1); // Start with first section active
@@ -45,7 +44,7 @@ const OverlappingHeadings = () => {
 
   return (
     <>
-      <Navbar />
+      
       <div className="bg-black">
         <div className="min-h-screen w-full relative text-white p-4 md:p-8">
           {/* Projekt v kostce header */}
@@ -124,7 +123,7 @@ const OverlappingHeadings = () => {
           </div>
         </div>
       </div>
-      <Footer />
+  
     </>
   );
 };
