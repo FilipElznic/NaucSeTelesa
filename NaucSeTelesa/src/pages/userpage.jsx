@@ -1,5 +1,5 @@
 import "../App.css";
-import Footer from "../Components/Footer";
+
 import Overused from "../Components/Overused";
 import Work from "../Components/Work";
 import Robot from "../Components/Robot";
@@ -29,8 +29,6 @@ function UserPage() {
 
         <Help />
       </div>
-
-      <Footer />
     </>
   );
 }

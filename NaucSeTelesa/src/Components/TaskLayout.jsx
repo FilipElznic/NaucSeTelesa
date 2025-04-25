@@ -8,7 +8,6 @@ import { FaHome } from "react-icons/fa";
 import { IoMdRefresh } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { FaShuffle } from "react-icons/fa6";
-import Footer from "./Footer";
 
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
@@ -271,7 +270,6 @@ function TaskLayout() {
         pauseOnHover
         theme="dark"
       />
-      <Footer />
     </>
   );
 }

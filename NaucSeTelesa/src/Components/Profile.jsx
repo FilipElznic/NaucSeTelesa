@@ -1,10 +1,7 @@
 import ProfilePic from "./ProfilePic";
 import { FaRegEdit } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 import { useGlobalData } from "../Global"; // Import global context
-import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -97,7 +94,6 @@ function Profile() {
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen flex flex-col items-center justify-center bgplanet text-white px-4">
         <div
           className="bg-black text-white p-6 rounded-lg w-full sm:w-3/5 md:w-2/5 lg:w-1/3 bg-opacity-40 border-2 border-gray-700 backdrop-blur-sm"
@@ -161,7 +157,6 @@ function Profile() {
         pauseOnHover
         theme="dark"
       />
-      <Footer />
     </>
   );
 }

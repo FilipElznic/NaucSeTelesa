@@ -14,7 +14,7 @@ import Profile from "./Components/Profile";
 import PomocPage from "./pages/helpPage";
 import FadeInWrapper from "./Components/FadeInWrapper";
 import NotFoundPage from "./pages/NotFoundPage"; // Import the new 404 page
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar"; // Import the Navbar component
 import Footer from "./components/Footer";
 
 function App() {

@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback, lazy, Suspense } from "react";
-import Navbar from "./Navbar";
 
 // Lazy load Spline
 const Spline = lazy(() => import("@splinetool/react-spline"));
@@ -22,7 +21,6 @@ function Robot() {
     <>
       {isDesktop ? (
         <div className="hidden lg:block bg-gradient-to-tr from-black to-zinc-950">
-          <Navbar />
           <div className="flex flex-col justify-center items-center min-h-screen text-white relative">
             {/* Lottie Animation */}
             <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-50">
