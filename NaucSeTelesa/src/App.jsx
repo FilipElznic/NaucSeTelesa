@@ -7,11 +7,11 @@ import { ProtectedRoute, RedirectIfLoggedIn } from "./ProtectedRoute";
 import TailwindTest from "./pages/TailwindTest";
 import UserPage from "./pages/userpage";
 import TaskPage from "./pages/taskPage";
-import TelesaPage from "./pages/telesaPage";
+import TelesaPage from "./Components/Telesa";
 import AboutPage from "./pages/aboutPage";
 import { GlobalProvider } from "./Global";
 import Profile from "./Components/Profile";
-import PomocPage from "./pages/helpPage";
+import PomocPage from "./Components/Help";
 import FadeInWrapper from "./Components/FadeInWrapper";
 import NotFoundPage from "./pages/NotFoundPage"; // Import the new 404 page
 import Navbar from "./components/Navbar"; // Import the Navbar component
@@ -25,8 +25,6 @@ function App() {
           <Router>
             <Navbar /> {/* Add Navbar here, outside of Routes */}
             <main>
-              {" "}
-              {/* Optional: wrap Routes in a main element */}
               <Routes>
                 {/* Public route for login */}
                 <Route path="/prihlaseni" element={<LoginPage />} />
