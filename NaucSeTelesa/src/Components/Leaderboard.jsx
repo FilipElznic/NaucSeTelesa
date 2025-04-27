@@ -37,29 +37,34 @@ function Leaderboard() {
 
         {/* Scrollable leaderboard container with hidden scrollbar */}
         <div className="h-96 overflow-y-auto no-scrollbar ">
-          {users.map((user, index) => (
-            <div
-              key={user.id}
-              className={`grid grid-cols-3 gap-4 p-4 rounded-lg shadow-lg mt-2 transition-all duration-300 
-              ${
-                user.id === userData.id
-                  ? "userlvl2 text-white font-bold"
-                  : "bg-zinc-800 hover:bg-gray-700"
-              }
-            `}
-            >
-              <div className="text-lg font-medium">{`#${index + 1}`}</div>
-              <div className="text-lg font-medium">
-                {" "}
-                {user.name && user.surname
-                  ? `${user.name} ${user.surname}`
-                  : "Neznámý uživatel"}
+          {users.length == 0 ? (
+            <h1 className="text-center text-lg font-semibold text-purple-400">
+              Načítám leaderboard...
+            </h1>
+          ) : (
+            users.map((user, index) => (
+              <div
+                key={user.id}
+                className={`grid grid-cols-3 gap-4 p-4 rounded-lg shadow-lg mt-2 transition-all duration-300 
+      ${
+        user.id === userData.id
+          ? "userlvl2 text-white font-bold"
+          : "bg-zinc-800 hover:bg-gray-700"
+      }
+    `}
+              >
+                <div className="text-lg font-medium">{`#${index + 1}`}</div>
+                <div className="text-lg font-medium">
+                  {user.name && user.surname
+                    ? `${user.name} ${user.surname}`
+                    : "Neznámý uživatel"}
+                </div>
+                <div className="text-lg font-medium text-right">
+                  {Math.floor(user.xp / 100)}
+                </div>
               </div>
-              <div className="text-lg font-medium text-right">
-                {Math.floor(user.xp / 100)}
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
