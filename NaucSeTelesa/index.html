@@ -31,8 +31,19 @@
     </style>
   </head>
   <body>
+    <h1 id="nauc">Nauč se Tělesa</h1>
     <div id="root"></div>
-    <!-- Add defer to improve loading performance -->
+
+    <!-- Skript pro skrytí h1 po načtení stránky -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const heading = document.getElementById("nauc");
+        if (heading) {
+          heading.style.display = "none";
+        }
+      });
+    </script>
+
     <script type="module" src="/src/main.jsx" defer></script>
   </body>
 </html>
