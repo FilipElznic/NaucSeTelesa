@@ -2,12 +2,37 @@
 <html lang="cs">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image" href="/cube.webp" />
+    <link rel="icon" type="image/webp" href="/cube.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Nauč se Tělesa - Interaktivní výuka těles a geometrie"
+    />
     <title>Nauč se Tělesa</title>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/cube.webp" as="image" type="image/webp" />
+
+    <!-- Preconnect to third-party domains -->
+    <link rel="preconnect" href="https://bviuhriolcuvayzbgzum.supabase.co" />
+
+    <!-- Inline critical CSS -->
+    <style>
+      body {
+        margin: 0;
+        background-color: #000;
+        color: #fff;
+      }
+      #root {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- Add defer to improve loading performance -->
+    <script type="module" src="/src/main.jsx" defer></script>
   </body>
 </html>

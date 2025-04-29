@@ -1,12 +1,39 @@
-import { useState, useEffect, useMemo, lazy, Suspense } from "react";
+import { useState, useEffect, useMemo, lazy, Suspense, useRef } from "react";
 
-const Spline = lazy(() => import("@splinetool/react-spline"));
+// Lazy load Spline
+const Spline = lazy(() =>
+  import(/* webpackChunkName: "project-spline" */ "@splinetool/react-spline")
+);
 
 function Project() {
-  // Memoized initial state
+  // Memoized initial screen size check
   const initialScreenSize = useMemo(() => window.innerWidth > 550, []);
   const [isLargeScreen, setIsLargeScreen] = useState(initialScreenSize);
+  const [isVisible, setIsVisible] = useState(false);
+  const splineRef = useRef(null);
 
+  // Setup intersection observer for lazy loading
+  useEffect(() => {
+    if (!splineRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Check if our element is intersecting
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          // Once it's visible, stop observing
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the element is visible
+    );
+
+    observer.observe(splineRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Handle resize with debounce
   useEffect(() => {
     let timeoutId;
 
@@ -14,10 +41,11 @@ function Project() {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         setIsLargeScreen(window.innerWidth > 550);
-      }, 150); // Debounce ke snížení počtu aktualizací
+      }, 150); // Debounce to reduce updates
     };
 
     window.addEventListener("resize", handleResize);
+
     return () => {
       clearTimeout(timeoutId);
       window.removeEventListener("resize", handleResize);
@@ -27,8 +55,8 @@ function Project() {
   return (
     <div className="w-full flex flex-col md:flex-row justify-center items-center text-center md:text-start md:justify-evenly md:items-center mt-20 md:mt-10 md:pb-20">
       {/* Lazy-loaded Spline model */}
-      <div className="w-full md:w-1/2 flex justify-center">
-        {isLargeScreen && (
+      <div ref={splineRef} className="w-full md:w-1/2 flex justify-center">
+        {isLargeScreen && isVisible && (
           <Suspense
             fallback={
               <div className="w-10 h-10 border-4 border-gray-300 border-t-transparent rounded-full animate-spin"></div>

@@ -7,7 +7,7 @@ function InfoForm() {
   const [jmeno, setJmeno] = useState("");
   const [prijmeni, setPrijmeni] = useState("");
   const [prezdivka, setPrezdivka] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   // Check if user is available and pre-fill name and surname from userData
   useEffect(() => {

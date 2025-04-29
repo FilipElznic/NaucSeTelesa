@@ -5,18 +5,36 @@ const FadeInWrapper = ({ children }) => {
   const domRef = useRef();
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+    // Create a single observer instance per component
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Use the first entry (our element)
+        if (entries[0].isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target); // Stop observing once the element is visible
+          // Once it's visible, no need to keep observing
+          if (domRef.current) {
+            observer.unobserve(domRef.current);
+          }
         }
-      });
-    });
+      },
+      {
+        threshold: 0.1, // Trigger when at least 10% is visible
+        rootMargin: "0px 0px 50px 0px", // Slightly ahead of scroll
+      }
+    );
 
-    observer.observe(domRef.current);
+    // Start observing when component mounts
+    if (domRef.current) {
+      observer.observe(domRef.current);
+    }
 
-    return () => observer.disconnect(); // Cleanup observer on unmount
+    // Clean up the observer on component unmount
+    return () => {
+      if (domRef.current) {
+        observer.unobserve(domRef.current);
+      }
+      observer.disconnect();
+    };
   }, []);
 
   return (
