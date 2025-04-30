@@ -49,7 +49,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         className="block px-4 py-2 text-white hover:bg-gray-700 text-xl font-bold"
         onClick={onClose}
       >
-        <UserIcon className="inline-block mr-2 w-5 h-5 text-white" />
+        <UserIcon className="inline-block mr-2 w-5 h-5  text-white" />
         Můj profil
       </Link>
       <button
@@ -59,7 +59,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         }}
         className="block w-full text-left px-4 py-2 text-xl text-red-500 hover:bg-gray-700 font-bold"
       >
-        <ArrowRightOnRectangleIcon className="inline-block mr-2 w-5 h-5 text-white" />
+        <ArrowRightOnRectangleIcon className="inline-block mr-2 w-5 h-5  text-white" />
         Odhlásit se
       </button>
     </div>
@@ -137,48 +137,6 @@ MobileSidebar.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const Avatar = memo(({ url, name }) => {
-  const [imageError, setImageError] = useState(false);
-
-  // Calculate first two initials if name exists or default to 'U'
-  const initials = useMemo(() => {
-    if (!name) return "U";
-    return name
-      .split(" ")
-      .slice(0, 2)
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase();
-  }, [name]);
-
-  if (!url || imageError) {
-    // Fallback to initials avatar
-    return (
-      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-indigo-600 text-white font-bold">
-        {initials}
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-      <img
-        src={url}
-        className="w-full h-full object-cover"
-        alt={`${name || "User"} avatar`}
-        loading="lazy"
-        onError={() => setImageError(true)}
-      />
-    </div>
-  );
-});
-
-Avatar.displayName = "Avatar";
-Avatar.propTypes = {
-  url: PropTypes.string,
-  name: PropTypes.string,
-};
-
 function Navbar() {
   const { authUser, userData } = useGlobalData();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -221,9 +179,9 @@ function Navbar() {
   // Update the avatar URL when user data changes
   useEffect(() => {
     if (userData?.img) {
-      // Add a resize transformation parameter to the URL
       setAvatarUrl(
-        `https://bviuhriolcuvayzbgzum.supabase.co/storage/v1/object/public/profile-pictures/${userData.img}?width=200&height=200`
+        "https://bviuhriolcuvayzbgzum.supabase.co/storage/v1/object/public/profile-pictures/" +
+          userData.img
       );
     }
   }, [userData]);
@@ -283,13 +241,6 @@ function Navbar() {
     ],
     []
   );
-
-  // Get user display name
-  const userDisplayName = useMemo(() => {
-    return (
-      userData?.name || (authUser?.email ? authUser.email.split("@")[0] : "")
-    );
-  }, [userData, authUser]);
 
   return (
     <div className="flex h-20 w-full">
@@ -353,15 +304,16 @@ function Navbar() {
                 aria-haspopup="true"
               >
                 <div className="flex flex-row justify-center items-center">
-                  <p className="text-white pr-2 text-2xl md:text-lg font-bold truncate max-w-32 md:max-w-40">
+                  <p className="text-white pr-2 text-2xl md:text-lg font-bold">
                     Dobrý den,
-                    {userData?.name
-                      ? ` ${userData.name}`
-                      : authUser.email
-                      ? ` ${authUser.email.split("@")[0]}`
-                      : ""}
+                    {userData?.name ? ` ${userData.name} ` : authUser.email}
                   </p>
-                  <Avatar url={avatarUrl} name={userDisplayName} />
+                  <img
+                    src={avatarUrl || "/default-avatar.jpg"}
+                    className="w-10 h-10 object-fit-contain rounded-full"
+                    alt="Avatar"
+                    loading="lazy"
+                  />
                 </div>
               </button>
 

@@ -1,53 +1,57 @@
-import { lazy, Suspense, memo } from "react";
+import InfoForm from "../Components/InfoForm";
+import Tailwind from "./TailwindTest";
+import Features from "../Components/Features";
+
+import LeaderboardW from "../Components/LeaderboardW";
 import FadeInWrapper from "../Components/FadeInWrapper";
-
-// Lazy load components to improve initial page load
-const InfoForm = lazy(() => import("../Components/InfoForm"));
-const Tailwind = lazy(() => import("./TailwindTest"));
-const Features = lazy(() => import("../Components/Features"));
-const LeaderboardW = lazy(() => import("../Components/LeaderboardW"));
-const Test = lazy(() => import("../Components/test"));
-
-// Loading fallback component
-const LoadingFallback = () => (
-  <div className="w-full flex justify-center items-center py-8">
-    <div className="animate-pulse bg-gray-200 rounded-md h-40 w-full max-w-3xl"></div>
-  </div>
-);
-
-// Create memoized section components to prevent unnecessary re-renders
-const Section = memo(({ children }) => (
-  <FadeInWrapper>
-    <Suspense fallback={<LoadingFallback />}>{children}</Suspense>
-  </FadeInWrapper>
-));
-
-Section.displayName = "Section";
+import Test from "../Components/test";
 
 function SuccessPage() {
   return (
-    <div className="space-y-8">
-      <Section>
+    <>
+      <FadeInWrapper>
         <InfoForm />
-      </Section>
-
-      <Section>
+      </FadeInWrapper>
+      <FadeInWrapper>
         <Tailwind />
-      </Section>
-
-      <Section>
+      </FadeInWrapper>
+      <FadeInWrapper>
         <Features />
-      </Section>
-
-      <Section>
+      </FadeInWrapper>
+      <FadeInWrapper>
         <Test />
-      </Section>
+      </FadeInWrapper>
 
-      <Section>
+      <FadeInWrapper>
         <LeaderboardW />
-      </Section>
-    </div>
+      </FadeInWrapper>
+    </>
   );
 }
 
-export default memo(SuccessPage);
+export default SuccessPage;
+
+/*
+{authUser ? (
+          <div className="bg-gray-800 p-6 rounded-lg shadow-md text-center mb-6">
+            <p className="mb-2">
+              <strong>User ID:</strong> {authUser.id}
+            </p>
+            <p>
+              <strong>Email:</strong> {authUser.email}
+            </p>
+          </div>
+        ) : (
+          <p>Loading authenticated user...</p>
+        )}
+        <button
+          onClick={signOutUser}
+          className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-500 hover:scale-105 transform transition-all duration-200 ease-in-out focus:ring-4 focus:ring-blue-300"
+        >
+          Odhlásit se
+        </button>
+        
+<
+
+
+*/
