@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../supabaseClient";
 import { useGlobalData } from "../Global";
-import { FaFileAlt } from "react-icons/fa";
+import { DocumentIcon } from "@heroicons/react/24/outline";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -105,7 +105,7 @@ function ProfilePic() {
         />
       ) : isFileSelected && selectedFile ? (
         <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-6 w-64">
-          <FaFileAlt className="text-gray-500 text-3xl mb-4" />
+          <DocumentIcon className="text-gray-500 w-10  h-10 mb-4" />
           <span className="text-gray-700 text-sm">{selectedFile.name}</span>
         </div>
       ) : (

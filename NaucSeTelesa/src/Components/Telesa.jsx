@@ -3,7 +3,7 @@ import { supabase } from "../supabaseClient";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 import Spline from "@splinetool/react-spline";
-import { IoMdClose } from "react-icons/io";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const GeometricBodiesCarousel = () => {
   // Stavové proměnné
@@ -325,7 +325,7 @@ const GeometricBodiesCarousel = () => {
               className="bg-purple-800 absolute right-3 hover:bg-purple-700 text-white rounded-full w-8 h-8 flex items-center justify-center text-xl z-10 transition-colors shadow-lg"
               aria-label="Zavřít"
             >
-              <IoMdClose />
+              <XMarkIcon className="w-7 h-7 text-white" />
             </button>
 
             <h2 className="text-2xl md:text-3xl font-bold mb-4 userlvl text-center drop-shadow-md">

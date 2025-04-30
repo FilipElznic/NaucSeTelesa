@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
-import { CiCircleInfo } from "react-icons/ci";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { useGlobalData } from "../Global";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FaHome } from "react-icons/fa";
-import { IoMdRefresh } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
-import { FaShuffle } from "react-icons/fa6";
+import { HomeIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
@@ -125,21 +125,21 @@ function TaskLayout() {
                     className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl ml-4"
                     onClick={() => (window.location.href = "/")}
                   >
-                    <FaHome />
+                    <HomeIcon className="w-7 h-7 text-white" />
                     <p className="hidden sm:block">Domů</p>
                   </span>
                   <span
                     className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
                     onClick={() => (window.location.href = "/ukoly")}
                   >
-                    <IoMdRefresh />
+                    <ArrowPathIcon className="w-7 h-7 text-white" />
                     <p className="hidden sm:block">Obnovit</p>
                   </span>
                   <span
                     className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
                     onClick={shuffleTasks}
                   >
-                    <FaShuffle />
+                    <ArrowsRightLeftIcon className="w-7 h-7 text-white" />
                     <p className="hidden sm:block">Zamíchat</p>
                   </span>
                 </div>
@@ -149,7 +149,7 @@ function TaskLayout() {
                   onClick={() => (window.location.href = "/")}
                 >
                   <p className="hidden sm:block text-2xl lg:text-3xl">Zavřít</p>
-                  <IoClose className="  lg:mr-10" />
+                  <XMarkIcon className="w-7 h-7  lg:mr-10" />
                 </span>
               </div>
             </div>
@@ -202,7 +202,7 @@ function TaskLayout() {
                     </div>
                     <div className="w-full flex justify-between text-xl lg:text-3xl p-10 mt-auto relative">
                       <div className="relative group">
-                        <CiCircleInfo className="cursor-pointer" />
+                        <InformationCircleIcon className="cursor-pointer w-7 h-7 text-white" />
                         <div className="absolute bottom-full left-5 md:left-40  -translate-x-1/2 mb-2 w-40 md:w-80 p-2 text-sm text-white bg-black rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
                           <p>
                             Každý úkol obsahuje otázku doplněnou krátkým

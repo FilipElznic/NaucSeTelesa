@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MdOutlineArrowOutward } from "react-icons/md";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { useGlobalData } from "../Global"; //
 import { Link } from "react-router-dom";
 const Test = () => {
@@ -260,23 +260,23 @@ const Test = () => {
             <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white">
               <div className="w-full h-full flex flex-row gap-4">
                 <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white absolute top-3 right-3" />
                   <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
                 </div>
               </div>
               <div className="w-full h-full flex flex-row gap-4">
                 <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white  absolute top-3 right-3" />
                   <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
                 </div>
                 <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white absolute top-3 right-3" />
                   <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
                 </div>
               </div>
               <div className="w-full h-full flex flex-row gap-4">
                 <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                  <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white  absolute top-3 right-3" />
                   <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
                 </div>
               </div>
@@ -353,7 +353,7 @@ const Test = () => {
                       className="w-full h-full  bg-zinc-800 rounded-3xl"
                     >
                       <div className="w-full h-full flex justify-center items-center p-4 relative">
-                        <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                        <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white  absolute top-3 right-3" />
                         <h1 className="text-5xl font-semibold p-4 userlvl">
                           Žebříček uživatelů
                         </h1>
@@ -366,7 +366,7 @@ const Test = () => {
                       className="w-full h-full  bg-zinc-800 rounded-3xl"
                     >
                       <div className=" h-full w-full  flex justify-center items-center p-4 relative">
-                        <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                        <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white absolute top-3 right-3" />
                         <h1 className="text-5xl font-semibold p-4 userlvl">
                           Tělesa
                         </h1>
@@ -377,7 +377,7 @@ const Test = () => {
                       className="w-full h-full z-50  bg-zinc-800 rounded-3xl"
                     >
                       <div className="w-full h-full flex justify-center items-center p-4 relative">
-                        <MdOutlineArrowOutward className="text-2xl  absolute top-3 right-3" />
+                        <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white  absolute top-3 right-3" />
                         <h1 className="text-5xl font-semibold p-4 userlvl">
                           Úkoly
                         </h1>

@@ -1,6 +1,6 @@
 import ProfilePic from "./ProfilePic";
-import { FaRegEdit } from "react-icons/fa";
-import { IoMdClose } from "react-icons/io";
+import { PencilIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useGlobalData } from "../Global"; // Import global context
 import { supabase } from "../supabaseClient";
 import { useState, useEffect } from "react";
@@ -104,8 +104,8 @@ function Profile() {
         >
           <div className="flex justify-between items-center">
             <h2 className="text-xl md:text-2xl font-semibold">Profil</h2>
-            <IoMdClose
-              className="cursor-pointer"
+            <XMarkIcon
+              className="cursor-pointer w-5 h-5 text-white"
               onClick={() => (window.location.href = "/")}
             />
           </div>
@@ -128,8 +128,8 @@ function Profile() {
                       className="w-3/5 lg:w-2/3 p-2 rounded-3xl bg-opacity-10 bg-gray-600 border-2 text-white mr-2"
                       readOnly={!editing[field]}
                     />
-                    <FaRegEdit
-                      className="cursor-pointer"
+                    <PencilIcon
+                      className="cursor-pointer w-5 h-5 text-white"
                       onClick={() => handleEditToggle(field)}
                     />
                   </div>
