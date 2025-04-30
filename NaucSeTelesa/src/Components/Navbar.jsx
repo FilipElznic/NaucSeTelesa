@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback, memo, useMemo } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useGlobalData } from "../Global";
 import "../App.css";
 import { supabase } from "../supabaseClient";
@@ -26,6 +27,14 @@ const NavLink = memo(({ to, icon, text, onClick }) => (
     </Link>
   </li>
 ));
+
+NavLink.displayName = "NavLink";
+NavLink.propTypes = {
+  to: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
+  text: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+};
 
 const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
   if (!isOpen) return null;
@@ -56,6 +65,13 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
     </div>
   );
 });
+
+ProfileDropdown.displayName = "ProfileDropdown";
+ProfileDropdown.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSignOut: PropTypes.func.isRequired,
+};
 
 const MobileSidebar = memo(({ isOpen, navLinks, onClose }) => {
   if (!isOpen) return null;
@@ -107,6 +123,19 @@ const MobileSidebar = memo(({ isOpen, navLinks, onClose }) => {
     </>
   );
 });
+
+MobileSidebar.displayName = "MobileSidebar";
+MobileSidebar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  navLinks: PropTypes.arrayOf(
+    PropTypes.shape({
+      to: PropTypes.string.isRequired,
+      icon: PropTypes.node.isRequired,
+      text: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 function Navbar() {
   const { authUser, userData } = useGlobalData();
@@ -304,5 +333,7 @@ function Navbar() {
     </div>
   );
 }
+
+Navbar.displayName = "Navbar";
 
 export default memo(Navbar);

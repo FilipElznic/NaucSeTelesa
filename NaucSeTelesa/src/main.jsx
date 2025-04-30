@@ -8,3 +8,12 @@ createRoot(document.getElementById("root")).render(
   <App />
   //</StrictMode>
 );
+
+if (window.loadingFallbackTimeout) {
+  clearTimeout(window.loadingFallbackTimeout);
+}
+
+// Call the global function to hide the animation
+if (typeof window.hideLoadingAnimation === "function") {
+  window.hideLoadingAnimation();
+}
