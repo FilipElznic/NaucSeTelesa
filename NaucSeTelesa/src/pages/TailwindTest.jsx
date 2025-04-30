@@ -1,11 +1,22 @@
 import "../App.css";
 import Spline from "@splinetool/react-spline";
-import { IoShieldSharp } from "react-icons/io5";
+
 import { Link } from "react-router-dom";
 import { useGlobalData } from "../Global"; // Import the custom hook
 import { useEffect, useState } from "react";
 
 function TailwindTest() {
+  const ShieldIcon = ({ className }) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      viewBox="0 0 24 24"
+      fill="#272626"
+    >
+      <path d="m12 22.118-.447-.223a52.689 52.689 0 0 1-5.108-3.063C3.143 16.63 2.111 6.265 2 5.09l-.08-.875L12 1.976l10.076 2.239L22 5.09c-.107 1.175-1.139 11.54-4.441 13.742a52.689 52.689 0 0 1-5.112 3.068zM4.085 5.783c.462 4.117 1.706 10.209 3.47 11.385 2.1 1.4 3.7 2.3 4.445 2.7.741-.4 2.35-1.3 4.445-2.7 1.764-1.176 3.008-7.267 3.47-11.385L12 4.024z" />
+    </svg>
+  );
+
   // Access the global context
   const { authUser, userData } = useGlobalData();
   const [avatarUrl, setAvatarUrl] = useState(userData?.img || ""); // Initialize avatar URL
@@ -35,7 +46,7 @@ function TailwindTest() {
 "
           >
             <div className="w-full h-5/6 justify-center items-center flex flex-col">
-              <IoShieldSharp className="w-2/3 h-5/6 relative text-zinc-900 drop-shadow-white-glow" />
+              <ShieldIcon className="w-40 h-40  drop-shadow-white-glow text-zinc-700 " />
 
               <div className="md:text-5xl text-7xl xl:text-7xl text-black absolute mb-7">
                 {userData ? (
