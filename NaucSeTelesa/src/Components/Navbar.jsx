@@ -5,14 +5,14 @@ import { useGlobalData } from "../Global";
 import "../App.css";
 import { supabase } from "../supabaseClient";
 import {
-  AiOutlineHome,
-  AiOutlineAppstore,
-  AiOutlineCheckCircle,
-  AiOutlineInfoCircle,
-  AiOutlineLogout,
-  AiOutlineUser,
-} from "react-icons/ai";
-import { FiHelpCircle } from "react-icons/fi";
+  HomeIcon,
+  Squares2X2Icon,
+  CheckCircleIcon,
+  InformationCircleIcon,
+  ArrowRightOnRectangleIcon,
+  UserIcon,
+  QuestionMarkCircleIcon,
+} from "@heroicons/react/24/outline";
 
 // Memoized components to prevent unnecessary re-renders
 const NavLink = memo(({ to, icon, text, onClick }) => (
@@ -49,7 +49,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         className="block px-4 py-2 text-white hover:bg-gray-700 text-xl font-bold"
         onClick={onClose}
       >
-        <AiOutlineUser className="inline-block mr-2" />
+        <UserIcon className="inline-block mr-2 w-5 h-5  text-white" />
         Můj profil
       </Link>
       <button
@@ -59,7 +59,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         }}
         className="block w-full text-left px-4 py-2 text-xl text-red-500 hover:bg-gray-700 font-bold"
       >
-        <AiOutlineLogout className="inline-block mr-2" />
+        <ArrowRightOnRectangleIcon className="inline-block mr-2 w-5 h-5  text-white" />
         Odhlásit se
       </button>
     </div>
@@ -215,25 +215,29 @@ function Navbar() {
     () => [
       {
         to: "/success",
-        icon: <AiOutlineHome className="mr-2" />,
+        icon: <HomeIcon className="w-5 h-5 mr-2 text-white" />,
         text: "Domů",
       },
       {
         to: "/telesa",
-        icon: <AiOutlineAppstore className="mr-2" />,
+        icon: <Squares2X2Icon className="w-5 h-5 mr-2 text-white" />,
         text: "Tělesa",
       },
       {
         to: "/ukoly",
-        icon: <AiOutlineCheckCircle className="mr-2" />,
+        icon: <CheckCircleIcon className="w-5 h-5 mr-2 text-white" />,
         text: "Úkoly",
       },
       {
         to: "/projekt",
-        icon: <AiOutlineInfoCircle className="mr-2" />,
+        icon: <InformationCircleIcon className="w-5 h-5 mr-2 text-white" />,
         text: "O projektu",
       },
-      { to: "/pomoc", icon: <FiHelpCircle className="mr-2" />, text: "Pomoc" },
+      {
+        to: "/pomoc",
+        icon: <QuestionMarkCircleIcon className="w-5 h-5 mr-2 text-white" />,
+        text: "Pomoc",
+      },
     ],
     []
   );
