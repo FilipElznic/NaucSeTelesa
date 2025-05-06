@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback, memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useGlobalData } from "../Global";
-import "../App.css";
 import { supabase } from "../supabaseClient";
 import {
   HomeIcon,
@@ -12,9 +11,11 @@ import {
   ArrowRightOnRectangleIcon,
   UserIcon,
   QuestionMarkCircleIcon,
+  XMarkIcon,
+  Bars3Icon,
 } from "@heroicons/react/24/outline";
 
-// Memoized components to prevent unnecessary re-renders
+// Memoized NavLink component
 const NavLink = memo(({ to, icon, text, onClick }) => (
   <li className="flex items-center">
     <Link
@@ -23,7 +24,7 @@ const NavLink = memo(({ to, icon, text, onClick }) => (
       onClick={onClick}
     >
       {icon}
-      {text}
+      <span>{text}</span>
     </Link>
   </li>
 ));
@@ -36,6 +37,7 @@ NavLink.propTypes = {
   onClick: PropTypes.func,
 };
 
+// Memoized ProfileDropdown component
 const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
   if (!isOpen) return null;
 
@@ -49,7 +51,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         className="block px-4 py-2 text-white hover:bg-gray-700 text-xl font-bold"
         onClick={onClose}
       >
-        <UserIcon className="inline-block mr-2 w-5 h-5  text-white" />
+        <UserIcon className="inline-block mr-2 w-5 h-5 text-white" />
         Můj profil
       </Link>
       <button
@@ -59,7 +61,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         }}
         className="block w-full text-left px-4 py-2 text-xl text-red-500 hover:bg-gray-700 font-bold"
       >
-        <ArrowRightOnRectangleIcon className="inline-block mr-2 w-5 h-5  text-white" />
+        <ArrowRightOnRectangleIcon className="inline-block mr-2 w-5 h-5 text-white" />
         Odhlásit se
       </button>
     </div>
@@ -73,6 +75,7 @@ ProfileDropdown.propTypes = {
   onSignOut: PropTypes.func.isRequired,
 };
 
+// Memoized MobileSidebar component
 const MobileSidebar = memo(({ isOpen, navLinks, onClose }) => {
   if (!isOpen) return null;
 
@@ -86,20 +89,7 @@ const MobileSidebar = memo(({ isOpen, navLinks, onClose }) => {
               className="text-white focus:outline-none transition-transform duration-300"
               aria-label="Close menu"
             >
-              <svg
-                className="w-7 h-7"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
+              <XMarkIcon className="w-7 h-7" />
             </button>
           </div>
 
@@ -137,33 +127,29 @@ MobileSidebar.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-function Navbar() {
+const Navbar = () => {
   const { authUser, userData } = useGlobalData();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
 
-  // Menu toggle - memoized callback
+  // Memoized callbacks
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
   }, []);
 
-  // Profile dropdown toggle - memoized callback
   const toggleProfileDropdown = useCallback(() => {
     setIsProfileDropdownOpen((prev) => !prev);
   }, []);
 
-  // Close menu - memoized callback
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
   }, []);
 
-  // Close profile dropdown - memoized callback
   const closeProfileDropdown = useCallback(() => {
     setIsProfileDropdownOpen(false);
   }, []);
 
-  // Handle sign out - memoized callback
   const signOutUser = useCallback(async () => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -176,7 +162,7 @@ function Navbar() {
     }
   }, []);
 
-  // Update the avatar URL when user data changes
+  // Update avatar URL when userData changes
   useEffect(() => {
     if (userData?.img) {
       setAvatarUrl(
@@ -186,7 +172,7 @@ function Navbar() {
     }
   }, [userData]);
 
-  // Close dropdown when clicking outside
+  // Handle clicks outside the profile dropdown
   useEffect(() => {
     if (!isProfileDropdownOpen) return;
 
@@ -210,7 +196,7 @@ function Navbar() {
     };
   }, [isProfileDropdownOpen]);
 
-  // Navigation links configuration - memoized to prevent recreating on each render
+  // Memoized navigation links
   const navLinks = useMemo(
     () => [
       {
@@ -244,7 +230,7 @@ function Navbar() {
 
   return (
     <div className="flex h-20 w-full">
-      {/* Mobile sidebar - only render when open */}
+      {/* Mobile sidebar */}
       <MobileSidebar
         isOpen={isMenuOpen}
         navLinks={navLinks}
@@ -253,7 +239,7 @@ function Navbar() {
 
       {/* Desktop navbar */}
       <nav className="fixed top-0 left-0 right-0 bg-transparent text-white px-4 py-2 flex justify-between items-center shadow-lg z-30 lg:relative lg:bg-transparent w-full">
-        {/* Left Side: Hamburger menu for mobile, horizontal menu for desktop */}
+        {/* Left Side: Menu & Navigation */}
         <div className="flex items-center">
           {/* Hamburger Icon for mobile */}
           <button
@@ -261,20 +247,7 @@ function Navbar() {
             className="lg:hidden text-white focus:outline-none transition-transform duration-300 z-40"
             aria-label="Open menu"
           >
-            <svg
-              className="w-7 h-7"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              ></path>
-            </svg>
+            <Bars3Icon className="w-7 h-7" />
           </button>
 
           {/* Desktop horizontal menu */}
@@ -292,7 +265,7 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Right Side: Login or User Profile with Dropdown */}
+        {/* Right Side: Login or User Profile */}
         <div className="relative">
           {authUser ? (
             <div className="relative">
@@ -310,7 +283,7 @@ function Navbar() {
                   </p>
                   <img
                     src={avatarUrl || "/default-avatar.jpg"}
-                    className="w-10 h-10 object-fit-contain rounded-full"
+                    className="w-10 h-10 object-cover rounded-full"
                     alt="Avatar"
                     loading="lazy"
                   />
@@ -336,7 +309,7 @@ function Navbar() {
       </nav>
     </div>
   );
-}
+};
 
 Navbar.displayName = "Navbar";
 

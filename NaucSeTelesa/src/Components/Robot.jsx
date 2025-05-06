@@ -40,7 +40,7 @@ function Robot() {
         timeoutId = setTimeout(() => {
           setIsDesktop(window.innerWidth >= 1024);
           timeoutId = null;
-        }, 150);
+        }, 300);
       }
     };
 
