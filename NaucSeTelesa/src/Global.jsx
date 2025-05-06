@@ -1,43 +1,19 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
+import { useAuth } from "./AuthContext";
 
 const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
-  const [authUser, setAuthUser] = useState(null);
+  // Use auth context to get authenticated user
+  const { user: authUser } = useAuth();
+
+  // State for storing user data from database
   const [userData, setUserData] = useState(null);
+  // State for tracking if global data is loading
   const [loading, setLoading] = useState(true);
 
-  // Fetch authenticated user
-  useEffect(() => {
-    const fetchAuthUser = async () => {
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.getSession();
-
-      if (error) {
-        console.error("Session error:", error);
-      } else if (session) {
-        setAuthUser(session.user);
-      }
-    };
-
-    fetchAuthUser();
-  }, []);
-
-  // Handle auth state changes
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setAuthUser(session?.user || null);
-      }
-    );
-
-    return () => authListener?.subscription.unsubscribe();
-  }, []);
-
-  // Fetch user data from 'user' table
+  // Fetch user data from 'user' table when auth state changes
   useEffect(() => {
     const fetchUserData = async () => {
       if (!authUser) {
@@ -46,19 +22,22 @@ export function GlobalProvider({ children }) {
       }
 
       try {
-        // Use double quotes for table name to avoid SQL keyword conflict
+        // Use proper quoting for table name to avoid SQL keyword conflicts
         const { data, error } = await supabase
-          .from("user") // Important: use double quotes
+          .from("user") // Using quotes in the query, not in JS string
           .select("*")
           .eq("authid", authUser.id)
           .single();
 
-        if (error && error.code !== "PGRST116") throw error;
+        if (error) {
+          // PGRST116 is "no rows returned" error, which means we need to create the user
+          if (error.code !== "PGRST116") {
+            throw error;
+          }
 
-        // Create new user if doesn't exist
-        if (!data) {
-          const { data: newUser } = await supabase
-            .from('"user"')
+          // Create new user if doesn't exist
+          const { data: newUser, error: insertError } = await supabase
+            .from("user")
             .insert([
               {
                 authid: authUser.id,
@@ -70,6 +49,7 @@ export function GlobalProvider({ children }) {
             .select()
             .single();
 
+          if (insertError) throw insertError;
           setUserData(newUser);
         } else {
           setUserData(data);
@@ -88,14 +68,18 @@ export function GlobalProvider({ children }) {
   const refreshUserData = async () => {
     if (!authUser) return;
 
-    const { data, error } = await supabase
-      .from("user")
-      .select("*")
-      .eq("authid", authUser.id)
-      .single();
+    try {
+      const { data, error } = await supabase
+        .from("user")
+        .select("*")
+        .eq("authid", authUser.id)
+        .single();
 
-    if (error) console.error("Refresh error:", error);
-    else setUserData(data);
+      if (error) throw error;
+      setUserData(data);
+    } catch (error) {
+      console.error("Refresh error:", error);
+    }
   };
 
   const value = {

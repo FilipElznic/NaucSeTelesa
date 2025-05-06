@@ -1,56 +1,64 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 
-// Vytvoření kontextu pro správu autentizace
+// Create authentication context
 const AuthContext = createContext();
 
-// Poskytovatel kontextu (AuthProvider), který obklopuje aplikaci a poskytuje autentizační data
+// Auth provider component that wraps the application and provides auth data
 export const AuthProvider = ({ children }) => {
-  // Stav pro uchování informací o přihlášeném uživateli
+  // State for storing authenticated user info
   const [user, setUser] = useState(null);
-
-  // Stav pro sledování, zda probíhá načítání uživatelských dat
+  // State for tracking if user data is loading
   const [loading, setLoading] = useState(true);
 
-  // Efekt pro ověření uživatelské relace při načtení aplikace
+  // Effect for checking user session on app load
   useEffect(() => {
     const checkSession = async () => {
-      // Získání aktuální relace z klienta Supabase
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      try {
+        // Get current session from Supabase
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.getSession();
 
-      // Nastavení uživatele (nebo null, pokud není přihlášen)
-      setUser(session?.user ?? null);
+        if (error) {
+          console.error("Session error:", error);
+        }
 
-      // Zastavení načítání po ověření relace
-      setLoading(false);
+        // Set user (or null if not logged in)
+        setUser(session?.user ?? null);
+      } catch (err) {
+        console.error("Auth error:", err);
+      } finally {
+        // Stop loading state after session check completes
+        setLoading(false);
+      }
     };
 
-    // Zavolání funkce pro ověření relace
+    // Call session check function
     checkSession();
 
-    // Přihlášení posluchače pro změny autentizace
+    // Set up auth state change listener
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      // Aktualizace stavu uživatele při změně autentizace
+      // Update user state when auth state changes
       setUser(session?.user ?? null);
     });
 
-    // Vyčištění posluchače při odpojení komponenty
+    // Clean up listener when component unmounts
     return () => {
       subscription.unsubscribe();
     };
-  }, []); // Prázdné pole závislostí zajistí, že efekt se spustí jen jednou
+  }, []);
 
-  // Vrácení poskytovatele kontextu s hodnotami (uživatel, stav načítání, klient Supabase)
+  // Return provider with context values
   return (
     <AuthContext.Provider value={{ user, loading, supabase }}>
-      {children} {/* Děti, které mají přístup ke sdíleným datům */}
+      {children}
     </AuthContext.Provider>
   );
 };
 
-// Vlastní hook pro snadný přístup k hodnotám z AuthContext
+// Custom hook for easy access to AuthContext values
 export const useAuth = () => useContext(AuthContext);

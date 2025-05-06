@@ -31,26 +31,17 @@ function App() {
   const [isAppReady, setIsAppReady] = useState(false);
 
   useEffect(() => {
-    // Perform any initial data loading or authentication checks here
+    // Hide loading animation only after auth state is checked and app is fully initialized
+    // This will be handled by the nested providers
     const initializeApp = async () => {
       try {
-        // Example: Check authentication status
-
-        // Any other initialization logic...
-
-        // Mark the app as ready
+        // Just set app ready here - actual auth checks will happen in AuthProvider
         setIsAppReady(true);
 
-        // Hide the loading animation
-        if (typeof window.hideLoadingAnimation === "function") {
-          window.hideLoadingAnimation();
-        }
+        // Don't hide loading animation yet - we'll do that after auth checks
       } catch (error) {
         console.error("Error initializing app:", error);
-        // Still hide loading animation even if there's an error
-        if (typeof window.hideLoadingAnimation === "function") {
-          window.hideLoadingAnimation();
-        }
+        setIsAppReady(true);
       }
     };
 
@@ -65,88 +56,104 @@ function App() {
     <div className="app-container">
       <AuthProvider>
         <GlobalProvider>
-          <FadeInWrapper>
-            <Router>
-              <Navbar />
-              <main className="min-h-screen">
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Routes>
-                    {/* Public route for login */}
-                    <Route path="/prihlaseni" element={<LoginPage />} />
-
-                    {/* Protected routes */}
-                    <Route
-                      path="/uzivatel"
-                      element={
-                        <ProtectedRoute redirectTo="/prihlaseni">
-                          <SuccessPage />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route path="/pomoc" element={<PomocPage />} />
-                    <Route
-                      path="/tailwind"
-                      element={
-                        <ProtectedRoute redirectTo="/prihlaseni">
-                          <TailwindTest />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/ukoly"
-                      element={
-                        <ProtectedRoute redirectTo="/prihlaseni">
-                          <TaskPage />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/telesa"
-                      element={
-                        <ProtectedRoute redirectTo="/prihlaseni">
-                          <TelesaPage />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route path="/projekt" element={<AboutPage />} />
-                    <Route
-                      path="/profil"
-                      element={
-                        <ProtectedRoute redirectTo="/prihlaseni">
-                          <Profile />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/success"
-                      element={
-                        <ProtectedRoute redirectTo="/">
-                          <SuccessPage />
-                        </ProtectedRoute>
-                      }
-                    />
-
-                    {/* Redirect logged-in users from the root ("/") */}
-                    <Route
-                      path="/"
-                      element={
-                        <RedirectIfLoggedIn redirectTo="/success">
-                          <UserPage />
-                        </RedirectIfLoggedIn>
-                      }
-                    />
-
-                    {/* Catch-all 404 route - place this LAST */}
-                    <Route path="*" element={<NotFoundPage />} />
-                  </Routes>
-                </Suspense>
-                <Footer />
-              </main>
-            </Router>
-          </FadeInWrapper>
+          <AppContent />
         </GlobalProvider>
       </AuthProvider>
     </div>
+  );
+}
+
+// Extract AppContent component to access auth/global context
+function AppContent() {
+  // This component will have access to auth and global context
+  useEffect(() => {
+    // This runs after auth and user data has been fetched in AuthProvider and GlobalProvider
+    // Only hide the loading animation after ensuring both providers have initialized
+    if (typeof window.hideLoadingAnimation === "function") {
+      window.hideLoadingAnimation();
+    }
+  }, []);
+
+  return (
+    <FadeInWrapper>
+      <Router>
+        <Navbar />
+        <main className="min-h-screen">
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              {/* Public route for login */}
+              <Route path="/prihlaseni" element={<LoginPage />} />
+
+              {/* Protected routes */}
+              <Route
+                path="/uzivatel"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <SuccessPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/pomoc" element={<PomocPage />} />
+              <Route
+                path="/tailwind"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <TailwindTest />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/ukoly"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <TaskPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/telesa"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <TelesaPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/projekt" element={<AboutPage />} />
+              <Route
+                path="/profil"
+                element={
+                  <ProtectedRoute redirectTo="/prihlaseni">
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/success"
+                element={
+                  <ProtectedRoute redirectTo="/">
+                    <SuccessPage />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Redirect logged-in users from the root ("/") */}
+              <Route
+                path="/"
+                element={
+                  <RedirectIfLoggedIn redirectTo="/success">
+                    <UserPage />
+                  </RedirectIfLoggedIn>
+                }
+              />
+
+              {/* Catch-all 404 route - place this LAST */}
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+          <Footer />
+        </main>
+      </Router>
+    </FadeInWrapper>
   );
 }
 
