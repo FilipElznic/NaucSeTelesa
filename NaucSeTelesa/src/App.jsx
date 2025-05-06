@@ -1,22 +1,31 @@
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Suspense, useEffect, useState, lazy } from "react";
 import { AuthProvider } from "./AuthContext";
-import LoginPage from "./pages/loginPage";
-import SuccessPage from "./pages/successPage";
 import { ProtectedRoute, RedirectIfLoggedIn } from "./ProtectedRoute";
-import TailwindTest from "./pages/TailwindTest";
-import UserPage from "./pages/userpage";
-import TaskPage from "./pages/taskPage";
-import TelesaPage from "./Components/Telesa";
-import AboutPage from "./pages/aboutPage";
 import { GlobalProvider } from "./Global";
-import Profile from "./Components/Profile";
-import PomocPage from "./Components/Help";
 import FadeInWrapper from "./Components/FadeInWrapper";
-import NotFoundPage from "./pages/NotFoundPage"; // Import the new 404 page
-import Navbar from "./components/Navbar"; // Import the Navbar component
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { useEffect, useState } from "react";
+
+// Lazy load all page components
+const LoginPage = lazy(() => import("./pages/loginPage"));
+const SuccessPage = lazy(() => import("./pages/successPage"));
+const TailwindTest = lazy(() => import("./pages/TailwindTest"));
+const UserPage = lazy(() => import("./pages/userpage"));
+const TaskPage = lazy(() => import("./pages/taskPage"));
+const TelesaPage = lazy(() => import("./Components/Telesa"));
+const AboutPage = lazy(() => import("./pages/aboutPage"));
+const Profile = lazy(() => import("./Components/Profile"));
+const PomocPage = lazy(() => import("./Components/Help"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+
+// Loading component for suspense fallback
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+);
 
 function App() {
   const [isAppReady, setIsAppReady] = useState(false);
@@ -47,83 +56,90 @@ function App() {
 
     initializeApp();
   }, []);
+
+  if (!isAppReady) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="app-container">
       <AuthProvider>
         <GlobalProvider>
           <FadeInWrapper>
             <Router>
-              <Navbar /> {/* Add Navbar here, outside of Routes */}
-              <main>
-                <Routes>
-                  {/* Public route for login */}
-                  <Route path="/prihlaseni" element={<LoginPage />} />
+              <Navbar />
+              <main className="min-h-screen">
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
+                    {/* Public route for login */}
+                    <Route path="/prihlaseni" element={<LoginPage />} />
 
-                  {/* Protected routes */}
-                  <Route
-                    path="/uzivatel"
-                    element={
-                      <ProtectedRoute redirectTo="/prihlaseni">
-                        <SuccessPage />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route path="/pomoc" element={<PomocPage />} />
-                  <Route
-                    path="/tailwind"
-                    element={
-                      <ProtectedRoute redirectTo="/prihlaseni">
-                        <TailwindTest />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="/ukoly"
-                    element={
-                      <ProtectedRoute redirectTo="/prihlaseni">
-                        <TaskPage />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="/telesa"
-                    element={
-                      <ProtectedRoute redirectTo="/prihlaseni">
-                        <TelesaPage />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route path="/projekt" element={<AboutPage />} />
-                  <Route
-                    path="/profil"
-                    element={
-                      <ProtectedRoute redirectTo="/prihlaseni">
-                        <Profile />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="/success"
-                    element={
-                      <ProtectedRoute redirectTo="/">
-                        <SuccessPage />
-                      </ProtectedRoute>
-                    }
-                  />
+                    {/* Protected routes */}
+                    <Route
+                      path="/uzivatel"
+                      element={
+                        <ProtectedRoute redirectTo="/prihlaseni">
+                          <SuccessPage />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route path="/pomoc" element={<PomocPage />} />
+                    <Route
+                      path="/tailwind"
+                      element={
+                        <ProtectedRoute redirectTo="/prihlaseni">
+                          <TailwindTest />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/ukoly"
+                      element={
+                        <ProtectedRoute redirectTo="/prihlaseni">
+                          <TaskPage />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/telesa"
+                      element={
+                        <ProtectedRoute redirectTo="/prihlaseni">
+                          <TelesaPage />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route path="/projekt" element={<AboutPage />} />
+                    <Route
+                      path="/profil"
+                      element={
+                        <ProtectedRoute redirectTo="/prihlaseni">
+                          <Profile />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/success"
+                      element={
+                        <ProtectedRoute redirectTo="/">
+                          <SuccessPage />
+                        </ProtectedRoute>
+                      }
+                    />
 
-                  {/* Redirect logged-in users from the root ("/") */}
-                  <Route
-                    path="/"
-                    element={
-                      <RedirectIfLoggedIn redirectTo="/success">
-                        <UserPage />
-                      </RedirectIfLoggedIn>
-                    }
-                  />
+                    {/* Redirect logged-in users from the root ("/") */}
+                    <Route
+                      path="/"
+                      element={
+                        <RedirectIfLoggedIn redirectTo="/success">
+                          <UserPage />
+                        </RedirectIfLoggedIn>
+                      }
+                    />
 
-                  {/* Catch-all 404 route - place this LAST */}
-                  <Route path="*" element={<NotFoundPage />} />
-                </Routes>
+                    {/* Catch-all 404 route - place this LAST */}
+                    <Route path="*" element={<NotFoundPage />} />
+                  </Routes>
+                </Suspense>
                 <Footer />
               </main>
             </Router>
