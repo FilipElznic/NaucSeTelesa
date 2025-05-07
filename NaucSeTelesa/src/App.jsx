@@ -18,7 +18,7 @@ const TelesaPage = lazy(() => import("./Components/Telesa"));
 const AboutPage = lazy(() => import("./pages/aboutPage"));
 const Profile = lazy(() => import("./Components/Profile"));
 const PomocPage = lazy(() => import("./Components/Help"));
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const NotFoundPage = lazy(() => import("./pages/notFoundpage"));
 
 // Loading component for suspense fallback
 const LoadingSpinner = () => (
