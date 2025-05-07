@@ -1,28 +1,30 @@
-import { memo } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 
-const NavItem = memo(({ to, text }) => (
+// NavItem component for the footer nav links
+const NavItem = ({ to, text }) => (
   <li>
-    <Link to={to} className="text-white px-2 hover:underline transition-colors">
+    <a href={to} className="text-gray-300 hover:text-white transition-colors">
       {text}
-    </Link>
+    </a>
   </li>
-));
+);
 
-NavItem.displayName = "NavItem";
+function Footer() {
+  // Function to get current year for copyright
+  const getCurrentYear = () => {
+    return new Date().getFullYear();
+  };
 
-const Footer = () => {
-  const getCurrentYear = () => new Date().getFullYear();
-
+  // Example nav links (replace with your actual links)
   const navLinks = [
     { to: "/", text: "Domů" },
-    { to: "/telesa", text: "Tělesa" },
-    { to: "/ukoly", text: "Úkoly" },
-    { to: "/projekt", text: "O projektu" },
+    { to: "/ochrana-osobnich-udaju", text: "Soukromí" },
+    { to: "/pomoc", text: "Kontakt" },
+    { to: "/projekt", text: "Projektu" },
   ];
 
   return (
-    <footer className="bg-transparent p-3 sm:px-[20vw] border-t border-gray-700">
+    <footer className="bg-transparent p-3 sm:px-[20vw] border-t border-gray-700 mt-auto">
       <div className="flex flex-col sm:flex-row justify-between items-center pb-3">
         {/* Logo */}
         <div className="mb-4 sm:mb-0">
@@ -52,6 +54,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+}
 
-export default memo(Footer);
+export default Footer;

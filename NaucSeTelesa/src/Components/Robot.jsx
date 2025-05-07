@@ -22,7 +22,7 @@ function Robot() {
           observer.disconnect();
         }
       },
-      { threshold: 0.01 }
+      { threshold: 0.2 }
     );
 
     observer.observe(splineRef);
@@ -40,7 +40,7 @@ function Robot() {
         timeoutId = setTimeout(() => {
           setIsDesktop(window.innerWidth >= 1024);
           timeoutId = null;
-        }, 300);
+        }, 1000);
       }
     };
 
@@ -130,13 +130,13 @@ function Robot() {
 
             {/* Mobile Content */}
             <div className="sm:flex sm:flex-col sm:justify-center sm:items-center sm:h-[90vh] text-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold userlvl">
                 Nechte se vnést <br />
                 do světa geometrie
               </h1>
               <p className="text-xl lg:text-3xl">
-                Pokud by se pro starý účel použil smysluplný text, bylo by těžké
-                hodnotit pouze umění.
+                Poznejte tvary geometrie z nové perspektivy a ovládněte jejich
+                tajemství.
               </p>
             </div>
 

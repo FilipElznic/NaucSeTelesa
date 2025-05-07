@@ -19,6 +19,7 @@ const AboutPage = lazy(() => import("./pages/aboutPage"));
 const Profile = lazy(() => import("./Components/Profile"));
 const PomocPage = lazy(() => import("./Components/Help"));
 const NotFoundPage = lazy(() => import("./pages/notFoundpage"));
+const Privacy = lazy(() => import("./pages/privacy"));
 
 // Loading component for suspense fallback
 const LoadingSpinner = () => (
@@ -83,6 +84,8 @@ function AppContent() {
             <Routes>
               {/* Public route for login */}
               <Route path="/prihlaseni" element={<LoginPage />} />
+
+              <Route path="/ochrana-osobnich-udaju" element={<Privacy />} />
 
               {/* Protected routes */}
               <Route
