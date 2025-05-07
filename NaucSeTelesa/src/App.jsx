@@ -5,8 +5,8 @@ import { AuthProvider } from "./AuthContext";
 import { ProtectedRoute, RedirectIfLoggedIn } from "./ProtectedRoute";
 import { GlobalProvider } from "./Global";
 import FadeInWrapper from "./Components/FadeInWrapper";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 
 // Lazy load all page components
 const LoginPage = lazy(() => import("./pages/loginPage"));
