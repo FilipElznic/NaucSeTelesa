@@ -3,8 +3,8 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import Robot1 from "/rukyhore.png";
-import Robot2 from "/robotlast1.png";
+import Robot1 from "/rukyhore.webp";
+import Robot2 from "/robotlast1.webp";
 
 import { toast, ToastContainer } from "react-toastify";
 
