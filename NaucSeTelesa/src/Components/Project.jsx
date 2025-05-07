@@ -41,7 +41,7 @@ function Project() {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         setIsLargeScreen(window.innerWidth > 550);
-      }, 150); // Debounce to reduce updates
+      }, 300); // Debounce to reduce updates
     };
 
     window.addEventListener("resize", handleResize);
