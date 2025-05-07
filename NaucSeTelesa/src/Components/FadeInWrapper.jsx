@@ -14,7 +14,7 @@ function FadeInWrapper({ children }) {
       // Small delay for smoother transition
       const timer = setTimeout(() => {
         setVisible(true);
-      }, 100);
+      }, 300);
 
       return () => clearTimeout(timer);
     }
@@ -22,7 +22,7 @@ function FadeInWrapper({ children }) {
 
   return (
     <div
-      className={`transition-opacity duration-300 ${
+      className={`transition-opacity duration-200 ${
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
