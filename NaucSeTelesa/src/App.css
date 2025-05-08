@@ -256,3 +256,11 @@ html {
 .formula-container:hover:after {
   opacity: 0.7;
 }
+
+/* Add these styles to your App.css or create a new CSS file */
+
+.form-container {
+  position: relative;
+  width: 100%;
+  transform: translateX(0);
+}
