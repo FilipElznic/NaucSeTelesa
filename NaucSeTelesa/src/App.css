@@ -12,14 +12,6 @@ html {
     #323232 100%
   );
 }
-.webbg {
-  background: rgb(41, 41, 41);
-  background: linear-gradient(0deg, rgb(29, 29, 29) 0%, rgba(0, 0, 0, 1) 100%);
-}
-
-.bg-quick2 {
-  background-color: #050017;
-}
 
 .features1 {
   background: linear-gradient(
@@ -34,22 +26,6 @@ html {
   background: linear-gradient(-27deg, #242424 0%, #515151 57%, #737373 100%);
 }
 
-.features3 {
-  background: rgb(20, 20, 20);
-  background: linear-gradient(160deg, #10052c 0%, #500d6a 100%);
-}
-.features4 {
-  background: rgb(20, 20, 20);
-  background: linear-gradient(160deg, #1e0a52 0%, #6d1490 100%);
-}
-
-.bg-form {
-  background-color: rgba(5, 0, 23, 0.9);
-}
-
-.bg-footer {
-  background-color: rgb(29, 29, 29);
-}
 .border-form {
   @media screen and (min-width: 1000px) {
     border-radius: 25% 10%;
