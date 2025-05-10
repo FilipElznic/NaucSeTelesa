@@ -8,7 +8,7 @@ function Work() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center pb-20">
       <h1 className="text-2xl sm:text-6xl md:text-7xl xl:text-9xl font-bold md:mb-7 text-white p-11 userlvl">
-        UKÁZKA WEBU
+        UKÁZKA PROJEKTU
       </h1>
 
       {/* Hlavní obrázek */}
