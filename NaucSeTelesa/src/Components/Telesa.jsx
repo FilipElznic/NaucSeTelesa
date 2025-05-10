@@ -109,14 +109,8 @@ const GeometricBodiesCarousel = () => {
   const visibleSlides = getVisibleSlides();
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-br from-black via-zinc-950 to-black text-white overflow-hidden">
+    <div className="relative w-full h-full bg-transparent text-white overflow-hidden">
       {/* Nadpis s efektem záře */}
-      <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-transparent bg-clip-text userlvl text-center relative pt-6">
-        Geometrická tělesa
-        <div className="absolute inset-0 blur-md opacity-50 bg-clip-text userlvl z-[-1] pt-6">
-          Geometrická tělesa
-        </div>
-      </h1>
 
       {/* Karusel */}
       <div className="relative w-full h-4/5">

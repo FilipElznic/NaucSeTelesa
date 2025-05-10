@@ -14,7 +14,7 @@ const SuccessPage = lazy(() => import("./pages/successPage"));
 const TailwindTest = lazy(() => import("./pages/TailwindTest"));
 const UserPage = lazy(() => import("./pages/userpage"));
 const TaskPage = lazy(() => import("./pages/taskPage"));
-const TelesaPage = lazy(() => import("./Components/Telesa"));
+const TelesaPage = lazy(() => import("./pages/telesaPage"));
 const AboutPage = lazy(() => import("./pages/aboutPage"));
 const Profile = lazy(() => import("./Components/Profile"));
 const PomocPage = lazy(() => import("./Components/Help"));
