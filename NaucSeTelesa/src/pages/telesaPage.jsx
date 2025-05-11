@@ -31,8 +31,11 @@ function TelesaPage() {
         </div>
       </div>
 
-      <div className="h-[60vh] w-full bg-zinc-800">
-        <div className="h-1 w-full bg-white"></div>
+      <div className="h-[60vh] w-full bg-zinc ">
+        <div className="flex justify-center ">
+          <div className="h-1  w-3/4 bg-white "></div>
+        </div>
+        <div className="w-full h-full bg-white"></div>
       </div>
       <Telesa />
 
