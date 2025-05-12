@@ -129,7 +129,7 @@ const GeometricBodiesCarousel = () => {
                 onClick={() => !isMobile && idx !== 1 && goToSlide(item.index)}
               >
                 <div
-                  className={`usergradient rounded-lg shadow-lg h-full overflow-hidden cursor-pointer flex flex-col ${
+                  className={`bg-zinc-900 rounded-lg shadow-lg h-full overflow-hidden cursor-pointer flex flex-col ${
                     isMobile || idx === 1
                       ? "border-2 border-purple-400 shadow-purple-500/50"
                       : "border border-purple-500/20"
@@ -311,7 +311,7 @@ const GeometricBodiesCarousel = () => {
       {/* Modální okno s detailem */}
       {isModalOpen && selectedBody && (
         <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-4 z-50">
-          <div className="usergradient rounded-lg p-4 md:p-6 w-full max-w-5xl max-h-[90vh] overflow-y-auto relative border border-purple-500/30">
+          <div className="bg-zinc-900 rounded-lg p-4 md:p-6 w-full max-w-5xl max-h-[90vh] overflow-y-auto relative border border-purple-500/30">
             {/* Tlačítko pro zavření - upraveno na střed s ikonou X */}
 
             <button
@@ -330,7 +330,7 @@ const GeometricBodiesCarousel = () => {
             {selectedBody.spline_url ? (
               <div className="relative rounded-xl overflow-hidden border border-purple-500/20">
                 {isSplineLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/70 rounded-lg z-10">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black rounded-lg z-10">
                     <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
                   </div>
                 )}
