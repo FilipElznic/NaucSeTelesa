@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 
-const DollarCube = () => {
+const BinaryCube = () => {
   const [faces, setFaces] = useState({
-    front: "", // $ characters
-    back: "", // + characters
-    right: "", // # characters
-    left: "", // @ characters
-    top: "", // * characters
-    bottom: "", // % characters
+    front: "", // Face 1
+    back: "", // Face 2
+    right: "", // Face 3
+    left: "", // Face 4
+    top: "", // Face 5
+    bottom: "", // Face 6
   });
 
   useEffect(() => {
-    // Generate pattern of characters for each face
-    const generateCharPattern = (primaryChar) => {
+    // Generate pattern of 1s and 0s for each face
+    const generateBinaryPattern = () => {
       let pattern = "";
 
       // Generate 40 rows of characters for density
@@ -20,27 +20,17 @@ const DollarCube = () => {
         let rowLength = 40;
         let row = "";
 
-        // Create density pattern similar to the image
+        // Create density pattern with only 1s and 0s
         for (let j = 0; j < rowLength; j++) {
-          // Higher probability of primary char in center, more alternates toward edges
+          // Higher probability of 1s in center, more 0s toward edges
           const distFromCenter = Math.abs(j - rowLength / 2);
 
           if (distFromCenter < rowLength / 4) {
-            row += Math.random() < 0.7 ? primaryChar : ".";
+            row += Math.random() < 0.7 ? "1" : "0";
           } else if (distFromCenter < rowLength / 2) {
-            row +=
-              Math.random() < 0.5
-                ? primaryChar
-                : Math.random() < 0.7
-                ? "."
-                : "+";
+            row += Math.random() < 0.5 ? "1" : "0";
           } else {
-            row +=
-              Math.random() < 0.3
-                ? primaryChar
-                : Math.random() < 0.5
-                ? "."
-                : "+";
+            row += Math.random() < 0.3 ? "1" : "0";
           }
         }
         pattern += row + "\n";
@@ -48,48 +38,48 @@ const DollarCube = () => {
       return pattern;
     };
 
-    // Generate different patterns for each face
+    // Generate different binary patterns for each face
     setFaces({
-      front: generateCharPattern("$"),
-      back: generateCharPattern("+"),
-      right: generateCharPattern("#"),
-      left: generateCharPattern("@"),
-      top: generateCharPattern("*"),
-      bottom: generateCharPattern("%"),
+      front: generateBinaryPattern(),
+      back: generateBinaryPattern(),
+      right: generateBinaryPattern(),
+      left: generateBinaryPattern(),
+      top: generateBinaryPattern(),
+      bottom: generateBinaryPattern(),
     });
   }, []);
 
   return (
     <div className="flex items-center justify-center h-full">
       <div className="perspective">
-        <div className="cube">
+        <div className="cube ">
           <div className="face front">
-            <pre className="text-xs leading-none text-white font-mono whitespace-pre">
+            <pre className="text-xs leading-none font-mono userlvl whitespace-pre">
               {faces.front}
             </pre>
           </div>
           <div className="face back">
-            <pre className="text-xs leading-none text-white font-mono whitespace-pre">
+            <pre className="text-xs leading-none userlvl font-mono whitespace-pre">
               {faces.back}
             </pre>
           </div>
           <div className="face right">
-            <pre className="text-xs leading-none text-white font-mono whitespace-pre">
+            <pre className="text-xs leading-none userlvl font-mono whitespace-pre">
               {faces.right}
             </pre>
           </div>
           <div className="face left">
-            <pre className="text-xs leading-none text-white font-mono whitespace-pre">
+            <pre className="text-xs leading-none userlvl font-mono whitespace-pre">
               {faces.left}
             </pre>
           </div>
           <div className="face top">
-            <pre className="text-xs leading-none text-white font-mono whitespace-pre">
+            <pre className="text-xs leading-none userlvl font-mono whitespace-pre">
               {faces.top}
             </pre>
           </div>
           <div className="face bottom">
-            <pre className="text-xs leading-none text-white font-mono whitespace-pre">
+            <pre className="text-xs leading-none userlvl font-mono whitespace-pre">
               {faces.bottom}
             </pre>
           </div>
@@ -166,4 +156,4 @@ const DollarCube = () => {
   );
 };
 
-export default DollarCube;
+export default BinaryCube;
