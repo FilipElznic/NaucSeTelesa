@@ -109,7 +109,7 @@ const GeometricBodiesCarousel = () => {
   const visibleSlides = getVisibleSlides();
 
   return (
-    <div className="relative w-full h-full bg-transparent text-white overflow-hidden">
+    <div className="relative w-full h-full bg-transparent text-white overflow-hidden mb-10">
       {/* Nadpis s efektem záře */}
 
       {/* Karusel */}

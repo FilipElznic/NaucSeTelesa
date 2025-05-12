@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 
 const DollarCube = () => {
-  const [characters, setCharacters] = useState("");
+  const [faces, setFaces] = useState({
+    front: "", // $ characters
+    back: "", // + characters
+    right: "", // # characters
+    left: "", // @ characters
+    top: "", // * characters
+    bottom: "", // % characters
+  });
 
   useEffect(() => {
-    // Generate pattern of $ and + characters similar to the image
-    const generateCharPattern = () => {
-      const chars = ["$", "+", "."];
+    // Generate pattern of characters for each face
+    const generateCharPattern = (primaryChar) => {
       let pattern = "";
 
       // Generate 40 rows of characters for density
@@ -16,15 +22,25 @@ const DollarCube = () => {
 
         // Create density pattern similar to the image
         for (let j = 0; j < rowLength; j++) {
-          // Higher probability of $ in center, more + and . toward edges
+          // Higher probability of primary char in center, more alternates toward edges
           const distFromCenter = Math.abs(j - rowLength / 2);
 
           if (distFromCenter < rowLength / 4) {
-            row += Math.random() < 0.7 ? "$" : "+";
+            row += Math.random() < 0.7 ? primaryChar : ".";
           } else if (distFromCenter < rowLength / 2) {
-            row += Math.random() < 0.5 ? "$" : Math.random() < 0.7 ? "+" : ".";
+            row +=
+              Math.random() < 0.5
+                ? primaryChar
+                : Math.random() < 0.7
+                ? "."
+                : "+";
           } else {
-            row += Math.random() < 0.3 ? "$" : Math.random() < 0.5 ? "+" : ".";
+            row +=
+              Math.random() < 0.3
+                ? primaryChar
+                : Math.random() < 0.5
+                ? "."
+                : "+";
           }
         }
         pattern += row + "\n";
@@ -32,41 +48,49 @@ const DollarCube = () => {
       return pattern;
     };
 
-    setCharacters(generateCharPattern());
+    // Generate different patterns for each face
+    setFaces({
+      front: generateCharPattern("$"),
+      back: generateCharPattern("+"),
+      right: generateCharPattern("#"),
+      left: generateCharPattern("@"),
+      top: generateCharPattern("*"),
+      bottom: generateCharPattern("%"),
+    });
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-black">
+    <div className="flex items-center justify-center h-full">
       <div className="perspective">
         <div className="cube">
           <div className="face front">
             <pre className="text-xs leading-none text-white font-mono whitespace-pre">
-              {characters}
+              {faces.front}
             </pre>
           </div>
           <div className="face back">
             <pre className="text-xs leading-none text-white font-mono whitespace-pre">
-              {characters}
+              {faces.back}
             </pre>
           </div>
           <div className="face right">
             <pre className="text-xs leading-none text-white font-mono whitespace-pre">
-              {characters}
+              {faces.right}
             </pre>
           </div>
           <div className="face left">
             <pre className="text-xs leading-none text-white font-mono whitespace-pre">
-              {characters}
+              {faces.left}
             </pre>
           </div>
           <div className="face top">
             <pre className="text-xs leading-none text-white font-mono whitespace-pre">
-              {characters}
+              {faces.top}
             </pre>
           </div>
           <div className="face bottom">
             <pre className="text-xs leading-none text-white font-mono whitespace-pre">
-              {characters}
+              {faces.bottom}
             </pre>
           </div>
         </div>
@@ -74,7 +98,7 @@ const DollarCube = () => {
 
       <style jsx>{`
         .perspective {
-          perspective: 1000px;
+          perspective: 500px;
           width: 200px;
           height: 200px;
           margin: 100px auto;
