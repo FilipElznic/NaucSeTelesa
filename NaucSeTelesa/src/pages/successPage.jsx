@@ -122,6 +122,7 @@ function SuccessPage() {
   return (
     <div className="success-page">
       {/* Tailwind Section */}
+
       <div
         ref={sectionRefs.tailwind}
         data-component-id="tailwind"
@@ -130,6 +131,7 @@ function SuccessPage() {
         {loadSequence.tailwind.loading && (
           <FadeInWrapper>
             <Suspense fallback={<ComponentLoader />}>
+              <InfoForm />
               <Tailwind onLoaded={() => handleComponentLoaded("tailwind")} />
             </Suspense>
           </FadeInWrapper>

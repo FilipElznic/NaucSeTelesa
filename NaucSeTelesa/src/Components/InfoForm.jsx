@@ -7,12 +7,33 @@ function InfoForm() {
   const [jmeno, setJmeno] = useState("");
   const [prijmeni, setPrijmeni] = useState("");
   const [prezdivka, setPrezdivka] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [formError, setFormError] = useState(null);
+
+  // Form validation states
+  const [errors, setErrors] = useState({
+    jmeno: "",
+    prijmeni: "",
+    prezdivka: "",
+  });
+
+  // Calculate progress
+  const [progress, setProgress] = useState(0);
+
+  // Debug logs to help troubleshoot
+  useEffect(() => {
+    console.log("InfoForm rendered");
+    console.log("Auth user:", authUser);
+    console.log("User data:", userData);
+    console.log("Loading state:", loading);
+    console.log("isVisible state:", isVisible);
+  }, [authUser, userData, loading, isVisible]);
 
   // Check if user is available and pre-fill name and surname from userData
   useEffect(() => {
     if (authUser && userData) {
-      if (authUser.app_metadata.provider === "google") {
+      console.log("Prefilling form data from user profile");
+      if (authUser.app_metadata?.provider === "google") {
         const fullName = userData.name || "";
         const nameParts = fullName.split(" ");
         setJmeno(nameParts[0] || ""); // First name
@@ -29,6 +50,7 @@ function InfoForm() {
     async function fetchData() {
       try {
         if (authUser) {
+          console.log("Checking if name is already set for user:", authUser.id);
           const { data, error } = await supabase
             .from("user")
             .select("nameSet")
@@ -37,22 +59,102 @@ function InfoForm() {
 
           if (error) {
             console.error("Error fetching data:", error);
+            setFormError("Couldn't check if your profile is complete.");
           } else if (data) {
+            console.log("Name set status:", data.nameSet);
             setIsVisible(!data.nameSet);
           }
         }
       } catch (error) {
         console.error("Unexpected error:", error);
+        setFormError("An unexpected error occurred.");
       }
     }
     fetchData();
   }, [authUser]);
 
+  // Update progress when fields change
+  useEffect(() => {
+    const validateField = (value) => {
+      return (
+        value.length >= 3 && value.length <= 25 && /^[a-zA-Z0-9_]+$/.test(value)
+      );
+    };
+
+    let validFields = 0;
+    const totalFields = 3;
+
+    if (validateField(jmeno)) validFields++;
+    if (validateField(prijmeni)) validFields++;
+    if (validateField(prezdivka)) validFields++;
+
+    setProgress((validFields / totalFields) * 100);
+  }, [jmeno, prijmeni, prezdivka]);
+
+  // Validate input fields
+  const validateInput = (field, value) => {
+    if (value.length < 3) {
+      return `Musí obsahovat alespoň 3 znaky`;
+    } else if (value.length > 25) {
+      return `Maximálně 25 znaků`;
+    } else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+      return `Pouze písmena, čísla a podtržítko`;
+    }
+    return "";
+  };
+
+  const handleInputChange = (field, value) => {
+    // Only allow valid characters
+    const sanitizedValue = value.replace(/[^a-zA-Z0-9_]/g, "");
+
+    // Update state based on field
+    switch (field) {
+      case "jmeno":
+        setJmeno(sanitizedValue);
+        setErrors({ ...errors, jmeno: validateInput(field, sanitizedValue) });
+        break;
+      case "prijmeni":
+        setPrijmeni(sanitizedValue);
+        setErrors({
+          ...errors,
+          prijmeni: validateInput(field, sanitizedValue),
+        });
+        break;
+      case "prezdivka":
+        setPrezdivka(sanitizedValue);
+        setErrors({
+          ...errors,
+          prezdivka: validateInput(field, sanitizedValue),
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log("Form submitted");
+
+    // Validate all fields
+    const jmenoError = validateInput("jmeno", jmeno);
+    const prijmeniError = validateInput("prijmeni", prijmeni);
+    const prezdivkaError = validateInput("prezdivka", prezdivka);
+
+    setErrors({
+      jmeno: jmenoError,
+      prijmeni: prijmeniError,
+      prezdivka: prezdivkaError,
+    });
+
+    // If any errors, prevent submission
+    if (jmenoError || prijmeniError || prezdivkaError) {
+      return;
+    }
 
     if (!authUser) {
       console.error("No authenticated user found.");
+      setFormError("You must be logged in to complete your profile.");
       return;
     }
 
@@ -63,23 +165,31 @@ function InfoForm() {
           name: jmeno,
           surname: prijmeni,
           nickname: prezdivka,
+          nameSet: true, // Set nameSet to true directly here
         })
         .eq("authid", authUser.id);
 
       if (error) {
         console.error("Error updating data:", error);
+        setFormError("Failed to update your profile. Please try again.");
       } else {
         console.log("Data updated successfully:", data);
+        setIsVisible(false); // Hide the form locally
         window.location.href = "/";
       }
     } catch (error) {
       console.error("Unexpected error during form submission:", error);
+      setFormError("An unexpected error occurred.");
     }
-    Zavri();
   }
 
-  const Zavri = async () => {
+  const handleZavri = async () => {
     try {
+      if (!authUser) {
+        console.error("No authenticated user found.");
+        return;
+      }
+
       const { data, error } = await supabase
         .from("user")
         .update({ nameSet: true })
@@ -97,10 +207,6 @@ function InfoForm() {
     }
   };
 
-  const handleHide = () => {
-    Zavri();
-  };
-
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -109,10 +215,19 @@ function InfoForm() {
     );
   }
 
+  // Always render a container, even if isVisible is false
   return (
-    <>
+    <div className="info-form-container">
+      {formError && (
+        <div className="fixed inset-x-0 top-4 flex justify-center">
+          <div className="bg-red-500 text-white px-4 py-2 rounded shadow-lg">
+            {formError}
+          </div>
+        </div>
+      )}
+
       {isVisible && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 ">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
           <div className="w-full max-w-4xl bg-zinc-900 rounded-2xl shadow-2xl overflow-hidden relative">
             <div className="flex flex-col md:flex-row">
               {/* Left Side - Welcome Message */}
@@ -120,18 +235,79 @@ function InfoForm() {
                 <h1 className="text-2xl md:text-4xl font-bold text-white mb-4">
                   Skvělé, že jste se zaregistrovali!
                 </h1>
-                <p className="text-base md:text-xl text-gray-300">
+                <p className="text-base md:text-xl text-gray-300 mb-8">
                   Abychom vám mohli nabídnout co nejlepší, potřebujeme od vás
                   ještě pár drobných informací.
                 </p>
+
+                {/* Progress section */}
+                <div className="mb-6">
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm text-gray-300">
+                      Úplnost profilu
+                    </span>
+                    <span className="text-sm text-gray-300">
+                      {Math.round(progress)}%
+                    </span>
+                  </div>
+                  <div className="w-full bg-zinc-800 rounded-full h-2.5">
+                    <div
+                      className="bg-purple-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                </div>
+
+                {/* Requirements list */}
+                <div className="mt-4 bg-zinc-800 p-4 rounded-lg">
+                  <h3 className="text-white font-medium mb-2">
+                    Pravidla pro vyplnění:
+                  </h3>
+                  <ul className="text-gray-300 text-sm space-y-1">
+                    <li className="flex items-center">
+                      <svg
+                        className="w-4 h-4 mr-2 text-green-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M5 13l4 4L19 7"
+                        ></path>
+                      </svg>
+                      3-25 znaků
+                    </li>
+                    <li className="flex items-center">
+                      <svg
+                        className="w-4 h-4 mr-2 text-green-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M5 13l4 4L19 7"
+                        ></path>
+                      </svg>
+                      Pouze písmena, čísla a podtržítko
+                    </li>
+                  </ul>
+                </div>
               </div>
 
               {/* Right Side - Form */}
               <div className="w-full md:w-1/2 bg-zinc-900 p-6 md:p-10 md:relative">
                 {/* Close Button */}
                 <button
-                  onClick={handleHide}
-                  className="absolute  top-4 right-4 text-white hover:text-gray-300 transition-colors"
+                  onClick={handleZavri}
+                  className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
                   aria-label="Zavřít"
                 >
                   <svg
@@ -152,7 +328,7 @@ function InfoForm() {
 
                 {/* Form Inputs */}
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-4">
                     <div>
                       <label
                         htmlFor="jmeno"
@@ -164,11 +340,22 @@ function InfoForm() {
                         id="jmeno"
                         type="text"
                         value={jmeno}
-                        onChange={(e) => setJmeno(e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("jmeno", e.target.value)
+                        }
                         placeholder="Karel"
                         required
-                        className="w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-600"
+                        className={`w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 ${
+                          errors.jmeno
+                            ? "border border-red-500 focus:ring-red-500"
+                            : "focus:ring-purple-600"
+                        }`}
                       />
+                      {errors.jmeno && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.jmeno}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label
@@ -181,11 +368,22 @@ function InfoForm() {
                         id="prijmeni"
                         type="text"
                         value={prijmeni}
-                        onChange={(e) => setPrijmeni(e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("prijmeni", e.target.value)
+                        }
                         placeholder="Novák"
                         required
-                        className="w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-600"
+                        className={`w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 ${
+                          errors.prijmeni
+                            ? "border border-red-500 focus:ring-red-500"
+                            : "focus:ring-purple-600"
+                        }`}
                       />
+                      {errors.prijmeni && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.prijmeni}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -200,20 +398,37 @@ function InfoForm() {
                       id="prezdivka"
                       type="text"
                       value={prezdivka}
-                      onChange={(e) => setPrezdivka(e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("prezdivka", e.target.value)
+                      }
                       placeholder="KarelNovak123"
                       required
-                      className="w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      className={`w-full h-12 px-4 bg-zinc-800 text-white rounded-full focus:outline-none focus:ring-2 ${
+                        errors.prezdivka
+                          ? "border border-red-500 focus:ring-red-500"
+                          : "focus:ring-purple-600"
+                      }`}
                     />
+                    {errors.prezdivka && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.prezdivka}
+                      </p>
+                    )}
                   </div>
 
-                  <div className="flex justify-center mt-6">
+                  <div className="flex justify-center mt-8">
                     <button
                       type="submit"
-                      className="w-full md:w-1/2 h-12 bg-purple-950 text-white rounded-full hover:bg-purple-900 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-600"
-                      onClick={Zavri()}
+                      disabled={progress < 100}
+                      className={`w-full h-12 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-600 ${
+                        progress < 100
+                          ? "bg-gray-600 text-gray-300 cursor-not-allowed"
+                          : "bg-purple-600 text-white hover:bg-purple-700"
+                      }`}
                     >
-                      Začít objevovat
+                      {progress < 100
+                        ? "Dokončete registraci"
+                        : "Začít objevovat"}
                     </button>
                   </div>
                 </form>
@@ -222,7 +437,7 @@ function InfoForm() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
