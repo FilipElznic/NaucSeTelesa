@@ -133,21 +133,6 @@ html {
   border-right: 2px solid white;
   animation: typing 3s steps(30, end), blink 1s step-end infinite;
 }
-.bgplanet {
-  background-image: url("best.webp");
-  background-repeat: no-repeat;
-  background-color: rgb(20, 20, 20); /* Ensure transparency */
-  background-size: cover;
-  background-position: center;
-  background-color: black;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
 
 .usergradient-glow {
   box-shadow: 0 0 2px 0px rgba(102, 102, 102, 0.8);
