@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 
 const BinaryCube = () => {
   const [faces, setFaces] = useState({
-    front: "", // Face 1
-    back: "", // Face 2
-    right: "", // Face 3
-    left: "", // Face 4
-    top: "", // Face 5
-    bottom: "", // Face 6
+    front: "",
+    back: "",
+    right: "",
+    left: "",
+    top: "",
+    bottom: "",
   });
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const BinaryCube = () => {
   return (
     <div className="flex items-center justify-center h-full">
       <div className="perspective">
-        <div className="cube ">
+        <div className="cube">
           <div className="face front">
             <pre className="text-xs leading-none font-mono userlvl whitespace-pre">
               {faces.front}
@@ -86,7 +86,10 @@ const BinaryCube = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      {/* Fixed the styled-jsx issue by using a string instead of boolean */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         .perspective {
           perspective: 500px;
           width: 200px;
@@ -151,7 +154,9 @@ const BinaryCube = () => {
             transform: rotateX(20deg) rotateY(360deg);
           }
         }
-      `}</style>
+      `,
+        }}
+      />
     </div>
   );
 };

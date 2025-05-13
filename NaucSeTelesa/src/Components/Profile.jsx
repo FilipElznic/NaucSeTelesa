@@ -127,10 +127,10 @@ function Profile() {
 
       if (deleteUserError) {
         console.error("Error deleting user record:", deleteUserError.message);
-        toast.error("Chyba při mazání účtu.");
+        toast.error("Chyba při mazání účtu.", deleteUserError.message);
         return;
       }
-
+      console.log(userData);
       // Sign out from Supabase Auth
       const { error: signOutError } = await supabase.auth.signOut();
 
@@ -139,7 +139,7 @@ function Profile() {
         toast.error("Účet byl smazán, ale nepodařilo se odhlásit.");
       } else {
         // Reset auth state in the app
-        setAuthUser(null);
+
         toast.success("Váš účet byl úspěšně smazán.");
         // Redirect to homepage after a short delay
         setTimeout(() => {
