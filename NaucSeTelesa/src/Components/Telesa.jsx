@@ -25,7 +25,7 @@ const GeometricBodiesCarousel = () => {
         console.error("Chyba při načítání geometrických těles:", error);
       } else {
         setBodies(data);
-        console.log("Načtená geometrická tělesa:", data);
+      
       }
       setLoading(false);
     };

@@ -130,7 +130,7 @@ function Profile() {
         toast.error("Chyba při mazání účtu.", deleteUserError.message);
         return;
       }
-      console.log(userData);
+
       // Sign out from Supabase Auth
       const { error: signOutError } = await supabase.auth.signOut();
 

@@ -20,19 +20,9 @@ function InfoForm() {
   // Calculate progress
   const [progress, setProgress] = useState(0);
 
-  // Debug logs to help troubleshoot
-  useEffect(() => {
-    console.log("InfoForm rendered");
-    console.log("Auth user:", authUser);
-    console.log("User data:", userData);
-    console.log("Loading state:", loading);
-    console.log("isVisible state:", isVisible);
-  }, [authUser, userData, loading, isVisible]);
-
   // Check if user is available and pre-fill name and surname from userData
   useEffect(() => {
     if (authUser && userData) {
-      console.log("Prefilling form data from user profile");
       if (authUser.app_metadata?.provider === "google") {
         const fullName = userData.name || "";
         const nameParts = fullName.split(" ");
@@ -50,7 +40,6 @@ function InfoForm() {
     async function fetchData() {
       try {
         if (authUser) {
-          console.log("Checking if name is already set for user:", authUser.id);
           const { data, error } = await supabase
             .from("user")
             .select("nameSet")
@@ -61,7 +50,6 @@ function InfoForm() {
             console.error("Error fetching data:", error);
             setFormError("Couldn't check if your profile is complete.");
           } else if (data) {
-            console.log("Name set status:", data.nameSet);
             setIsVisible(!data.nameSet);
           }
         }
@@ -134,7 +122,6 @@ function InfoForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Form submitted");
 
     // Validate all fields
     const jmenoError = validateInput("jmeno", jmeno);
@@ -170,10 +157,8 @@ function InfoForm() {
         .eq("authid", authUser.id);
 
       if (error) {
-        console.error("Error updating data:", error);
         setFormError("Failed to update your profile. Please try again.");
       } else {
-        console.log("Data updated successfully:", data);
         setIsVisible(false); // Hide the form locally
         window.location.href = "/";
       }
@@ -186,7 +171,6 @@ function InfoForm() {
   const handleZavri = async () => {
     try {
       if (!authUser) {
-        console.error("No authenticated user found.");
         return;
       }
 
@@ -200,7 +184,6 @@ function InfoForm() {
         return;
       }
 
-      console.log("Update successful:", data);
       setIsVisible(false);
     } catch (err) {
       console.error("Unexpected error:", err);

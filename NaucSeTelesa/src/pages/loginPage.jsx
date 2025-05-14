@@ -37,7 +37,6 @@ function CustomLoginPage() {
       if (event === "SIGNED_IN" && session) {
         handleUserData(session);
       } else if (event === "SIGNED_OUT") {
-        console.log("User signed out");
       }
     });
 
@@ -63,11 +62,7 @@ function CustomLoginPage() {
 
         if (insertError) {
           console.error("Error inserting user data:", insertError.message);
-        } else {
-          console.log("User data inserted successfully");
         }
-      } else {
-        console.log("User already exists, no data inserted");
       }
 
       navigate("/success");

@@ -9,6 +9,3 @@ createRoot(document.getElementById("root")).render(<App />);
 if (window.loadingFallbackTimeout) {
   clearTimeout(window.loadingFallbackTimeout);
 }
-
-// Note: We don't hide the loading animation here anymore
-// It will be handled by the App component once everything is properly loaded

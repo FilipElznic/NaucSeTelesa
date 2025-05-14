@@ -26,7 +26,7 @@ function TaskLayout() {
       console.error("Error resetting tasks:", error);
     }
     window.location.href = "/ukoly"; // Redirect to the tasks page
-    console.log("Tasks reset successfully!");
+
     toast.success("Úkoly byly úspěšně obnoveny!");
   };
 

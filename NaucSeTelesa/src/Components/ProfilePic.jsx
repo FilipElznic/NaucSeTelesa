@@ -1,11 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "../supabaseClient";
 import { useGlobalData } from "../Global";
-import {
-  DocumentIcon,
-  PhotoIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { PhotoIcon } from "@heroicons/react/24/outline";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -133,48 +129,6 @@ function ProfilePic() {
   };
 
   // Delete profile picture
-  const deleteProfilePicture = async () => {
-    if (!authUser || !userData?.img) {
-      toast.error("Žádný profilový obrázek k odstranění.");
-      return;
-    }
-
-    try {
-      setIsUploading(true);
-
-      // Delete the file from storage
-      const { error: deleteError } = await supabase.storage
-        .from(STORAGE_BUCKET)
-        .remove([userData.img]);
-
-      if (deleteError) {
-        console.error("Error deleting file:", deleteError.message);
-        toast.error("Chyba při odstraňování obrázku.");
-        return;
-      }
-
-      // Update the user record in the database
-      const { error: updateError } = await supabase
-        .from("user")
-        .update({ img: "guest1.png" })
-        .eq("id", userData.id);
-
-      if (updateError) {
-        console.error("Error updating user:", updateError.message);
-        toast.error("Chyba při aktualizaci uživatele.");
-        return;
-      }
-
-      // Update UI
-      setProfilePictureUrl(null);
-      toast.success("Profilový obrázek byl úspěšně odstraněn.");
-    } catch (error) {
-      console.error("Unexpected error:", error);
-      toast.error("Neočekávaná chyba při odstraňování obrázku.");
-    } finally {
-      setIsUploading(false);
-    }
-  };
 
   // Upload profile picture
   const uploadProfilePicture = async () => {
@@ -268,14 +222,6 @@ function ProfilePic() {
             alt="Profile"
             className="rounded-full w-52 h-52 mb-6 shadow-lg border-4 border-blue-500 hover:border-purple-600 transition-all object-cover"
           />
-          <button
-            onClick={deleteProfilePicture}
-            disabled={isUploading}
-            className="absolute -top-2 -right-2 bg-red-500 rounded-full p-1 hover:bg-red-600 transition-colors"
-            title="Odstranit profilový obrázek"
-          >
-            <TrashIcon className="w-4 h-4 text-white" />
-          </button>
         </div>
       ) : isFileSelected && previewUrl ? (
         <div className="mb-6">
