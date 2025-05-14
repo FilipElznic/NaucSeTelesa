@@ -1,5 +1,10 @@
 import ProfilePic from "./ProfilePic";
-import { PencilIcon, XMarkIcon, UserIcon } from "@heroicons/react/24/outline";
+import {
+  PencilIcon,
+  XMarkIcon,
+  UserIcon,
+  CheckIcon,
+} from "@heroicons/react/24/outline";
 import { useGlobalData } from "../Global";
 import { supabase } from "../supabaseClient";
 import { useState, useEffect } from "react";
@@ -139,7 +144,6 @@ function Profile() {
         toast.error("Účet byl smazán, ale nepodařilo se odhlásit.");
       } else {
         // Reset auth state in the app
-
         toast.success("Váš účet byl úspěšně smazán.");
         // Redirect to homepage after a short delay
         setTimeout(() => {
@@ -156,117 +160,154 @@ function Profile() {
 
   // Form fields configuration for cleaner rendering
   const fields = [
-    { key: "name", label: "Jméno" },
-    { key: "surname", label: "Příjmení" },
-    { key: "nickname", label: "Přezdívka" },
+    { key: "name", label: "Jméno", icon: <UserIcon className="w-5 h-5" /> },
+    {
+      key: "surname",
+      label: "Příjmení",
+      icon: <UserIcon className="w-5 h-5" />,
+    },
+    {
+      key: "nickname",
+      label: "Přezdívka",
+      icon: <UserIcon className="w-5 h-5" />,
+    },
   ];
 
   if (loading || fetching) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-white">
+      <div className="min-h-screen flex items-center justify-center  text-white">
         <div className="animate-pulse flex space-x-2">
-          <div className="h-3 w-3 bg-white rounded-full"></div>
-          <div className="h-3 w-3 bg-white rounded-full"></div>
-          <div className="h-3 w-3 bg-white rounded-full"></div>
+          <div className="h-3 w-3 bg-blue-400 rounded-full"></div>
+          <div className="h-3 w-3 bg-purple-400 rounded-full"></div>
+          <div className="h-3 w-3 bg-blue-400 rounded-full"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <>
-      <div className="min-h-screen flex flex-col items-center justify-center text-white px-4 py-8">
-        <div className="bg-black text-white p-6 rounded-xl shadow-2xl w-full max-w-4xl usergradient">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Váš profil
-            </h2>
-            <XMarkIcon
-              className="cursor-pointer w-6 h-6 text-white hover:text-gray-300 transition-colors"
-              onClick={() => (window.location.href = "/")}
-            />
-          </div>
+    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header with close button */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Váš profil
+          </h1>
+          <button
+            onClick={() => (window.location.href = "/")}
+            className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+          >
+            <XMarkIcon className="w-6 h-6 text-white" />
+          </button>
+        </div>
 
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Profile picture section */}
-            <div className="w-full md:w-1/2 flex flex-col items-center">
-              <ProfilePic />
-            </div>
-
-            {/* Profile details section */}
-            <div className="w-full md:w-1/2 flex flex-col justify-center space-y-4">
-              <div className="bg-gray-800 bg-opacity-30 p-5 rounded-lg shadow-inner">
-                {fields.map((field) => (
-                  <div className="mb-4" key={field.key}>
-                    <label className="block text-sm font-medium mb-1 text-gray-300">
-                      {field.label}
-                      <div className="flex items-center mt-2">
-                        <input
-                          type="text"
-                          value={formData[field.key]}
-                          onChange={(e) =>
-                            handleInputChange(field.key, e.target.value)
-                          }
-                          className={`w-full p-2 rounded-lg bg-gray-700 bg-opacity-50 border text-white transition-all focus:outline-none focus:ring-2 ${
-                            editing[field.key]
-                              ? "border-blue-500 ring-blue-500"
-                              : "border-gray-600"
-                          }`}
-                          readOnly={!editing[field.key]}
-                        />
-                        <PencilIcon
-                          className="cursor-pointer w-5 h-5 text-white hover:text-blue-400 transition-colors ml-2 flex-shrink-0"
-                          onClick={() => handleEditToggle(field.key)}
-                        />
-                      </div>
-                    </label>
+        {/* Main content card */}
+        <div className="usergradient rounded-2xl shadow-2xl overflow-hidden">
+          <div className="p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Profile picture section */}
+              <div className="lg:col-span-1 flex flex-col items-center justify-start">
+                <div className=" p-4 rounded-2xl w-full">
+                  <div className="mb-6">
+                    <ProfilePic />
                   </div>
-                ))}
+                </div>
 
-                <button
-                  className="w-full p-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium mt-4 hover:opacity-90 transition-all transform hover:scale-105"
-                  onClick={handleSaveChanges}
-                >
-                  Uložit změny
-                </button>
+                {/* Delete account button positioned at bottom left */}
+                <div className="mt-auto pt-6 self-start">
+                  {!showDeleteConfirm ? (
+                    <button
+                      onClick={() => setShowDeleteConfirm(true)}
+                      className="px-4 py-2 text-sm rounded-lg bg-red-900/30 border border-red-600/50 text-red-400 font-medium hover:bg-red-800/40 transition-colors"
+                    >
+                      Smazat účet
+                    </button>
+                  ) : (
+                    <div className="bg-red-900/30 p-4 rounded-lg border border-red-500/50 max-w-xs">
+                      <p className="text-sm mb-3 text-red-200">
+                        Opravdu chcete smazat svůj účet? Tato akce je nevratná.
+                      </p>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={handleDeleteAccount}
+                          className="w-1/2 p-2 text-sm rounded bg-red-600 hover:bg-red-700 text-white transition-colors"
+                        >
+                          Ano, smazat
+                        </button>
+                        <button
+                          onClick={() => setShowDeleteConfirm(false)}
+                          className="w-1/2 p-2 text-sm rounded bg-gray-600 hover:bg-gray-700 text-white transition-colors"
+                        >
+                          Zrušit
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
-              {/* Delete account section */}
-              <div className="mt-6">
-                {!showDeleteConfirm ? (
-                  <button
-                    onClick={() => setShowDeleteConfirm(true)}
-                    className="w-full p-3 rounded-lg bg-red-500 bg-opacity-80 text-white font-medium hover:bg-red-600 transition-colors"
-                  >
-                    Smazat účet
-                  </button>
-                ) : (
-                  <div className="bg-red-900 bg-opacity-30 p-4 rounded-lg border border-red-500">
-                    <p className="text-sm mb-3 text-center">
-                      Opravdu chcete smazat svůj účet? Tato akce je nevratná.
-                    </p>
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={handleDeleteAccount}
-                        className="w-1/2 p-2 rounded bg-red-600 hover:bg-red-700 text-white transition-colors"
-                      >
-                        Ano, smazat
-                      </button>
-                      <button
-                        onClick={() => setShowDeleteConfirm(false)}
-                        className="w-1/2 p-2 rounded bg-gray-600 hover:bg-gray-700 text-white transition-colors"
-                      >
-                        Zrušit
-                      </button>
-                    </div>
+              {/* Profile form section */}
+              <div className="lg:col-span-2">
+                <div className="bg-gray-800/30 rounded-2xl shadow-inner p-6">
+                  <h3 className="text-xl font-bold text-white mb-6 border-b border-gray-700 pb-2">
+                    Osobní údaje
+                  </h3>
+
+                  <div className="space-y-6">
+                    {fields.map((field) => (
+                      <div key={field.key} className="group">
+                        <label className="block text-sm font-medium mb-1 text-gray-300">
+                          {field.label}
+                        </label>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                            {field.icon}
+                          </div>
+                          <input
+                            type="text"
+                            value={formData[field.key]}
+                            onChange={(e) =>
+                              handleInputChange(field.key, e.target.value)
+                            }
+                            className={`block w-full pl-10 pr-10 py-3 rounded-lg bg-gray-700/50 border text-white transition-all focus:outline-none focus:ring ${
+                              editing[field.key]
+                                ? "border-blue-500 ring-blue-500/50"
+                                : "border-gray-600"
+                            }`}
+                            readOnly={!editing[field.key]}
+                          />
+                          <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                            {editing[field.key] ? (
+                              <CheckIcon
+                                className="w-5 h-5 text-green-400 cursor-pointer"
+                                onClick={() => handleEditToggle(field.key)}
+                              />
+                            ) : (
+                              <PencilIcon
+                                className="w-5 h-5 text-gray-400 cursor-pointer hover:text-blue-400 transition-colors"
+                                onClick={() => handleEditToggle(field.key)}
+                              />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+
+                    <button
+                      className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium mt-8 hover:from-blue-600 hover:to-purple-700 transition-all transform hover:translate-y-[-2px] shadow-lg"
+                      onClick={handleSaveChanges}
+                    >
+                      Uložit změny
+                    </button>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Toast notifications */}
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -279,7 +320,7 @@ function Profile() {
         pauseOnHover
         theme="dark"
       />
-    </>
+    </div>
   );
 }
 
