@@ -200,7 +200,7 @@ const Navbar = () => {
   const navLinks = useMemo(
     () => [
       {
-        to: "/success",
+        to: "/hlavni-strana",
         icon: <HomeIcon className="w-5 h-5 mr-2 text-white" />,
         text: "Domů",
       },

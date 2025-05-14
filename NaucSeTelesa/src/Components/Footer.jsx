@@ -20,7 +20,7 @@ function Footer() {
     { to: "/", text: "Domů" },
     { to: "/ochrana-osobnich-udaju", text: "Soukromí" },
     { to: "/pomoc", text: "Kontakt" },
-    { to: "/projekt", text: "Projektu" },
+    { to: "/projekt", text: "Projekt" },
   ];
 
   return (

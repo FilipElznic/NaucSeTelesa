@@ -65,7 +65,7 @@ function CustomLoginPage() {
         }
       }
 
-      navigate("/success");
+      navigate("/hlavni-strana");
     } catch (err) {
       console.error("Unexpected error:", err);
     }
@@ -77,7 +77,7 @@ function CustomLoginPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: window.location.origin + "/success",
+          redirectTo: window.location.origin + "/hlavni-strana",
         },
       });
 

@@ -131,7 +131,7 @@ function AppContent() {
                 }
               />
               <Route
-                path="/success"
+                path="/hlavni-strana"
                 element={
                   <ProtectedRoute redirectTo="/">
                     <SuccessPage />
@@ -143,7 +143,7 @@ function AppContent() {
               <Route
                 path="/"
                 element={
-                  <RedirectIfLoggedIn redirectTo="/success">
+                  <RedirectIfLoggedIn redirectTo="/hlavni-strana">
                     <UserPage />
                   </RedirectIfLoggedIn>
                 }
