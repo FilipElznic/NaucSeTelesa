@@ -186,8 +186,8 @@ function Profile() {
   }
 
   return (
-    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto h-full">
         {/* Header with close button */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
@@ -201,105 +201,106 @@ function Profile() {
           </button>
         </div>
 
-        {/* Main content card */}
-        <div className="usergradient rounded-2xl shadow-2xl overflow-hidden">
-          <div className="p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Profile picture section */}
-              <div className="lg:col-span-1 flex flex-col items-center justify-start">
-                <div className=" p-4 rounded-2xl w-full">
-                  <div className="mb-6">
-                    <ProfilePic />
-                  </div>
-                </div>
-
-                {/* Delete account button positioned at bottom left */}
-                <div className="mt-auto pt-6 self-start">
-                  {!showDeleteConfirm ? (
-                    <button
-                      onClick={() => setShowDeleteConfirm(true)}
-                      className="px-4 py-2 text-sm rounded-lg bg-red-900/30 border border-red-600/50 text-red-400 font-medium hover:bg-red-800/40 transition-colors"
-                    >
-                      Smazat účet
-                    </button>
-                  ) : (
-                    <div className="bg-red-900/30 p-4 rounded-lg border border-red-500/50 max-w-xs">
-                      <p className="text-sm mb-3 text-red-200">
-                        Opravdu chcete smazat svůj účet? Tato akce je nevratná.
-                      </p>
-                      <div className="flex space-x-2">
-                        <button
-                          onClick={handleDeleteAccount}
-                          className="w-1/2 p-2 text-sm rounded bg-red-600 hover:bg-red-700 text-white transition-colors"
-                        >
-                          Ano, smazat
-                        </button>
-                        <button
-                          onClick={() => setShowDeleteConfirm(false)}
-                          className="w-1/2 p-2 text-sm rounded bg-gray-600 hover:bg-gray-700 text-white transition-colors"
-                        >
-                          Zrušit
-                        </button>
-                      </div>
-                    </div>
-                  )}
+        {/* Main content card - Made taller for PC with min-height */}
+        <div className="usergradient rounded-2xl shadow-2xl overflow-hidden min-h-[700px] lg:min-h-[800px]">
+          <div className="grid grid-cols-1 lg:grid-cols-3 h-full">
+            {/* Profile picture section - Improved spacing */}
+            <div className="lg:col-span-1 flex flex-col items-center justify-between py-8 px-4 lg:px-8 h-full">
+              <div className="w-full flex flex-col items-center">
+                <div className="mb-10 mt-6">
+                  <ProfilePic />
                 </div>
               </div>
 
-              {/* Profile form section */}
-              <div className="lg:col-span-2">
-                <div className="bg-gray-800/30 rounded-2xl shadow-inner p-6">
-                  <h3 className="text-xl font-bold text-white mb-6 border-b border-gray-700 pb-2">
-                    Osobní údaje
-                  </h3>
+              {/* Delete account button positioned at bottom */}
+              <div className="w-full flex justify-center mb-8">
+                {!showDeleteConfirm ? (
+                  <button
+                    onClick={() => setShowDeleteConfirm(true)}
+                    className="px-6 py-3 text-sm rounded-lg bg-red-900/30 border border-red-600/50 text-red-400 font-medium hover:bg-red-800/40 transition-colors"
+                  >
+                    Smazat účet
+                  </button>
+                ) : (
+                  <div className="bg-red-900/30 p-4 rounded-lg border border-red-500/50 max-w-xs">
+                    <p className="text-sm mb-3 text-red-200">
+                      Opravdu chcete smazat svůj účet? Tato akce je nevratná.
+                    </p>
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={handleDeleteAccount}
+                        className="w-1/2 p-2 text-sm rounded bg-red-600 hover:bg-red-700 text-white transition-colors"
+                      >
+                        Ano, smazat
+                      </button>
+                      <button
+                        onClick={() => setShowDeleteConfirm(false)}
+                        className="w-1/2 p-2 text-sm rounded bg-gray-600 hover:bg-gray-700 text-white transition-colors"
+                      >
+                        Zrušit
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
 
-                  <div className="space-y-6">
-                    {fields.map((field) => (
-                      <div key={field.key} className="group">
-                        <label className="block text-sm font-medium mb-1 text-gray-300">
-                          {field.label}
-                        </label>
-                        <div className="relative">
-                          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
-                            {field.icon}
-                          </div>
-                          <input
-                            type="text"
-                            value={formData[field.key]}
-                            onChange={(e) =>
-                              handleInputChange(field.key, e.target.value)
-                            }
-                            className={`block w-full pl-10 pr-10 py-3 rounded-lg bg-gray-700/50 border text-white transition-all focus:outline-none focus:ring ${
-                              editing[field.key]
-                                ? "border-blue-500 ring-blue-500/50"
-                                : "border-gray-600"
-                            }`}
-                            readOnly={!editing[field.key]}
-                          />
-                          <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                            {editing[field.key] ? (
-                              <CheckIcon
-                                className="w-5 h-5 text-green-400 cursor-pointer"
-                                onClick={() => handleEditToggle(field.key)}
-                              />
-                            ) : (
-                              <PencilIcon
-                                className="w-5 h-5 text-gray-400 cursor-pointer hover:text-blue-400 transition-colors"
-                                onClick={() => handleEditToggle(field.key)}
-                              />
-                            )}
-                          </div>
+            {/* Profile form section - Made wider and taller */}
+            <div className="lg:col-span-2 h-full flex items-center justify-center p-4 lg:p-8">
+              <div className="bg-gray-800/30 rounded-2xl shadow-inner p-6 lg:p-10 w-full h-full flex flex-col">
+                <h3 className="text-2xl font-bold text-white mb-8 border-b border-gray-700 pb-4">
+                  Osobní údaje
+                </h3>
+
+                <div className="space-y-8 mt-6 flex-grow">
+                  {fields.map((field) => (
+                    <div key={field.key} className="group">
+                      <label className="block text-sm font-medium mb-2 text-gray-300">
+                        {field.label}
+                      </label>
+                      <div className="relative w-full lg:w-3/4">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                          {field.icon}
+                        </div>
+                        <input
+                          type="text"
+                          value={formData[field.key]}
+                          onChange={(e) =>
+                            handleInputChange(field.key, e.target.value)
+                          }
+                          className={`block w-full pl-10 pr-10 py-4 rounded-lg bg-gray-700/50 border text-white transition-all focus:outline-none focus:ring ${
+                            editing[field.key]
+                              ? "border-blue-500 ring-blue-500/50"
+                              : "border-gray-600"
+                          }`}
+                          readOnly={!editing[field.key]}
+                        />
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                          {editing[field.key] ? (
+                            <CheckIcon
+                              className="w-5 h-5 text-green-400 cursor-pointer"
+                              onClick={() => handleEditToggle(field.key)}
+                            />
+                          ) : (
+                            <PencilIcon
+                              className="w-5 h-5 text-gray-400 cursor-pointer hover:text-blue-400 transition-colors"
+                              onClick={() => handleEditToggle(field.key)}
+                            />
+                          )}
                         </div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
+                </div>
 
-                    <button
-                      className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium mt-8 hover:from-blue-600 hover:to-purple-700 transition-all transform hover:translate-y-[-2px] shadow-lg"
-                      onClick={handleSaveChanges}
-                    >
-                      Uložit změny
-                    </button>
-                  </div>
+                {/* Save button positioned at the bottom */}
+                <div className="mt-auto pt-8">
+                  <button
+                    className="py-4 px-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all transform hover:translate-y-[-2px] shadow-lg"
+                    onClick={handleSaveChanges}
+                  >
+                    Uložit změny
+                  </button>
                 </div>
               </div>
             </div>
