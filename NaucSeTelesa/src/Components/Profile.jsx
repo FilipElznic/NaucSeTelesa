@@ -202,7 +202,7 @@ function Profile() {
         </div>
 
         {/* Main content card - Made taller for PC with min-height */}
-        <div className="usergradient rounded-2xl shadow-2xl overflow-hidden min-h-[700px] lg:min-h-[800px]">
+        <div className="usergradient rounded-2xl shadow-2xl overflow-hidden  lg:min-h-[600px]">
           <div className="grid grid-cols-1 lg:grid-cols-3 h-full">
             {/* Profile picture section - Improved spacing */}
             <div className="lg:col-span-1 flex flex-col items-center justify-between py-8 px-4 lg:px-8 h-full">
