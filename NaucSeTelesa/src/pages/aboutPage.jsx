@@ -1,128 +1,204 @@
-import React, { useState } from "react";
+import React from "react";
+import {
+  BookOpen,
+  Code,
+  Award,
+  Users,
+  Monitor,
+  GitBranch,
+  Layers,
+  Activity,
+} from "lucide-react";
 
-const OverlappingHeadings = () => {
-  const [activeSection, setActiveSection] = useState(1); // Start with first section active
-
-  const sections = [
-    {
-      id: 1,
-      number: "01",
-      heading: "Proč projekt vznikl?",
-      content:
-        "Projekt vznikl jako ročníková práce pro Střední průmyslovou školu v Ústí nad Labem. Cílem bylo vytvořit moderní webovou aplikaci pro výuku geometrie, která by byla atraktivní, interaktivní a zábavná. Autor Filip Elznic se inspiroval svým kladným vztahem k matematice a touhou zlepšit své dovednosti ve webovém vývoji.",
-    },
-    {
-      id: 2,
-      number: "02",
-      heading: "K čemu projekt slouží?",
-      content:
-        "Projekt slouží jako online platforma pro výuku geometrických těles. Nabízí 3D modely těles, vzorce pro výpočet jejich vlastností (jako objem a povrch) a interaktivní úkoly pro ověření znalostí. Uživatelé mohou sledovat svůj pokrok pomocí bodového systému.",
-    },
-    {
-      id: 3,
-      number: "03",
-      heading: "Jaké technologie byly použity?",
-      content:
-        "Projekt využívá moderní technologie jako React, JavaScript a Vite.js pro frontend. Pro backend a databázi byl zvolen Supabase. Dále byly použity nástroje jako Spline pro 3D modely, Tailwind CSS pro styling, GitHub pro verzování kódu a další pomocné nástroje jako Figma pro design.",
-    },
-    {
-      id: 4,
-      number: "04",
-      heading: "Jaké jsou hlavní funkce?",
-      content:
-        "Hlavní funkce zahrnují: 1) Prohlížení 3D modelů geometrických těles, 2) Studium vzorců pro výpočet vlastností těles, 3) Řešení interaktivních úkolů s bodovým hodnocením, 4) Uživatelský účet s možností sledování pokroku, 5) Responzivní design pro různé velikosti obrazovek.",
-    },
-    {
-      id: 5,
-      number: "05",
-      heading: "Kdo je cílovou skupinou?",
-      content:
-        "Projekt je určen pro uživatele všech věkových skupin, kteří se chtějí naučit nebo procvičit geometrická tělesa. Primárně je zaměřen na studenty, ale může být užitečný i pro učitele nebo kohokoli s zájmem o matematiku.",
-    },
-  ];
-
+const AboutPage = () => {
   return (
-    <>
-      <div className="bg-black">
-        <div className="min-h-screen w-full relative text-white p-4 md:p-8">
-          {/* Projekt v kostce header */}
-          <div className="flex flex-col w-full justify-center items-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold  text-purple-400 mb-2">
-              Projekt v kostce
-            </h1>
+    <div className="min-h-screen bg-black text-white">
+      {/* Hero Section */}
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Project Introduction */}
+        <div className="mb-20">
+          <div className="flex items-center mb-6">
+            <div className="h-px bg-gradient-to-r from-purple-500 to-blue-400 flex-grow"></div>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold px-6">
+              O Projektu
+            </h2>
+            <div className="h-px bg-gradient-to-l from-purple-500 to-blue-400 flex-grow"></div>
           </div>
 
-          {/* Overlapping sections container */}
-          <div className="w-5/6 mx-auto">
-            {sections.map((section, index) => (
-              <div
-                key={section.id}
-                className={`relative cursor-pointer transition-all duration-500`}
-                style={{
-                  marginTop: index === 0 ? "0" : "-50px", // Increased negative margin for more overlap
-                  zIndex: activeSection === section.id ? 10 : 10 - index,
-                  opacity: activeSection === section.id ? 1 : 0.4,
-                  transform: `translateY(${
-                    activeSection === section.id ? "0" : "10px"
-                  })`,
-                  height: activeSection === section.id ? "auto" : "180px", // Increased height
-                  overflow: "hidden",
-                }}
-                onMouseEnter={() => setActiveSection(section.id)}
-              >
-                <div className="flex flex-row items-start">
-                  {/* Large number */}
-                  <div
-                    className={`text-8xl md:text-9xl lg:text-[12rem] font-bold transition-all duration-500 ease-out
-                    ${
-                      activeSection === section.id ? "text-white" : "text-white"
-                    }`}
-                    style={{ lineHeight: "1.2" }} // Increased line height for taller numbers
-                  >
-                    {section.number}
-                  </div>
+          <div className="usergradient rounded-lg shadow-2xl p-8 border border-gray-700">
+            <p className="text-gray-300 mb-6 leading-relaxed">
+              Projekt vznikl jako ročníková práce pro Střední průmyslovou školu
+              v Ústí nad Labem. Cílem bylo vytvořit moderní webovou aplikaci pro
+              výuku geometrie, která by byla atraktivní, interaktivní a zábavná.
+              Autor Filip Elznic se inspiroval svým kladným vztahem k matematice
+              a touhou zlepšit své dovednosti ve webovém vývoji.
+            </p>
+            <p className="text-gray-300 leading-relaxed">
+              Projekt slouží jako online platforma pro výuku geometrických
+              těles. Nabízí 3D modely těles, vzorce pro výpočet jejich
+              vlastností (jako objem a povrch) a interaktivní úkoly pro ověření
+              znalostí. Uživatelé mohou sledovat svůj pokrok pomocí bodového
+              systému.
+            </p>
+          </div>
+        </div>
 
-                  {/* Heading and content */}
-                  <div className="mt-4 md:mt-8">
-                    <h3
-                      className={`text-2xl md:text-3xl font-bold mb-3 md:mb-4 transition-all duration-300
-                    ${
-                      activeSection === section.id
-                        ? "text-white"
-                        : "text-gray-500"
-                    }`}
-                    >
-                      {section.heading}
-                    </h3>
+        {/* Technologies */}
+        <div className="mb-20">
+          <div className="flex items-center mb-6">
+            <div className="h-px bg-gradient-to-r from-purple-500 to-blue-400 flex-grow"></div>
+            <h2 className="text-3xl font-bold px-6">Technologie</h2>
+            <div className="h-px bg-gradient-to-l from-purple-500 to-blue-400 flex-grow"></div>
+          </div>
 
-                    {/* Content with expand/collapse effect */}
-                    <div
-                      className={`max-w-2xl transition-all duration-500 overflow-hidden
-                    ${
-                      activeSection === section.id
-                        ? "max-h-96 opacity-100"
-                        : "max-h-0 opacity-0"
-                    }`}
-                    >
-                      <p className="text-gray-300">{section.content}</p>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="usergradient p-6 rounded-lg border border-gray-700 flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center bg-purple-900 mb-4">
+                <Code size={32} className="text-purple-300" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Frontend</h3>
+              <p className="text-gray-400">React, JavaScript, Vite.js</p>
+            </div>
+
+            <div className="usergradient p-6 rounded-lg border border-gray-700 flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center bg-blue-900 mb-4">
+                <Layers size={32} className="text-blue-300" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Backend</h3>
+              <p className="text-gray-400">Supabase</p>
+            </div>
+
+            <div className="usergradient p-6 rounded-lg border border-gray-700 flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center bg-purple-900 mb-4">
+                <Monitor size={32} className="text-purple-300" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Styling</h3>
+              <p className="text-gray-400">Tailwind CSS, Figma</p>
+            </div>
+
+            <div className="usergradient p-6 rounded-lg border border-gray-700 flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center bg-blue-900 mb-4">
+                <GitBranch size={32} className="text-blue-300" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Nástroje</h3>
+              <p className="text-gray-400">Spline, GitHub</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Features */}
+        <div className="mb-20">
+          <div className="flex items-center mb-6">
+            <div className="h-px bg-gradient-to-r from-purple-500 to-blue-400 flex-grow"></div>
+            <h2 className="text-3xl font-bold px-6">Funkce</h2>
+            <div className="h-px bg-gradient-to-l from-purple-500 to-blue-400 flex-grow"></div>
+          </div>
+
+          <div className="bg-gray-800 rounded-lg shadow-2xl p-8 border usergradient">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="flex">
+                <div className="flex-shrink-0 mr-4">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-purple-900">
+                    <Layers size={24} className="text-purple-300" />
                   </div>
                 </div>
-
-                {/* Border line with animation */}
-                <div className="absolute bottom-0 left-0 w-full h-px bg-zinc-800">
-                  <div
-                    className={`h-full bg-purple-500 transition-all duration-500 ease-out
-                  ${activeSection === section.id ? "w-full" : "w-0"}`}
-                  />
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">3D Modely</h3>
+                  <p className="text-gray-400">
+                    Prohlížení interaktivních 3D modelů geometrických těles
+                  </p>
                 </div>
               </div>
-            ))}
+
+              <div className="flex">
+                <div className="flex-shrink-0 mr-4">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-blue-900">
+                    <BookOpen size={24} className="text-blue-300" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Vzorce</h3>
+                  <p className="text-gray-400">
+                    Studium vzorců pro výpočet vlastností těles
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className="flex-shrink-0 mr-4">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-purple-900">
+                    <Award size={24} className="text-purple-300" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Interaktivní Úkoly
+                  </h3>
+                  <p className="text-gray-400">
+                    Řešení úkolů s bodovým hodnocením pro ověření znalostí
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className="flex-shrink-0 mr-4">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-blue-900">
+                    <Users size={24} className="text-blue-300" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Uživatelský Účet
+                  </h3>
+                  <p className="text-gray-400">
+                    Možnost sledování pokroku a ukládání výsledků
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className="flex-shrink-0 mr-4">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-purple-900">
+                    <Activity size={24} className="text-purple-300" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Responzivní Design
+                  </h3>
+                  <p className="text-gray-400">
+                    Optimalizace pro různé velikosti obrazovek
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Target Audience */}
+        <div>
+          <div className="flex items-center mb-6">
+            <div className="h-px bg-gradient-to-r bg-transparent flex-grow"></div>
+            <h2 className="text-3xl font-bold px-6">Pro Koho</h2>
+            <div className="h-px bg-transparent flex-grow"></div>
+          </div>
+
+          <div className="bg-gradient-to-br usergradient rounded-lg shadow-2xl p-8 border border-gray-700 text-center">
+            <p className="text-xl text-gray-200 leading-relaxed">
+              Projekt je určen pro uživatele všech věkových skupin, kteří se
+              chtějí naučit nebo procvičit geometrická tělesa. Primárně je
+              zaměřen na studenty, ale může být užitečný i pro učitele nebo
+              kohokoli s zájmem o matematiku.
+            </p>
           </div>
         </div>
       </div>
-    </>
+
+      {/* Footer */}
+    </div>
   );
 };
 
-export default OverlappingHeadings;
+export default AboutPage;
