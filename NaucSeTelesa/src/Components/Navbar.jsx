@@ -131,7 +131,7 @@ const Navbar = () => {
   const { authUser, userData } = useGlobalData();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState();
 
   // Memoized callbacks
   const toggleMenu = useCallback(() => {
@@ -164,11 +164,13 @@ const Navbar = () => {
 
   // Update avatar URL when userData changes
   useEffect(() => {
-    if (userData?.img) {
+    if (userData?.img && userData.img !== "") {
       setAvatarUrl(
         "https://bviuhriolcuvayzbgzum.supabase.co/storage/v1/object/public/profile-pictures/" +
           userData.img
       );
+    } else {
+      setAvatarUrl();
     }
   }, [userData]);
 
@@ -282,7 +284,7 @@ const Navbar = () => {
                     {userData?.name ? ` ${userData.name} ` : authUser.email}
                   </p>
                   <img
-                    src={avatarUrl || "/default-avatar.jpg"}
+                    src={avatarUrl === undefined ? "/guest1.webp" : avatarUrl}
                     className="w-10 h-10 object-cover rounded-full"
                     alt="Avatar"
                     loading="lazy"
