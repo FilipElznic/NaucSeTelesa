@@ -90,7 +90,7 @@ const HelpPage = () => {
       <div className="flex md:flex-row flex-col w-5/6 mx-auto mt-8">
         {/* Často kladené otázky */}
         <div
-          className="bg-zinc-900 p-8 rounded-3xl 
+          className="usergradient p-8 rounded-3xl 
           shadow-[0_0_30px_rgba(255,255,255,0.2)] 
          w-full
           transition-all duration-100 
@@ -114,7 +114,7 @@ const HelpPage = () => {
           </div>
         </div>
         <div
-          className="bg-zinc-900 p-8 rounded-3xl 
+          className="usergradient p-8 rounded-3xl 
           shadow-[0_0_30px_rgba(255,255,255,0.2)] 
          w-full
           transition-all duration-100 
@@ -144,7 +144,7 @@ const HelpPage = () => {
       {/* Kontaktní formulář */}
       <div className="flex flex-col h-full w-5/6">
         <section
-          className="bg-zinc-900 p-8 rounded-3xl 
+          className="usergradient p-8 rounded-3xl 
           shadow-[0_0_30px_rgba(255,255,255,0.2)] 
           transition-all duration-100 
           hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]

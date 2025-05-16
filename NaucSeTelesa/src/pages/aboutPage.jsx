@@ -9,6 +9,7 @@ import {
   Layers,
   Activity,
 } from "lucide-react";
+import "../App.css";
 
 const AboutPage = () => {
   return (

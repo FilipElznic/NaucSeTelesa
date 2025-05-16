@@ -10,7 +10,7 @@ function Privacy() {
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-zinc-800 rounded-xl p-8 shadow-lg">
+          <div className="usergradient rounded-xl p-8 shadow-lg">
             <h2 className="userlvl text-2xl font-semibold mb-4">
               Ochrana vašich údajů
             </h2>
@@ -42,7 +42,7 @@ function Privacy() {
             </div>
           </div>
 
-          <div className="bg-zinc-800 rounded-xl p-8 shadow-lg">
+          <div className="usergradient rounded-xl p-8 shadow-lg">
             <h2 className="userlvl text-2xl font-semibold mb-4">
               Žádný prodej třetím stranám
             </h2>
@@ -75,7 +75,7 @@ function Privacy() {
           </div>
         </div>
 
-        <div className="bg-zinc-800 rounded-xl p-8 shadow-lg mb-12">
+        <div className="usergradient rounded-xl p-8 shadow-lg mb-12">
           <h2 className=" text-2xl font-semibold mb-6">
             Jak používáme vaše data
           </h2>
