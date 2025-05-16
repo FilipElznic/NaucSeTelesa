@@ -3,6 +3,7 @@ import { supabase } from "../supabaseClient";
 import Telesa from "../Components/Telesa";
 import Cube from "../Components/Cube";
 import "../App.css";
+import HowItWorks from "../Components/HowItWorks";
 
 function TelesaPage() {
   const [counts, setCounts] = useState({
@@ -87,8 +88,11 @@ function TelesaPage() {
           </div>
         </div>
       </div>
+      <div className="min-h-screen w-full">
+        <HowItWorks />
+      </div>
 
-      <div className="h-screen w-full">
+      <div className="h-screen w-full ">
         <Telesa />
       </div>
     </div>
