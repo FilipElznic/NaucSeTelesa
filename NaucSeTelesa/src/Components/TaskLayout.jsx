@@ -8,6 +8,7 @@ import { HomeIcon } from "@heroicons/react/24/outline";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
+import KnowHow from "./KnowHow";
 
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
@@ -117,6 +118,12 @@ function TaskLayout() {
     <>
       <div className="bg-gradient-to-br from-black via-zinc-950  to-black  min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
         <div className="w-full h-full bg-black md:p-5 rounded-3xl">
+          <KnowHow
+            title="Jak na úkoly?"
+            text="Každý úkol obsahuje otázku doplněnou krátkým vysvětlením. Uživatel má na výběr ze tří možných odpovědí, z nichž pouze jedna je správná. Cílem je zvolit správnou odpověď na základě poskytnutých informací."
+            img="/taskshow.png"
+            alt="Jak to funguje?"
+          />
           <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
             <div className="w-full h-24 usergradient rounded-full usergradient-glow">
               <div className="h-full flex flex-row justify-between items-center">

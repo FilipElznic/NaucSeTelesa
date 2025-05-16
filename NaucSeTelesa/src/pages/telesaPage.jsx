@@ -3,7 +3,8 @@ import { supabase } from "../supabaseClient";
 import Telesa from "../Components/Telesa";
 import Cube from "../Components/Cube";
 import "../App.css";
-import HowItWorks from "../Components/HowItWorks";
+
+import KnowHow from "../Components/KnowHow";
 
 function TelesaPage() {
   const [counts, setCounts] = useState({
@@ -89,7 +90,12 @@ function TelesaPage() {
         </div>
       </div>
       <div className="min-h-screen w-full">
-        <HowItWorks />
+        <KnowHow
+          title="Jak na tělesa?"
+          text="Každý úkol obsahuje otázku doplněnou krátkým vysvětlením. Uživatel má na výběr ze tří možných odpovědí, z nichž pouze jedna je správná. Cílem je zvolit správnou odpověď na základě poskytnutých informací."
+          img="/howitworkss.png"
+          alt="Jak to funguje?"
+        />
       </div>
 
       <div className="h-screen w-full ">
