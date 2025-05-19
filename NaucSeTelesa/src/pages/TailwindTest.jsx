@@ -28,7 +28,7 @@ const Spinner = memo(() => (
 function TailwindTest() {
   // Get auth and user data from context
   const { authUser, userData } = useGlobalData();
-  const [avatarUrl, setAvatarUrl] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState();
   const [isSplineLoading, setIsSplineLoading] = useState(true);
 
   // Set avatar URL when userData changes
@@ -39,7 +39,9 @@ function TailwindTest() {
           userData.img
       );
     }
-  }, [userData?.img]); // Only depend on userData.img, not the entire userData object
+  }, [userData?.img]);
+
+  //Only depend on userData.img, not the entire userData object
 
   const handleSplineLoad = () => {
     setIsSplineLoading(false);
@@ -159,14 +161,12 @@ function TailwindTest() {
           <div className="w-full lg:w-1/5 h-80 usergradient m-2 rounded-3xl border-2 border-transparent hover:border-purple-500 transition-all duration-200">
             <Link to={"/profil"}>
               <div className="w-full h-full flex flex-col justify-center items-center">
-                {avatarUrl && (
-                  <img
-                    src={avatarUrl}
-                    className="object-fit rounded-full max-h-80 md:max-w-48 lg:max-w-56"
-                    alt="Avatar"
-                    loading="lazy"
-                  />
-                )}
+                <img
+                  src={avatarUrl === undefined ? "/guest1.webp" : avatarUrl}
+                  className="object-fit rounded-full max-h-80 md:max-w-48 lg:max-w-56"
+                  alt="Avatar"
+                  loading="lazy"
+                />
               </div>
             </Link>
           </div>
