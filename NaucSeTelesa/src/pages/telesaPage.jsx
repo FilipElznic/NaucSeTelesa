@@ -38,12 +38,6 @@ function TelesaPage() {
             <h2 className="mb-1">
               <span className="userlvl">Srozumitelně</span>.
             </h2>
-            <p className="text-sm sm:text-base font-normal mt-4 md:mt-7 max-w-xl lg:max-w-2xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Laudantium, vel quae. Quam, fuga natus, blanditiis error
-              architecto expedita cupiditate aliquid, et impedit molestiae
-              eaque. Odit porro labore inventore ratione facere?
-            </p>
           </div>
         </div>
 
@@ -92,7 +86,7 @@ function TelesaPage() {
       <div className="min-h-screen w-full">
         <KnowHow
           title="Jak na tělesa?"
-          text="Každý úkol obsahuje otázku doplněnou krátkým vysvětlením. Uživatel má na výběr ze tří možných odpovědí, z nichž pouze jedna je správná. Cílem je zvolit správnou odpověď na základě poskytnutých informací."
+          text="Každá karta představuje jedno geometrické těleso a obsahuje jeho název, stručný popis, ilustrační obrázek a základní vzorce. Uživatel si může zobrazit detailní informace kliknutím na tlačítko ve spodní části karty."
           img="/howitworkss.png"
           alt="Jak to funguje?"
         />
