@@ -233,8 +233,10 @@ function ProfilePic() {
         </div>
       ) : (
         <div className="mb-6 flex flex-col items-center text-gray-400">
-          <PhotoIcon className="w-20 h-20 mb-2" />
-          <p className="italic">Přidejte si prosím profilový obrázek.</p>
+          <img
+            src="/guest1.webp"
+            className="rounded-full w-52 h-52 mb-6 shadow-lg border-4 border-blue-500 hover:border-purple-600 transition-all object-cover"
+          ></img>
         </div>
       )}
 

@@ -258,27 +258,42 @@ const Test = () => {
               Úrovně procvičování
             </h1>
             <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white">
-              <div className="w-full h-full flex flex-row gap-4">
-                <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white absolute top-3 right-3" />
-                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                </div>
+              <div className="w-full h-full flex flex-row gap-4 ">
+                <a
+                  href="#zebricek"
+                  className="w-full h-full  bg-zinc-800 rounded-3xl"
+                >
+                  <div className="w-full h-full flex justify-center items-center p-4 relative">
+                    <ArrowTopRightOnSquareIcon className="w-5 h-5 text-white  absolute top-3 right-3" />
+                    <h1 className="text-2xl font-semibold p-4 userlvl">
+                      Žebříček uživatelů
+                    </h1>
+                  </div>
+                </a>
               </div>
-              <div className="w-full h-full flex flex-row gap-4">
-                <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white  absolute top-3 right-3" />
-                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                </div>
-                <div className="w-1/2 h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white absolute top-3 right-3" />
-                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                </div>
-              </div>
-              <div className="w-full h-full flex flex-row gap-4">
-                <div className="w-full h-full bg-zinc-800 rounded-3xl flex justify-center items-center p-4 relative">
-                  <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white  absolute top-3 right-3" />
-                  <h1 className="text-5xl font-semibold p-4 userlvl"></h1>
-                </div>
+              <div className="w-full h-full flex flex-col gap-4 ">
+                <Link
+                  to="/telesa"
+                  className="w-full h-full  bg-zinc-800 rounded-3xl"
+                >
+                  <div className=" h-full w-full  flex justify-center items-center p-4 relative">
+                    <ArrowTopRightOnSquareIcon className="w-5 h-5 text-white absolute top-3 right-3" />
+                    <h1 className="text-2xl font-semibold p-4 userlvl">
+                      Tělesa
+                    </h1>
+                  </div>
+                </Link>
+                <Link
+                  to="/ukoly"
+                  className="w-full h-full z-50  bg-zinc-800 rounded-3xl"
+                >
+                  <div className="w-full h-full flex justify-center items-center p-4 relative">
+                    <ArrowTopRightOnSquareIcon className="w-5 h-5 text-white  absolute top-3 right-3" />
+                    <h1 className="text-2xl font-semibold p-4 userlvl">
+                      Úkoly
+                    </h1>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -338,10 +353,9 @@ const Test = () => {
               </h1>
               <div className="mt-40 w-full">
                 <p className="text-white/90 text-xl lg:text-2xl mb-2 lg:mb-6 ">
-                  Úrovně na našem webu fungují jednoduše – čím aktivnější jsi,
-                  tím vyšší úroveň získáš! Za různé akce, jako je přispívání,
-                  komentování nebo sdílení, získáváš body, které tě posouvají
-                  dál.
+                  Úrovně na našem webu fungují jednoduše, čím více procvičujete,
+                  tím vyšší úroveň získáváte! Úrovně získáte pomocí procvičování
+                  úkolů.
                 </p>
               </div>
 

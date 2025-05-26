@@ -189,20 +189,21 @@ function Profile() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto h-full">
         {/* Header with close button */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Váš profil
-          </h1>
-          <button
-            onClick={() => (window.location.href = "/")}
-            className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
-          >
-            <XMarkIcon className="w-6 h-6 text-white" />
-          </button>
-        </div>
 
         {/* Main content card - Made taller for PC with min-height */}
-        <div className="usergradient rounded-2xl shadow-2xl overflow-hidden  lg:min-h-[600px]">
+        <div className="bg-zinc-950 rounded-2xl shadow-2xl overflow-hidden  lg:min-h-[500px]">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl lg:text-7xl font-extrabold text-white p-5">
+              Váš profil
+            </h1>
+            <button
+              onClick={() => (window.location.href = "/")}
+              className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors m-5"
+            >
+              <XMarkIcon className="w-6 h-6 text-white" />
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 h-full">
             {/* Profile picture section - Improved spacing */}
             <div className="lg:col-span-1 flex flex-col items-center justify-between py-8 px-4 lg:px-8 h-full">
@@ -247,7 +248,7 @@ function Profile() {
 
             {/* Profile form section - Made wider and taller */}
             <div className="lg:col-span-2 h-full flex items-center justify-center p-4 lg:p-8">
-              <div className="bg-gray-800/30 rounded-2xl shadow-inner p-6 lg:p-10 w-full h-full flex flex-col">
+              <div className="usergradient rounded-2xl shadow-inner p-6 lg:p-10 w-full h-full flex flex-col">
                 <h3 className="text-2xl font-bold text-white mb-8 border-b border-gray-700 pb-4">
                   Osobní údaje
                 </h3>
