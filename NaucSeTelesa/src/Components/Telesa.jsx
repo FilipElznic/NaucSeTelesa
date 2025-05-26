@@ -15,6 +15,61 @@ const GeometricBodiesCarousel = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Otevření modálního okna
   const [selectedBody, setSelectedBody] = useState(null); // Vybrané těleso pro detail
 
+  // Funkce pro renderování textu s KaTeX formulemi
+  const renderTextWithKaTeX = (text) => {
+    if (!text) return "";
+
+    // Regex pro nalezení LaTeX výrazů mezi $...$ (inline) nebo $$...$$ (block)
+    const latexRegex = /(\$\$.*?\$\$|\$.*?\$)/g;
+
+    const parts = text.split(latexRegex);
+
+    return parts.map((part, index) => {
+      if (part.match(/^\$\$.*\$\$$/)) {
+        // Block math ($$...$$)
+        const formula = part.slice(2, -2);
+        try {
+          return (
+            <span
+              key={index}
+              className="formula-block block my-2"
+              dangerouslySetInnerHTML={{
+                __html: katex.renderToString(formula, {
+                  throwOnError: false,
+                  displayMode: true,
+                }),
+              }}
+            />
+          );
+        } catch (error) {
+          return <span key={index}>{part}</span>;
+        }
+      } else if (part.match(/^\$.*\$$/)) {
+        // Inline math ($...$)
+        const formula = part.slice(1, -1);
+        try {
+          return (
+            <span
+              key={index}
+              className="formula-inline"
+              dangerouslySetInnerHTML={{
+                __html: katex.renderToString(formula, {
+                  throwOnError: false,
+                  displayMode: false,
+                }),
+              }}
+            />
+          );
+        } catch (error) {
+          return <span key={index}>{part}</span>;
+        }
+      } else {
+        // Regular text
+        return <span key={index}>{part}</span>;
+      }
+    });
+  };
+
   // Načtení dat při inicializaci komponenty
   useEffect(() => {
     const fetchBodies = async () => {
@@ -25,7 +80,6 @@ const GeometricBodiesCarousel = () => {
         console.error("Chyba při načítání geometrických těles:", error);
       } else {
         setBodies(data);
-      
       }
       setLoading(false);
     };
@@ -156,14 +210,14 @@ const GeometricBodiesCarousel = () => {
 
                     {/* Popis */}
                     <div className="flex-grow overflow-y-auto">
-                      <p className="text-gray-300 mb-4 text-sm md:text-base leading-relaxed">
-                        {item.body.description}
-                      </p>
+                      <div className="text-gray-300 mb-4 text-sm md:text-base leading-relaxed">
+                        {renderTextWithKaTeX(item.body.description)}
+                      </div>
                       {(idx === 1 || isMobile) && item.body.description1 && (
                         <div className="mt-4">
-                          <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                            {item.body.description1}
-                          </p>
+                          <div className="text-gray-300 text-sm md:text-base leading-relaxed">
+                            {renderTextWithKaTeX(item.body.description1)}
+                          </div>
                         </div>
                       )}
 
@@ -362,16 +416,14 @@ const GeometricBodiesCarousel = () => {
 
             <div className="mt-6 md:mt-8">
               <div className="bg-black/50 backdrop-blur-sm p-4 rounded-lg border border-purple-500/20">
-                <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-                  {selectedBody.description}
+                <div className="text-gray-300 text-lg md:text-xl leading-relaxed">
+                  {renderTextWithKaTeX(selectedBody.description)}
                   {selectedBody.description1 && (
-                    <>
-                      <br />
-                      <br />
-                      {selectedBody.description1}
-                    </>
+                    <div className="mt-4">
+                      {renderTextWithKaTeX(selectedBody.description1)}
+                    </div>
                   )}
-                </p>
+                </div>
               </div>
 
               {/* Vzorce */}
