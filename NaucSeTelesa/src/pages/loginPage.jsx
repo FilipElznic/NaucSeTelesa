@@ -107,7 +107,7 @@ function CustomLoginPage() {
         email,
         password,
         options: {
-          emailRedirectTo: window.location.origin + "/success",
+          emailRedirectTo: window.location.origin + "/",
         },
       });
 

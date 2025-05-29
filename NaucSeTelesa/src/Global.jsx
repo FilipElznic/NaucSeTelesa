@@ -41,9 +41,6 @@ export function GlobalProvider({ children }) {
             .insert([
               {
                 authid: authUser.id,
-                email: authUser.email,
-                xp: 0,
-                created_at: new Date().toISOString(),
               },
             ])
             .select()

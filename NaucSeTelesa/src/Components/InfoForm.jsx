@@ -10,29 +10,26 @@ function InfoForm() {
   const [isVisible, setIsVisible] = useState(true);
   const [formError, setFormError] = useState(null);
 
-  // Form validation states
   const [errors, setErrors] = useState({
     jmeno: "",
     prijmeni: "",
     prezdivka: "",
   });
 
-  // Calculate progress
   const [progress, setProgress] = useState(0);
 
-  // Check if user is available and pre-fill name and surname from userData
   useEffect(() => {
     if (authUser && userData) {
       if (authUser.app_metadata?.provider === "google") {
         const fullName = userData.name || "";
         const nameParts = fullName.split(" ");
-        setJmeno(nameParts[0] || ""); // First name
-        setPrijmeni(nameParts.slice(1).join(" ") || ""); // Last name
+        setJmeno(nameParts[0] || "");
+        setPrijmeni(nameParts.slice(1).join(" ") || "");
       } else {
-        setJmeno(userData.firstName || ""); // Pre-fill with existing first name
-        setPrijmeni(userData.lastName || ""); // Pre-fill with existing last name
+        setJmeno(userData.firstName || "");
+        setPrijmeni(userData.lastName || "");
       }
-      setPrezdivka(userData.nickname || ""); // Pre-fill nickname if available
+      setPrezdivka(userData.nickname || "");
     }
   }, [authUser, userData]);
 
@@ -61,11 +58,10 @@ function InfoForm() {
     fetchData();
   }, [authUser]);
 
-  // Update progress when fields change
   useEffect(() => {
     const validateField = (value) => {
       return (
-        value.length >= 3 && value.length <= 25 && /^[a-zA-Z0-9_]+$/.test(value)
+        value.length >= 3 && value.length <= 25 && /^[\p{L}0-9_]+$/u.test(value)
       );
     };
 
@@ -79,23 +75,20 @@ function InfoForm() {
     setProgress((validFields / totalFields) * 100);
   }, [jmeno, prijmeni, prezdivka]);
 
-  // Validate input fields
   const validateInput = (field, value) => {
     if (value.length < 3) {
       return `Musí obsahovat alespoň 3 znaky`;
     } else if (value.length > 25) {
       return `Maximálně 25 znaků`;
-    } else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
-      return `Pouze písmena, čísla a podtržítko`;
+    } else if (!/^[\p{L}0-9_]+$/u.test(value)) {
+      return `Pouze písmena (včetně háčků a čárek), čísla a podtržítko`;
     }
     return "";
   };
 
   const handleInputChange = (field, value) => {
-    // Only allow valid characters
-    const sanitizedValue = value.replace(/[^a-zA-Z0-9_]/g, "");
+    const sanitizedValue = value.replace(/[^\p{L}0-9_]/gu, "");
 
-    // Update state based on field
     switch (field) {
       case "jmeno":
         setJmeno(sanitizedValue);
@@ -123,7 +116,6 @@ function InfoForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // Validate all fields
     const jmenoError = validateInput("jmeno", jmeno);
     const prijmeniError = validateInput("prijmeni", prijmeni);
     const prezdivkaError = validateInput("prezdivka", prezdivka);
@@ -134,7 +126,6 @@ function InfoForm() {
       prezdivka: prezdivkaError,
     });
 
-    // If any errors, prevent submission
     if (jmenoError || prijmeniError || prezdivkaError) {
       return;
     }
@@ -152,14 +143,14 @@ function InfoForm() {
           name: jmeno,
           surname: prijmeni,
           nickname: prezdivka,
-          nameSet: true, // Set nameSet to true directly here
+          nameSet: true,
         })
         .eq("authid", authUser.id);
 
       if (error) {
         setFormError("Failed to update your profile. Please try again.");
       } else {
-        setIsVisible(false); // Hide the form locally
+        setIsVisible(false);
         window.location.href = "/";
       }
     } catch (error) {
@@ -198,7 +189,6 @@ function InfoForm() {
     );
   }
 
-  // Always render a container, even if isVisible is false
   return (
     <div className="info-form-container">
       {formError && (
@@ -213,7 +203,6 @@ function InfoForm() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
           <div className="w-full max-w-4xl bg-zinc-900 rounded-2xl shadow-2xl overflow-hidden relative">
             <div className="flex flex-col md:flex-row">
-              {/* Left Side - Welcome Message */}
               <div className="w-full md:w-1/2 bg-zinc-900 p-6 md:p-10 flex flex-col justify-center">
                 <h1 className="text-2xl md:text-4xl font-bold text-white mb-4">
                   Skvělé, že jste se zaregistrovali!
@@ -223,7 +212,6 @@ function InfoForm() {
                   ještě pár drobných informací.
                 </p>
 
-                {/* Progress section */}
                 <div className="mb-6">
                   <div className="flex justify-between mb-2">
                     <span className="text-sm text-gray-300">
@@ -241,7 +229,6 @@ function InfoForm() {
                   </div>
                 </div>
 
-                {/* Requirements list */}
                 <div className="mt-4 bg-zinc-800 p-4 rounded-lg">
                   <h3 className="text-white font-medium mb-2">
                     Pravidla pro vyplnění:
@@ -253,14 +240,13 @@ function InfoForm() {
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
                           d="M5 13l4 4L19 7"
-                        ></path>
+                        />
                       </svg>
                       3-25 znaků
                     </li>
@@ -270,24 +256,21 @@ function InfoForm() {
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
                           d="M5 13l4 4L19 7"
-                        ></path>
+                        />
                       </svg>
-                      Pouze písmena, čísla a podtržítko
+                      Pouze písmena (včetně háčků a čárek), čísla a podtržítko
                     </li>
                   </ul>
                 </div>
               </div>
 
-              {/* Right Side - Form */}
               <div className="w-full md:w-1/2 bg-zinc-900 p-6 md:p-10 md:relative">
-                {/* Close Button */}
                 <button
                   onClick={handleZavri}
                   className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
@@ -309,7 +292,6 @@ function InfoForm() {
                   </svg>
                 </button>
 
-                {/* Form Inputs */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-4">
                     <div>
