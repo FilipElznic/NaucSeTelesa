@@ -1,53 +1,30 @@
 
+# Robots.txt for NaucSeTelesa (Learn Solids)
+# Educational platform for learning geometric solids
 
-.htaccess
-Code 
-Testing your robots.txt:
-After deploying to your school server, verify the file is accessible by visiting https://your-school-domain.edu/robots.txt
-You should see the plain text content of your robots.txt file, not HTML
-You can also use Google's robots.txt testing tool in Search Console once your site is verified
-The robots.txt file I've created:
+User-agent: *
 
-Allows search engines to index your main informational pages (/, /projekt, /pomoc)
-Prevents indexing of authentication and user-specific pages (like /prihlaseni, /profil, /ukoly)
-Adds a crawl delay to be respectful of your school server's resources
-Includes commented placeholders for sitemap information when you add one in the future
-This configuration should fix your Lighthouse errors and properly guide search engines on how to crawl your educational website.
+# Allow indexing of main educational content
+Allow: /
+Allow: /about
+Allow: /help
+Allow: /telesa
+Allow: /tasks
 
+# Disallow user-specific and authentication pages
+Disallow: /login
+Disallow: /profile
+Disallow: /admin
+Disallow: /user
 
+# Disallow private API routes if any
+Disallow: /api/
 
+# Crawl delay to be respectful of server resources
+Crawl-delay: 1
 
-well its still on local host so create one for localhost
-
-Edit
-Here's a robots.txt file specifically configured for your local development environment:
-
-
-robots.txt for localhost
-Code 
-For your localhost development environment:
-
-Save this file:
-Place the robots.txt file in your project's public folder
-The path should be: NaucSeTelesa/public/robots.txt
-Why disallow everything in development:
-For local development, it's standard practice to disallow all crawling
-This prevents search engines from accidentally indexing your development content if they ever encounter it
-It's simpler and safer than a more complex configuration
-Testing in localhost:
-After adding the file, restart your Vite development server
-You should be able to access it at http://localhost:YOUR_PORT/robots.txt
-Verify it shows the plain text content and not HTML
-Fixing the Lighthouse error:
-This simple robots.txt should resolve your Lighthouse error during local testing
-Lighthouse should now be able to parse the file correctly
-Remember to replace this with the more comprehensive production version I provided earlier when you deploy to your school servers. The production version allows specific routes while protecting user-specific content from being indexed.
-
-
-
-
-
-You are out of free messages until 7:00 PM
+# Sitemap location
+Sitemap: https://naucsetelesa.vercel.app/sitemap.xml
 
 
 # Ensure robots.txt is served correctly

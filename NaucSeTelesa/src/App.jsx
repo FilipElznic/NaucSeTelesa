@@ -12,6 +12,7 @@ import { GlobalProvider } from "./Global";
 import FadeInWrapper from "./Components/FadeInWrapper";
 import Navbar from "./Components/Navbar.jsx";
 import Footer from "./Components/Footer.jsx";
+import Docs from "./pages/Docs.jsx";
 
 // Lazy load all page components
 const LoginPage = lazy(() => import("./pages/loginPage.jsx"));
@@ -88,10 +89,9 @@ function AppContent() {
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               {/* Public route for login */}
-              <Route path="/login" element={<LoginPage />} />
-
+              <Route path="/login" element={<LoginPage />} />{" "}
+              <Route path="/docs" element={<Docs />} />
               <Route path="/privacy-policy" element={<Privacy />} />
-
               {/* Protected routes */}
               <Route
                 path="/user"
@@ -143,7 +143,6 @@ function AppContent() {
                   </ProtectedRoute>
                 }
               />
-
               {/* Redirect logged-in users from the root ("/") */}
               <Route
                 path="/"
@@ -153,7 +152,6 @@ function AppContent() {
                   </RedirectIfLoggedIn>
                 }
               />
-
               {/* Legacy Czech routes - redirect to English equivalents */}
               <Route
                 path="/projekt"
@@ -167,7 +165,6 @@ function AppContent() {
                   </ProtectedRoute>
                 }
               />
-
               {/* Catch-all 404 route - place this LAST */}
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
