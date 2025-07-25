@@ -158,7 +158,7 @@ const HelpPage = () => {
           <form onSubmit={sendEmail} className="flex flex-col gap-4">
             <div className="col-span-2 md:col-span-1">
               <label htmlFor="email" className="block mb-2">
-                Váš email
+                Your email
               </label>
               <input
                 type="email"
@@ -174,7 +174,7 @@ const HelpPage = () => {
             </div>
             <div className="col-span-2 md:col-span-1">
               <label htmlFor="message" className="block mb-2">
-                Vaše zpráva
+                Your message
               </label>
               <textarea
                 id="message"

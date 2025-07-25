@@ -35,7 +35,7 @@ function ProfilePic() {
 
       if (error) {
         console.error("Error fetching public URL:", error);
-        toast.error("Nepodařilo se načíst profilový obrázek.");
+        toast.error("Failed to load profile picture.");
       } else if (data?.publicUrl) {
         setProfilePictureUrl(data.publicUrl);
       }
@@ -52,16 +52,14 @@ function ProfilePic() {
 
     // Validate file type
     if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
-      toast.error("Nepodporovaný formát souboru. Použijte JPG, PNG nebo WebP.");
+      toast.error("Unsupported file format. Please use JPG, PNG or WebP.");
       return;
     }
 
     // Validate file size
     if (file.size > MAX_FILE_SIZE) {
       toast.error(
-        `Soubor je příliš velký. Maximální velikost je ${
-          MAX_FILE_SIZE / (1024 * 1024)
-        }MB.`
+        `File is too large. Maximum size is ${MAX_FILE_SIZE / (1024 * 1024)}MB.`
       );
       return;
     }
@@ -133,7 +131,7 @@ function ProfilePic() {
   // Upload profile picture
   const uploadProfilePicture = async () => {
     if (!selectedFile || !authUser) {
-      toast.error("Nebyl vybrán žádný soubor nebo uživatel není přihlášen.");
+      toast.error("No file selected or user is not logged in.");
       return;
     }
 
@@ -155,7 +153,7 @@ function ProfilePic() {
         if (deleteError) {
           console.error("Error deleting old file:", deleteError.message);
           toast.warning(
-            "Nepodařilo se odstranit starý obrázek, ale pokračuji v nahrávání nového."
+            "Failed to delete old image, but continuing with uploading new one."
           );
         }
       }
@@ -170,7 +168,7 @@ function ProfilePic() {
 
       if (uploadError) {
         console.error("Error uploading file:", uploadError.message);
-        toast.error("Chyba při nahrávání obrázku.");
+        toast.error("Error uploading image.");
         return;
       }
 
@@ -182,7 +180,7 @@ function ProfilePic() {
 
       if (dbError) {
         console.error("Error updating user profile:", dbError.message);
-        toast.error("Chyba při aktualizaci profilu uživatele.");
+        toast.error("Error updating user profile.");
 
         // Clean up the uploaded file if we can't update the database
         await supabase.storage.from(STORAGE_BUCKET).remove([filePath]);
@@ -196,14 +194,14 @@ function ProfilePic() {
 
       if (urlError) {
         console.error("Error fetching public URL:", urlError);
-        toast.warning("Obrázek byl nahrán, ale nelze ho zobrazit.");
+        toast.warning("Image was uploaded, but cannot be displayed.");
       } else {
         setProfilePictureUrl(publicUrlData.publicUrl);
-        toast.success("Profilový obrázek byl úspěšně aktualizován!");
+        toast.success("Profile picture was successfully updated!");
       }
     } catch (error) {
       console.error("Unexpected error:", error);
-      toast.error("Neočekávaná chyba při nahrávání obrázku.");
+      toast.error("Unexpected error uploading image.");
     } finally {
       setIsFileSelected(false);
       setPreviewUrl(null);
@@ -243,7 +241,7 @@ function ProfilePic() {
       {/* Upload Controls */}
       <div className="w-full flex flex-row justify-center">
         <label className="mt-4 bg-gradient-to-r from-blue-400 to-purple-500 text-white py-2 px-6 rounded-lg relative m-2 hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50">
-          {isUploading ? "Nahrávání..." : "Vybrat obrázek"}
+          {isUploading ? "Uploading..." : "Select Image"}
           <input
             type="file"
             onChange={handleFileChange}
@@ -259,15 +257,15 @@ function ProfilePic() {
             disabled={isUploading}
             className="mt-4 bg-gradient-to-r from-blue-400 to-purple-500 text-white py-2 px-6 rounded-lg m-2 hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {isUploading ? "Nahrávání..." : "Uložit"}
+            {isUploading ? "Uploading..." : "Save"}
           </button>
         )}
       </div>
 
       {/* Image requirements info */}
       <div className="mt-4 text-xs text-gray-400 text-center">
-        <p>Podporované formáty: JPG, PNG, WebP</p>
-        <p>Maximální velikost: {MAX_FILE_SIZE / (1024 * 1024)}MB</p>
+        <p>Supported formats: JPG, PNG, WebP</p>
+        <p>Maximum size: {MAX_FILE_SIZE / (1024 * 1024)}MB</p>
       </div>
     </div>
   );

@@ -46,7 +46,7 @@ function Profile() {
 
         if (error) {
           console.error("Error fetching user data:", error.message);
-          toast.error("Chyba při načítání dat uživatele.");
+          toast.error("Error loading user data.");
         } else {
           setFormData({
             name: data?.name || "",
@@ -56,7 +56,7 @@ function Profile() {
         }
       } catch (error) {
         console.error("Unexpected error:", error);
-        toast.error("Neočekávaná chyba při načítání dat.");
+        toast.error("Unexpected error loading data.");
       } finally {
         setFetching(false);
       }
@@ -75,7 +75,7 @@ function Profile() {
 
   const handleSaveChanges = async () => {
     if (!userData?.id) {
-      toast.error("Uživatel není přihlášen.");
+      toast.error("User is not logged in.");
       return;
     }
 
@@ -91,20 +91,20 @@ function Profile() {
 
       if (error) {
         console.error("Error updating profile:", error.message);
-        toast.error("Chyba při ukládání změn profilu.");
+        toast.error("Error saving profile changes.");
       } else {
-        toast.success("Profil byl úspěšně aktualizován!");
+        toast.success("Profile was successfully updated!");
         setEditing({ name: false, surname: false, nickname: false });
       }
     } catch (error) {
       console.error("Unexpected error:", error);
-      toast.error("Neočekávaná chyba při ukládání změn.");
+      toast.error("Unexpected error saving changes.");
     }
   };
 
   const handleDeleteAccount = async () => {
     if (!userData?.id) {
-      toast.error("Uživatel není přihlášen.");
+      toast.error("User is not logged in.");
       return;
     }
 
@@ -141,10 +141,10 @@ function Profile() {
 
       if (signOutError) {
         console.error("Error signing out:", signOutError.message);
-        toast.error("Účet byl smazán, ale nepodařilo se odhlásit.");
+        toast.error("Account was deleted, but failed to sign out.");
       } else {
         // Reset auth state in the app
-        toast.success("Váš účet byl úspěšně smazán.");
+        toast.success("Your account was successfully deleted.");
         // Redirect to homepage after a short delay
         setTimeout(() => {
           window.location.href = "/";
@@ -152,7 +152,7 @@ function Profile() {
       }
     } catch (error) {
       console.error("Unexpected error during account deletion:", error);
-      toast.error("Neočekávaná chyba při mazání účtu.");
+      toast.error("Unexpected error deleting account.");
     } finally {
       setShowDeleteConfirm(false);
     }
@@ -160,15 +160,19 @@ function Profile() {
 
   // Form fields configuration for cleaner rendering
   const fields = [
-    { key: "name", label: "Jméno", icon: <UserIcon className="w-5 h-5" /> },
+    {
+      key: "name",
+      label: "First Name",
+      icon: <UserIcon className="w-5 h-5" />,
+    },
     {
       key: "surname",
-      label: "Příjmení",
+      label: "Last Name",
       icon: <UserIcon className="w-5 h-5" />,
     },
     {
       key: "nickname",
-      label: "Přezdívka",
+      label: "Nickname",
       icon: <UserIcon className="w-5 h-5" />,
     },
   ];
@@ -194,7 +198,7 @@ function Profile() {
         <div className="bg-zinc-950 rounded-2xl shadow-2xl overflow-hidden  lg:min-h-[500px]">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl lg:text-7xl font-extrabold text-white p-5">
-              Váš profil
+              Your Profile
             </h1>
             <button
               onClick={() => (window.location.href = "/")}
@@ -220,25 +224,26 @@ function Profile() {
                     onClick={() => setShowDeleteConfirm(true)}
                     className="px-6 py-3 text-sm rounded-lg bg-red-900/30 border border-red-600/50 text-red-400 font-medium hover:bg-red-800/40 transition-colors"
                   >
-                    Smazat účet
+                    Delete Account
                   </button>
                 ) : (
                   <div className="bg-red-900/30 p-4 rounded-lg border border-red-500/50 max-w-xs">
                     <p className="text-sm mb-3 text-red-200">
-                      Opravdu chcete smazat svůj účet? Tato akce je nevratná.
+                      Are you sure you want to delete your account? This action
+                      is irreversible.
                     </p>
                     <div className="flex space-x-2">
                       <button
                         onClick={handleDeleteAccount}
                         className="w-1/2 p-2 text-sm rounded bg-red-600 hover:bg-red-700 text-white transition-colors"
                       >
-                        Ano, smazat
+                        Yes, delete
                       </button>
                       <button
                         onClick={() => setShowDeleteConfirm(false)}
                         className="w-1/2 p-2 text-sm rounded bg-gray-600 hover:bg-gray-700 text-white transition-colors"
                       >
-                        Zrušit
+                        Cancel
                       </button>
                     </div>
                   </div>
@@ -250,7 +255,7 @@ function Profile() {
             <div className="lg:col-span-2 h-full flex items-center justify-center p-4 lg:p-8">
               <div className="usergradient rounded-2xl shadow-inner p-6 lg:p-10 w-full h-full flex flex-col">
                 <h3 className="text-2xl font-bold text-white mb-8 border-b border-gray-700 pb-4">
-                  Osobní údaje
+                  Personal Information
                 </h3>
 
                 <div className="space-y-8 mt-6 flex-grow">

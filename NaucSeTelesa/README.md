@@ -119,6 +119,13 @@ VITE_SUPABASE_KEY=your_supabase_anon_public_key
 
 ### Step 3: Create database same in the Docs.jsx
 
+1. Go to public folder and find database.png
+2. Create database same as in the picture
+3. You will also need to setup RLS policies
+
+(you can't export supabase database with RLS policies and data)
+The data needed for insert will be in folder data in src
+
 ### Step 4: Authentication Setup
 
 1. Go to Authentication → Settings
@@ -321,4 +328,4 @@ This project is created as a thesis work for educational purposes.
          alt="This project is part of Shipwrecked, the world's first hackathon on an island!" 
          style="width: 35%;">
   </a>
-</div>s
+</div>

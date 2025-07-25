@@ -78,8 +78,8 @@ function TaskLayout() {
     // Show toast notification
     {
       isCorrect
-        ? toast.success("Správná odpověď!")
-        : toast.error("Špatná odpověď!");
+        ? toast.success("Correct answer!")
+        : toast.error("Wrong answer!");
     }
 
     if (isCorrect) {
@@ -106,7 +106,7 @@ function TaskLayout() {
 
   // Prevents rendering before userData is available
   if (!userData) {
-    return <div className="text-white text-center mt-10">Načítání...</div>;
+    return <div className="text-white text-center mt-10">Loading...</div>;
   }
 
   // Function to shuffle task order

@@ -33,10 +33,10 @@ function TelesaPage() {
         {/* Text content */}
         <div className="flex-1 flex flex-col justify-center items-start px-4 sm:px-8 md:mx-16 lg:px-22 py-6">
           <div className="text-start text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black">
-            <h2 className="mb-1">Efektivně.</h2>
-            <h2 className="mb-1">Pohodlně.</h2>
+            <h2 className="mb-1">Clearly.</h2>
+            <h2 className="mb-1">Efficient.</h2>
             <h2 className="mb-1">
-              <span className="userlvl">Srozumitelně</span>.
+              <span className="userlvl">Comfortably.</span>.
             </h2>
           </div>
         </div>

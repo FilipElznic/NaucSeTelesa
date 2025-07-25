@@ -28,10 +28,10 @@ function Leaderboard() {
     <div className="usergradient rounded-3xl w-full  text-white p-4 font-sans">
       <div className="min-w-3xl mx-auto">
         <div className="grid grid-cols-3 gap-4 p-4 bg-transparent rounded-lg shadow-lg">
-          <div className="text-lg font-semibold text-purple-400">Místo</div>
-          <div className="text-lg font-semibold text-purple-400">Uživatel</div>
+          <div className="text-lg font-semibold text-purple-400">Place</div>
+          <div className="text-lg font-semibold text-purple-400">User</div>
           <div className="text-lg text-right font-semibold text-purple-400">
-            Úroveň
+            Level
           </div>
         </div>
 
@@ -39,7 +39,7 @@ function Leaderboard() {
         <div className="h-96 overflow-y-auto no-scrollbar ">
           {users.length == 0 ? (
             <h1 className="text-center text-lg font-semibold text-purple-400">
-              Načítám leaderboard...
+              Loading leaderboard...
             </h1>
           ) : (
             users.map((user, index) => (

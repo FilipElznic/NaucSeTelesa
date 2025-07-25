@@ -82,11 +82,11 @@ function CustomLoginPage() {
       });
 
       if (error) {
-        toast.error(`Přihlášení přes ${provider} selhalo: ${error.message}`);
+        toast.error(`Login via ${provider} failed: ${error.message}`);
         console.error("Error with provider login:", error.message);
       }
     } catch (err) {
-      toast.error("Nastala neočekávaná chyba při přihlášení");
+      toast.error("An unexpected error occurred during login");
       console.error("Unexpected error during provider login:", err);
     } finally {
       setLoading(false);
@@ -97,7 +97,7 @@ function CustomLoginPage() {
     e.preventDefault();
 
     if (!email || !password) {
-      toast.error("Vyplňte prosím všechna pole");
+      toast.error("Please fill in all fields");
       return;
     }
 
@@ -131,7 +131,7 @@ function CustomLoginPage() {
     e.preventDefault();
 
     if (!email || !password) {
-      toast.error("Vyplňte prosím všechna pole");
+      toast.error("Please fill in all fields");
       return;
     }
 
@@ -143,11 +143,11 @@ function CustomLoginPage() {
       });
 
       if (error) {
-        toast.error(`Přihlášení selhalo: ${error.message}`);
+        toast.error(`Login failed: ${error.message}`);
       }
       // Successful login will trigger onAuthStateChange which handles navigation
     } catch (err) {
-      toast.error("Nastala neočekávaná chyba při přihlášení");
+      toast.error("An unexpected error occurred during login");
       console.error("Unexpected error during sign in:", err);
     } finally {
       setLoading(false);
@@ -158,7 +158,7 @@ function CustomLoginPage() {
     e.preventDefault();
 
     if (!email) {
-      toast.error("Zadejte prosím svůj e-mail");
+      toast.error("Please enter your email address");
       return;
     }
 
@@ -169,13 +169,15 @@ function CustomLoginPage() {
       });
 
       if (error) {
-        toast.error(`Reset hesla selhal: ${error.message}`);
+        toast.error(`Password reset failed: ${error.message}`);
       } else {
-        toast.success("Pokyny k resetování hesla byly odeslány na váš e-mail");
+        toast.success(
+          "Password reset instructions have been sent to your email"
+        );
         setForgotPassword(false);
       }
     } catch (err) {
-      toast.error("Nastala neočekávaná chyba při resetování hesla");
+      toast.error("An unexpected error occurred during password reset");
       console.error("Unexpected error during password reset:", err);
     } finally {
       setLoading(false);
@@ -228,7 +230,7 @@ function CustomLoginPage() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-500 ease-in-out">
         <div>
-          <h2 className="text-2xl font-bold mb-6 text-left">Přihlášení</h2>
+          <h2 className="text-2xl font-bold mb-6 text-left">Login</h2>
 
           <div className="space-y-4 mb-6">
             <div className="w-full usergradient rounded-2xl">
@@ -238,7 +240,7 @@ function CustomLoginPage() {
                 disabled={loading}
                 className="w-full py-2 px-4 text-white font-semibold userlvl"
               >
-                Přihlásit se přes Google
+                Sign in with Google
               </button>
             </div>
             <div className="w-full usergradient rounded-2xl">
@@ -248,7 +250,7 @@ function CustomLoginPage() {
                 disabled={loading}
                 className="w-full py-2 px-4 text-white font-semibold userlvl"
               >
-                Přihlásit se přes Discord
+                Sign in with Discord
               </button>
             </div>
 
@@ -257,7 +259,7 @@ function CustomLoginPage() {
                 <div className="w-full border-t border-zinc-700"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-zinc-900 text-zinc-400">nebo</span>
+                <span className="px-2 bg-zinc-900 text-zinc-400">or</span>
               </div>
             </div>
           </div>
@@ -265,7 +267,7 @@ function CustomLoginPage() {
           <form onSubmit={handleEmailSignIn} className="space-y-4">
             <div className="text-left">
               <label className="block text-sm font-medium mb-1">
-                E-mailová adresa
+                Email Address
               </label>
               <input
                 type="email"
@@ -311,9 +313,11 @@ function CustomLoginPage() {
 
         <div className="flex flex-col justify-center items-center border-l border-zinc-700 pl-8 hidden md:flex">
           <div className="text-center">
-            <h3 className="text-xl font-semibold mb-4">Nemáte u nás účet?</h3>
+            <h3 className="text-xl font-semibold mb-4">
+              Don&apos;t have an account?
+            </h3>
             <p className="text-zinc-400 mb-6">
-              Vytvořte si účet zdarma a získejte přístup ke všem našim službám.
+              Create a free account and get access to all our services.
             </p>
             <button
               onClick={() => {
@@ -323,7 +327,7 @@ function CustomLoginPage() {
               }}
               className="py-2 px-8 bg-zinc-800 hover:bg-zinc-700 text-white font-semibold rounded-md transition-colors"
             >
-              Zaregistrovat se
+              Register
             </button>
           </div>
         </div>
@@ -331,7 +335,7 @@ function CustomLoginPage() {
         {/* Mobile only register link */}
         <div className="text-center mt-4 md:hidden">
           <p className="text-zinc-400">
-            Nemáte u nás účet?{" "}
+            Don&apos;t have an account?{" "}
             <button
               onClick={() => {
                 setEmail("");
@@ -340,7 +344,7 @@ function CustomLoginPage() {
               }}
               className="text-white font-semibold hover:underline"
             >
-              Zaregistrovat se
+              Register
             </button>
           </p>
         </div>

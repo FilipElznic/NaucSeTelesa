@@ -48,7 +48,7 @@ function TailwindTest() {
   };
 
   // Loading placeholder for userData
-  const LoadingPlaceholder = () => <p className="text-sm">Načítám data ...</p>;
+  const LoadingPlaceholder = () => <p className="text-sm">Loading data...</p>;
 
   // Calculate user level and progress
   const userLevel = userData ? Math.floor(userData.xp / 100) : 0;
@@ -74,7 +74,7 @@ function TailwindTest() {
                 )}
               </div>
             </div>
-            <p className="text-2xl text-white mb-3">Úroveň</p>
+            <p className="text-2xl text-white mb-3">Level</p>
           </div>
 
           {/* User Profile Card */}

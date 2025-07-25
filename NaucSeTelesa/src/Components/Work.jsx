@@ -11,7 +11,7 @@ function Work() {
         PROJECT SHOWCASE
       </h1>
 
-      {/* Hlavní obrázek */}
+      {/* Main image */}
       <div className="w-[90vw]">
         <div className="w-full bg-black rounded-2xl mb-6 flex flex-col items-center justify-center usergradient-glow p-6">
           <p className="userlvl text-xl text-white">Track your progress</p>
@@ -24,7 +24,7 @@ function Work() {
         </div>
       </div>
 
-      {/* Dva menší obrázky vedle sebe */}
+      {/* Two smaller images side by side */}
       <div className="w-[90vw] flex flex-col md:flex-row gap-6">
         {[
           {

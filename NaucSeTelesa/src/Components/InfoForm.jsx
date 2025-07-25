@@ -77,11 +77,11 @@ function InfoForm() {
 
   const validateInput = (field, value) => {
     if (value.length < 3) {
-      return `Musí obsahovat alespoň 3 znaky`;
+      return `Must contain at least 3 characters`;
     } else if (value.length > 25) {
-      return `Maximálně 25 znaků`;
+      return `Maximum 25 characters`;
     } else if (!/^[\p{L}0-9_]+$/u.test(value)) {
-      return `Pouze písmena (včetně háčků a čárek), čísla a podtržítko`;
+      return `Only letters (including accents), numbers and underscore`;
     }
     return "";
   };
@@ -299,7 +299,7 @@ function InfoForm() {
                         htmlFor="jmeno"
                         className="block text-sm font-medium text-white mb-2"
                       >
-                        Jméno
+                        First Name
                       </label>
                       <input
                         id="jmeno"
@@ -327,7 +327,7 @@ function InfoForm() {
                         htmlFor="prijmeni"
                         className="block text-sm font-medium text-white mb-2"
                       >
-                        Přijmení
+                        Last Name
                       </label>
                       <input
                         id="prijmeni"
@@ -357,7 +357,7 @@ function InfoForm() {
                       htmlFor="prezdivka"
                       className="block text-sm font-medium text-white mb-2"
                     >
-                      Přezdívka
+                      Nickname
                     </label>
                     <input
                       id="prezdivka"

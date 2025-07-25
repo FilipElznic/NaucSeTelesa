@@ -15,11 +15,11 @@ const GeometricBodiesCarousel = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal window opening
   const [selectedBody, setSelectedBody] = useState(null); // Selected solid for detail
 
-  // Funkce pro renderování textu s KaTeX formulemi
+  // Function for rendering text with KaTeX formulas
   const renderTextWithKaTeX = (text) => {
     if (!text) return "";
 
-    // Regex pro nalezení LaTeX výrazů mezi $...$ (inline) nebo $$...$$ (block)
+    // Regex to find LaTeX expressions between $...$ (inline) or $$...$$ (block)
     const latexRegex = /(\$\$.*?\$\$|\$.*?\$)/g;
 
     const parts = text.split(latexRegex);
@@ -70,7 +70,7 @@ const GeometricBodiesCarousel = () => {
     });
   };
 
-  // Načtení dat při inicializaci komponenty
+  // Loading data during component initialization
   useEffect(() => {
     const fetchBodies = async () => {
       setLoading(true);
@@ -86,7 +86,7 @@ const GeometricBodiesCarousel = () => {
 
     fetchBodies();
 
-    // Posluchač pro změnu velikosti okna (detekce mobil/desktop)
+    // Window size change listener (mobile/desktop detection)
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -114,7 +114,7 @@ const GeometricBodiesCarousel = () => {
     setCurrentSlide(index);
   };
 
-  // Otevření/zavření modálního okna
+  // Opening/closing modal window
   const openModal = (body) => {
     setSelectedBody(body);
     setIsModalOpen(true);
@@ -130,7 +130,7 @@ const GeometricBodiesCarousel = () => {
     setIsSplineLoading(false);
   };
 
-  // Získání viditelných slidů (předchozí, aktuální, následující)
+  // Get visible slides (previous, current, next)
   const getVisibleSlides = () => {
     if (bodies.length === 0) return [];
 

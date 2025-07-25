@@ -71,16 +71,14 @@ function Privacy() {
                 </svg>
               </div>
               <p className="ml-4 text-gray-300">
-                Žádné sdílení s třetími stranami
+                No sharing with third parties
               </p>
             </div>
           </div>
         </div>
 
         <div className="usergradient rounded-xl p-8 shadow-lg mb-12">
-          <h2 className=" text-2xl font-semibold mb-6">
-            Jak používáme vaše data
-          </h2>
+          <h2 className=" text-2xl font-semibold mb-6">How we use your data</h2>
 
           <div className="space-y-6">
             <div className="flex items-start">
@@ -102,12 +100,12 @@ function Privacy() {
               </div>
               <div className="ml-4">
                 <h3 className="text-xl font-medium text-gray-100">
-                  Zlepšení uživatelské zkušenosti
+                  Improving user experience
                 </h3>
                 <p className="text-gray-300 mt-2">
-                  Využíváme anonymizovaná data k analýze, jak naši uživatelé
-                  používají aplikaci, abychom mohli průběžně zlepšovat její
-                  funkčnost a design.
+                  We use anonymized data to analyze how our users use the
+                  application so we can continuously improve its functionality
+                  and design.
                 </p>
               </div>
             </div>
@@ -131,12 +129,11 @@ function Privacy() {
               </div>
               <div className="ml-4">
                 <h3 className="text-xl font-medium text-gray-100">
-                  Personalizace obsahu
+                  Content personalization
                 </h3>
                 <p className="text-gray-300 mt-2">
-                  Ukládáme váš pokrok a preference, abychom vám mohli nabídnout
-                  personalizovaný obsah a přizpůsobit vaše učení podle vašich
-                  potřeb.
+                  We save your progress and preferences so we can offer you
+                  personalized content and tailor your learning to your needs.
                 </p>
               </div>
             </div>
@@ -160,12 +157,11 @@ function Privacy() {
               </div>
               <div className="ml-4">
                 <h3 className="text-xl font-medium text-gray-100">
-                  Sledování pokroku
+                  Progress tracking
                 </h3>
                 <p className="text-gray-300 mt-2">
-                  Ukládáme informace o vašem postupu v učení, abyste mohli
-                  sledovat svůj růst a abychom vám mohli nabídnout relevantní
-                  následující kroky.
+                  We store information about your learning progress so you can
+                  track your growth and so we can offer you relevant next steps.
                 </p>
               </div>
             </div>

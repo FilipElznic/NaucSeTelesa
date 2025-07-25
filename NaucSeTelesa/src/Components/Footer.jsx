@@ -17,10 +17,10 @@ function Footer() {
 
   // Example nav links (replace with your actual links)
   const navLinks = [
-    { to: "/", text: "Domů" },
-    { to: "/privacy-policy", text: "Soukromí" },
-    { to: "/help", text: "Kontakt" },
-    { to: "/about", text: "Projekt" },
+    { to: "/", text: "Home" },
+    { to: "/privacy-policy", text: "Privacy Policy" },
+    { to: "/help", text: "Contact" },
+    { to: "/about", text: "Project" },
   ];
 
   return (
@@ -50,6 +50,8 @@ function Footer() {
       <div className="text-center mt-3">
         <p className="text-white">
           &copy; {getCurrentYear()} Filip Elznic. All rights reserved.
+          <br />
+          <p>This english version was created for shipwrecked</p>
         </p>
       </div>
     </footer>

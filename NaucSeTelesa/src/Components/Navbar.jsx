@@ -52,7 +52,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         onClick={onClose}
       >
         <UserIcon className="inline-block mr-2 w-5 h-5 text-white" />
-        Můj profil
+        My Profile
       </Link>
       <button
         onClick={() => {
@@ -62,7 +62,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         className="block w-full text-left px-4 py-2 text-xl text-red-500 hover:bg-gray-700 font-bold"
       >
         <ArrowRightOnRectangleIcon className="inline-block mr-2 w-5 h-5 text-white" />
-        Odhlásit se
+        Sign Out
       </button>
     </div>
   );
@@ -280,7 +280,7 @@ const Navbar = () => {
               >
                 <div className="flex flex-row justify-center items-center">
                   <p className="text-white pr-2 text-2xl md:text-lg font-bold">
-                    Dobrý den,
+                    Hello,
                     {userData?.name ? ` ${userData.name} ` : authUser.email}
                   </p>
                   <img
