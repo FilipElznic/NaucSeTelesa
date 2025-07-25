@@ -18,9 +18,9 @@ function Footer() {
   // Example nav links (replace with your actual links)
   const navLinks = [
     { to: "/", text: "Domů" },
-    { to: "/ochrana-osobnich-udaju", text: "Soukromí" },
-    { to: "/pomoc", text: "Kontakt" },
-    { to: "/projekt", text: "Projekt" },
+    { to: "/privacy-policy", text: "Soukromí" },
+    { to: "/help", text: "Kontakt" },
+    { to: "/about", text: "Projekt" },
   ];
 
   return (
@@ -49,7 +49,7 @@ function Footer() {
       {/* Copyright */}
       <div className="text-center mt-3">
         <p className="text-white">
-          &copy; {getCurrentYear()} Filip Elznic. Všechna práva vyhrazena.
+          &copy; {getCurrentYear()} Filip Elznic. All rights reserved.
         </p>
       </div>
     </footer>

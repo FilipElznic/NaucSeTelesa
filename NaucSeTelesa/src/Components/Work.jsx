@@ -8,16 +8,16 @@ function Work() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center pb-20">
       <h1 className="text-2xl sm:text-6xl md:text-7xl xl:text-9xl font-bold md:mb-7 text-white p-11 userlvl">
-        UKÁZKA PROJEKTU
+        PROJECT SHOWCASE
       </h1>
 
       {/* Hlavní obrázek */}
       <div className="w-[90vw]">
         <div className="w-full bg-black rounded-2xl mb-6 flex flex-col items-center justify-center usergradient-glow p-6">
-          <p className="userlvl text-xl text-white">Sledujte svůj pokrok</p>
+          <p className="userlvl text-xl text-white">Track your progress</p>
           <img
             src={TasksIMG}
-            alt="Ukázka sledování úkolů"
+            alt="Task  showcase"
             loading="lazy"
             className="w-full h-auto rounded-2xl object-contain"
           />
@@ -29,13 +29,13 @@ function Work() {
         {[
           {
             img: UserPageIMG,
-            text: "Sledujte svůj pokrok",
-            alt: "Uživatelská stránka",
+            text: "Track your progress",
+            alt: "User page",
           },
           {
             img: LeaderboardIMG,
-            text: "Soutěžte s ostatními",
-            alt: "Žebříček uživatelů",
+            text: "Compete with others",
+            alt: "User leaderboard",
           },
         ].map(({ img, text, alt }, index) => (
           <div

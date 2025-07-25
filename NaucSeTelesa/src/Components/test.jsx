@@ -255,42 +255,42 @@ const Test = () => {
         <div className="flex flex-col ">
           <div className=" h-full mt-10 w-full flex justify-center items-center flex-col gap-16">
             <h1 className="text-3xl md:text-6xl mb-6 userlvl font-bold">
-              Úrovně procvičování
+              Practice levels
             </h1>
             <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white">
               <div className="w-full h-full flex flex-row gap-4 ">
                 <a
-                  href="#zebricek"
+                  href="#leaderboard"
                   className="w-full h-full  bg-zinc-800 rounded-3xl"
                 >
                   <div className="w-full h-full flex justify-center items-center p-4 relative">
                     <ArrowTopRightOnSquareIcon className="w-5 h-5 text-white  absolute top-3 right-3" />
                     <h1 className="text-2xl font-semibold p-4 userlvl">
-                      Žebříček uživatelů
+                      User leaderboard
                     </h1>
                   </div>
                 </a>
               </div>
               <div className="w-full h-full flex flex-col gap-4 ">
                 <Link
-                  to="/telesa"
+                  to="/solids"
                   className="w-full h-full  bg-zinc-800 rounded-3xl"
                 >
                   <div className=" h-full w-full  flex justify-center items-center p-4 relative">
                     <ArrowTopRightOnSquareIcon className="w-5 h-5 text-white absolute top-3 right-3" />
                     <h1 className="text-2xl font-semibold p-4 userlvl">
-                      Tělesa
+                      Solids
                     </h1>
                   </div>
                 </Link>
                 <Link
-                  to="/ukoly"
+                  to="/tasks"
                   className="w-full h-full z-50  bg-zinc-800 rounded-3xl"
                 >
                   <div className="w-full h-full flex justify-center items-center p-4 relative">
                     <ArrowTopRightOnSquareIcon className="w-5 h-5 text-white  absolute top-3 right-3" />
                     <h1 className="text-2xl font-semibold p-4 userlvl">
-                      Úkoly
+                      Tasks
                     </h1>
                   </div>
                 </Link>
@@ -349,13 +349,12 @@ const Test = () => {
           <div className="w-1/2 p-10 flex items-start justify-center">
             <div className="max-w-lg">
               <h1 className=" md:text-7xl userlvl font-bold mb-6 absolute scale-110 left-24">
-                Úrovně procvičování
+                Practice levels
               </h1>
               <div className="mt-40 w-full">
                 <p className="text-white/90 text-xl lg:text-2xl mb-2 lg:mb-6 ">
-                  Úrovně na našem webu fungují jednoduše, čím více procvičujete,
-                  tím vyšší úroveň získáváte! Úrovně získáte pomocí procvičování
-                  úkolů.
+                  Levels on our website work simply: the more you practice, the
+                  higher level you achieve! You gain levels by practicing tasks.
                 </p>
               </div>
 
@@ -363,37 +362,37 @@ const Test = () => {
                 <div className="gap-4 flex flex-col h-[30vh] w-5/6 text-white ">
                   <div className="w-full h-full flex flex-row gap-4 ">
                     <a
-                      href="#zebricek"
+                      href="#leaderboard"
                       className="w-full h-full  bg-zinc-800 rounded-3xl"
                     >
                       <div className="w-full h-full flex justify-center items-center p-4 relative">
                         <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white  absolute top-3 right-3" />
                         <h1 className="text-5xl font-semibold p-4 userlvl">
-                          Žebříček uživatelů
+                          User leaderboard
                         </h1>
                       </div>
                     </a>
                   </div>
                   <div className="w-full h-full flex flex-row gap-4 ">
                     <Link
-                      to="/telesa"
+                      to="/solids"
                       className="w-full h-full  bg-zinc-800 rounded-3xl"
                     >
                       <div className=" h-full w-full  flex justify-center items-center p-4 relative">
                         <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white absolute top-3 right-3" />
                         <h1 className="text-5xl font-semibold p-4 userlvl">
-                          Tělesa
+                          Solids
                         </h1>
                       </div>
                     </Link>
                     <Link
-                      to="/ukoly"
+                      to="/tasks"
                       className="w-full h-full z-50  bg-zinc-800 rounded-3xl"
                     >
                       <div className="w-full h-full flex justify-center items-center p-4 relative">
                         <ArrowTopRightOnSquareIcon className="w-7 h-7 text-white  absolute top-3 right-3" />
                         <h1 className="text-5xl font-semibold p-4 userlvl">
-                          Úkoly
+                          Tasks
                         </h1>
                       </div>
                     </Link>

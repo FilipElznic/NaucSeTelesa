@@ -300,7 +300,7 @@ function Profile() {
                     className="py-4 px-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:from-blue-600 hover:to-purple-700 transition-all transform hover:translate-y-[-2px] shadow-lg"
                     onClick={handleSaveChanges}
                   >
-                    Uložit změny
+                    Save changes
                   </button>
                 </div>
               </div>

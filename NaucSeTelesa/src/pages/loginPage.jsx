@@ -19,7 +19,7 @@ function CustomLoginPage() {
   useEffect(() => {
     // Check if user was redirected from a protected route
     if (location.state?.protected) {
-      toast.error("Pro přístup na tuto stránku se musíte přihlásit", {
+      toast.error("You must log in to access this page", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -65,7 +65,7 @@ function CustomLoginPage() {
         }
       }
 
-      navigate("/hlavni-strana");
+      navigate("/main-page");
     } catch (err) {
       console.error("Unexpected error:", err);
     }
@@ -77,7 +77,7 @@ function CustomLoginPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: window.location.origin + "/hlavni-strana",
+          redirectTo: window.location.origin + "/main-page",
         },
       });
 
@@ -112,15 +112,15 @@ function CustomLoginPage() {
       });
 
       if (error) {
-        toast.error(`Registrace selhala: ${error.message}`);
+        toast.error(`Registration failed: ${error.message}`);
       } else {
         toast.success(
-          "Registrace úspěšná! Zkontrolujte svůj e-mail pro potvrzení."
+          "Registration successful! Check your email for confirmation."
         );
         setIsLogin(true);
       }
     } catch (err) {
-      toast.error("Nastala neočekávaná chyba při registraci");
+      toast.error("An unexpected error occurred during registration");
       console.error("Unexpected error during sign up:", err);
     } finally {
       setLoading(false);
@@ -185,18 +185,18 @@ function CustomLoginPage() {
   const renderForgotPasswordForm = () => {
     return (
       <div className="w-full transition-all duration-500 ease-in-out">
-        <h2 className="text-2xl font-bold mb-6 text-left">Obnovit heslo</h2>
+        <h2 className="text-2xl font-bold mb-6 text-left">Reset Password</h2>
 
         <form onSubmit={handleResetPassword} className="space-y-4">
           <div className="text-left">
             <label className="block text-sm font-medium mb-1">
-              E-mailová adresa
+              Email Address
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Zadejte svůj e-mail pro reset hesla"
+              placeholder="Enter your email to reset password"
               className="w-full bg-zinc-900 border border-zinc-800 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-zinc-700"
               required
             />
@@ -207,7 +207,7 @@ function CustomLoginPage() {
             disabled={loading}
             className="w-full py-2 px-4 bg-zinc-900 hover:bg-zinc-950 text-white font-semibold rounded-md transition-colors usergradient userlvl"
           >
-            {loading ? "Odesílám..." : "Resetovat heslo"}
+            {loading ? "Sending..." : "Reset Password"}
           </button>
 
           <div className="text-left mt-4">
@@ -216,7 +216,7 @@ function CustomLoginPage() {
               onClick={() => setForgotPassword(false)}
               className="text-zinc-400 hover:text-white transition-colors"
             >
-              Zpět na přihlášení
+              Back to Login
             </button>
           </div>
         </form>
@@ -271,19 +271,19 @@ function CustomLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Zadejte svůj e-mail"
+                placeholder="Enter your email"
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-zinc-700"
                 required
               />
             </div>
 
             <div className="text-left">
-              <label className="block text-sm font-medium mb-1">Heslo</label>
+              <label className="block text-sm font-medium mb-1">Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Zadejte své heslo"
+                placeholder="Enter your password"
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-zinc-700"
                 required
               />
@@ -294,7 +294,7 @@ function CustomLoginPage() {
               disabled={loading}
               className="w-full py-2 px-4 bg-zinc-900 hover:bg-zinc-950 text-white font-semibold rounded-md transition-colors usergradient userlvl"
             >
-              {loading ? "Zpracovávám..." : "Přihlásit se"}
+              {loading ? "Processing..." : "Sign In"}
             </button>
 
             <div className="flex justify-end text-sm mt-4">
@@ -303,7 +303,7 @@ function CustomLoginPage() {
                 onClick={() => setForgotPassword(true)}
                 className="text-zinc-400 hover:text-white transition-colors"
               >
-                Zapomenuté heslo?
+                Forgot Password?
               </button>
             </div>
           </form>
@@ -352,7 +352,7 @@ function CustomLoginPage() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-500 ease-in-out">
         <div>
-          <h2 className="text-2xl font-bold mb-6 text-left">Registrace</h2>
+          <h2 className="text-2xl font-bold mb-6 text-left">Register</h2>
 
           <div className="space-y-4 mb-6">
             <div className="w-full usergradient rounded-2xl">
@@ -362,7 +362,7 @@ function CustomLoginPage() {
                 disabled={loading}
                 className="w-full py-2 px-4 text-white font-semibold userlvl"
               >
-                Registrovat přes Google
+                Register with Google
               </button>
             </div>
             <div className="w-full usergradient rounded-2xl">
@@ -372,7 +372,7 @@ function CustomLoginPage() {
                 disabled={loading}
                 className="w-full py-2 px-4 text-white font-semibold userlvl"
               >
-                Registrovat přes Discord
+                Register with Discord
               </button>
             </div>
 
@@ -381,7 +381,7 @@ function CustomLoginPage() {
                 <div className="w-full border-t border-zinc-700"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-zinc-900 text-zinc-400">nebo</span>
+                <span className="px-2 bg-zinc-900 text-zinc-400">or</span>
               </div>
             </div>
           </div>
@@ -389,25 +389,25 @@ function CustomLoginPage() {
           <form onSubmit={handleEmailSignUp} className="space-y-4">
             <div className="text-left">
               <label className="block text-sm font-medium mb-1">
-                E-mailová adresa
+                Email Address
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Zadejte svůj e-mail"
+                placeholder="Enter your email"
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-zinc-700"
                 required
               />
             </div>
 
             <div className="text-left">
-              <label className="block text-sm font-medium mb-1">Heslo</label>
+              <label className="block text-sm font-medium mb-1">Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Vytvořte si heslo"
+                placeholder="Create a password"
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-zinc-700"
                 required
               />
@@ -418,16 +418,18 @@ function CustomLoginPage() {
               disabled={loading}
               className="w-full py-2 px-4 bg-zinc-900 hover:bg-zinc-950 text-white font-semibold rounded-md transition-colors usergradient userlvl"
             >
-              {loading ? "Zpracovávám..." : "Zaregistrovat se"}
+              {loading ? "Processing..." : "Register"}
             </button>
           </form>
         </div>
 
         <div className="flex flex-col justify-center items-center border-l border-zinc-700 pl-8 hidden md:flex">
           <div className="text-center">
-            <h3 className="text-xl font-semibold mb-4">Už máte účet?</h3>
+            <h3 className="text-xl font-semibold mb-4">
+              Already have an account?
+            </h3>
             <p className="text-zinc-400 mb-6">
-              Přihlaste se ke svému účtu a pokračujte v používání našich služeb.
+              Sign in to your account and continue using our services.
             </p>
             <button
               onClick={() => {
@@ -437,7 +439,7 @@ function CustomLoginPage() {
               }}
               className="py-2 px-8 bg-zinc-800 hover:bg-zinc-700 text-white font-semibold rounded-md transition-colors"
             >
-              Přihlásit se
+              Sign In
             </button>
           </div>
         </div>
@@ -445,7 +447,7 @@ function CustomLoginPage() {
         {/* Mobile only login link */}
         <div className="text-center mt-4 md:hidden">
           <p className="text-zinc-400">
-            Už máte účet?{" "}
+            Already have an account?{" "}
             <button
               onClick={() => {
                 setEmail("");
@@ -454,7 +456,7 @@ function CustomLoginPage() {
               }}
               className="text-white font-semibold hover:underline"
             >
-              Přihlásit se
+              Sign In
             </button>
           </p>
         </div>

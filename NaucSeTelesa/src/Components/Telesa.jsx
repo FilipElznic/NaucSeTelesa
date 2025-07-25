@@ -6,14 +6,14 @@ import Spline from "@splinetool/react-spline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const GeometricBodiesCarousel = () => {
-  // Stavové proměnné
-  const [bodies, setBodies] = useState([]); // Ukládá seznam geometrických těles
-  const [loading, setLoading] = useState(true); // Indikátor načítání
-  const [currentSlide, setCurrentSlide] = useState(0); // Aktuální slide v karusele
-  const [isSplineLoading, setIsSplineLoading] = useState(true); // Načítání 3D modelu
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Detekce mobilního zařízení
-  const [isModalOpen, setIsModalOpen] = useState(false); // Otevření modálního okna
-  const [selectedBody, setSelectedBody] = useState(null); // Vybrané těleso pro detail
+  // State variables
+  const [bodies, setBodies] = useState([]); // Stores list of geometric solids
+  const [loading, setLoading] = useState(true); // Loading indicator
+  const [currentSlide, setCurrentSlide] = useState(0); // Current slide in carousel
+  const [isSplineLoading, setIsSplineLoading] = useState(true); // 3D model loading
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Mobile device detection
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal window opening
+  const [selectedBody, setSelectedBody] = useState(null); // Selected solid for detail
 
   // Funkce pro renderování textu s KaTeX formulemi
   const renderTextWithKaTeX = (text) => {
@@ -77,7 +77,7 @@ const GeometricBodiesCarousel = () => {
       const { data, error } = await supabase.rpc("fetch_geometric_bodies4");
 
       if (error) {
-        console.error("Chyba při načítání geometrických těles:", error);
+        console.error("Error loading geometric solids:", error);
       } else {
         setBodies(data);
       }
@@ -330,8 +330,8 @@ const GeometricBodiesCarousel = () => {
                           className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 md:py-3 md:px-6 rounded-full transition-colors shadow-md text-sm md:text-base"
                         >
                           {item.body.spline_url
-                            ? "Zobrazit 3D model"
-                            : "Zobrazit detail"}
+                            ? "View 3D model"
+                            : "View details"}
                         </button>
                       </div>
                     )}
@@ -371,7 +371,7 @@ const GeometricBodiesCarousel = () => {
             <button
               onClick={closeModal}
               className="bg-purple-800 absolute right-3 hover:bg-purple-700 text-white rounded-full w-8 h-8 flex items-center justify-center text-xl z-10 transition-colors shadow-lg"
-              aria-label="Zavřít"
+              aria-label="Close"
             >
               <XMarkIcon className="w-7 h-7 text-white" />
             </button>

@@ -202,29 +202,29 @@ const Navbar = () => {
   const navLinks = useMemo(
     () => [
       {
-        to: "/hlavni-strana",
+        to: "/main-page",
         icon: <HomeIcon className="w-5 h-5 mr-2 text-white" />,
-        text: "Domů",
+        text: "Home",
       },
       {
-        to: "/telesa",
+        to: "/solids",
         icon: <Squares2X2Icon className="w-5 h-5 mr-2 text-white" />,
-        text: "Tělesa",
+        text: "Solids",
       },
       {
-        to: "/ukoly",
+        to: "/tasks",
         icon: <CheckCircleIcon className="w-5 h-5 mr-2 text-white" />,
-        text: "Úkoly",
+        text: "Tasks",
       },
       {
-        to: "/projekt",
+        to: "/about",
         icon: <InformationCircleIcon className="w-5 h-5 mr-2 text-white" />,
-        text: "O projektu",
+        text: "About",
       },
       {
-        to: "/pomoc",
+        to: "/help",
         icon: <QuestionMarkCircleIcon className="w-5 h-5 mr-2 text-white" />,
-        text: "Pomoc",
+        text: "Help",
       },
     ],
     []
@@ -301,10 +301,10 @@ const Navbar = () => {
             </div>
           ) : (
             <Link
-              to="/prihlaseni"
+              to="/login"
               className="navbutton text-white w-30 md:w-40 lg:w-50 px-4 py-2 text-xl rounded-full border hover:bg-gray-800 transition-all duration-300 lg:text-2xl flex justify-center items-center lg:px-10"
             >
-              Přihlášení
+              Login
             </Link>
           )}
         </div>

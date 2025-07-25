@@ -26,7 +26,7 @@ const NotFoundPage = () => {
           bg-clip-text text-transparent 
           drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
             >
-              Jejda, sem jsi se dostat neměl!
+              Oops, you shouldn&apos;t have gotten here!
             </h1>
             <p
               className="text-lg text-zinc-300 
@@ -36,8 +36,8 @@ const NotFoundPage = () => {
           border border-zinc-700 
           shadow-inner"
             >
-              Tohle je tajná stránka… nebo spíš žádná stránka. Každopádně, teď
-              už o tobě víme. 👀
+              This is a secret page... or rather no page at all. Anyway, now we
+              know about you. 👀
             </p>
           </div>
           <div className="w-full h-full flex justify-evenly items-center flex-col md:flex-row">
@@ -53,7 +53,7 @@ const NotFoundPage = () => {
             <div className="text-lg text-zinc-300 h-full w-full">
               <h2 className="font-bold flex items-center  space-x-2 mb-4">
                 <Rocket size={24} className="flex-shrink-0" />
-                <span>Co dál?</span>
+                <span>What next?</span>
               </h2>
               <div className="space-y-4">
                 <div className="flex items-center  space-x-2">
@@ -62,14 +62,12 @@ const NotFoundPage = () => {
                     onClick={handleGoHome}
                     className="px-4 py-2 bg-zinc-800 text-white rounded-full hover:bg-zinc-700 transition duration-300"
                   >
-                    Utíkej zpátky na hlavní stránku, než tě tu někdo načapá!
+                    Run back to the main page before someone catches you here!
                   </button>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span>➡</span>
-                  <span>
-                    Předstírej, že se nic nestalo a jdi si dát sušenku.
-                  </span>
+                  <span>Pretend nothing happened and go get a cookie.</span>
                   <Cookie className="w-6 h-6 text-yellow-600" />
                 </div>
                 <div className="flex items-center space-x-2">
@@ -78,8 +76,8 @@ const NotFoundPage = () => {
                     onClick={handleEcho}
                     className="px-4 py-2 bg-zinc-800 text-white rounded-full hover:bg-zinc-700 transition duration-300"
                   >
-                    Nebo tu chvíli zůstaň a užij si prázdnotu... možná se ozve
-                    echo? 📢
+                    Or stay here for a moment and enjoy the emptiness... maybe
+                    an echo will sound? 📢
                   </button>
                 </div>
               </div>
@@ -94,7 +92,7 @@ const NotFoundPage = () => {
             )}
 
             <div className="text-sm text-zinc-600 italic">
-              A jestli jsi hacker, mě nech prosím žít! Dík 😅
+              And if you&apos;re a hacker, please let me live! Thanks 😅
             </div>
           </div>
         </div>

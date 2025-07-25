@@ -20,33 +20,33 @@ const Overused = memo(function Overused() {
   return (
     <div className="flex flex-col justify-center min-h-screen text-white">
       <h1 className="text-white text-3xl sm:text-5xl md:text-7xl flex justify-center items-center font-bold p-5 userlvl">
-        Jak to funguje...?
+        How does it work...?
       </h1>
       <div className="flex flex-col">
         <div className="flex flex-col items-center gap-5 mt-10 md:flex-row md:justify-center">
           <InfoCard
-            title="Objevte 3D tělesa"
-            description="Ponořte se do fascinujícího světa 3D geometrie, kde každé těleso odhaluje nové možnosti pro učení a vizualizaci."
+            title="Discover 3D solids"
+            description="Immerse yourself in the fascinating world of 3D geometry, where each solid reveals new possibilities for learning and visualization."
           />
           <InfoCard
-            title="Ponořte se do interaktivního účení"
-            description="Poznávání geometrických tvarů hravě, interaktivně a hlavně smysluplně. To je myšlenka této webové aplikace."
+            title="Dive into interactive learning"
+            description="Learning geometric shapes playfully, interactively and meaningfully. This is the idea of this web application."
           />
         </div>
         <div className="flex flex-col items-center mt-10 md:flex-row md:justify-center">
           <InfoCard
-            title="Vyzkoušejte svoje znalosti"
-            description="Ponořte se do fascinujícího světa 3D geometrie, kde každé těleso odhaluje nové možnosti pro učení a vizualizaci."
+            title="Test your knowledge"
+            description="Immerse yourself in the fascinating world of 3D geometry, where each solid reveals new possibilities for learning and visualization."
           />
           <div className="w-2/3 md:w-72 md:h-60 lg:w-96 flex flex-col justify-evenly items-center md:mx-4 my-5">
             <div className="w-full mb-5 md:w-full md:h-full h-24 bg-zinc-900 rounded-3xl">
-              <Link to="/prihlaseni">
+              <Link to="/login">
                 <div className="w-full h-full flex justify-center items-center flex-col">
                   <h1 className="text-xl lg:text-2xl userlvl text-center">
-                    Začnětě svou cestu učení s námi
+                    Start your learning journey with us
                   </h1>
                   <div className="flex flex-row items-center gap-2">
-                    <p>přihlásit se</p>
+                    <p>sign in</p>
                     <ArrowRightOnRectangleIcon className="w-5 h-5 mr-2 text-white" />
                   </div>
                 </div>
@@ -57,8 +57,8 @@ const Overused = memo(function Overused() {
             </div>
           </div>
           <InfoCard
-            title="Sledujte svůj pokrok a soutěžte s ostatními"
-            description="Získejte body za splněné úkoly, zlepšujte své dovednosti a soutěžte s ostatními uživateli."
+            title="Track your progress and compete with others"
+            description="Earn points for completed tasks, improve your skills and compete with other users."
           />
         </div>
       </div>

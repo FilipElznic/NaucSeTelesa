@@ -83,55 +83,55 @@ function AppContent() {
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               {/* Public route for login */}
-              <Route path="/prihlaseni" element={<LoginPage />} />
+              <Route path="/login" element={<LoginPage />} />
 
-              <Route path="/ochrana-osobnich-udaju" element={<Privacy />} />
+              <Route path="/privacy-policy" element={<Privacy />} />
 
               {/* Protected routes */}
               <Route
-                path="/uzivatel"
+                path="/user"
                 element={
-                  <ProtectedRoute redirectTo="/prihlaseni">
+                  <ProtectedRoute redirectTo="/login">
                     <SuccessPage />
                   </ProtectedRoute>
                 }
               />
-              <Route path="/pomoc" element={<PomocPage />} />
+              <Route path="/help" element={<PomocPage />} />
               <Route
                 path="/tailwind"
                 element={
-                  <ProtectedRoute redirectTo="/prihlaseni">
+                  <ProtectedRoute redirectTo="/login">
                     <TailwindTest />
                   </ProtectedRoute>
                 }
               />
               <Route
-                path="/ukoly"
+                path="/tasks"
                 element={
-                  <ProtectedRoute redirectTo="/prihlaseni">
+                  <ProtectedRoute redirectTo="/login">
                     <TaskPage />
                   </ProtectedRoute>
                 }
               />
               <Route
-                path="/telesa"
+                path="/solids"
                 element={
-                  <ProtectedRoute redirectTo="/prihlaseni">
+                  <ProtectedRoute redirectTo="/login">
                     <TelesaPage />
                   </ProtectedRoute>
                 }
               />
-              <Route path="/projekt" element={<AboutPage />} />
+              <Route path="/about" element={<AboutPage />} />
               <Route
-                path="/profil"
+                path="/profile"
                 element={
-                  <ProtectedRoute redirectTo="/prihlaseni">
+                  <ProtectedRoute redirectTo="/login">
                     <Profile />
                   </ProtectedRoute>
                 }
               />
               <Route
-                path="/hlavni-strana"
+                path="/main-page"
                 element={
                   <ProtectedRoute redirectTo="/">
                     <SuccessPage />
@@ -143,11 +143,16 @@ function AppContent() {
               <Route
                 path="/"
                 element={
-                  <RedirectIfLoggedIn redirectTo="/hlavni-strana">
+                  <RedirectIfLoggedIn redirectTo="/main-page">
                     <UserPage />
                   </RedirectIfLoggedIn>
                 }
               />
+
+              {/* Legacy Czech routes - redirect to English equivalents */}
+
+              <Route path="/projekt" element={<AboutPage />} />
+              <Route path="/profil" element={<Profile />} />
 
               {/* Catch-all 404 route - place this LAST */}
               <Route path="*" element={<NotFoundPage />} />

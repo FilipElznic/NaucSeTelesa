@@ -1,23 +1,25 @@
 import React from "react";
 import "../App.css"; // Import your CSS file for styling
+import Data from "../pages/dataupdate.jsx"; // Import the Data component
 
 function Privacy() {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center py-16 px-4">
       <div className="max-w-4xl w-full">
+        <Data />
         <h1 className="userlvl text-5xl font-bold text-center mb-12 ">
-          Soukromí o datech uživatelů
+          User Data Privacy
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div className="usergradient rounded-xl p-8 shadow-lg">
             <h2 className="userlvl text-2xl font-semibold mb-4">
-              Ochrana vašich údajů
+              Protecting Your Data
             </h2>
             <p className="text-gray-300 mb-4">
-              Vaše osobní údaje jsou u nás v bezpečí. Veškerá data, která nám
-              poskytnete, jsou uložena v zabezpečené databázi a používána pouze
-              pro účely zlepšení vaší zkušenosti s naší aplikací.
+              Your personal data is safe with us. All data you provide is stored
+              in a secure database and used only to improve your experience with
+              our application.
             </p>
             <div className="flex items-center mt-6">
               <div className="bg-black p-3 rounded-full">
@@ -37,19 +39,19 @@ function Privacy() {
                 </svg>
               </div>
               <p className="ml-4 text-gray-300">
-                Šifrování dat na nejvyšší úrovni
+                Highest level data encryption
               </p>
             </div>
           </div>
 
           <div className="usergradient rounded-xl p-8 shadow-lg">
             <h2 className="userlvl text-2xl font-semibold mb-4">
-              Žádný prodej třetím stranám
+              No Third-Party Sales
             </h2>
             <p className="text-gray-300 mb-4">
-              Zavazujeme se, že vaše údaje nikdy neprodáme ani neposkytneme
-              třetím stranám. Vaše soukromí je pro nás na prvním místě a
-              respektujeme vaši důvěru.
+              We pledge that we will never sell or provide your data to third
+              parties. Your privacy is our top priority and we respect your
+              trust.
             </p>
             <div className="flex items-center mt-6">
               <div className="bg-black p-3 rounded-full">

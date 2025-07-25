@@ -26,9 +26,9 @@ function TaskLayout() {
     } catch (error) {
       console.error("Error resetting tasks:", error);
     }
-    window.location.href = "/ukoly"; // Redirect to the tasks page
+    window.location.href = "/tasks"; // Redirect to the tasks page
 
-    toast.success("Úkoly byly úspěšně obnoveny!");
+    toast.success("Tasks have been successfully reset!");
   };
 
   // Function to shuffle an array
@@ -119,10 +119,10 @@ function TaskLayout() {
       <div className="bg-gradient-to-br from-black via-zinc-950  to-black  min-h-screen flex flex-col items-center p-2 sm:p-5 md:px-10 text-white">
         <div className="w-full h-full bg-black md:p-5 rounded-3xl">
           <KnowHow
-            title="Jak na úkoly?"
-            text="Každý úkol obsahuje otázku doplněnou krátkým vysvětlením. Uživatel má na výběr ze tří možných odpovědí, z nichž pouze jedna je správná. Cílem je zvolit správnou odpověď na základě poskytnutých informací."
+            title="How to handle tasks?"
+            text="Each task contains a question supplemented with a short explanation. The user can choose from three possible answers, of which only one is correct. The goal is to choose the correct answer based on the provided information."
             img="/taskshow.png"
-            alt="Jak to funguje?"
+            alt="How does it work?"
           />
           <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">
             <div className="w-full h-24 usergradient rounded-full usergradient-glow">
@@ -133,21 +133,21 @@ function TaskLayout() {
                     onClick={() => (window.location.href = "/")}
                   >
                     <HomeIcon className="w-7 h-7 text-white" />
-                    <p className="hidden sm:block">Domů</p>
+                    <p className="hidden sm:block">Home</p>
                   </span>
                   <span
                     className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
-                    onClick={() => (window.location.href = "/ukoly")}
+                    onClick={() => (window.location.href = "/tasks")}
                   >
                     <ArrowPathIcon className="w-7 h-7 text-white" />
-                    <p className="hidden sm:block">Obnovit</p>
+                    <p className="hidden sm:block">Refresh</p>
                   </span>
                   <span
                     className="flex flex-row cursor-pointer items-center gap-2 lg:text-3xl text-2xl"
                     onClick={shuffleTasks}
                   >
                     <ArrowsRightLeftIcon className="w-7 h-7 text-white" />
-                    <p className="hidden sm:block">Zamíchat</p>
+                    <p className="hidden sm:block">Shuffle</p>
                   </span>
                 </div>
 
@@ -155,7 +155,7 @@ function TaskLayout() {
                   className="flex flex-row cursor-pointer items-center gap-2   text-3xl mr-5"
                   onClick={() => (window.location.href = "/")}
                 >
-                  <p className="hidden sm:block text-2xl lg:text-3xl">Zavřít</p>
+                  <p className="hidden sm:block text-2xl lg:text-3xl">Close</p>
                   <XMarkIcon className="w-7 h-7  lg:mr-10" />
                 </span>
               </div>
@@ -164,16 +164,16 @@ function TaskLayout() {
             {tasks.length === 0 && (
               <div className="flex flex-col items-center justify-center h-full bg-transparent mt-11">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl text-center mb-4">
-                  Žádné úkoly k zobrazení
+                  No tasks to display
                 </h1>
                 <p className="text-lg md:text-xl text-center mb-4">
-                  Všechny úkoly byly dokončeny.
+                  All tasks have been completed.
                 </p>
                 <button
                   className="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
                   onClick={() => resetTasks()}
                 >
-                  Obnovit úkoly
+                  Reset Tasks
                 </button>
               </div>
             )}
@@ -212,11 +212,11 @@ function TaskLayout() {
                         <InformationCircleIcon className="cursor-pointer w-7 h-7 text-white" />
                         <div className="absolute bottom-full left-5 md:left-40  -translate-x-1/2 mb-2 w-40 md:w-80 p-2 text-sm text-white bg-black rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
                           <p>
-                            Každý úkol obsahuje otázku doplněnou krátkým
-                            vysvětlením. Uživatel má na výběr ze tří možných
-                            odpovědí, z nichž pouze jedna je správná. Cílem je
-                            zvolit správnou odpověď na základě poskytnutých
-                            informací.
+                            Each task contains a question supplemented with a
+                            short explanation. The user can choose from three
+                            possible answers, of which only one is correct. The
+                            goal is to choose the correct answer based on the
+                            provided information.
                           </p>
                         </div>
                       </div>

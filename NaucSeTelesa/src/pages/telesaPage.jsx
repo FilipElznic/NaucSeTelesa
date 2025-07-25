@@ -61,7 +61,7 @@ function TelesaPage() {
                 {counts.user_count}
               </p>
               <h3 className="text-base md:text-lg lg:text-xl text-center font-light text-gray-400">
-                Registrovaných uživatelů
+                Registered users
               </h3>
             </div>
             <div className="bg-black p-4 w-full md:w-auto">
@@ -69,7 +69,7 @@ function TelesaPage() {
                 {counts.geometric_bodies_count}
               </p>
               <h3 className="text-base md:text-lg lg:text-xl text-center font-light text-gray-400">
-                Geometrických těles
+                Geometric solids
               </h3>
             </div>
             <div className="bg-black p-4 w-full md:w-auto">
@@ -77,7 +77,7 @@ function TelesaPage() {
                 {counts.tasks_count}
               </p>
               <h3 className="text-base md:text-lg lg:text-xl text-center font-light text-gray-400">
-                Úkolů k vyřešení
+                Tasks to solve
               </h3>
             </div>
           </div>
@@ -85,10 +85,10 @@ function TelesaPage() {
       </div>
       <div className="min-h-screen w-full">
         <KnowHow
-          title="Jak na tělesa?"
-          text="Každá karta představuje jedno geometrické těleso a obsahuje jeho název, stručný popis, ilustrační obrázek a základní vzorce. Uživatel si může zobrazit detailní informace kliknutím na tlačítko ve spodní části karty."
+          title="How to handle solids?"
+          text="Each card represents one geometric solid and contains its name, brief description, illustrative image and basic formulas. User can view detailed information by clicking the button at the bottom of the card."
           img="/howitworkss.png"
-          alt="Jak to funguje?"
+          alt="How does it work?"
         />
       </div>
 

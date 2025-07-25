@@ -58,7 +58,7 @@ function TailwindTest() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center mb-20 text-white">
       <h1 className="text-2xl sm:text-4xl md:text-5xl xl:text-7xl font-bold md:mb-7 text-white p-11">
-        Osobní stránka
+        Personal Page
       </h1>
       <div className="flex flex-col h-full w-5/6 justify-center items-center">
         <div className="flex flex-col lg:flex-row w-full">
@@ -143,7 +143,7 @@ function TailwindTest() {
         <div className="flex flex-col lg:flex-row w-full">
           {/* Tasks Card */}
           <div className="w-full lg:w-2/5 h-80 usergradient m-2 rounded-3xl relative border-2 border-transparent hover:border-purple-500 transition-all duration-200 cursor-pointer">
-            <Link to={"/ukoly"}>
+            <Link to={"/tasks"}>
               <img
                 src="/userimg.webp"
                 alt="telesa"
@@ -151,15 +151,17 @@ function TailwindTest() {
                 loading="lazy"
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center usertask text-stroke text-xl md:text-5xl lg:text-6xl text-center p-2 rounded-md font-semibold">
-                <h1>Pojďte vyzkoušet svoje znalosti</h1>
-                <p className="md:text-xl mt-3 text-white">Začít plnit úkoly</p>
+                <h1>Come and test your knowledge</h1>
+                <p className="md:text-xl mt-3 text-white">
+                  Start completing tasks
+                </p>
               </div>
             </Link>
           </div>
 
           {/* Avatar Card */}
           <div className="w-full lg:w-1/5 h-80 usergradient m-2 rounded-3xl border-2 border-transparent hover:border-purple-500 transition-all duration-200">
-            <Link to={"/profil"}>
+            <Link to={"/profile"}>
               <div className="w-full h-full flex flex-col justify-center items-center">
                 <img
                   src={avatarUrl === undefined ? "/guest1.webp" : avatarUrl}
@@ -173,13 +175,13 @@ function TailwindTest() {
 
           {/* Geometry World Card */}
           <div className="w-full lg:w-2/5 h-80 usergradient m-2 rounded-3xl border-2 border-transparent hover:border-purple-500 transition-all duration-200">
-            <Link to={"/telesa"}>
+            <Link to={"/solidsa"}>
               <div className="h-full w-full flex flex-col justify-center items-center text-white p-11">
                 <h1 className="text-xl md:text-5xl lg:text-5xl pb-2 w-full text-center font-semibold userlvl">
-                  Nechte se vnést do světa geometrie
+                  Let yourself be immersed in the world of geometry
                 </h1>
                 <p className="md:text-xl mt-3 text-white">
-                  Začít objevovat tělesa
+                  Start exploring solids
                 </p>
               </div>
             </Link>

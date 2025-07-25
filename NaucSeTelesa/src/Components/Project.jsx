@@ -73,17 +73,17 @@ function Project() {
       {/* Text section */}
       <div className="w-full max-w-screen-lg">
         <h1 className="text-2xl sm:text-6xl md:text-7xl xl:text-8xl font-bold m-5 userlvl">
-          O Projektu
+          About the Project
         </h1>
         <p className="text-xl text-gray-800 m-2">
-          Tento projekt je součástí ročníkové práce 3. ročníku.
+          This project is part of a 3rd year thesis work.
         </p>
         <p className="text-xl text-gray-400 m-5 md:w-2/3">
-          Cílem tohoto projektu je vytvořit interaktivní webovou aplikaci, která
-          umožní uživatelům učit se o různých geometrických tělesech zábavnou a
-          poutavou formou. Aplikace obsahuje interaktivní modely, které
-          uživatelům umožní prozkoumat vlastnosti jednotlivých těles a získat
-          tak lepší představu o jejich geometrických vlastnostech.
+          The goal of this project is to create an interactive web application
+          that allows users to learn about various geometric solids in a fun and
+          engaging way. The application contains interactive models that allow
+          users to explore the properties of individual solids and gain a better
+          understanding of their geometric properties.
         </p>
       </div>
     </div>

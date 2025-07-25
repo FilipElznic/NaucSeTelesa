@@ -205,17 +205,17 @@ function InfoForm() {
             <div className="flex flex-col md:flex-row">
               <div className="w-full md:w-1/2 bg-zinc-900 p-6 md:p-10 flex flex-col justify-center">
                 <h1 className="text-2xl md:text-4xl font-bold text-white mb-4">
-                  Skvělé, že jste se zaregistrovali!
+                  Great that you have registered!
                 </h1>
                 <p className="text-base md:text-xl text-gray-300 mb-8">
-                  Abychom vám mohli nabídnout co nejlepší, potřebujeme od vás
-                  ještě pár drobných informací.
+                  To offer you the best experience, we need a few more pieces of
+                  information from you.
                 </p>
 
                 <div className="mb-6">
                   <div className="flex justify-between mb-2">
                     <span className="text-sm text-gray-300">
-                      Úplnost profilu
+                      Profile completeness
                     </span>
                     <span className="text-sm text-gray-300">
                       {Math.round(progress)}%
@@ -248,7 +248,7 @@ function InfoForm() {
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                      3-25 znaků
+                      3-25 characters
                     </li>
                     <li className="flex items-center">
                       <svg
@@ -264,7 +264,7 @@ function InfoForm() {
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                      Pouze písmena (včetně háčků a čárek), čísla a podtržítko
+                      Only letters (including accents), numbers and underscore
                     </li>
                   </ul>
                 </div>
@@ -392,8 +392,8 @@ function InfoForm() {
                       }`}
                     >
                       {progress < 100
-                        ? "Dokončete registraci"
-                        : "Začít objevovat"}
+                        ? "Complete registration"
+                        : "Start exploring"}
                     </button>
                   </div>
                 </form>

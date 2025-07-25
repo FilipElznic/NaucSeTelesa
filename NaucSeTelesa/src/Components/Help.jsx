@@ -44,7 +44,7 @@ const HelpPage = () => {
       )
       .then(
         (result) => {
-          toast.success("Vaše zpráva byla úspěšně odeslána!", {
+          toast.success("Your message was sent successfully!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -60,7 +60,7 @@ const HelpPage = () => {
           setMessage("");
         },
         (error) => {
-          toast.error("Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.", {
+          toast.error("Failed to send message. Please try again.", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -83,7 +83,7 @@ const HelpPage = () => {
 
       <div className="flex w-full justify-center">
         <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-center mb-12 pb-6">
-          <span className="userlvl">Centrum pomoci</span>
+          <span className="userlvl">Help Center</span>
         </h1>
       </div>
 
@@ -97,19 +97,21 @@ const HelpPage = () => {
           hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]
           mt-5 mr-4 mb-12"
         >
-          <h2 className="text-2xl font-semibold mb-6">Často kladené otázky</h2>
+          <h2 className="text-2xl font-semibold mb-6">
+            Frequently Asked Questions
+          </h2>
           <div className="space-y-4">
             <FAQItem
-              question="Jak začít používat Nauč se Tělesa?"
-              answer="První se zaregistrujte a přihlaste se do svého účtu. Poté můžete využívat všechny funkce."
+              question="How to start using Learn Solids?"
+              answer="First register and log into your account. Then you can use all the features."
             />
             <FAQItem
-              question="Jak obnovit zapomenuté heslo?"
-              answer="Na přihlašovací stránce klikněte na 'Zapomenuté heslo' a postupujte podle pokynů pro reset hesla."
+              question="How to reset forgotten password?"
+              answer="On the login page, click 'Forgot Password' and follow the instructions to reset your password."
             />
             <FAQItem
-              question="Jak kontaktovat podporu?"
-              answer="Můžete mě kontaktovat pomocí formuláře nebo prostřednictvím emailu elznicfilip@gmail.com."
+              question="How to contact support?"
+              answer="You can contact me using the form or via email elznicfilip@gmail.com."
             />
           </div>
         </div>
@@ -122,20 +124,20 @@ const HelpPage = () => {
           mt-5 mb-12"
         >
           <h2 className="text-2xl font-semibold mb-6">
-            Nejčastější problémy a jejich řešení
+            Most Common Problems and Their Solutions
           </h2>
           <div className="space-y-4">
             <FAQItem
-              question="Proč mi nepřišel potvrzovací e-mail?"
-              answer="Zkontrolujte složku se spamem nebo reklamy. Pokud e-mail stále nemáte, zkuste požádat o nový potvrzovací e-mail na stránce přihlášení."
+              question="Why didn't I receive a confirmation email?"
+              answer="Check your spam or promotions folder. If you still don't have the email, try requesting a new confirmation email on the login page."
             />
             <FAQItem
-              question="Mohu používat službu na více zařízeních?"
-              answer="Ano, svůj účet můžete používat na více zařízeních současně. Stačí se přihlásit stejnými přihlašovacími údaji."
+              question="Can I use the service on multiple devices?"
+              answer="Yes, you can use your account on multiple devices simultaneously. Just log in with the same credentials."
             />
             <FAQItem
-              question="Co dělat, když se nemohu přihlásit?"
-              answer="Zkuste obnovit heslo pomocí odkazu 'Zapomenuté heslo'. Pokud problém přetrvává, kontaktujte naši podporu."
+              question="What to do when I can't log in?"
+              answer="Try resetting your password using the 'Forgot Password' link. If the problem persists, contact our support."
             />
           </div>
         </div>
@@ -151,7 +153,7 @@ const HelpPage = () => {
           mb-8"
         >
           <h2 className="text-4xl text-center font-semibold mb-6">
-            Kontaktujte nás
+            Contact Us
           </h2>
           <form onSubmit={sendEmail} className="flex flex-col gap-4">
             <div className="col-span-2 md:col-span-1">
@@ -218,10 +220,10 @@ const HelpPage = () => {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       ></path>
                     </svg>
-                    Odesílání...
+                    Sending...
                   </>
                 ) : (
-                  "Odeslat zprávu"
+                  "Send message"
                 )}
               </button>
             </div>

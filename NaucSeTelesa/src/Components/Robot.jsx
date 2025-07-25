@@ -86,11 +86,11 @@ function Robot() {
                 )}
                 <div className="relative sm:flex sm:flex-col sm:justify-center sm:h-[90vh] w-1/3">
                   <h1 className="text-4xl md:text-2xl lg:text-5xl font-bold p-5 sm:pr-20 userlvl">
-                    Nechte se vnést do světa geometrie
+                    Let yourself be drawn into the world of geometry
                   </h1>
                   <p className="text-xl lg:text-2xl p-5">
-                    Poznejte tvary geometrie z nové perspektivy a ovládněte
-                    jejich tajemství.
+                    Discover the shapes of geometry from a new perspective and
+                    master their secrets.
                   </p>
                 </div>
 
@@ -131,12 +131,12 @@ function Robot() {
             {/* Mobile Content */}
             <div className="sm:flex sm:flex-col sm:justify-center sm:items-center sm:h-[90vh] text-center">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold userlvl">
-                Nechte se vnést <br />
-                do světa geometrie
+                Let yourself be drawn <br />
+                into the world of geometry
               </h1>
               <p className="text-xl lg:text-3xl">
-                Poznejte tvary geometrie z nové perspektivy a ovládněte jejich
-                tajemství.
+                Discover the shapes of geometry from a new perspective and
+                master their secrets.
               </p>
             </div>
 
