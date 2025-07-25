@@ -20,15 +20,8 @@ function InfoForm() {
 
   useEffect(() => {
     if (authUser && userData) {
-      if (authUser.app_metadata?.provider === "google") {
-        const fullName = userData.name || "";
-        const nameParts = fullName.split(" ");
-        setJmeno(nameParts[0] || "");
-        setPrijmeni(nameParts.slice(1).join(" ") || "");
-      } else {
-        setJmeno(userData.firstName || "");
-        setPrijmeni(userData.lastName || "");
-      }
+      setJmeno(userData.firstName || "");
+      setPrijmeni(userData.lastName || "");
       setPrezdivka(userData.nickname || "");
     }
   }, [authUser, userData]);

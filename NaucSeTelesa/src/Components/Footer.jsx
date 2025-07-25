@@ -20,7 +20,8 @@ function Footer() {
     { to: "/", text: "Home" },
     { to: "/privacy-policy", text: "Privacy Policy" },
     { to: "/help", text: "Contact" },
-    { to: "/about", text: "Project" },
+
+    { to: "/docs", text: "Docs" },
   ];
 
   return (

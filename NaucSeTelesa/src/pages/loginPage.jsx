@@ -71,28 +71,6 @@ function CustomLoginPage() {
     }
   };
 
-  const handleProviderLogin = async (provider) => {
-    try {
-      setLoading(true);
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider,
-        options: {
-          redirectTo: window.location.origin + "/main-page",
-        },
-      });
-
-      if (error) {
-        toast.error(`Login via ${provider} failed: ${error.message}`);
-        console.error("Error with provider login:", error.message);
-      }
-    } catch (err) {
-      toast.error("An unexpected error occurred during login");
-      console.error("Unexpected error during provider login:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleEmailSignUp = async (e) => {
     e.preventDefault();
 
@@ -232,38 +210,6 @@ function CustomLoginPage() {
         <div>
           <h2 className="text-2xl font-bold mb-6 text-left">Login</h2>
 
-          <div className="space-y-4 mb-6">
-            <div className="w-full usergradient rounded-2xl">
-              <button
-                type="button"
-                onClick={() => handleProviderLogin("google")}
-                disabled={loading}
-                className="w-full py-2 px-4 text-white font-semibold userlvl"
-              >
-                Sign in with Google
-              </button>
-            </div>
-            <div className="w-full usergradient rounded-2xl">
-              <button
-                type="button"
-                onClick={() => handleProviderLogin("discord")}
-                disabled={loading}
-                className="w-full py-2 px-4 text-white font-semibold userlvl"
-              >
-                Sign in with Discord
-              </button>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-zinc-700"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-zinc-900 text-zinc-400">or</span>
-              </div>
-            </div>
-          </div>
-
           <form onSubmit={handleEmailSignIn} className="space-y-4">
             <div className="text-left">
               <label className="block text-sm font-medium mb-1">
@@ -357,38 +303,6 @@ function CustomLoginPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-500 ease-in-out">
         <div>
           <h2 className="text-2xl font-bold mb-6 text-left">Register</h2>
-
-          <div className="space-y-4 mb-6">
-            <div className="w-full usergradient rounded-2xl">
-              <button
-                type="button"
-                onClick={() => handleProviderLogin("google")}
-                disabled={loading}
-                className="w-full py-2 px-4 text-white font-semibold userlvl"
-              >
-                Register with Google
-              </button>
-            </div>
-            <div className="w-full usergradient rounded-2xl">
-              <button
-                type="button"
-                onClick={() => handleProviderLogin("discord")}
-                disabled={loading}
-                className="w-full py-2 px-4 text-white font-semibold userlvl"
-              >
-                Register with Discord
-              </button>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-zinc-700"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-zinc-900 text-zinc-400">or</span>
-              </div>
-            </div>
-          </div>
 
           <form onSubmit={handleEmailSignUp} className="space-y-4">
             <div className="text-left">
