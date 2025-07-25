@@ -33,19 +33,18 @@ const AboutPage = () => {
             Project Introduction
           </h2>
           <p className="text-zinc-300 mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg">
-            This project was created as a thesis work for the Secondary
-            Technical School in Ústí nad Labem. The goal was to create a modern
-            web application for teaching geometry that would be attractive,
-            interactive and fun. Author Filip Elznic was inspired by his
-            positive relationship with mathematics and desire to improve his web
-            development skills.
-          </p>
-          <p className="text-zinc-300 leading-relaxed text-base sm:text-lg">
-            The project serves as an online platform for teaching geometric
-            solids. It offers 3D models of solids, formulas for calculating
-            their properties (such as volume and surface area) and interactive
+            This project is an online platform for learning about geometric
+            solids. It provides 3D models of solids, formulas for calculating
+            their properties (such as volume and surface area), and interactive
             tasks to verify knowledge. Users can track their progress using a
             point system.
+          </p>
+          <p className="text-zinc-300 leading-relaxed text-base sm:text-lg">
+            The project was originally created as a thesis work for the
+            Secondary Technical School in Ústí nad Labem. But I have created an
+            english version of the project to make it accessible to a wider
+            audience. This was due to the shipwrecked hackathon, where I had to
+            create an english version of the project in a very short time.
           </p>
         </section>
       </div>
