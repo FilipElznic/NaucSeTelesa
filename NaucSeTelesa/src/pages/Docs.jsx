@@ -22,9 +22,9 @@ function Docs() {
   });
 
   const toggleSection = (sectionId) => {
-    setExpandedSections(prev => ({
+    setExpandedSections((prev) => ({
       ...prev,
-      [sectionId]: !prev[sectionId]
+      [sectionId]: !prev[sectionId],
     }));
   };
 
@@ -58,22 +58,40 @@ function Docs() {
         Table of Contents
       </h2>
       <nav className="space-y-2">
-        <a href="#installation" className="block text-blue-400 hover:text-blue-300 transition-colors">
+        <a
+          href="#installation"
+          className="block text-blue-400 hover:text-blue-300 transition-colors"
+        >
           1. Installation & Setup
         </a>
-        <a href="#supabase-config" className="block text-blue-400 hover:text-blue-300 transition-colors">
+        <a
+          href="#supabase-config"
+          className="block text-blue-400 hover:text-blue-300 transition-colors"
+        >
           2. Supabase Configuration
         </a>
-        <a href="#running-app" className="block text-blue-400 hover:text-blue-300 transition-colors">
+        <a
+          href="#running-app"
+          className="block text-blue-400 hover:text-blue-300 transition-colors"
+        >
           3. Running the Application
         </a>
-        <a href="#features" className="block text-blue-400 hover:text-blue-300 transition-colors">
+        <a
+          href="#features"
+          className="block text-blue-400 hover:text-blue-300 transition-colors"
+        >
           4. Features Overview
         </a>
-        <a href="#user-guide" className="block text-blue-400 hover:text-blue-300 transition-colors">
+        <a
+          href="#user-guide"
+          className="block text-blue-400 hover:text-blue-300 transition-colors"
+        >
           5. User Guide
         </a>
-        <a href="#troubleshooting" className="block text-blue-400 hover:text-blue-300 transition-colors">
+        <a
+          href="#troubleshooting"
+          className="block text-blue-400 hover:text-blue-300 transition-colors"
+        >
           6. Troubleshooting
         </a>
       </nav>
@@ -90,13 +108,13 @@ function Docs() {
           <Icon className="mr-3" size={24} />
           {title}
         </h2>
-        {expandedSections[id] ? <ChevronDown size={24} /> : <ChevronRight size={24} />}
+        {expandedSections[id] ? (
+          <ChevronDown size={24} />
+        ) : (
+          <ChevronRight size={24} />
+        )}
       </button>
-      {expandedSections[id] && (
-        <div className="mt-6 space-y-4">
-          {children}
-        </div>
-      )}
+      {expandedSections[id] && <div className="mt-6 space-y-4">{children}</div>}
     </div>
   );
 
@@ -123,9 +141,11 @@ function Docs() {
             Welcome to NaucSeTelesa Documentation
           </h2>
           <p className="text-zinc-300 mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg">
-            NaucSeTelesa (Learn Solids) is an interactive educational platform designed to help students 
-            learn about geometric solids through 3D visualizations, interactive tasks, and comprehensive 
-            learning materials. This documentation will guide you through installation, setup, and usage.
+            NaucSeTelesa (Learn Solids) is an interactive educational platform
+            designed to help students learn about geometric solids through 3D
+            visualizations, interactive tasks, and comprehensive learning
+            materials. This documentation will guide you through installation,
+            setup, and usage.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <div className="flex items-center bg-black/30 rounded-lg px-4 py-2">
@@ -147,7 +167,11 @@ function Docs() {
 
         {/* Installation & Setup */}
         <section id="installation">
-          <ExpandableSection id="installation" title="Installation & Setup" icon={Download}>
+          <ExpandableSection
+            id="installation"
+            title="Installation & Setup"
+            icon={Download}
+          >
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-semibold text-blue-400 mb-3 flex items-center">
@@ -159,15 +183,23 @@ cd NaucSeTelesa`}</CodeBlock>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-green-400 mb-3">2. Install Dependencies</h3>
+                <h3 className="text-xl font-semibold text-green-400 mb-3">
+                  2. Install Dependencies
+                </h3>
                 <CodeBlock>{`npm install
 # or
 yarn install`}</CodeBlock>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-purple-400 mb-3">3. Environment Setup</h3>
-                <p className="text-gray-300 mb-3">Create a <code className="bg-black/30 px-2 py-1 rounded">.env</code> file in the root directory:</p>
+                <h3 className="text-xl font-semibold text-purple-400 mb-3">
+                  3. Environment Setup
+                </h3>
+                <p className="text-gray-300 mb-3">
+                  Create a{" "}
+                  <code className="bg-black/30 px-2 py-1 rounded">.env</code>{" "}
+                  file in the root directory:
+                </p>
                 <CodeBlock language="env">{`VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_KEY=your_supabase_anon_public_key`}</CodeBlock>
               </div>
@@ -177,35 +209,61 @@ VITE_SUPABASE_KEY=your_supabase_anon_public_key`}</CodeBlock>
 
         {/* Supabase Configuration */}
         <section id="supabase-config">
-          <ExpandableSection id="supabase-config" title="Supabase Configuration" icon={Database}>
+          <ExpandableSection
+            id="supabase-config"
+            title="Supabase Configuration"
+            icon={Database}
+          >
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold text-blue-400 mb-3">Step 1: Create Supabase Project</h3>
+                <h3 className="text-xl font-semibold text-blue-400 mb-3">
+                  Step 1: Create Supabase Project
+                </h3>
                 <ol className="list-decimal list-inside text-gray-300 space-y-2">
-                  <li>Go to <a href="https://supabase.com" className="text-blue-400 hover:text-blue-300">Supabase</a></li>
+                  <li>
+                    Go to{" "}
+                    <a
+                      href="https://supabase.com"
+                      className="text-blue-400 hover:text-blue-300"
+                    >
+                      Supabase
+                    </a>
+                  </li>
                   <li>Sign up/in and create a new project</li>
-                  <li>Wait for the project to be set up (usually 1-2 minutes)</li>
+                  <li>
+                    Wait for the project to be set up (usually 1-2 minutes)
+                  </li>
                 </ol>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-green-400 mb-3">Step 2: Get Project Credentials</h3>
+                <h3 className="text-xl font-semibold text-green-400 mb-3">
+                  Step 2: Get Project Credentials
+                </h3>
                 <ol className="list-decimal list-inside text-gray-300 space-y-2">
                   <li>Go to Project Settings → API</li>
-                  <li>Copy your:
+                  <li>
+                    Copy your:
                     <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
-                      <li><strong>Project URL</strong> (VITE_SUPABASE_URL)</li>
-                      <li><strong>Anon public key</strong> (VITE_SUPABASE_KEY)</li>
+                      <li>
+                        <strong>Project URL</strong> (VITE_SUPABASE_URL)
+                      </li>
+                      <li>
+                        <strong>Anon public key</strong> (VITE_SUPABASE_KEY)
+                      </li>
                     </ul>
                   </li>
                 </ol>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-purple-400 mb-3">Step 3: Create Database</h3>
+                <h3 className="text-xl font-semibold text-purple-400 mb-3">
+                  Step 3: Create Database
+                </h3>
                 <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4">
                   <p className="text-orange-300 mb-3">
-                    <strong>Important:</strong> Database setup is required for the application to work properly.
+                    <strong>Important:</strong> Database setup is required for
+                    the application to work properly.
                   </p>
                   <ol className="list-decimal list-inside text-gray-300 space-y-2">
                     <li>Go to public folder and find database.png</li>
@@ -213,19 +271,25 @@ VITE_SUPABASE_KEY=your_supabase_anon_public_key`}</CodeBlock>
                     <li>You will also need to setup RLS policies</li>
                   </ol>
                   <p className="text-sm text-gray-400 mt-3">
-                    Note: You can&apos;t export supabase database with RLS policies and data. 
-                    The data needed for insert will be in folder data in src.
+                    Note: You can&apos;t export supabase database with RLS
+                    policies and data. The data needed for insert will be in
+                    folder data in src.
                   </p>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-orange-400 mb-3">Step 4: Authentication Setup</h3>
+                <h3 className="text-xl font-semibold text-orange-400 mb-3">
+                  Step 4: Authentication Setup
+                </h3>
                 <ol className="list-decimal list-inside text-gray-300 space-y-2">
                   <li>Go to Authentication → Settings</li>
-                  <li>Configure sign-in providers:
+                  <li>
+                    Configure sign-in providers:
                     <ul className="list-disc list-inside ml-6 mt-2">
-                      <li><strong>Email:</strong> Enable email authentication</li>
+                      <li>
+                        <strong>Email:</strong> Enable email authentication
+                      </li>
                     </ul>
                   </li>
                   <li>Set up email templates if needed</li>
@@ -237,25 +301,40 @@ VITE_SUPABASE_KEY=your_supabase_anon_public_key`}</CodeBlock>
 
         {/* Running the Application */}
         <section id="running-app">
-          <ExpandableSection id="running-app" title="Running the Application" icon={Terminal}>
+          <ExpandableSection
+            id="running-app"
+            title="Running the Application"
+            icon={Terminal}
+          >
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold text-green-400 mb-3">Development Mode</h3>
+                <h3 className="text-xl font-semibold text-green-400 mb-3">
+                  Development Mode
+                </h3>
                 <CodeBlock>{`npm run dev
 # or
 yarn dev`}</CodeBlock>
-                <p className="text-gray-300">The application will start on <code className="bg-black/30 px-2 py-1 rounded">http://localhost:5173</code></p>
+                <p className="text-gray-300">
+                  The application will start on{" "}
+                  <code className="bg-black/30 px-2 py-1 rounded">
+                    http://localhost:5173
+                  </code>
+                </p>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-blue-400 mb-3">Build for Production</h3>
+                <h3 className="text-xl font-semibold text-blue-400 mb-3">
+                  Build for Production
+                </h3>
                 <CodeBlock>{`npm run build
 # or
 yarn build`}</CodeBlock>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-purple-400 mb-3">Preview Production Build</h3>
+                <h3 className="text-xl font-semibold text-purple-400 mb-3">
+                  Preview Production Build
+                </h3>
                 <CodeBlock>{`npm run preview
 # or
 yarn preview`}</CodeBlock>
@@ -266,34 +345,47 @@ yarn preview`}</CodeBlock>
 
         {/* Features Overview */}
         <section id="features">
-          <ExpandableSection id="features" title="Features Overview" icon={BookOpen}>
+          <ExpandableSection
+            id="features"
+            title="Features Overview"
+            icon={BookOpen}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-black/30 rounded-lg p-4">
-                <h3 className="text-lg font-semibold text-blue-400 mb-2">3D Solid Visualizations</h3>
+                <h3 className="text-lg font-semibold text-blue-400 mb-2">
+                  3D Solid Visualizations
+                </h3>
                 <p className="text-gray-300 text-sm">
-                  Interactive 3D models of geometric solids including cubes, spheres, 
-                  pyramids, cylinders, and more. Rotate and examine each solid in detail.
+                  Interactive 3D models of geometric solids including cubes,
+                  spheres, pyramids, cylinders, and more. Rotate and examine
+                  each solid in detail.
                 </p>
               </div>
               <div className="bg-black/30 rounded-lg p-4">
-                <h3 className="text-lg font-semibold text-green-400 mb-2">Interactive Tasks</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-2">
+                  Interactive Tasks
+                </h3>
                 <p className="text-gray-300 text-sm">
-                  Solve problems related to volume, surface area, and properties of 
-                  geometric solids. Get instant feedback on your answers.
+                  Solve problems related to volume, surface area, and properties
+                  of geometric solids. Get instant feedback on your answers.
                 </p>
               </div>
               <div className="bg-black/30 rounded-lg p-4">
-                <h3 className="text-lg font-semibold text-purple-400 mb-2">Progress Tracking</h3>
+                <h3 className="text-lg font-semibold text-purple-400 mb-2">
+                  Progress Tracking
+                </h3>
                 <p className="text-gray-300 text-sm">
-                  Monitor your learning progress with detailed statistics and 
+                  Monitor your learning progress with detailed statistics and
                   achievement tracking. Earn points for completing tasks.
                 </p>
               </div>
               <div className="bg-black/30 rounded-lg p-4">
-                <h3 className="text-lg font-semibold text-orange-400 mb-2">Leaderboards</h3>
+                <h3 className="text-lg font-semibold text-orange-400 mb-2">
+                  Leaderboards
+                </h3>
                 <p className="text-gray-300 text-sm">
-                  Compete with other students and see how you rank on the 
-                  global leaderboard. Challenge yourself to reach the top!
+                  Compete with other students and see how you rank on the global
+                  leaderboard. Challenge yourself to reach the top!
                 </p>
               </div>
             </div>
@@ -305,18 +397,37 @@ yarn preview`}</CodeBlock>
           <ExpandableSection id="user-guide" title="User Guide" icon={Users}>
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold text-blue-400 mb-3">Navigation</h3>
+                <h3 className="text-xl font-semibold text-blue-400 mb-3">
+                  Navigation
+                </h3>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
-                  <li><strong>Home:</strong> Landing page with overview and quick access</li>
-                  <li><strong>Solids:</strong> Browse and interact with 3D geometric models</li>
-                  <li><strong>Tasks:</strong> Complete interactive exercises and problems</li>
-                  <li><strong>Profile:</strong> View your progress, achievements, and statistics</li>
-                  <li><strong>Help:</strong> Get assistance and find answers to common questions</li>
+                  <li>
+                    <strong>Home:</strong> Landing page with overview and quick
+                    access
+                  </li>
+                  <li>
+                    <strong>Solids:</strong> Browse and interact with 3D
+                    geometric models
+                  </li>
+                  <li>
+                    <strong>Tasks:</strong> Complete interactive exercises and
+                    problems
+                  </li>
+                  <li>
+                    <strong>Profile:</strong> View your progress, achievements,
+                    and statistics
+                  </li>
+                  <li>
+                    <strong>Help:</strong> Get assistance and find answers to
+                    common questions
+                  </li>
                 </ul>
               </div>
-              
+
               <div>
-                <h3 className="text-xl font-semibold text-green-400 mb-3">Using the 3D Viewer</h3>
+                <h3 className="text-xl font-semibold text-green-400 mb-3">
+                  Using the 3D Viewer
+                </h3>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
                   <li>Click and drag to rotate the solid</li>
                   <li>Use mouse wheel to zoom in/out</li>
@@ -324,9 +435,11 @@ yarn preview`}</CodeBlock>
                   <li>Use the formula panel to see calculations</li>
                 </ul>
               </div>
-              
+
               <div>
-                <h3 className="text-xl font-semibold text-purple-400 mb-3">Completing Tasks</h3>
+                <h3 className="text-xl font-semibold text-purple-400 mb-3">
+                  Completing Tasks
+                </h3>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
                   <li>Read the problem statement carefully</li>
                   <li>Use the provided measurements and formulas</li>
@@ -340,14 +453,22 @@ yarn preview`}</CodeBlock>
 
         {/* Troubleshooting */}
         <section id="troubleshooting">
-          <ExpandableSection id="troubleshooting" title="Troubleshooting" icon={HelpCircle}>
+          <ExpandableSection
+            id="troubleshooting"
+            title="Troubleshooting"
+            icon={HelpCircle}
+          >
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold text-red-400 mb-3">Common Issues</h3>
-                
+                <h3 className="text-xl font-semibold text-red-400 mb-3">
+                  Common Issues
+                </h3>
+
                 <div className="space-y-4">
                   <div className="bg-black/30 rounded-lg p-4">
-                    <h4 className="font-semibold text-orange-400 mb-2">Environment Variables Not Working</h4>
+                    <h4 className="font-semibold text-orange-400 mb-2">
+                      Environment Variables Not Working
+                    </h4>
                     <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
                       <li>Ensure .env file is in the root directory</li>
                       <li>Restart the development server after adding .env</li>
@@ -355,9 +476,11 @@ yarn preview`}</CodeBlock>
                       <li>Verify Supabase credentials are correct</li>
                     </ul>
                   </div>
-                  
+
                   <div className="bg-black/30 rounded-lg p-4">
-                    <h4 className="font-semibold text-blue-400 mb-2">Database Connection Issues</h4>
+                    <h4 className="font-semibold text-blue-400 mb-2">
+                      Database Connection Issues
+                    </h4>
                     <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
                       <li>Verify your Supabase project URL and key</li>
                       <li>Check if database tables are created correctly</li>
@@ -365,9 +488,11 @@ yarn preview`}</CodeBlock>
                       <li>Verify authentication is configured</li>
                     </ul>
                   </div>
-                  
+
                   <div className="bg-black/30 rounded-lg p-4">
-                    <h4 className="font-semibold text-green-400 mb-2">Build Errors</h4>
+                    <h4 className="font-semibold text-green-400 mb-2">
+                      Build Errors
+                    </h4>
                     <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
                       <li>Delete node_modules and reinstall dependencies</li>
                       <li>Clear your browser cache</li>
@@ -384,8 +509,9 @@ yarn preview`}</CodeBlock>
         {/* Footer note */}
         <div className="usergradient rounded-xl p-6 shadow-lg mt-8 text-center">
           <p className="text-gray-300">
-            This documentation covers installation, setup, and basic usage. 
-            For additional support, please check the repository issues or contact the development team.
+            This documentation covers installation, setup, and basic usage. For
+            additional support, please check the repository issues or contact
+            the development team.
           </p>
           <p className="text-sm text-gray-400 mt-2">
             Last updated: July 26, 2025
