@@ -24,7 +24,8 @@ Disallow: /api/
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://naucsetelesa.vercel.app/sitemap.xml
+Sitemap: nauc-se-telesa.vercel.app
+/sitemap.xml
 
 
 # Ensure robots.txt is served correctly
