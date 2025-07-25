@@ -9,6 +9,7 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import KnowHow from "./KnowHow";
+import "../App.css"; // Import your CSS file for styling
 
 function TaskLayout() {
   const [tasks, setTasks] = useState([]);
@@ -121,7 +122,7 @@ function TaskLayout() {
           <KnowHow
             title="How to handle tasks?"
             text="Each task contains a question supplemented with a short explanation. The user can choose from three possible answers, of which only one is correct. The goal is to choose the correct answer based on the provided information."
-            img="/taskshow.png"
+            img="/taskEN.png"
             alt="How does it work?"
           />
           <div className="w-full flex flex-col gap-4 p-3 md:p-6 bg-white/9 backdrop-blur-lg rounded-3xl">

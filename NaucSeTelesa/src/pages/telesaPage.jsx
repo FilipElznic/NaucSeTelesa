@@ -87,7 +87,7 @@ function TelesaPage() {
         <KnowHow
           title="How to handle solids?"
           text="Each card represents one geometric solid and contains its name, brief description, illustrative image and basic formulas. User can view detailed information by clicking the button at the bottom of the card."
-          img="/howitworkss.png"
+          img="/geobodyEN.png"
           alt="How does it work?"
         />
       </div>

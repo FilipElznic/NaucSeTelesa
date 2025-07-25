@@ -1,7 +1,7 @@
 import React from "react";
-import UserPageIMG from "/testimg1.webp";
-import LeaderboardIMG from "/leaderboard.webp";
-import TasksIMG from "/tasks.webp";
+import UserPageIMG from "/personalpage.png";
+import LeaderboardIMG from "/leaderboard.png";
+import TasksIMG from "/taskShowEn.png";
 import "../App.css";
 
 function Work() {

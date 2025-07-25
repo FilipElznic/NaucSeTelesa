@@ -1,5 +1,10 @@
 import "./index.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { Suspense, useEffect, useState, lazy } from "react";
 import { AuthProvider } from "./AuthContext";
 import { ProtectedRoute, RedirectIfLoggedIn } from "./ProtectedRoute";
@@ -9,17 +14,17 @@ import Navbar from "./Components/Navbar.jsx";
 import Footer from "./Components/Footer.jsx";
 
 // Lazy load all page components
-const LoginPage = lazy(() => import("./pages/loginPage"));
-const SuccessPage = lazy(() => import("./pages/successPage"));
-const TailwindTest = lazy(() => import("./pages/TailwindTest"));
-const UserPage = lazy(() => import("./pages/userpage"));
-const TaskPage = lazy(() => import("./pages/taskPage"));
-const TelesaPage = lazy(() => import("./pages/telesaPage"));
-const AboutPage = lazy(() => import("./pages/aboutPage"));
-const Profile = lazy(() => import("./Components/Profile"));
-const PomocPage = lazy(() => import("./Components/Help"));
-const NotFoundPage = lazy(() => import("./pages/notFoundpage"));
-const Privacy = lazy(() => import("./pages/privacy"));
+const LoginPage = lazy(() => import("./pages/loginPage.jsx"));
+const SuccessPage = lazy(() => import("./pages/successPage.jsx"));
+const TailwindTest = lazy(() => import("./pages/TailwindTest.jsx"));
+const UserPage = lazy(() => import("./pages/userpage.jsx"));
+const TaskPage = lazy(() => import("./pages/taskPage.jsx"));
+const TelesaPage = lazy(() => import("./pages/telesaPage.jsx"));
+const AboutPage = lazy(() => import("./pages/aboutPage.jsx"));
+const Profile = lazy(() => import("./Components/Profile.jsx"));
+const PomocPage = lazy(() => import("./Components/Help.jsx"));
+const NotFoundPage = lazy(() => import("./pages/notFoundpage.jsx"));
+const Privacy = lazy(() => import("./pages/privacy.jsx"));
 
 // Loading component for suspense fallback
 const LoadingSpinner = () => (
@@ -150,9 +155,18 @@ function AppContent() {
               />
 
               {/* Legacy Czech routes - redirect to English equivalents */}
-
-              <Route path="/projekt" element={<AboutPage />} />
-              <Route path="/profil" element={<Profile />} />
+              <Route
+                path="/projekt"
+                element={<Navigate to="/about" replace />}
+              />
+              <Route
+                path="/profil"
+                element={
+                  <ProtectedRoute redirectTo="/login">
+                    <Navigate to="/profile" replace />
+                  </ProtectedRoute>
+                }
+              />
 
               {/* Catch-all 404 route - place this LAST */}
               <Route path="*" element={<NotFoundPage />} />

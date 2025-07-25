@@ -1,12 +1,10 @@
 import React from "react";
 import "../App.css"; // Import your CSS file for styling
-import Data from "../pages/dataupdate.jsx"; // Import the Data component
 
 function Privacy() {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center py-16 px-4">
       <div className="max-w-4xl w-full">
-        <Data />
         <h1 className="userlvl text-5xl font-bold text-center mb-12 ">
           User Data Privacy
         </h1>

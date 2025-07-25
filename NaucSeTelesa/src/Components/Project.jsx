@@ -76,7 +76,7 @@ function Project() {
           About the Project
         </h1>
         <p className="text-xl text-gray-800 m-2">
-          This project is part of a 3rd year thesis work.
+          This project is part of a hackathon - Shipwrecked
         </p>
         <p className="text-xl text-gray-400 m-5 md:w-2/3">
           The goal of this project is to create an interactive web application

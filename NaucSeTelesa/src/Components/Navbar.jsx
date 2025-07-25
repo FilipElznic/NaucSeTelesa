@@ -47,7 +47,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
       className="absolute right-0 mt-2 w-48 usergradient rounded-md shadow-lg py-1 z-50"
     >
       <Link
-        to="/profil"
+        to="/profile"
         className="block px-4 py-2 text-white hover:bg-gray-700 text-xl font-bold"
         onClick={onClose}
       >
