@@ -237,11 +237,6 @@ Required environment variables:
 # Supabase Configuration
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_KEY=your-anon-public-key
-
-# Optional: EmailJS (for contact forms)
-VITE_EMAILJS_SERVICE_ID=your-service-id
-VITE_EMAILJS_TEMPLATE_ID=your-template-id
-VITE_EMAILJS_USER_ID=your-user-id
 ```
 
 ### Common Issues

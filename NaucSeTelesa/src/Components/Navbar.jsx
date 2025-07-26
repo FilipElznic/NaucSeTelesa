@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, memo, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useGlobalData } from "../Global";
 import { supabase } from "../supabaseClient";
@@ -55,10 +55,7 @@ const ProfileDropdown = memo(({ isOpen, onClose, onSignOut }) => {
         My Profile
       </Link>
       <button
-        onClick={() => {
-          onSignOut();
-          onClose();
-        }}
+        onClick={onSignOut}
         className="block w-full text-left px-4 py-2 text-xl text-red-500 hover:bg-gray-700 font-bold"
       >
         <ArrowRightOnRectangleIcon className="inline-block mr-2 w-5 h-5 text-white" />
@@ -129,6 +126,7 @@ MobileSidebar.propTypes = {
 
 const Navbar = () => {
   const { authUser, userData } = useGlobalData();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState();
@@ -152,15 +150,25 @@ const Navbar = () => {
 
   const signOutUser = useCallback(async () => {
     try {
+      // Close the dropdown first
+      setIsProfileDropdownOpen(false);
+
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.error("Error signing out:", error);
+        return;
       }
-      window.location.reload();
+
+      // Clear any local storage or session storage if needed
+      localStorage.clear();
+      sessionStorage.clear();
+
+      // Navigate to home page using React Router
+      navigate("/");
     } catch (err) {
       console.error("Sign out failed:", err);
     }
-  }, []);
+  }, [navigate]);
 
   // Update avatar URL when userData changes
   useEffect(() => {

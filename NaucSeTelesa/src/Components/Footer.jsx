@@ -52,7 +52,7 @@ function Footer() {
         <p className="text-white">
           &copy; {getCurrentYear()} Filip Elznic. All rights reserved.
           <br />
-          <p>This english version was created for shipwrecked</p>
+          This english version was created for shipwrecked
         </p>
       </div>
     </footer>
