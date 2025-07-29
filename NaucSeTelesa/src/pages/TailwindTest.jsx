@@ -175,7 +175,7 @@ function TailwindTest() {
 
           {/* Geometry World Card */}
           <div className="w-full lg:w-2/5 h-80 usergradient m-2 rounded-3xl border-2 border-transparent hover:border-purple-500 transition-all duration-200">
-            <Link to={"/solidsa"}>
+            <Link to={"/solids"}>
               <div className="h-full w-full flex flex-col justify-center items-center text-white p-11">
                 <h1 className="text-xl md:text-5xl lg:text-5xl pb-2 w-full text-center font-semibold userlvl">
                   Let yourself be immersed in the world of geometry
